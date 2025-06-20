@@ -1,32 +1,32 @@
 package com.example.MediLine.Service;
 
-import com.example.MediLine.DTO.MedicalCenter;
-import com.example.MediLine.DTO.MedicalCenterRegisterRequest;
-import com.example.MediLine.Repository.MedicalCenterRepository;
+import com.example.MediLine.DTO.Hospital;
+import com.example.MediLine.DTO.HospitalRegisterRequest;
+import com.example.MediLine.Repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MedicalCenterRegisterService {
+public class HospitalRegisterService {
 
     @Autowired
-    private MedicalCenterRepository medicalCenterRepository;
+    private HospitalRepository hospitalRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public MedicalCenter registerMedicalCenter(MedicalCenterRegisterRequest request) {
+    public Hospital registerHospital(HospitalRegisterRequest request) {
         // Check if email or phone number already exists
-        if (medicalCenterRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (hospitalRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email already in use");
         }
-        if (medicalCenterRepository.findByPhoneNumber(request.getPhoneNumber()).isPresent()) {
+        if (hospitalRepository.findByPhoneNumber(request.getPhoneNumber()).isPresent()) {
             throw new IllegalArgumentException("Phone number already in use");
         }
 
-        // Create and save medical center
-        MedicalCenter medicalCenter = MedicalCenter.builder()
+        // Create and save hospital
+        Hospital hospital = Hospital.builder()
                 .email(request.getEmail())
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
@@ -35,6 +35,6 @@ public class MedicalCenterRegisterService {
                 .address(request.getAddress())
                 .build();
 
-        return medicalCenterRepository.save(medicalCenter);
+        return hospitalRepository.save(hospital);
     }
 }

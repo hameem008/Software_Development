@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MedicalCenterRegisterRequest {
+public class HospitalRegisterRequest {
 
     private String email;
 

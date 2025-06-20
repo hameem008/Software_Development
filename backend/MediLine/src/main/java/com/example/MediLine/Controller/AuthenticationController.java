@@ -2,7 +2,7 @@ package com.example.MediLine.Controller;
 
 import com.example.MediLine.DTO.*;
 import com.example.MediLine.Repository.DoctorRepository;
-import com.example.MediLine.Repository.MedicalCenterRepository;
+import com.example.MediLine.Repository.HospitalRepository;
 import com.example.MediLine.Repository.PatientRepository;
 import com.example.MediLine.Service.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,10 +30,10 @@ public class AuthenticationController {
     private DoctorLoginService doctorLoginService;
 
     @Autowired
-    private MedicalCenterRegisterService medicalCenterRegisterService;
+    private HospitalRegisterService hospitalRegisterService;
 
     @Autowired
-    private MedicalCenterLoginService medicalCenterLoginService;
+    private HospitalLoginService hospitalLoginService;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -42,7 +42,7 @@ public class AuthenticationController {
     private DoctorRepository doctorRepository;
 
     @Autowired
-    private MedicalCenterRepository medicalCenterRepository;
+    private HospitalRepository hospitalRepository;
 
     @GetMapping("/ping")
     public String ping() {
@@ -61,10 +61,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredDoctor);
     }
 
-    @PostMapping("/register/medical-center")
-    public ResponseEntity registerMedicalCenter(@RequestBody MedicalCenterRegisterRequest request) {
-        MedicalCenter registeredMedicalCenter = medicalCenterRegisterService.registerMedicalCenter(request);
-        return ResponseEntity.ok(registeredMedicalCenter);
+    @PostMapping("/register/hospital")
+    public ResponseEntity registerHospital(@RequestBody HospitalRegisterRequest request) {
+        Hospital registeredHospital = hospitalRegisterService.registerHospital(request);
+        return ResponseEntity.ok(registeredHospital);
     }
 
     @PostMapping("/login/patient")
@@ -91,15 +91,15 @@ public class AuthenticationController {
         return ResponseEntity.ok(responseBody);
     }
 
-    @PostMapping("/login/medical-center")
-    public ResponseEntity loginMedicalCenter(@RequestBody MedicalCenterLoginRequest request, HttpServletResponse response) {
-        MedicalCenter medicalCenter = medicalCenterLoginService.loginMedicalCenterAndSetCookies(request, response);
+    @PostMapping("/login/hospital")
+    public ResponseEntity loginHospital(@RequestBody HospitalLoginRequest request, HttpServletResponse response) {
+        Hospital hospital = hospitalLoginService.loginHospitalAndSetCookies(request, response);
         User responseBody = new User();
-        responseBody.setId(medicalCenter.getMedicalCenterId().toString());
-        responseBody.setName(medicalCenter.getName());
-        responseBody.setEmail(medicalCenter.getEmail());
+        responseBody.setId(hospital.getHospitalId().toString());
+        responseBody.setName(hospital.getName());
+        responseBody.setEmail(hospital.getEmail());
         responseBody.setType("hospital");
-        responseBody.setAvatar(medicalCenter.getProfilePhotoUrl());
+        responseBody.setAvatar(hospital.getProfilePhotoUrl());
         return ResponseEntity.ok(responseBody);
     }
 
@@ -110,7 +110,7 @@ public class AuthenticationController {
             String email = authentication.getName();
             String roles = authentication.getAuthorities().toString();
             User responseBody = new User();
-            if (roles.equals("[ROLE_PATIENT]")){
+            if (roles.equals("[ROLE_PATIENT]")) {
                 Patient patient = patientRepository.findByEmail(email)
                         .orElseThrow(() -> new IllegalArgumentException("No Patient found with this email."));
                 responseBody.setId(patient.getPatientId().toString());
@@ -126,14 +126,14 @@ public class AuthenticationController {
                 responseBody.setEmail(doctor.getEmail());
                 responseBody.setType("doctor");
                 responseBody.setAvatar(doctor.getProfilePhotoUrl());
-            } else if (roles.equals("[ROLE_MEDICAL_CENTER]")) {
-                MedicalCenter medicalCenter = medicalCenterRepository.findByEmail(email)
-                        .orElseThrow(() -> new IllegalArgumentException("No Medical Center found with this email."));
-                responseBody.setId(medicalCenter.getMedicalCenterId().toString());
-                responseBody.setName(medicalCenter.getName());
-                responseBody.setEmail(medicalCenter.getEmail());
+            } else if (roles.equals("[ROLE_HOSPITAL]")) {
+                Hospital hospital = hospitalRepository.findByEmail(email)
+                        .orElseThrow(() -> new IllegalArgumentException("No Hospital found with this email."));
+                responseBody.setId(hospital.getHospitalId().toString());
+                responseBody.setName(hospital.getName());
+                responseBody.setEmail(hospital.getEmail());
                 responseBody.setType("hospital");
-                responseBody.setAvatar(medicalCenter.getProfilePhotoUrl());
+                responseBody.setAvatar(hospital.getProfilePhotoUrl());
             }
             System.out.println(responseBody);
             return ResponseEntity.ok(responseBody);
@@ -152,8 +152,8 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
     }
 
-    @GetMapping("/medical-center/profile")
-    public ResponseEntity<String> getMedicalCenterProfile() {
+    @GetMapping("/hospital/profile")
+    public ResponseEntity<String> getHospitalProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             String email = authentication.getName();

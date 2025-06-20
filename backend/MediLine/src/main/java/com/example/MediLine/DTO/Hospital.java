@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "medical_center")
+@Table(name = "hospital")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MedicalCenter {
+public class Hospital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer medicalCenterId;
+    private Integer hospitalId;
 
     @Column(unique = true)
     private String email;

@@ -80,9 +80,9 @@ CREATE TABLE doctor_degree (
     PRIMARY KEY (doctor_id, degree_name)
 );
 
--- Medical Center Table
-CREATE TABLE medical_center (
-    medical_center_id SERIAL PRIMARY KEY,
+-- Hospital Table
+CREATE TABLE hospital (
+    hospital_id SERIAL PRIMARY KEY,
     email TEXT UNIQUE,
     password_hash TEXT NOT NULL,
     name TEXT NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE prescription (
     prescription_id SERIAL PRIMARY KEY,
     patient_id INT REFERENCES patient(patient_id) ON DELETE CASCADE,
     doctor_id INT REFERENCES doctor(doctor_id) ON DELETE CASCADE,
-    medical_center_id INT REFERENCES medical_center(medical_center_id),
+    hospital_id INT REFERENCES hospital(hospital_id),
     summary TEXT,
     prescribed_date DATE DEFAULT CURRENT_DATE,
     symptoms TEXT,
@@ -181,7 +181,7 @@ CREATE TABLE performed_tests (
     suggested_by_doctor_id INT REFERENCES doctor(doctor_id) ON DELETE SET NULL,
     performed_by_doctor_id INT REFERENCES doctor(doctor_id) ON DELETE SET NULL,
     reviewed_by_doctor_id INT REFERENCES doctor(doctor_id) ON DELETE SET NULL,
-    medical_center_id INT REFERENCES medical_center(medical_center_id),
+    hospital_id INT REFERENCES hospital(hospital_id),
     pdf_url TEXT
 );
 
@@ -197,7 +197,7 @@ CREATE TABLE test_result_value (
 CREATE TABLE doctor_availability (
     slot_id SERIAL PRIMARY KEY,
     doctor_id INT REFERENCES doctor(doctor_id) ON DELETE CASCADE,
-    medical_center_id INT REFERENCES medical_center(medical_center_id),
+    hospital_id INT REFERENCES hospital(hospital_id),
     start_time TIME,
     end_time TIME,
     week_day VARCHAR(10),

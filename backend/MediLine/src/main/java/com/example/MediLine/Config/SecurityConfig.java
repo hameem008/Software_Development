@@ -25,12 +25,6 @@ import com.example.MediLine.Service.RefreshTokenService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-
-
-
-
-
 @Configuration
 public class SecurityConfig {
 
@@ -86,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers("/logout").authenticated()
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/doctor/**").hasRole("DOCTOR")
-                        .requestMatchers("/medical-center/**").hasRole("MEDICAL_CENTER")
+                        .requestMatchers("/hospital/**").hasRole("HOSPITAL")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

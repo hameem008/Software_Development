@@ -5,22 +5,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.MediLine.Config.CookieConfig;
-import com.example.MediLine.DTO.MedicalCenter;
-import com.example.MediLine.DTO.MedicalCenterLoginRequest;
+import com.example.MediLine.DTO.Hospital;
+import com.example.MediLine.DTO.HospitalLoginRequest;
 import com.example.MediLine.DTO.RefreshToken;
-import com.example.MediLine.Repository.MedicalCenterRepository;
+import com.example.MediLine.Repository.HospitalRepository;
 import com.example.MediLine.Security.JwtUtil;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-
 @Service
-public class MedicalCenterLoginService {
+public class HospitalLoginService {
 
     @Autowired
-    private MedicalCenterRepository medicalCenterRepository;
+    private HospitalRepository hospitalRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -34,16 +32,16 @@ public class MedicalCenterLoginService {
     @Autowired
     private CookieConfig cookieConfig;
 
-    public MedicalCenter loginMedicalCenterAndSetCookies(MedicalCenterLoginRequest request, HttpServletResponse response) {
-        MedicalCenter medicalCenter = medicalCenterRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("No medical center found with this email."));
+    public Hospital loginHospitalAndSetCookies(HospitalLoginRequest request, HttpServletResponse response) {
+        Hospital hospital = hospitalRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("No hospital found with this email."));
 
-        if (!passwordEncoder.matches(request.getPassword(), medicalCenter.getPasswordHash())) {
+        if (!passwordEncoder.matches(request.getPassword(), hospital.getPasswordHash())) {
             throw new IllegalArgumentException("Invalid password.");
         }
 
-        String accessToken = jwtUtil.generateAccessToken(medicalCenter.getEmail(), "ROLE_MEDICAL_CENTER");
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(medicalCenter.getEmail(), "ROLE_MEDICAL_CENTER");
+        String accessToken = jwtUtil.generateAccessToken(hospital.getEmail(), "ROLE_HOSPITAL");
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(hospital.getEmail(), "ROLE_HOSPITAL");
 
         Cookie accessCookie = cookieConfig.createAccessTokenCookie(accessToken);
         Cookie refreshCookie = cookieConfig.createRefreshTokenCookie(refreshToken.getToken());
@@ -51,6 +49,6 @@ public class MedicalCenterLoginService {
         response.addCookie(accessCookie);
         response.addCookie(refreshCookie);
 
-        return medicalCenter;
+        return hospital;
     }
 }
