@@ -68,8 +68,7 @@ const GeneralLoginForm: React.FC = () => {
           redirectPath = '/doctor/';
           break;
         case 'hospital':
-          endpoint = '/login/medical-center'; // medical center is in backend
-          // Ensure the endpoint matches your backend route
+          endpoint = '/login/hospital'; 
           redirectPath = '/hospital/';
           break;
         default:
