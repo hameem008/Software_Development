@@ -69,7 +69,7 @@ const HospitalRegister = () => {
 
     try {
       // Send POST request to backend
-      await api.post('/register/medical-center', {
+      await api.post('/register/hospital', {
         email: formData.email,
         password: formData.password,
         name: formData.name,
@@ -80,7 +80,7 @@ const HospitalRegister = () => {
 
       toast({
         title: "Registration Submitted!",
-        description: "Your medical center registration is pending admin approval. You will be notified once approved.",
+        description: "Your hospital registration is pending admin approval. You will be notified once approved.",
       });
 
       // Redirect to login after 3 seconds
@@ -117,14 +117,14 @@ const HospitalRegister = () => {
                 <Building2 className="h-6 w-6 text-white" />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold text-medical-700">Medical Center Registration</CardTitle>
+            <CardTitle className="text-2xl font-bold text-medical-700">Hospital Registration</CardTitle>
             <p className="text-gray-600">Partner with us to provide quality healthcare services</p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="name">Medical Center Name *</Label>
+                  <Label htmlFor="name">Hospital Name *</Label>
                   <Input
                     id="name"
                     type="text"
@@ -186,7 +186,7 @@ const HospitalRegister = () => {
                     id="description"
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
-                    placeholder="Describe your medical center"
+                    placeholder="Describe your hospital"
                     required
                   />
                 </div>
@@ -198,7 +198,7 @@ const HospitalRegister = () => {
                   id="address"
                   value={formData.address}
                   onChange={(e) => handleInputChange('address', e.target.value)}
-                  placeholder="Enter complete medical center address"
+                  placeholder="Enter complete hospital address"
                   required
                 />
               </div>

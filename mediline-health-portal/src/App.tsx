@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PatientDashboard from "./pages/patient/Dashboard";
 import DoctorDashboard from "./pages/doctor/Dashboard";
-import MedicalCenterDashboard from "./pages/hospital/Dashboard"; // Updated
+import HospitalDashboard from "./pages/hospital/Dashboard"; // Updated
 import PatientRegister from "./pages/auth/PatientRegister";
 import DoctorRegister from "./pages/auth/DoctorRegister";
 import HospitalRegister from "./pages/auth/HospitalRegister"; // Updated
@@ -78,7 +78,7 @@ const AppRoutes = () => {
         path="/hospital/*" 
         element={
           <ProtectedRoute allowedUserType="hospital">
-            <MedicalCenterDashboard />
+            <HospitalDashboard />
           </ProtectedRoute>
         } 
       />

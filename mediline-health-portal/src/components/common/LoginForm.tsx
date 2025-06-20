@@ -10,7 +10,7 @@ import api from '@/lib/api';
 import { AxiosError } from 'axios';
 
 interface LoginFormProps {
-  userType: 'patient' | 'doctor' | 'medical-center';
+  userType: 'patient' | 'doctor' | 'hospital';
   onClose: () => void;
 }
 
@@ -25,7 +25,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType, onClose }) => {
     const defaults = {
       'patient': { email: 'john.smith@email.com', password: 'demo123' },
       'doctor': { email: 'dr.johnson@hospital.com', password: 'demo123' },
-      'medical-center': { email: 'admin@citymedical.com', password: 'demo123' },
+      'hospital': { email: 'admin@citymedical.com', password: 'demo123' },
     };
     return defaults[userType];
   };
@@ -67,9 +67,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType, onClose }) => {
           endpoint = '/login/doctor';
           redirectPath = '/doctor/';
           break;
-        case 'medical-center':
-          endpoint = '/login/medical-center';
-          redirectPath = '/medical-center/';
+        case 'hospital':
+          endpoint = '/login/hospital';
+          redirectPath = '/hospital/';
           break;
         default:
           throw new Error('Invalid user type');
@@ -128,7 +128,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType, onClose }) => {
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-center">
-          {userType === 'medical-center' ? 'Medical Center' : userType.charAt(0).toUpperCase() + userType.slice(1)} Login
+          {userType === 'hospital' ? 'Hospital' : userType.charAt(0).toUpperCase() + userType.slice(1)} Login
         </CardTitle>
         <CardDescription className="text-center">
           Enter your credentials to access your dashboard
