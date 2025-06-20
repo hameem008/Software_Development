@@ -1,0 +1,71 @@
+http://localhost:8080/register/patient
+{
+  "email": "john.doe@example.com",
+  "password": "MyStrongPassword123!",
+  "firstName": "John",
+  "lastName": "Doe",
+  "gender": "Male",
+  "dateOfBirth": "1990-01-01",
+  "bloodGroup": "A+",
+  "phoneNumber": "01812345678",
+  "address": "123 Main Street, Dhaka"
+}
+
+http://localhost:8080/login/patient
+{
+  "email": "john.doe@example.com",
+  "password": "MyStrongPassword123!"
+}
+
+http://localhost:8080/register/doctor
+{
+  "email": "dr.john.doe@example.com",
+  "password": "StrongPassword123!",
+  "firstName": "John",
+  "lastName": "Doe",
+  "gender": "Male",
+  "specialization": "Cardiology",
+  "designation": "Consultant",
+  "academicInstitution": "Harvard Medical School",
+  "phoneNumber": "1234567890",
+  "address": "123 Medical Street, City, Country"
+}
+
+http://localhost:8080/login/doctor
+{
+  "email": "dr.john.doe@example.com",
+  "password": "StrongPassword123!"
+}
+
+{
+  "email": "john.doe@example.com",
+  "password": "MyStrongPassword123!",
+  "firstName": "John",
+  "lastName": "Doe",
+  "gender": "Male",
+  "dateOfBirth": "1990-01-01",
+  "bloodGroup": "A+",
+  "phoneNumber": "01812345678",
+  "address": "123 Main Street, Dhaka"
+}
+{
+  "email": "john.doe@example.com",
+  "password": "MyStrongPassword123!"
+}
+
+{
+  "email": "john.doe@example.com",
+  "password": "StrongPassword123!",
+  "firstName": "Dr. John",
+  "lastName": "Doe",
+  "gender": "Male",
+  "specialization": "Cardiology",
+  "designation": "Consultant",
+  "academicInstitution": "Harvard Medical School",
+  "phoneNumber": "1234567890",
+  "address": "123 Medical Street, City, Country"
+}
+{
+  "email": "john.doe@example.com",
+  "password": "StrongPassword123!"
+}
