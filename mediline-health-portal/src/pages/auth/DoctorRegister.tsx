@@ -28,9 +28,37 @@ const DoctorRegister = () => {
   });
 
   const specializations = [
-    'Cardiology', 'Dermatology', 'Pediatrics', 'Neurology', 'Orthopedics',
-    'Gynecology', 'Psychiatry', 'Oncology', 'Gastroenterology', 'Endocrinology'
-  ];
+    'Allergy and Immunology',
+    'Anesthesiology',
+    'Cardiology',
+    'Dermatology',
+    'Endocrinology',
+    'Gastroenterology',
+    'Gynecology',
+    'Hematology',
+    'Infectious Disease',
+    'Nephrology',
+    'Neurology',
+    'Oncology',
+    'Ophthalmology',
+    'Orthopedics',
+    'Otolaryngology',
+    'Pediatrics',
+    'Psychiatry',
+    'Pulmonology',
+    'Radiology',
+    'Urology'
+  ].sort();
+
+  const designations = [
+    'Assistant Professor',
+    'Associate Professor',
+    'Consultant',
+    'Former Director',
+    'Medical Officer',
+    'Professor',
+    'Senior Consultant'
+  ].sort();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +124,7 @@ const DoctorRegister = () => {
         password: formData.password,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        gender: formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1).toLowerCase(), // Capitalize first letter
+        gender: formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1).toLowerCase(),
         specialization: formData.specialization,
         designation: formData.designation,
         academicInstitution: formData.academicInstitution,
@@ -253,14 +281,19 @@ const DoctorRegister = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="designation">Designation *</Label>
-                  <Input
-                    id="designation"
-                    type="text"
+                  <Select
                     value={formData.designation}
-                    onChange={(e) => handleInputChange('designation', e.target.value)}
-                    placeholder="e.g., Consultant, Professor"
-                    required
-                  />
+                    onValueChange={(value) => handleInputChange('designation', value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select designation" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {designations.map(designation => (
+                        <SelectItem key={designation} value={designation}>{designation}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
                   <Label htmlFor="academicInstitution">Academic Institution *</Label>
