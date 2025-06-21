@@ -24,11 +24,23 @@ services:
       dockerfile: Dockerfile
     container_name: mediline-backend
     ports:
-      - "8081:8081"
+      - "8080:8080"
     env_file:
       - ./MediLine/.env
     depends_on:
       - db
+    networks:
+      - mediline-net
+
+  frontend:
+    build:
+      context: ../mediline-health-portal
+      dockerfile: Dockerfile
+    container_name: mediline-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
     networks:
       - mediline-net
 
