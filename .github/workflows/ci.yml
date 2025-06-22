@@ -27,19 +27,19 @@ jobs:
         with:
           context: ./db
           push: true
-          tags: yourusername/mediline-db:latest
+          tags: hameem08/mediline-db:latest
 
       - name: 📦 Build & Push Backend image
         uses: docker/build-push-action@v5
         with:
           context: ./backend/MediLine
           push: true
-          tags: yourusername/mediline-backend:latest
+          tags: hameem08/mediline-backend:latest
 
       - name: 📦 Build & Push Frontend image
         uses: docker/build-push-action@v5
         with:
           context: ./mediline-health-portal
           push: true
-          tags: yourusername/mediline-frontend:latest
+          tags: hameem08/mediline-frontend:latest
 
