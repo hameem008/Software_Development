@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:15
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     container_name: my_postgres_db
     environment:
       POSTGRES_USER: myuser
@@ -11,22 +13,19 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
-      - ./2-data.sql:/docker-entrypoint-initdb.d/2-data.sql
-      - ./entrypoint.sh:/entrypoint.sh
-    entrypoint: ["/entrypoint.sh"]
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - mediline-net
 
   backend:
     build:
-      context: ./MediLine
+      context: ./backend/MediLine
       dockerfile: Dockerfile
     container_name: mediline-backend
     ports:
       - "8080:8080"
     env_file:
-      - ./MediLine/.env
+      - ./backend/MediLine/.env
     depends_on:
       - db
     networks:
@@ -34,7 +33,7 @@ services:
 
   frontend:
     build:
-      context: ../mediline-health-portal
+      context: ./mediline-health-portal
       dockerfile: Dockerfile
     container_name: mediline-frontend
     ports:
@@ -43,6 +42,9 @@ services:
       - backend
     networks:
       - mediline-net
+
+volumes:
+  postgres_data:
 
 networks:
   mediline-net:

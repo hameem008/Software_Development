@@ -173,6 +173,7 @@ INSERT INTO public.hospital VALUES (1, 'dmc@gmail.com', '$2a$10$D5N39QPYgV9LRAKl
 -- Data for Name: refresh_token; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.refresh_token VALUES ('hameem@gmail.com', 'ROLE_PATIENT', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYW1lZW1AZ21haWwuY29tIiwianRpIjoiMzI1NWZlM2QtNjc3MS00NGJmLTllYWYtNGFhZWE1Yzg3ZDMwIiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsImlhdCI6MTc1MDUxNjQ2MiwiZXhwIjoxNzUxMTIxMjYyfQ.xwhe502osTDmPYntk3dUeZcEoKGQqDygPdfA57PZzBs', '2025-06-28 14:34:22.222556');
 
 
 --
