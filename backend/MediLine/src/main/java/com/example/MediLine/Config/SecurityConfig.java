@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,10 +43,17 @@ public class SecurityConfig {
     @Autowired
     private CookieConfig cookieConfig;
 
+    // Add this to inject the CORS allowed origin from environment / properties
+    @Value("${cors.allowed.origins}")
+    private String corsAllowedOrigin;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+
+        // Use environment variable here instead of hardcoded localhost
+        configuration.setAllowedOrigins(Arrays.asList(corsAllowedOrigin));
+        
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("Set-Cookie"));
