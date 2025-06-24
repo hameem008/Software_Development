@@ -2,13 +2,14 @@ name: 🚀 Deploy to VM using PEM
 
 on:
   workflow_run:
-    workflows: ["CI - Build & Push Docker Images"] 
+    workflows: ["CI - Build & Push Docker Images"]
     types:
       - completed
+  workflow_dispatch:  # Optional: Allows manual trigger
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     name: Deploy with PEM
     runs-on: ubuntu-latest
 
