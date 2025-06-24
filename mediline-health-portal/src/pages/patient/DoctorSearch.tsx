@@ -1,30 +1,77 @@
 
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { mockDoctors } from '@/data/mockData';
+// import { mockDoctors } from '@/data/mockData';
 import { Search, MapPin, Star, Clock, DollarSign, User } from 'lucide-react';
+import api from '@/lib/api';
 
 const DoctorSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
 
-  const specialties = [...new Set(mockDoctors.map(doctor => doctor.specialization))];
-  const locations = [...new Set(mockDoctors.map(doctor => doctor.hospital))];
+  // const specialties = [...new Set(mockDoctors.map(doctor => doctor.specialization))];
+  // const locations = [...new Set(mockDoctors.map(doctor => doctor.hospital))];
 
-  const filteredDoctors = mockDoctors.filter(doctor => {
-    const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSpecialty = !selectedSpecialty || selectedSpecialty === 'all-specialties' || doctor.specialization === selectedSpecialty;
-    const matchesLocation = !selectedLocation || selectedLocation === 'all-locations' || doctor.hospital === selectedLocation;
+  const [specialties, setSpecialties] = useState<string[]>([]);
+  const [locations, setLocations] = useState<string[]>([]);
+  const [doctors, setDoctors] = useState<any[]>([]);
+
+  // const filteredDoctors = mockDoctors.filter(doctor => {
+  //   const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //                        doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase());
+  //   const matchesSpecialty = !selectedSpecialty || selectedSpecialty === 'all-specialties' || doctor.specialization === selectedSpecialty;
+  //   const matchesLocation = !selectedLocation || selectedLocation === 'all-locations' || doctor.hospital === selectedLocation;
     
-    return matchesSearch && matchesSpecialty && matchesLocation;
-  });
+  //   return matchesSearch && matchesSpecialty && matchesLocation;
+  // });
+
+  useEffect(() => {
+    const fetchSpecialtiesAndLocations = async () => {
+      try {
+        const [specialtiesResponse, locationsResponse] = await Promise.all([
+          api.get('/patient/specialties'),
+          api.get('/patient/locations')
+        ]);
+
+        setSpecialties(specialtiesResponse.data);
+        setLocations(locationsResponse.data);
+      } catch (error) {
+        console.error('Error fetching specialties or locations:', error);
+      }
+    };
+
+    fetchSpecialtiesAndLocations();
+  }, []);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const body = {
+          specialization: selectedSpecialty || null,
+          location: selectedLocation || ''
+        };
+
+        const response = await api.post('/patient/find-doctors', body);
+        setDoctors(response.data);
+      } catch (error) {
+        console.error('Error fetching doctors:', error);
+      }
+    };
+
+    if (selectedSpecialty || selectedLocation) {
+      fetchDoctors();
+    }
+
+    fetchDoctors();
+
+  }, [selectedSpecialty, selectedLocation]);
+
 
   return (
     <div className="space-y-6">
@@ -57,7 +104,7 @@ const DoctorSearch = () => {
                   <SelectValue placeholder="All Specialties" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="all-specialties">All Specialties</SelectItem>
+                  <SelectItem value=" " onClick={() => setSelectedSpecialty(null)}>All Specialties</SelectItem>
                   {specialties.map(specialty => (
                     <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
                   ))}
@@ -70,7 +117,7 @@ const DoctorSearch = () => {
                   <SelectValue placeholder="All Locations" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="all-locations">All Locations</SelectItem>
+                  <SelectItem value=" " onClick={() => setSelectedLocation(null)}>All Locations</SelectItem>
                   {locations.map(location => (
                     <SelectItem key={location} value={location}>{location}</SelectItem>
                   ))}
@@ -98,14 +145,14 @@ const DoctorSearch = () => {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            Available Doctors ({filteredDoctors.length})
+            Available Doctors ({doctors.length})
           </h2>
         </div>
 
-        {filteredDoctors.length > 0 ? (
+        {doctors.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredDoctors.map((doctor) => (
-              <Card key={doctor.id} className="hover:shadow-lg transition-shadow duration-200">
+            {doctors.map((doctor) => (
+              <Card key={doctor.doctorId} className="hover:shadow-lg transition-shadow duration-200">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
@@ -140,13 +187,13 @@ const DoctorSearch = () => {
                         
                         <div className="flex items-center text-sm text-gray-600">
                           <MapPin className="w-4 h-4 mr-1" />
-                          {doctor.hospital}
+                          {doctor.academicInstitution}
                         </div>
                         
                         <div className="flex items-center justify-between text-sm">
                           <div className="flex items-center text-gray-600">
                             <Clock className="w-4 h-4 mr-1" />
-                            {doctor.experience} years experience
+                            {doctor.designation} 
                           </div>
                           <div className="flex items-center text-gray-900 font-medium">
                             <DollarSign className="w-4 h-4 mr-1" />
@@ -155,21 +202,21 @@ const DoctorSearch = () => {
                         </div>
                         
                         <div className="flex flex-wrap gap-1 mt-2">
-                          {doctor.availability.slice(0, 3).map((day) => (
+                          {doctor.availableDays.slice(0, 3).map((day) => (
                             <Badge key={day} variant="outline" className="text-xs">
                               {day}
                             </Badge>
                           ))}
-                          {doctor.availability.length > 3 && (
+                          {doctor.availableDays.length > 3 && (
                             <Badge variant="outline" className="text-xs">
-                              +{doctor.availability.length - 3} more
+                              +{doctor.availableDays.length - 3} more
                             </Badge>
                           )}
                         </div>
                       </div>
                       
                       <div className="flex space-x-2 mt-4">
-                        <Link to={`/patient/book-appointment/${doctor.id}`}>
+                        <Link to={`/patient/book-appointment/${doctor.doctorId}`}>
                           <Button 
                             size="sm"
                             className="bg-medical-600 hover:bg-medical-700"
@@ -177,7 +224,7 @@ const DoctorSearch = () => {
                             Book Appointment
                           </Button>
                         </Link>
-                        <Link to={`/patient/doctors/${doctor.id}`}>
+                        <Link to={`/patient/doctors/${doctor.doctorId}`}>
                           <Button size="sm" variant="outline">
                             View Profile
                           </Button>

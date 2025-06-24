@@ -1,21 +1,58 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { mockDoctors, mockDoctorReviews, mockDoctorAvailability } from '@/data/mockData';
 import { ArrowLeft, MapPin, Star, Clock, DollarSign, User, GraduationCap, Calendar } from 'lucide-react';
+import api  from '@/lib/api'; // Assuming you have an API utility for axios
 
 const DoctorProfile = () => {
   const { doctorId } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
+  const [doctor, setDoctor] = useState<any>(null);  // State to hold doctor details
+  const [reviews, setReviews] = useState<any[]>([]); // State to hold reviews
+  const [scheduleByLocation, setScheduleByLocation] = useState<any>({}); // State to hold schedule by location
+  const [loading, setLoading] = useState(true); // Loading state
 
-  const doctor = mockDoctors.find(d => d.id === doctorId);
-  const reviews = mockDoctorReviews[doctorId as keyof typeof mockDoctorReviews] || [];
-  const doctorSchedule = mockDoctorAvailability[doctorId as keyof typeof mockDoctorAvailability] || [];
+  useEffect(() => {
+    const fetchDoctorProfile = async () => {
+      try {
+        const body = {
+          doctorId: doctorId 
+        };
+        const response = await api.post('/patient/find-doctors/details', body);
+        const doctorData = response.data;
+        setDoctor(doctorData);
+
+        const reviewsResponse = await api.post('/patient/find-doctors/details/reviews', body);
+        const reviewsData = reviewsResponse.data;
+        setReviews(reviewsData);
+        setScheduleByLocation(groupScheduleByLocation(doctorData.availableMedCenters));
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching doctor details:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchDoctorProfile();
+  }, [doctorId]);
+
+  const groupScheduleByLocation = (availableMedCenters: any[]) => {
+    return availableMedCenters.reduce((acc, center) => {
+      acc[center.medicalCenterName] = center.availabilitySlots.map((slot: any) => ({
+        day: slot.weekDay,
+        time: `${slot.startTime} - ${slot.endTime}`,
+      }));
+      return acc;
+    }, {});
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!doctor) {
     return (
@@ -28,22 +65,13 @@ const DoctorProfile = () => {
     );
   }
 
-  const averageRating = reviews.length > 0 
+  const averageRating = reviews.length > 0
     ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
     : '0.0';
 
   const handleBookAppointment = () => {
-    navigate(`/patient/book-appointment/${doctor.id}`);
+    navigate(`/patient/book-appointment/${doctor.doctorId}`);
   };
-
-  // Group schedule by location
-  const scheduleByLocation = doctorSchedule.reduce((acc, schedule) => {
-    if (!acc[schedule.location]) {
-      acc[schedule.location] = [];
-    }
-    acc[schedule.location].push(schedule);
-    return acc;
-  }, {} as Record<string, typeof doctorSchedule>);
 
   return (
     <div className="space-y-6">
@@ -89,25 +117,29 @@ const DoctorProfile = () => {
                   <div className="space-y-2">
                     <div className="flex items-center text-gray-600">
                       <GraduationCap className="w-4 h-4 mr-2" />
-                      {doctor.degree}
+                      {doctor.degrees.map((degree: any) => (
+                        <div key={degree.institution}>{degree.degree} ({degree.institution}, {degree.year})</div>
+                      ))}
                     </div>
-                    <div className="flex items-center text-gray-600">
+                    {/* <div className="flex items-center text-gray-600">
                       <MapPin className="w-4 h-4 mr-2" />
-                      {doctor.hospital}
-                    </div>
+                      {doctor.availableMedCenters.map((center: any) => (
+                        <div key={center.medicalCenterLocation}>{center.medicalCenterName} - {center.medicalCenterLocation}</div>
+                      ))}
+                    </div> */}
                     <div className="flex items-center text-gray-600">
                       <Clock className="w-4 h-4 mr-2" />
-                      {doctor.experience} years experience
+                      {doctor.designation}
                     </div>
-                    <div className="flex items-center text-gray-900 font-medium">
+                    {/* <div className="flex items-center text-gray-900 font-medium">
                       <DollarSign className="w-4 h-4 mr-2" />
                       ${doctor.consultationFee} consultation fee
-                    </div>
+                    </div> */}
                   </div>
                   
                   <div className="flex items-center mt-4">
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                    <span className="ml-1 text-lg font-medium">{averageRating}</span>
+                    <span className="ml-1 text-lg font-medium">{doctor.rating}</span>
                     <span className="ml-2 text-gray-600">({reviews.length} reviews)</span>
                   </div>
                 </div>
@@ -131,31 +163,19 @@ const DoctorProfile = () => {
         <nav className="-mb-px flex space-x-8">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'overview'
-                ? 'border-medical-600 text-medical-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'overview' ? 'border-medical-600 text-medical-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Overview
           </button>
           <button
             onClick={() => setActiveTab('availability')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'availability'
-                ? 'border-medical-600 text-medical-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'availability' ? 'border-medical-600 text-medical-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Availability & Locations
           </button>
           <button
             onClick={() => setActiveTab('reviews')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'reviews'
-                ? 'border-medical-600 text-medical-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'reviews' ? 'border-medical-600 text-medical-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
           >
             Reviews ({reviews.length})
           </button>
@@ -183,7 +203,9 @@ const DoctorProfile = () => {
               
               <div>
                 <h4 className="font-medium text-gray-900 mb-2">Education</h4>
-                <p className="text-gray-600">{doctor.degree}</p>
+                {doctor.degrees.map((degree: any) => (
+                  <p key={degree.institution} className="text-gray-600">{degree.degree} - {degree.institution} ({degree.year})</p>
+                ))}
               </div>
             </div>
           </CardContent>
@@ -225,18 +247,6 @@ const DoctorProfile = () => {
                   </div>
                 ))}
               </div>
-              
-              <Separator className="my-4" />
-              
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-medium text-blue-900 mb-2">Booking Information</h4>
-                <ul className="text-sm text-blue-700 space-y-1">
-                  <li>• Appointments can be booked up to 30 days in advance</li>
-                  <li>• Consultation fee: ${doctor.consultationFee}</li>
-                  <li>• Please arrive 15 minutes before your scheduled time</li>
-                  <li>• Cancellations must be made at least 24 hours in advance</li>
-                </ul>
-              </div>
             </CardContent>
           </Card>
         </div>
@@ -273,7 +283,7 @@ const DoctorProfile = () => {
                           </div>
                           <span className="text-sm text-gray-500">{review.date}</span>
                         </div>
-                        <p className="text-gray-600">{review.comment}</p>
+                        <p className="text-gray-600">{review.reviewText}</p>
                       </div>
                     </div>
                     {reviews.indexOf(review) < reviews.length - 1 && <Separator className="mt-4" />}
