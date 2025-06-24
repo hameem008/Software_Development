@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🔍 Checking and freeing ports 3000 and 8080..."
+echo "🔍 Checking and freeing ports 5432, 3000 and 8080..."
 fuser -k 3000/tcp 2>/dev/null
 fuser -k 8080/tcp 2>/dev/null
 fuser -k 5432/tcp 2>/dev/null
