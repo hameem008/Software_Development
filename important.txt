@@ -1,0 +1,8 @@
+Connect to vm:
+sudo ssh -i /home/hameem08/My_Codes/Software_Lab/MediLine_key.pem hameem08@74.225.218.7
+
+Upload to vm:
+scp -r /home/hameem08/My_Codes/Software_Lab/Software_Development/vm hameem08@74.225.218.7:/home/hameem08/
+
+Website URL:
+http://74.225.218.7:3000
