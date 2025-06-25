@@ -17,3 +17,4 @@ docker-compose down -v
 
 # Rebuild and start all services
 docker-compose up --build -d
+
