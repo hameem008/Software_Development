@@ -1,6 +1,6 @@
 package com.example.MediLine.Service;
 
-import com.example.MediLine.DTO.RefreshToken;
+import com.example.MediLine.Entity.RefreshToken;
 import com.example.MediLine.Repository.RefreshTokenRepository;
 import com.example.MediLine.Security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

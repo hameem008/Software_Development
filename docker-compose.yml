@@ -31,17 +31,17 @@ services:
     networks:
       - mediline-net
 
-  frontend:
-    build:
-      context: ./mediline-health-portal
-      dockerfile: Dockerfile
-    container_name: mediline-frontend
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    networks:
-      - mediline-net
+#  frontend:
+#    build:
+#      context: ./mediline-health-portal
+#      dockerfile: Dockerfile
+#    container_name: mediline-frontend
+#    ports:
+#      - "3000:80"
+#    depends_on:
+#      - backend
+#    networks:
+#      - mediline-net
 
 volumes:
   postgres_data:

@@ -1,0 +1,26 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Explicitly declare text files
+*.java text
+*.ts text
+*.tsx text
+*.html text
+*.css text
+*.js text
+*.json text
+*.yml text
+*.sql text
+*.md text
+*.sh text eol=lf
+.gitattributes text eol=lf
+
+# Declare binary files (no normalization)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

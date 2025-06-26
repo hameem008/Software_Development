@@ -56,6 +56,10 @@ const DoctorSearch = () => {
           specialization: selectedSpecialty || null,
           location: selectedLocation || ''
         };
+        if(body.specialization == "all")
+          body.specialization = null
+        if(body.location=="all")
+          body.location=''
 
         const response = await api.post('/patient/find-doctors', body);
         setDoctors(response.data);
@@ -104,7 +108,7 @@ const DoctorSearch = () => {
                   <SelectValue placeholder="All Specialties" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value=" " onClick={() => setSelectedSpecialty(null)}>All Specialties</SelectItem>
+                  <SelectItem value="all">All Specialties</SelectItem>
                   {specialties.map(specialty => (
                     <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
                   ))}
@@ -117,7 +121,7 @@ const DoctorSearch = () => {
                   <SelectValue placeholder="All Locations" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value=" " onClick={() => setSelectedLocation(null)}>All Locations</SelectItem>
+                  <SelectItem value="all">All Locations</SelectItem>
                   {locations.map(location => (
                     <SelectItem key={location} value={location}>{location}</SelectItem>
                   ))}
@@ -174,7 +178,7 @@ const DoctorSearch = () => {
                         <h3 className="text-lg font-semibold text-gray-900">{doctor.name}</h3>
                         <div className="flex items-center">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="ml-1 text-sm text-gray-600">4.8</span>
+                          <span className="ml-1 text-sm text-gray-600">{doctor.rating}</span>
                         </div>
                       </div>
                       

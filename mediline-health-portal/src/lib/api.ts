@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // Create an Axios instance with default configuration
 const api = axios.create({
-  // baseURL: 'http://localhost:8080', // Backend base URL
-  baseURL: 'http://4.213.179.41:8080', // Backend base URL
+  baseURL: 'http://localhost:8080', // Backend base URL
+  // baseURL: 'http://4.213.179.41:8080', // Backend base URL
   withCredentials: true, // Include cookies in requests/responses
   headers: {
     'Content-Type': 'application/json',
