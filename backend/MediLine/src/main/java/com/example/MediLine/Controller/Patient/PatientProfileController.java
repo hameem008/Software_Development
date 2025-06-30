@@ -1,9 +1,11 @@
 package com.example.MediLine.Controller.Patient;
 
+import com.example.MediLine.Annotation.CurrentPatient;
+import com.example.MediLine.DTO.PatientAuthDTO.PatientDashboardDTO;
 import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.DTO.PatientAuthDTO.PatientProfileDTO;
 import com.example.MediLine.Repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -11,11 +13,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("")
 public class PatientProfileController {
 
-    @Autowired
-    PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+
+
+    @GetMapping("/patient/dashboard")
+    public ResponseEntity<PatientDashboardDTO> getPatientDashBoard(
+            @CurrentPatient Patient patient) {
+
+        return ResponseEntity.ok(null);
+    }
+
 
     @GetMapping("/patient/profile")
     public ResponseEntity getPatientProfile() {
@@ -60,4 +71,6 @@ public class PatientProfileController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
     }
+
+
 }
