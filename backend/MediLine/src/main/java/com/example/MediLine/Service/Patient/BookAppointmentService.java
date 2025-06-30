@@ -4,10 +4,7 @@ import com.example.MediLine.DTO.AppointmentDTO.AppointmentDTO;
 import com.example.MediLine.DTO.AppointmentDTO.AppointmentDoctorDTO;
 import com.example.MediLine.DTO.AppointmentDTO.AppointmentWindowDTO;
 import com.example.MediLine.DTO.AppointmentDTO.CreateAppointmentRequest;
-import com.example.MediLine.Entity.Appointment;
-import com.example.MediLine.Entity.Doctor;
-import com.example.MediLine.Entity.DoctorAvailability;
-import com.example.MediLine.Entity.Patient;
+import com.example.MediLine.Entity.*;
 import com.example.MediLine.Repository.AppointmentRepository;
 import com.example.MediLine.Repository.DoctorAvailabilityRepository;
 import com.example.MediLine.Repository.DoctorRepository;
@@ -15,12 +12,13 @@ import com.example.MediLine.Repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -66,7 +64,9 @@ public class BookAppointmentService {
 
 
     public List<AppointmentWindowDTO> getAppointmentWindows(
-            int doctorId, int medicalCenterId, String weekDay) {
+            int doctorId, int medicalCenterId, LocalDate date) {
+
+        String weekDay = date.getDayOfWeek().toString();
 
         DoctorAvailability availability = doctorAvailabilityRepository
                 .findByDoctorMedCenterAndWeekDay(doctorId, medicalCenterId, weekDay)
@@ -74,7 +74,7 @@ public class BookAppointmentService {
                         new IllegalArgumentException("Doctor availability not found for the given criteria"));
 
         List<Appointment> appointments =
-                appointmentRepository.findBySlotSlotId(availability.getSlotId());
+                appointmentRepository.findBySlotSlotIdAndDate(availability.getSlotId(), date);
 
         return getAppointmentWindowsFromSlot(availability, appointments);
 
@@ -87,22 +87,17 @@ public class BookAppointmentService {
 
         validateWeekDay(request.getDate(), slot.getWeekDay());
         validateTime(request.getTime(), slot.getStartTime(), slot.getEndTime());
-        validateWindowAvailability(slot, request.getTime());
-
-        Doctor doctor = doctorRepository.findById(request.getDoctorId())
-                .orElseThrow(() -> new IllegalArgumentException("Doctor not found"));
+        validateWindowAvailability(slot.getSlotId(), request.getDate(), request.getTime());
 
         Patient patient = patientRepository.findByPatientId(request.getPatientId())
                 .orElseThrow(() -> new IllegalArgumentException("Patient not found"));
 
-
         Appointment appointment = new Appointment();
-        appointment.setDoctor(doctor);
         appointment.setPatient(patient);
         appointment.setSlot(slot);
         appointment.setDate(request.getDate());
         appointment.setTime(request.getTime());
-        appointment.setSerialNumber(getSerialNumber(request.getSlotId()));
+        appointment.setSerialNumber(getSerialNumber(slot, request.getTime()));
 
         appointmentRepository.save(appointment);
     }
@@ -122,75 +117,72 @@ public class BookAppointmentService {
         }
     }
 
-    private int getSerialNumber(Integer slotId) {
-        Integer maxSerial = appointmentRepository.findMaxSerialNumberBySlotId(slotId);
-        return (maxSerial == null) ? 1 : maxSerial + 1;
+
+    private int getSerialNumber(DoctorAvailability slot, LocalTime appointmentTime) {
+        long minutesFromStart =
+                Duration.between(slot.getStartTime(), appointmentTime).toMinutes();
+
+        return (int) (minutesFromStart / slot.getDuration()) + 1;
     }
 
     private void validateWindowAvailability(
-            DoctorAvailability slot, LocalTime requestTime) {
+            Integer slotId, LocalDate requestDate, LocalTime requestTime) {
 
-        final int WINDOW_DURATION = 30;
-        LocalTime chunkEnd = requestTime.plusMinutes(WINDOW_DURATION);
+        boolean isBooked = appointmentRepository
+                .existsBySlotSlotIdAndDateAndTime(slotId, requestDate, requestTime);
 
-        int existingCount = appointmentRepository.
-                countBySlotSlotIdAndTimeBetween(slot.getSlotId(), requestTime, chunkEnd);
-
-        if (existingCount >= WINDOW_DURATION / slot.getDuration()) {
-            throw new IllegalStateException("This time slot is fully booked");
+        if (isBooked) {
+            throw new IllegalStateException("This time slot is already booked");
         }
     }
 
-    public List<AppointmentDTO> getPatientAppointments(int patientId) {
-        List<Appointment> appointments =
-                appointmentRepository.findByPatientPatientId(patientId);
 
-        return appointments.stream().map(app ->
-                AppointmentDTO.builder()
-                    .appointmentId(app.getAppointmentId())
-                    .doctorId(app.getDoctor().getDoctorId())
-                    .doctorName(app.getDoctor().getFirstName() + " " + app.getDoctor().getLastName())
-                    .medicalCenterId(app.getSlot().getMedicalCenter().getMedicalCenterId())
-                    .medicalCenterName(app.getSlot().getMedicalCenter().getName())
-                    .date(app.getDate())
-                    .time(app.getTime())
-                    .chamber(app.getSlot().getChamber())
-                    .serialNumber(app.getSerialNumber())
-                    .build()
-        ).collect(toList());
-    }
+    public List<AppointmentDTO> getPatientAppointments(int patientId) {
+    List<Appointment> appointments =
+            appointmentRepository.findByPatientPatientId(patientId);
+
+    return appointments.stream().map(app -> {
+        Doctor doctor = app.getSlot().getDoctor();
+        MedicalCenter center = app.getSlot().getMedicalCenter();
+
+        return AppointmentDTO.builder()
+                .appointmentId(app.getAppointmentId())
+                .doctorId(doctor.getDoctorId())
+                .doctorName(doctor.getFirstName() + " " + doctor.getLastName())
+                .medicalCenterId(center.getMedicalCenterId())
+                .medicalCenterName(center.getName())
+                .date(app.getDate())
+                .time(app.getTime())
+                .chamber(app.getSlot().getChamber())
+                .serialNumber(app.getSerialNumber())
+                .build();
+    }).collect(Collectors.toList());
+}
 
 
     private List<AppointmentWindowDTO> getAppointmentWindowsFromSlot(
-            DoctorAvailability availability,
-            List<Appointment> slotAppointments) {
+        DoctorAvailability availability,
+        List<Appointment> slotAppointments) {
 
-        List<AppointmentWindowDTO> appointmentWindows = new ArrayList<>();
+        List<AppointmentWindowDTO> windows = new ArrayList<>();
 
         Integer slotId = availability.getSlotId();
         LocalTime start = availability.getStartTime();
         LocalTime end = availability.getEndTime();
-        int timeForEachPatient = availability.getDuration();
-        final int WINDOW_SIZE = 30;
+        int duration = availability.getDuration();
+
+        Set<LocalTime> bookedTimes = slotAppointments.stream()
+                .map(Appointment::getTime)
+                .collect(Collectors.toSet());
 
         LocalTime current = start;
-        while (!current.isAfter(end)) {
-            LocalTime windowStart = current;
-            LocalTime windowEnd = current.plusMinutes(WINDOW_SIZE);
-
-            long count = slotAppointments.stream()
-                    .filter(app -> {
-                        LocalTime time = app.getTime();
-                        return !time.isBefore(windowStart) && time.isBefore(windowEnd);
-                    })
-                    .count();
-
-            boolean isBooked = count >= (WINDOW_SIZE / timeForEachPatient);
-
-            appointmentWindows.add(new AppointmentWindowDTO(slotId, windowStart, isBooked));
-            current = windowEnd;
+        while (!current.isAfter(end.minusMinutes(duration))) {
+            boolean isBooked = bookedTimes.contains(current);
+            windows.add(new AppointmentWindowDTO(slotId, current, isBooked));
+            current = current.plusMinutes(duration);
         }
 
-        return appointmentWindows;
+        return windows;
     }
+
 }

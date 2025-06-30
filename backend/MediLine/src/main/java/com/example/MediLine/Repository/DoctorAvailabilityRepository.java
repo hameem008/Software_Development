@@ -28,7 +28,7 @@ public interface DoctorAvailabilityRepository extends JpaRepository<DoctorAvaila
         SELECT da FROM DoctorAvailability da
         WHERE da.doctor.doctorId = :doctorId
           AND da.medicalCenter.medicalCenterId = :medicalCenterId
-          AND da.weekDay = :weekDay
+          AND LOWER(da.weekDay) = LOWER(:weekDay)
     """)
     Optional<DoctorAvailability> findByDoctorMedCenterAndWeekDay(
             @Param("doctorId") Integer doctorId,

@@ -314,56 +314,58 @@ INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_n
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (1, 42, 20, '2025-08-20', '12:45:00', 178, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (2, 37, 10, '2025-08-21', '14:40:00', 164, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (3, 26, 17, '2025-08-16', '13:00:00', 112, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (4, 45, 7, '2025-08-15', '11:50:00', 49, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (5, 39, 20, '2025-08-19', '14:45:00', 35, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (6, 24, 15, '2025-08-15', '12:15:00', 16, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (7, 34, 3, '2025-08-20', '12:30:00', 141, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (8, 36, 5, '2025-08-22', '13:00:00', 147, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (9, 16, 11, '2025-08-16', '09:45:00', 2, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (10, 38, 7, '2025-08-15', '14:15:00', 129, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (11, 34, 1, '2025-08-20', '13:15:00', 149, 6);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (12, 35, 3, '2025-08-25', '11:30:00', 22, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (13, 37, 11, '2025-08-20', '10:00:00', 41, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (14, 46, 2, '2025-08-18', '08:45:00', 160, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (15, 7, 18, '2025-08-23', '09:30:00', 55, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (16, 14, 7, '2025-08-16', '11:15:00', 163, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (17, 42, 9, '2025-08-16', '12:15:00', 65, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (18, 27, 1, '2025-08-15', '13:45:00', 152, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (19, 13, 8, '2025-08-20', '14:40:00', 94, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (20, 28, 16, '2025-08-17', '10:00:00', 122, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (21, 34, 17, '2025-08-17', '12:25:00', 61, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (22, 41, 5, '2025-08-16', '14:30:00', 140, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (23, 33, 6, '2025-08-18', '10:15:00', 140, 6);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (24, 31, 8, '2025-08-25', '13:45:00', 150, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (25, 36, 8, '2025-08-25', '11:30:00', 2, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (26, 43, 15, '2025-08-20', '12:45:00', 179, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (27, 32, 20, '2025-08-16', '10:00:00', 58, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (28, 32, 4, '2025-08-18', '10:00:00', 90, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (29, 32, 9, '2025-08-21', '10:50:00', 84, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (30, 44, 2, '2025-08-23', '13:00:00', 45, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (31, 7, 17, '2025-08-17', '08:45:00', 98, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (32, 22, 11, '2025-08-23', '15:25:00', 111, 5);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (33, 10, 6, '2025-08-24', '14:30:00', 117, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (34, 33, 10, '2025-08-23', '10:40:00', 152, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (35, 5, 8, '2025-08-22', '10:40:00', 106, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (36, 29, 14, '2025-08-17', '15:00:00', 81, 6);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (37, 22, 4, '2025-08-20', '09:00:00', 86, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (38, 43, 2, '2025-08-15', '12:35:00', 162, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (39, 48, 9, '2025-08-20', '13:00:00', 30, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (40, 36, 18, '2025-08-24', '10:15:00', 50, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (41, 6, 2, '2025-08-19', '12:20:00', 62, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (42, 25, 9, '2025-08-15', '10:45:00', 28, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (43, 48, 15, '2025-08-20', '12:15:00', 36, 1);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (44, 7, 15, '2025-08-23', '12:35:00', 19, 3);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (45, 23, 14, '2025-08-15', '08:45:00', 44, 2);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (46, 14, 2, '2025-08-19', '09:15:00', 19, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (47, 21, 6, '2025-08-20', '13:45:00', 80, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (48, 45, 20, '2025-08-17', '13:45:00', 23, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (49, 36, 16, '2025-08-19', '13:15:00', 137, 4);
-INSERT INTO public.appointment (appointment_id, doctor_id, patient_id, date, "time", slot_id, serial_number) VALUES (50, 30, 16, '2025-08-19', '09:45:00', 83, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (1, 20, '2025-08-20', '12:45:00', 178, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (2, 10, '2025-08-21', '14:40:00', 164, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (3, 17, '2025-08-16', '13:00:00', 112, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (4, 7, '2025-08-15', '11:50:00', 49, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (5, 20, '2025-08-19', '14:45:00', 35, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (6, 15, '2025-08-15', '12:15:00', 16, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (7, 3, '2025-08-20', '12:30:00', 141, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (8, 5, '2025-08-22', '13:00:00', 147, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (9, 11, '2025-08-16', '09:45:00', 2, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (10, 7, '2025-08-15', '14:15:00', 129, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (11, 1, '2025-08-20', '13:15:00', 149, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (12, 3, '2025-08-25', '11:30:00', 22, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (13, 11, '2025-08-20', '10:00:00', 41, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (14, 2, '2025-08-18', '08:45:00', 160, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (15, 18, '2025-08-23', '09:30:00', 55, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (16, 7, '2025-08-16', '11:15:00', 163, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (17, 9, '2025-08-16', '12:15:00', 65, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (18, 1, '2025-08-15', '13:45:00', 152, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (19, 8, '2025-08-20', '14:40:00', 94, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (20, 16, '2025-08-17', '10:00:00', 122, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (21, 17, '2025-08-17', '12:25:00', 61, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (22, 5, '2025-08-16', '14:30:00', 140, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (23, 6, '2025-08-18', '10:15:00', 140, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (24, 8, '2025-08-25', '13:45:00', 150, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (25, 8, '2025-08-25', '11:30:00', 2, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (26, 15, '2025-08-20', '12:45:00', 179, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (27, 20, '2025-08-16', '10:00:00', 58, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (28, 4, '2025-08-18', '10:00:00', 90, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (29, 9, '2025-08-21', '10:50:00', 84, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (30, 2, '2025-08-23', '13:00:00', 45, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (31, 17, '2025-08-17', '08:45:00', 98, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (32, 11, '2025-08-23', '15:25:00', 111, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (33, 6, '2025-08-24', '14:30:00', 117, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (34, 10, '2025-08-23', '10:40:00', 152, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (35, 8, '2025-08-22', '10:40:00', 106, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (36, 14, '2025-08-17', '15:00:00', 81, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (37, 4, '2025-08-20', '09:00:00', 86, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (38, 2, '2025-08-15', '12:35:00', 162, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (39, 9, '2025-08-20', '13:00:00', 30, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (40, 18, '2025-08-24', '10:15:00', 50, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (41, 2, '2025-08-19', '12:20:00', 62, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (42, 9, '2025-08-15', '10:45:00', 28, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (43, 15, '2025-08-20', '12:15:00', 36, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (44, 15, '2025-08-23', '12:35:00', 19, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (45, 14, '2025-08-15', '08:45:00', 44, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (46, 2, '2025-08-19', '09:15:00', 19, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (47, 6, '2025-08-20', '13:45:00', 80, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (48, 20, '2025-08-17', '13:45:00', 23, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (49, 16, '2025-08-19', '13:15:00', 137, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (50, 16, '2025-08-19', '09:45:00', 83, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (51, 2, '2025-07-06', '12:40:00', 2, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (52, 2, '2025-07-06', '13:00:00', 2, 7);
 
 
 --
@@ -2040,6 +2042,7 @@ INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (50, 44);
 -- Data for Name: refresh_token; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.refresh_token (email, role, token, expiry_date) VALUES ('rafi.hossain258@gmail.com', 'ROLE_PATIENT', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWZpLmhvc3NhaW4yNThAZ21haWwuY29tIiwianRpIjoiOTg4NzllY2YtODgwZS00N2Q1LWFmY2UtNmU5NzVhOTc3ZGRlIiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsImlhdCI6MTc1MTI4ODAxMSwiZXhwIjoxNzUxODkyODExfQ.Rq1IvnuDPv-wD4YOGXG7CXOyOmlEThKFxq4yOz0jCC4', '2025-07-07 12:53:31.002455');
 
 
 --
@@ -2253,7 +2256,7 @@ INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_
 -- Name: appointment_appointment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.appointment_appointment_id_seq', 50, true);
+SELECT pg_catalog.setval('public.appointment_appointment_id_seq', 52, true);
 
 
 --

@@ -1,10 +1,19 @@
 package com.example.MediLine.DTO.AppointmentDTO;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
+
+import java.time.LocalDate;
 
 @Data
 public class AppointmentWindowRequest {
-    private int doctorId;
-    private int medicalCenterId;
-    private String weekDay;
+    @Positive
+    private Integer doctorId;
+
+    @Positive
+    private Integer medicalCenterId;
+
+    @FutureOrPresent
+    private LocalDate date;
 }

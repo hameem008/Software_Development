@@ -36,4 +36,7 @@ else
 
   docker compose down -v
   docker compose up --build -d
+
+  echo "🚀 Running services................."
+  docker ps
 fi

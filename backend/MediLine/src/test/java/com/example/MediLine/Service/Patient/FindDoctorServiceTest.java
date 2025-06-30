@@ -10,12 +10,11 @@ import com.example.MediLine.Repository.DoctorAvailabilityRepository;
 import com.example.MediLine.Repository.DoctorRepository;
 import com.example.MediLine.Repository.DoctorReviewRepository;
 
+import com.example.MediLine.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,9 +35,16 @@ public class FindDoctorServiceTest {
     @InjectMocks
     private FindDoctorService findDoctorService;
 
+
+    private Doctor doctor;
+
+
     @BeforeEach
     public void setUp() {
+
         MockitoAnnotations.openMocks(this);
+
+        doctor = TestDataFactory.createDoctor();
     }
 
     @Test
@@ -46,8 +52,6 @@ public class FindDoctorServiceTest {
         FindDoctorRequest request = new FindDoctorRequest();
         request.setSpecialization("Cardiology");
         request.setLocation("Dhaka");
-
-        Doctor doctor = getDoctor();
 
         when(doctorRepository.searchDoctors("Cardiology", "Dhaka"))
                 .thenReturn(List.of(doctor));
@@ -60,45 +64,13 @@ public class FindDoctorServiceTest {
         assertEquals(4.5, result.getFirst().getRating());
     }
 
-    private Doctor getDoctor() {
-        Doctor doctor = new Doctor();
-        doctor.setDoctorId(1);
-        doctor.setFirstName("John");
-        doctor.setLastName("Doe");
-        doctor.setSpecialization("Cardiology");
-        doctor.setDesignation("Professor");
-        doctor.setAcademicInstitution("BSMMU");
-
-        DoctorDegree degree = new DoctorDegree();
-        DoctorDegree.DoctorDegreeId degreeId =
-                new DoctorDegree.DoctorDegreeId(1,"MBBS");
-        degree.setId(degreeId);
-        degree.setInstitution("DU");
-        degree.setPassingYear(2010);
-        doctor.setDegrees(Set.of(degree));
-
-        DoctorAvailability availability = new DoctorAvailability();
-        availability.setWeekDay("Sunday");
-        doctor.setAvailabilities(Set.of(availability));
-        return doctor;
-    }
 
     @Test
     void testGetDoctorDetails() {
-        Doctor doctor = getDoctor();
-
         when(doctorRepository.findWithDegreesById(1))
                 .thenReturn(Optional.of(doctor));
 
-        MedicalCenter center = new MedicalCenter();
-        center.setName("Apollo");
-        center.setAddress("Dhaka");
-
-        DoctorAvailability availability = new DoctorAvailability();
-        availability.setWeekDay("Sunday");
-        availability.setStartTime(LocalTime.of(9, 0));
-        availability.setEndTime(LocalTime.of(12, 0));
-        availability.setMedicalCenter(center);
+        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
 
         when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
                 .thenReturn(List.of(availability));
@@ -108,20 +80,65 @@ public class FindDoctorServiceTest {
         DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
         assertEquals("John Doe", details.getName());
         assertEquals(1, details.getAvailableMedCenters().size());
+        assertEquals("Apollo Hospital",
+                details.getAvailableMedCenters().getFirst().getMedicalCenterName());
         assertEquals(4.8, details.getRating());
     }
 
     @Test
-    void testGetDoctorReviews() {
-        Patient patient = new Patient();
-        patient.setFirstName("Alice");
-        patient.setLastName("Smith");
+    void testGetDoctorDetails_whenNoDoctor() {
+        when(doctorRepository.findWithDegreesById(1))
+                .thenReturn(Optional.empty());
 
-        DoctorReview review = new DoctorReview();
-        review.setRating(4);
-        review.setDescription("Very good");
-        review.setPatient(patient);
-        review.setDate(LocalDate.of(2025, 6, 1));
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> findDoctorService.getDoctorDetails(1));
+        assertTrue(ex.getMessage().contains("Doctor not found"));
+    }
+
+    @Test
+    void testGetDoctorDetails_whenNoAvailability() {
+        when(doctorRepository.findWithDegreesById(1))
+                .thenReturn(Optional.of(doctor));
+
+        // No availability
+        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
+                .thenReturn(Collections.emptyList());
+
+        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
+                .thenReturn(4.8);
+
+        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
+
+        assertEquals("John Doe", details.getName());
+        assertTrue(details.getAvailableMedCenters().isEmpty());
+        assertEquals(4.8, details.getRating());
+    }
+
+    @Test
+    void testGetDoctorDetails_whenNoRating() {
+        when(doctorRepository.findWithDegreesById(1))
+                .thenReturn(Optional.of(doctor));
+
+        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
+
+        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
+                .thenReturn(List.of(availability));
+
+        // No rating available
+        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
+                .thenReturn(null);
+
+        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
+
+        assertEquals("John Doe", details.getName());
+        assertEquals(1, details.getAvailableMedCenters().size());
+        assertEquals(0, details.getRating());
+    }
+
+
+    @Test
+    void testGetDoctorReviews() {
+        DoctorReview review = TestDataFactory.createDoctorReview();
 
         when(doctorReviewRepository.findByDoctorDoctorId(1))
                 .thenReturn(List.of(review));
@@ -131,5 +148,15 @@ public class FindDoctorServiceTest {
         assertEquals("Alice Smith", reviews.getFirst().getPatientName());
         assertEquals(4.0, reviews.getFirst().getRating());
         assertEquals("Very good", reviews.getFirst().getReviewText());
+    }
+
+
+    @Test
+    void testGetDoctorReviews_whenNoReviews() {
+        when(doctorReviewRepository.findByDoctorDoctorId(1))
+                .thenReturn(Collections.emptyList());
+
+        List<DoctorReviewDTO> reviews = findDoctorService.getDoctorReviews(1);
+        assertEquals(0, reviews.size());
     }
 }

@@ -21,10 +21,6 @@ public class Appointment {
     private Integer appointmentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private Doctor doctor;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
@@ -40,6 +36,4 @@ public class Appointment {
 
     @Column(name = "serial_number")
     private Integer serialNumber;
-
-    // Getters & Setters are handled by Lombok (@Data)
 }

@@ -31,12 +31,14 @@ public class BookAppointmentController {
 
     @PostMapping("/doctor/windows")
     public ResponseEntity<List<AppointmentWindowDTO>> getDoctorAppointmentWindows(
-            @RequestBody AppointmentWindowRequest windowRequest) {
+            @RequestBody
+            @Valid
+            AppointmentWindowRequest windowRequest) {
 
         List<AppointmentWindowDTO> windows = appointmentService.getAppointmentWindows(
                 windowRequest.getDoctorId(),
                 windowRequest.getMedicalCenterId(),
-                windowRequest.getWeekDay()
+                windowRequest.getDate()
         );
 
         if (windows.isEmpty()) {

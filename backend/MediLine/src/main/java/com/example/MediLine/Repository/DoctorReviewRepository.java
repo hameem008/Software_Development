@@ -12,7 +12,7 @@ import java.util.List;
 public interface DoctorReviewRepository extends JpaRepository<DoctorReview, Integer> {
 
     @Query("SELECT AVG(dr.rating) FROM DoctorReview dr WHERE dr.doctor.doctorId = :doctorId")
-    double findAverageRatingByDoctorId(@Param("doctorId") Integer doctorId);
+    Double findAverageRatingByDoctorId(@Param("doctorId") Integer doctorId);
 
 
     @EntityGraph(attributePaths = {"patient"})

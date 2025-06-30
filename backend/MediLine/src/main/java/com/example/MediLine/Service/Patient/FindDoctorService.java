@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +61,7 @@ public class FindDoctorService {
 
     public DoctorDetailsDTO getDoctorDetails(int doctorId) {
         Doctor doctor = doctorRepository.findWithDegreesById(doctorId)
-                .orElseThrow(() -> new IllegalArgumentException("Doctor not found with ID: " + doctorId));
+                .orElseThrow(() -> new IllegalArgumentException("Doctor not found"));
 
 
         List<DoctorAvailability> doctorAvailabilities =
@@ -80,8 +81,10 @@ public class FindDoctorService {
                         .toList())
                 .availableMedCenters(
                         createMedCenterList(doctorAvailabilities))
-                .rating(
-                        doctorReviewRepository.findAverageRatingByDoctorId(doctorId))
+                .rating(Optional.ofNullable(
+                            doctorReviewRepository.findAverageRatingByDoctorId(doctorId))
+                            .orElse(0.0)
+                )
                 .build();
     }
 
