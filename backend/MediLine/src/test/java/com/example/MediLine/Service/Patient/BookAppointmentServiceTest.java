@@ -6,7 +6,6 @@ import com.example.MediLine.DTO.AppointmentDTO.AppointmentWindowDTO;
 import com.example.MediLine.DTO.AppointmentDTO.CreateAppointmentRequest;
 import com.example.MediLine.Entity.*;
 import com.example.MediLine.Repository.*;
-
 import com.example.MediLine.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

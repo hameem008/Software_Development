@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 // import { mockDoctors } from '@/data/mockData';
 import { Search, MapPin, Star, Clock, DollarSign, User } from 'lucide-react';
 import api from '@/lib/api';
+import DropDown from "@/components/common/DropDown";
 
 const DoctorSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -103,7 +104,7 @@ const DoctorSearch = () => {
               />
             </div>
             <div>
-              <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
+              {/*<Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
                 <SelectTrigger>
                   <SelectValue placeholder="All Specialties" />
                 </SelectTrigger>
@@ -113,10 +114,17 @@ const DoctorSearch = () => {
                     <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+              </Select>*/}
+
+              <DropDown
+                value={selectedSpecialty}
+                onChange={setSelectedSpecialty}
+                options={specialties}
+                placeholder="Specialties"
+              />
             </div>
             <div>
-              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+              {/*<Select value={selectedLocation} onValueChange={setSelectedLocation}>
                 <SelectTrigger>
                   <SelectValue placeholder="All Locations" />
                 </SelectTrigger>
@@ -126,7 +134,13 @@ const DoctorSearch = () => {
                     <SelectItem key={location} value={location}>{location}</SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+              </Select>*/}
+              <DropDown
+                value={selectedLocation}
+                onChange={setSelectedLocation}
+                options={locations}
+                placeholder="Locations"
+              />
             </div>
             <div>
               <Button 
