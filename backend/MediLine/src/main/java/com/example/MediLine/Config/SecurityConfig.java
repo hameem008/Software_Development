@@ -84,7 +84,7 @@ public class SecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/ping", "/register/**", "/login/**", "/refresh").permitAll()
+                        .requestMatchers("/ping", "/register/**", "/login/**", "/refresh", "/api/chat").permitAll()
                         .requestMatchers("/logout").authenticated()
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/doctor/**").hasRole("DOCTOR")

@@ -12,7 +12,8 @@ import {
   Heart,
   TestTube,
   Pill,
-  ClipboardList
+  ClipboardList,
+  MessageSquare
 } from 'lucide-react';
 import PatientOverview from '@/pages/patient/Overview';
 import PatientProfile from '@/pages/patient/Profile';
@@ -26,6 +27,7 @@ import TestResults from '@/pages/patient/TestResults';
 import TestRequest from '@/pages/patient/TestRequest';
 import TestRequests from '@/pages/patient/TestRequests';
 import TestRequestsList from '@/pages/patient/TestRequestsList';
+import Chatbot from '@/pages/patient/Chatbot';
 
 const PatientDashboard = () => {
   const location = useLocation();
@@ -40,6 +42,7 @@ const PatientDashboard = () => {
     { path: '/patient/tests/request', icon: TestTube, label: 'Request Test' },
     { path: '/patient/tests/requests-list', icon: ClipboardList, label: 'My Test Requests' },
     { path: '/patient/profile', icon: User, label: 'Profile' },
+    { path: '/patient/chatbot', icon: MessageSquare, label: 'Chatbot' },
   ];
 
   const isActive = (path: string, exact = false) => {
@@ -86,6 +89,7 @@ const PatientDashboard = () => {
         <Route path="tests/request" element={<TestRequest />} />
         <Route path="tests/requests" element={<TestRequests />} />
         <Route path="tests/requests-list" element={<TestRequestsList />} />
+        <Route path="chatbot" element={<Chatbot />} />
       </Routes>
     </DashboardLayout>
   );
