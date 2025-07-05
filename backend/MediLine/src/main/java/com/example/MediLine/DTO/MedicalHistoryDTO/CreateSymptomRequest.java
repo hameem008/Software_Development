@@ -13,6 +13,7 @@ public class CreateSymptomRequest {
     @NotBlank
     private String description;
 
+    @NotBlank
     private String overallMood;
 
     @Min(1)

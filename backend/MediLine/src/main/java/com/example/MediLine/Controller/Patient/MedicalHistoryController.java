@@ -1,8 +1,10 @@
 package com.example.MediLine.Controller.Patient;
 
 import com.example.MediLine.Annotation.CurrentPatient;
+import com.example.MediLine.DTO.FindDoctorDTO.DoctorCardDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.Patient;
+import com.example.MediLine.Service.Patient.PatientHistoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,31 +17,50 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MedicalHistoryController {
 
+    private final PatientHistoryService patientHistoryService;
+
+
     @GetMapping("/severity-level-options")
     public ResponseEntity<List<SeverityLevelDTO>> getSeverityLevels() {
-         return ResponseEntity.ok(null);
+        List<SeverityLevelDTO> severityLevels = patientHistoryService.getAllSeverityLevels();
+
+        if(severityLevels.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(severityLevels);
     }
 
     @GetMapping("/mood-options")
     public ResponseEntity<List<MoodOptionDTO>> getMoodOptions() {
-         return ResponseEntity.ok(null);
+        List<MoodOptionDTO> moodOptions = patientHistoryService.getAllMoodOptions();
+
+        if (moodOptions.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(moodOptions);
     }
 
     @GetMapping("/get-symptoms")
-    public ResponseEntity<List<SymptomDTO>> getPrescriptionDetails() {
+    public ResponseEntity<List<SymptomDTO>> getAllSymptoms(@CurrentPatient Patient patient) {
 
+        List<SymptomDTO> symptoms =
+                patientHistoryService.getAllSymptoms(patient.getPatientId());
 
-         return ResponseEntity.ok(null);
+        if (symptoms.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(symptoms);
     }
 
     @PostMapping("/create-symptom")
-    public ResponseEntity<String> getPrescriptionDetails(
-             @RequestBody
-             @Valid
-             CreateSymptomRequest symptomRequest) {
+    public ResponseEntity<String> createSymptom(
+            @CurrentPatient Patient patient,
+            @RequestBody
+            @Valid
+            CreateSymptomRequest symptomRequest) {
 
-
-         return ResponseEntity.ok(null);
+        patientHistoryService.createSymptom(patient.getPatientId(), symptomRequest);
+        return ResponseEntity.ok("Symptom created successfully");
     }
 
 
