@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Try to get user profile based on the cookie
         await api.get('/refresh');
         const response = await api.get('/me');
-        console.log('Auth check response:', response.data); // Debug log
+        // console.log('Auth check response:', response.data); // Debug log
         
         if (response.data) {
           setUser(response.data);
@@ -56,9 +56,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     try {
       await api.post('/logout');
+      
+      // Clear chat conversation data from localStorage
+      if (user?.id) {
+        const conversationKey = `chat_conversation_${user.id}`;
+        localStorage.removeItem(conversationKey);
+        console.log('Chat conversation cleared for user:', user.id);
+      }
+      
+      // Also clear any default conversation if it exists
+      const defaultConversationKey = 'chat_conversation_default';
+      localStorage.removeItem(defaultConversationKey);
+      
       setUser(null);
+      console.log('User logged out successfully and chat data cleared');
     } catch (error) {
       console.error('Logout error:', error);
+      
+      // Even if logout API fails, clear local data
+      if (user?.id) {
+        const conversationKey = `chat_conversation_${user.id}`;
+        localStorage.removeItem(conversationKey);
+      }
+      localStorage.removeItem('chat_conversation_default');
+      
+      setUser(null);
     }
   };
 

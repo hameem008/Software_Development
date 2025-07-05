@@ -6,46 +6,44 @@ services:
       context: ./db
       dockerfile: Dockerfile
     container_name: my_postgres_db
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+    env_file:
+      - .env
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - mediline-net
+    # networks:
+    #   - mediline-net
 
-  backend:
-    build:
-      context: ./backend/MediLine
-      dockerfile: Dockerfile
-    container_name: mediline-backend
-    ports:
-      - "8080:8080"
-    env_file:
-      - ./backend/MediLine/.env
-    depends_on:
-      - db
-    networks:
-      - mediline-net
+  # backend:
+  #   build:
+  #     context: ./backend/MediLine
+  #     dockerfile: Dockerfile
+  #   container_name: mediline-backend
+  #   ports:
+  #     - "8080:8080"
+  #   env_file:
+  #     - ./backend/MediLine/.env
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - mediline-net
 
-  frontend:
-    build:
-      context: ./mediline-health-portal
-      dockerfile: Dockerfile
-    container_name: mediline-frontend
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    networks:
-      - mediline-net
+  # frontend:
+  #   build:
+  #     context: ./mediline-health-portal
+  #     dockerfile: Dockerfile
+  #   container_name: mediline-frontend
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - mediline-net
 
 volumes:
   postgres_data:
 
-networks:
-  mediline-net:
-    driver: bridge
+# networks:
+#   mediline-net:
+#     driver: bridge

@@ -49,6 +49,45 @@ public class GeminiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
+        return executeRequest(apiUrl, request);
+    }
+
+    // New method to handle conversation context
+    public String getGeminiResponseWithContext(List<Map<String, String>> conversationHistory) {
+        if (conversationHistory == null || conversationHistory.isEmpty()) {
+            logger.warn("Conversation history is null or empty");
+            return "Error: Conversation history cannot be empty";
+        }
+
+        String apiUrl = geminiApiUrl + "?key=" + geminiApiKey;
+        logger.info("Sending request to Gemini API with conversation context");
+
+        // Build contents array with conversation history
+        List<Map<String, Object>> contents = new ArrayList<>();
+
+        for (Map<String, String> message : conversationHistory) {
+            String role = message.get("role"); // "user" or "model"
+            String text = message.get("message");
+
+            if (text != null && !text.trim().isEmpty()) {
+                Map<String, Object> content = Map.of(
+                        "role", role,
+                        "parts", List.of(Map.of("text", text.trim()))
+                );
+                contents.add(content);
+            }
+        }
+
+        Map<String, Object> requestBody = Map.of("contents", contents);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
+
+        return executeRequest(apiUrl, request);
+    }
+
+    private String executeRequest(String apiUrl, HttpEntity<Map<String, Object>> request) {
         int maxRetries = 3;
         int retryCount = 0;
 
