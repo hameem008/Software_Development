@@ -2,7 +2,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // Create an Axios instance with default configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_BASE_URL, // Read from .env
+  // baseURL: import.meta.env.VITE_BACKEND_BASE_URL, // Read from .env
+  baseURL: 'http://74.225.218.7:8080', // Backend base URL
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
