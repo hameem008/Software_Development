@@ -28,8 +28,8 @@ public class DoctorDetailsDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class AvailableMedCenters {
-        private String MedicalCenterName;
-        private String MedicalCenterLocation;
+        private String HospitalName;
+        private String HospitalLocation;
         private List<AvailabilitySlot> availabilitySlots;
     }
 

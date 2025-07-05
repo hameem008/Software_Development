@@ -24,10 +24,10 @@ public class AppointmentDTO {
     private String doctorName;
 
     @NotNull
-    private int medicalCenterId;
+    private int hospitalId;
 
     @NotNull
-    private String medicalCenterName;
+    private String hospitalName;
 
     @NotNull
     private LocalDate date;

@@ -12,7 +12,7 @@ public class AppointmentWindowRequest {
     private Integer doctorId;
 
     @Positive
-    private Integer medicalCenterId;
+    private Integer hospitalId;
 
     @FutureOrPresent
     private LocalDate date;

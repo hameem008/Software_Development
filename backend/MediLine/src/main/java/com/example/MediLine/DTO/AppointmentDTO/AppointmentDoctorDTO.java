@@ -24,9 +24,9 @@ public class AppointmentDoctorDTO {
     @AllArgsConstructor
     @Builder
     public static class ConsultationLocation {
-        private int medicalCenterId;
-        private String medicalCenterName;
-        private String medicalCenterLocation;
+        private int hospitalId;
+        private String hospitalName;
+        private String hospitalLocation;
         private double consultationFee;
     }
 }

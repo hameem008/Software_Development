@@ -20,7 +20,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     );
 
 
-    @EntityGraph(attributePaths = {"slot", "slot.doctor","slot.medicalCenter"})
+    @EntityGraph(attributePaths = {"slot", "slot.doctor","slot.hospital"})
     List<Appointment> findByPatientPatientId(
             @Param("patientId") Integer patientId);
 

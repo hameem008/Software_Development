@@ -35,7 +35,8 @@ else
   docker rm -f my_postgres_db mediline-backend mediline-frontend 2>/dev/null || true
 
   docker compose down -v
-  docker compose up --build -d
+  docker-compose build --no-cache
+  docker compose up -d
 
   echo "🚀 Running services................."
   docker ps

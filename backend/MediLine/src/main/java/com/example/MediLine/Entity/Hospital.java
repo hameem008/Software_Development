@@ -7,17 +7,17 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "medical_center")
+@Table(name = "hospital")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MedicalCenter {
+public class Hospital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer medicalCenterId;
+    private Integer hospitalId;
 
     @Column(unique = true)
     private String email;
@@ -40,7 +40,7 @@ public class MedicalCenter {
     @Column(name = "profile_photo_url")
     private String profilePhotoUrl;
 
-    @OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     List<DoctorAvailability> doctorAvailabilities;
 

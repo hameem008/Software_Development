@@ -35,7 +35,7 @@ public class PerformedTest {
     private Doctor reviewedByDoctor;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "medical_center_id")
-    private MedicalCenter medicalCenter;
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 
 }

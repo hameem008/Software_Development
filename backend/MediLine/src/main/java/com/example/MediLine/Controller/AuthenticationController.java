@@ -2,21 +2,22 @@ package com.example.MediLine.Controller;
 
 import com.example.MediLine.DTO.DoctorAuthDTO.DoctorLoginRequest;
 import com.example.MediLine.DTO.DoctorAuthDTO.DoctorRegisterRequest;
-import com.example.MediLine.DTO.MedicalCenterDTO.MedicalCenterLoginRequest;
-import com.example.MediLine.DTO.MedicalCenterDTO.MedicalCenterRegisterRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalRegisterRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalLoginRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalRegisterRequest;
 import com.example.MediLine.DTO.PatientAuthDTO.PatientLoginRequest;
 import com.example.MediLine.DTO.PatientAuthDTO.PatientRegisterRequest;
 import com.example.MediLine.DTO.User;
 import com.example.MediLine.Entity.Doctor;
-import com.example.MediLine.Entity.MedicalCenter;
+import com.example.MediLine.Entity.Hospital;
 import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Repository.DoctorRepository;
-import com.example.MediLine.Repository.MedicalCenterRepository;
+import com.example.MediLine.Repository.HospitalRepository;
 import com.example.MediLine.Repository.PatientRepository;
 import com.example.MediLine.Service.Doctor.DoctorLoginService;
 import com.example.MediLine.Service.Doctor.DoctorRegisterService;
-import com.example.MediLine.Service.MedicalCenter.MedicalCenterLoginService;
-import com.example.MediLine.Service.MedicalCenter.MedicalCenterRegisterService;
+import com.example.MediLine.Service.Hospital.HospitalLoginService;
+import com.example.MediLine.Service.Hospital.HospitalRegisterService;
 import com.example.MediLine.Service.Patient.PatientLoginService;
 import com.example.MediLine.Service.Patient.PatientRegisterService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,10 +45,10 @@ public class AuthenticationController {
     private DoctorLoginService doctorLoginService;
 
     @Autowired
-    private MedicalCenterRegisterService medicalCenterRegisterService;
+    private HospitalRegisterService hospitalRegisterService;
 
     @Autowired
-    private MedicalCenterLoginService medicalCenterLoginService;
+    private HospitalLoginService hospitalLoginService;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -56,7 +57,7 @@ public class AuthenticationController {
     private DoctorRepository doctorRepository;
 
     @Autowired
-    private MedicalCenterRepository medicalCenterRepository;
+    private HospitalRepository hospitalRepository;
 
     @GetMapping("/ping")
     public String ping() {
@@ -76,9 +77,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register/medical-center")
-    public ResponseEntity registerMedicalCenter(@RequestBody MedicalCenterRegisterRequest request) {
-        MedicalCenter registeredMedicalCenter = medicalCenterRegisterService.registerMedicalCenter(request);
-        return ResponseEntity.ok(registeredMedicalCenter);
+    public ResponseEntity registerHospital(@RequestBody HospitalRegisterRequest request) {
+        Hospital registeredHospital = hospitalRegisterService.registerHospital(request);
+        return ResponseEntity.ok(registeredHospital);
     }
 
     @PostMapping("/login/patient")
@@ -108,14 +109,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login/medical-center")
-    public ResponseEntity loginMedicalCenter(@RequestBody MedicalCenterLoginRequest request, HttpServletResponse response) {
-        MedicalCenter medicalCenter = medicalCenterLoginService.loginMedicalCenterAndSetCookies(request, response);
+    public ResponseEntity loginHospital(@RequestBody HospitalLoginRequest request, HttpServletResponse response) {
+        Hospital hospital = hospitalLoginService.loginHospitalAndSetCookies(request, response);
         User responseBody = new User();
-        responseBody.setId(medicalCenter.getMedicalCenterId().toString());
-        responseBody.setName(medicalCenter.getName());
-        responseBody.setEmail(medicalCenter.getEmail());
+        responseBody.setId(hospital.getHospitalId().toString());
+        responseBody.setName(hospital.getName());
+        responseBody.setEmail(hospital.getEmail());
         responseBody.setType("hospital");
-        responseBody.setAvatar(medicalCenter.getProfilePhotoUrl());
+        responseBody.setAvatar(hospital.getProfilePhotoUrl());
         return ResponseEntity.ok(responseBody);
     }
 
@@ -143,13 +144,13 @@ public class AuthenticationController {
                 responseBody.setType("doctor");
                 responseBody.setAvatar(doctor.getProfilePhotoUrl());
             } else if (roles.equals("[ROLE_MEDICAL_CENTER]")) {
-                MedicalCenter medicalCenter = medicalCenterRepository.findByEmail(email)
+                Hospital hospital = hospitalRepository.findByEmail(email)
                         .orElseThrow(() -> new IllegalArgumentException("No Medical Center found with this email."));
-                responseBody.setId(medicalCenter.getMedicalCenterId().toString());
-                responseBody.setName(medicalCenter.getName());
-                responseBody.setEmail(medicalCenter.getEmail());
+                responseBody.setId(hospital.getHospitalId().toString());
+                responseBody.setName(hospital.getName());
+                responseBody.setEmail(hospital.getEmail());
                 responseBody.setType("hospital");
-                responseBody.setAvatar(medicalCenter.getProfilePhotoUrl());
+                responseBody.setAvatar(hospital.getProfilePhotoUrl());
             }
             System.out.println(responseBody);
             return ResponseEntity.ok(responseBody);
@@ -169,7 +170,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/medical-center/profile")
-    public ResponseEntity<String> getMedicalCenterProfile() {
+    public ResponseEntity<String> getHospitalProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             String email = authentication.getName();

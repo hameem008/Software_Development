@@ -26,10 +26,10 @@ public class AddSlotRequest {
     private LocalTime endTime;
 
     @NotBlank(message = "Medical center name cannot be blank")
-    private String medicalCenterName;
+    private String hospitalName;
 
     @NotBlank(message = "Medical center location cannot be blank")
-    private String medicalCenterLocation;
+    private String hospitalLocation;
 
     @Positive(message = "Consultation fee must be a positive number")
     private Integer consultationFee;

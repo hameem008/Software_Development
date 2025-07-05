@@ -24,7 +24,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     WHERE (:specialization IS NULL OR d.specialization = :specialization)
     AND (:location IS NULL OR EXISTS (
        SELECT da FROM d.availabilities da
-       WHERE LOWER(da.medicalCenter.address) LIKE LOWER(CONCAT('%', :location, '%'))
+       WHERE LOWER(da.hospital.address) LIKE LOWER(CONCAT('%', :location, '%'))
     ))
 """)
     List<Doctor> searchDoctors(

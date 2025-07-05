@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MedicalCenterBaseDTO {
-    private Integer medicalCenterId;
+public class HospitalBaseDTO {
+    private Integer hospitalId;
     private String name;
     private String address;
 }

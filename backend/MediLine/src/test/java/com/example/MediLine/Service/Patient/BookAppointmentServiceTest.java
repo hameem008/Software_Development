@@ -48,7 +48,7 @@ public class BookAppointmentServiceTest {
         assertEquals(1, dto.getDoctorId());
         assertEquals("John Doe", dto.getName());
         assertTrue(dto.getAvailableWeekdays().contains("WEDNESDAY"));
-        assertEquals("Apollo Hospital", dto.getConsultationLocations().getFirst().getMedicalCenterName());
+        assertEquals("Apollo Hospital", dto.getConsultationLocations().getFirst().getHospitalName());
     }
 
     @Test
@@ -172,6 +172,6 @@ public class BookAppointmentServiceTest {
         List<AppointmentDTO> appointments = service.getPatientAppointments(1);
         assertEquals(1, appointments.size());
         assertEquals("John Doe", appointments.getFirst().getDoctorName());
-        assertEquals("Apollo Hospital", appointments.getFirst().getMedicalCenterName());
+        assertEquals("Apollo Hospital", appointments.getFirst().getHospitalName());
     }
 }

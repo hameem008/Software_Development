@@ -53,9 +53,9 @@ public class BookAppointmentService {
                         doctor.getAvailabilities().stream()
                             .map(availability ->
                                     new AppointmentDoctorDTO.ConsultationLocation(
-                                        availability.getMedicalCenter().getMedicalCenterId(),
-                                        availability.getMedicalCenter().getName(),
-                                        availability.getMedicalCenter().getAddress(),
+                                        availability.getHospital().getHospitalId(),
+                                        availability.getHospital().getName(),
+                                        availability.getHospital().getAddress(),
                                         (double) availability.getVisitFee()))
                             .distinct()
                             .toList())
@@ -64,12 +64,12 @@ public class BookAppointmentService {
 
 
     public List<AppointmentWindowDTO> getAppointmentWindows(
-            int doctorId, int medicalCenterId, LocalDate date) {
+            int doctorId, int hospitalId, LocalDate date) {
 
         String weekDay = date.getDayOfWeek().toString();
 
         DoctorAvailability availability = doctorAvailabilityRepository
-                .findByDoctorMedCenterAndWeekDay(doctorId, medicalCenterId, weekDay)
+                .findByDoctorMedCenterAndWeekDay(doctorId, hospitalId, weekDay)
                 .orElseThrow(() ->
                         new IllegalArgumentException("Doctor availability not found for the given criteria"));
 
@@ -143,14 +143,14 @@ public class BookAppointmentService {
 
     return appointments.stream().map(app -> {
         Doctor doctor = app.getSlot().getDoctor();
-        MedicalCenter center = app.getSlot().getMedicalCenter();
+        Hospital center = app.getSlot().getHospital();
 
         return AppointmentDTO.builder()
                 .appointmentId(app.getAppointmentId())
                 .doctorId(doctor.getDoctorId())
                 .doctorName(doctor.getFirstName() + " " + doctor.getLastName())
-                .medicalCenterId(center.getMedicalCenterId())
-                .medicalCenterName(center.getName())
+                .hospitalId(center.getHospitalId())
+                .hospitalName(center.getName())
                 .date(app.getDate())
                 .time(app.getTime())
                 .chamber(app.getSlot().getChamber())

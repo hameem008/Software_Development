@@ -23,9 +23,9 @@ public class DoctorSlotDTO {
     @JsonFormat(pattern = "hh:mm a")
     private LocalTime endTime;
 
-    private String medicalCenterName;
+    private String hospitalName;
 
-    private String medicalCenterLocation;
+    private String hospitalLocation;
 
     private Integer consultationFee;
 

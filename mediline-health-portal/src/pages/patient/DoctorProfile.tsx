@@ -23,9 +23,9 @@ interface AvailabilitySlot {
   endTime: string;
 }
 
-interface MedicalCenter {
-  medicalCenterName: string;
-  medicalCenterLocation: string;
+interface Hospital {
+  hospitalName: string;
+  hospitalLocation: string;
   availabilitySlots: AvailabilitySlot[];
 }
 
@@ -36,7 +36,7 @@ interface Doctor {
   designation: string;
   academicInstitution: string;
   degrees: Degree[];
-  availableMedCenters: MedicalCenter[];
+  availableMedCenters: Hospital[];
   rating: number;
   avatar?: string;
 }
@@ -90,9 +90,9 @@ const DoctorProfile: React.FC = () => {
     fetchDoctorProfile()
   }, [doctorId]);
 
-  const groupScheduleByLocation = (availableMedCenters: MedicalCenter[]): ScheduleByLocation => {
+  const groupScheduleByLocation = (availableMedCenters: Hospital[]): ScheduleByLocation => {
     return availableMedCenters.reduce((acc, center) => {
-      acc[center.medicalCenterName] = center.availabilitySlots.map((slot) => ({
+      acc[center.hospitalName] = center.availabilitySlots.map((slot) => ({
         day: slot.weekDay,
         time: `${slot.startTime} - ${slot.endTime}`,
       }));

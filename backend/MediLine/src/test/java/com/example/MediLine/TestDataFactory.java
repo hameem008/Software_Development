@@ -20,9 +20,9 @@ public class TestDataFactory {
         return doctor;
     }
 
-    public static MedicalCenter createMedicalCenter() {
-        MedicalCenter center = new MedicalCenter();
-        center.setMedicalCenterId(1);
+    public static Hospital createHospital() {
+        Hospital center = new Hospital();
+        center.setHospitalId(1);
         center.setName("Apollo Hospital");
         center.setAddress("Dhaka, Bangladesh");
         return center;
@@ -36,7 +36,7 @@ public class TestDataFactory {
         availability.setDuration(15);
         availability.setWeekDay("WEDNESDAY");
         availability.setVisitFee(500);
-        availability.setMedicalCenter(createMedicalCenter());
+        availability.setHospital(createHospital());
         availability.setChamber("Room 101");
         return availability;
     }

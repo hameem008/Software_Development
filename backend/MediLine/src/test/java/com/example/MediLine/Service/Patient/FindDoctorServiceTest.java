@@ -81,7 +81,7 @@ public class FindDoctorServiceTest {
         assertEquals("John Doe", details.getName());
         assertEquals(1, details.getAvailableMedCenters().size());
         assertEquals("Apollo Hospital",
-                details.getAvailableMedCenters().getFirst().getMedicalCenterName());
+                details.getAvailableMedCenters().getFirst().getHospitalName());
         assertEquals(4.8, details.getRating());
     }
 

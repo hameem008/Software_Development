@@ -2,7 +2,7 @@ package com.example.MediLine.DTO.MedicalHistoryDTO;
 
 
 import com.example.MediLine.DTO.DoctorBaseDTO;
-import com.example.MediLine.DTO.MedicalCenterBaseDTO;
+import com.example.MediLine.DTO.HospitalBaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class TestResultDTO {
 
     private DoctorBaseDTO reviewedBy;
 
-    private MedicalCenterBaseDTO medicalCenter;
+    private HospitalBaseDTO hospital;
 
 
     @Data

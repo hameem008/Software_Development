@@ -2,19 +2,12 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# Copy Maven config first to cache dependencies
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY . .
 
-RUN ./mvnw dependency:go-offline
-
-# Copy source code
-COPY src ./src
-
-# Build the app
+# Package the application
 RUN ./mvnw clean package -DskipTests
 
-# Copy the JAR
+# Copy jar explicitly (safer)
 RUN cp target/*.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]

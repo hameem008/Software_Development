@@ -1,6 +1,6 @@
 package com.example.MediLine.DTO.MedicalHistoryDTO;
 
-import com.example.MediLine.DTO.MedicalCenterBaseDTO;
+import com.example.MediLine.DTO.HospitalBaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +21,6 @@ public class RequestedTestDTO {
 
     private LocalDateTime requestedDate;
 
-    private MedicalCenterBaseDTO medicalCenter;
+    private HospitalBaseDTO hospital;
 
 }

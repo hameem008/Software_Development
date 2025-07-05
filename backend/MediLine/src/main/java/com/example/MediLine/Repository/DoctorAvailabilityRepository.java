@@ -14,24 +14,24 @@ import java.util.Optional;
 public interface DoctorAvailabilityRepository extends JpaRepository<DoctorAvailability, Integer> {
 
     @Query("SELECT DISTINCT mc.address FROM DoctorAvailability da " +
-            "JOIN da.medicalCenter mc")
+            "JOIN da.hospital mc")
     List<String> findAllDistinctDoctorLocations();
 
 
-    @EntityGraph(attributePaths = {"medicalCenter"})
+    @EntityGraph(attributePaths = {"hospital"})
     List<DoctorAvailability> findByDoctorDoctorId(
             @Param("doctorId") Integer doctorId);
 
 
-    @EntityGraph(attributePaths = {"doctor", "medicalCenter"})
+    @EntityGraph(attributePaths = {"doctor", "hospital"})
     @Query("""
         SELECT da FROM DoctorAvailability da
         WHERE da.doctor.doctorId = :doctorId
-          AND da.medicalCenter.medicalCenterId = :medicalCenterId
+          AND da.hospital.hospitalId = :hospitalId
           AND LOWER(da.weekDay) = LOWER(:weekDay)
     """)
     Optional<DoctorAvailability> findByDoctorMedCenterAndWeekDay(
             @Param("doctorId") Integer doctorId,
-            @Param("medicalCenterId") Integer medicalCenterId,
+            @Param("hospitalId") Integer hospitalId,
             @Param("weekDay") String weekDay);
 }

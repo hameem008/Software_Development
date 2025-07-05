@@ -1,4 +1,4 @@
-package com.example.MediLine.DTO.MedicalCenterDTO;
+package com.example.MediLine.DTO.HospitalDTO;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MedicalCenterRegisterRequest {
+public class HospitalRegisterRequest {
 
     private String email;
 

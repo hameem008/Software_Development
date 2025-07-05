@@ -37,7 +37,7 @@ public class BookAppointmentController {
 
         List<AppointmentWindowDTO> windows = appointmentService.getAppointmentWindows(
                 windowRequest.getDoctorId(),
-                windowRequest.getMedicalCenterId(),
+                windowRequest.getHospitalId(),
                 windowRequest.getDate()
         );
 

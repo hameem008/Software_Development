@@ -8,7 +8,7 @@ import com.example.MediLine.DTO.FindDoctorDTO.FindDoctorRequest;
 import com.example.MediLine.Entity.Doctor;
 import com.example.MediLine.Entity.DoctorAvailability;
 import com.example.MediLine.Entity.DoctorReview;
-import com.example.MediLine.Entity.MedicalCenter;
+import com.example.MediLine.Entity.Hospital;
 import com.example.MediLine.Repository.DoctorAvailabilityRepository;
 import com.example.MediLine.Repository.DoctorRepository;
 import com.example.MediLine.Repository.DoctorReviewRepository;
@@ -106,8 +106,8 @@ public class FindDoctorService {
     private List<DoctorDetailsDTO.AvailableMedCenters> createMedCenterList(
             List<DoctorAvailability> availabilities) {
 
-        Map<MedicalCenter, List<DoctorAvailability>> grouped = availabilities.stream()
-                .collect(Collectors.groupingBy(DoctorAvailability::getMedicalCenter));
+        Map<Hospital, List<DoctorAvailability>> grouped = availabilities.stream()
+                .collect(Collectors.groupingBy(DoctorAvailability::getHospital));
 
         return grouped.entrySet().stream()
                 .map(entry ->

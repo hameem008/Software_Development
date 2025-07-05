@@ -25,9 +25,9 @@ public class DoctorAvailability {
     private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medical_center_id", nullable = false)
+    @JoinColumn(name = "hospital_id", nullable = false)
     @JsonManagedReference
-    private MedicalCenter medicalCenter;
+    private Hospital hospital;
 
     @Column(name = "week_day", nullable = false, length = 20)
     private String weekDay;
