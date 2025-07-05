@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Hospital {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer hospitalId;

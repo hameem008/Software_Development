@@ -71,7 +71,7 @@ INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_nam
 
 
 --
--- Data for Name: medical_center; Type: TABLE DATA; Schema: public; Owner: myuser
+-- Data for Name: hospital; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
 INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (1, 'info@medinova.com.bd', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Medinova Medical Services Ltd. | Malibagh', 'We are proud to introduce our Medinova Medical Services Ltd. | Malibagh a state-of-the-art facility dedicated to providing exceptional healthcare services. Medinova Medical Malibagh holds the privilege of being Dhaka’s first choice hospital. Since its founding we have become an integral part of the city, advancing our mission of providing access to compassionate care to our communities.', '01790118855', 'Gemcon Business Center (Lift 2-6 255, New Circular Road, Malibagh Mor Rd, Dhaka-1217', NULL);
@@ -2288,7 +2288,7 @@ SELECT pg_catalog.setval('public.doctor_review_review_id_seq', 480, true);
 
 
 --
--- Name: medical_center_hospital_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
+-- Name: hospital_hospital_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
 SELECT pg_catalog.setval('public.hospital_hospital_id_seq', 10, true);

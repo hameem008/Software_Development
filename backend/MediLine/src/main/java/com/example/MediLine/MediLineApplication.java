@@ -13,7 +13,9 @@ public class MediLineApplication {
         Dotenv dotenv = Dotenv.configure()
                 .directory("./backend/MediLine")
                 .load();
+
         dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+
         SpringApplication.run(MediLineApplication.class, args);
     }
 }

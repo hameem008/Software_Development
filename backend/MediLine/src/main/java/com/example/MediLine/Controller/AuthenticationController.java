@@ -143,7 +143,7 @@ public class AuthenticationController {
                 responseBody.setEmail(doctor.getEmail());
                 responseBody.setType("doctor");
                 responseBody.setAvatar(doctor.getProfilePhotoUrl());
-            } else if (roles.equals("[ROLE_MEDICAL_CENTER]")) {
+            } else if (roles.equals("[ROLE_HOSPITAL]")) {
                 Hospital hospital = hospitalRepository.findByEmail(email)
                         .orElseThrow(() -> new IllegalArgumentException("No Medical Center found with this email."));
                 responseBody.setId(hospital.getHospitalId().toString());

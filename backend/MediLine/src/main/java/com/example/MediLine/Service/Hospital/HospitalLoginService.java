@@ -41,8 +41,8 @@ public class HospitalLoginService {
             throw new IllegalArgumentException("Invalid password.");
         }
 
-        String accessToken = jwtUtil.generateAccessToken(hospital.getEmail(), "ROLE_MEDICAL_CENTER");
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(hospital.getEmail(), "ROLE_MEDICAL_CENTER");
+        String accessToken = jwtUtil.generateAccessToken(hospital.getEmail(), "ROLE_HOSPITAL");
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(hospital.getEmail(), "ROLE_HOSPITAL");
 
         Cookie accessCookie = cookieConfig.createAccessTokenCookie(accessToken);
         Cookie refreshCookie = cookieConfig.createRefreshTokenCookie(refreshToken.getToken());

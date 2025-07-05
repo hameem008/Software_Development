@@ -28,5 +28,5 @@ public class TestSummaryDTO {
 
     private DoctorBaseDTO reviewedBy;
 
-    private DoctorBaseDTO medical_center;
+    private DoctorBaseDTO hospital;
 }
