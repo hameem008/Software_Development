@@ -20,6 +20,7 @@ public class ChatController {
 
     @PostMapping("/chat")
     public ResponseEntity<Map<String, String>> chat(@RequestBody Map<String, Object> request) {
+        System.out.println("api hit");
         logger.info("Received chat request");
 
         // Validate request structure
