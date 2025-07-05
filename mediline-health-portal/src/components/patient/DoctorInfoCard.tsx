@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {GraduationCap, Clock, Star, Calendar, User, Hospital} from 'lucide-react';
+import UserImage from "@/components/common/UserImage";
 
 
 interface DoctorInfoCardProps {
@@ -25,21 +26,7 @@ const DoctorInfoCard: React.FC<DoctorInfoCardProps> = ({ doctor, reviewCount, on
     <Card>
       <CardContent className="p-6">
             <div className="flex items-start space-x-6">
-              {/*<UserImage avatar={doctor.avatar} name={doctor.name} />*/}
-
-              <div className="flex-shrink-0">
-            {doctor.avatar ? (
-              <img
-                src={doctor.avatar}
-                alt={doctor.name}
-                className="w-24 h-24 rounded-full object-cover"
-              />
-            ) : (
-              <div className="w-24 h-24 bg-medical-100 rounded-full flex items-center justify-center">
-                <User className="w-12 h-12 text-medical-600" data-testid="user-icon" />
-              </div>
-            )}
-          </div>
+              <UserImage avatar={doctor.avatar} name={doctor.name} />
 
               <div className="flex-1">
                 <div className="flex items-start justify-between">

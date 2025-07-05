@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import api from '@/lib/api';
 
 import DoctorInfoCard from '@/components/patient/DoctorInfoCard';
-import TabsNavigation from '@/components/patient/TabsNavigation';
+import TabsNavigation from '@/components/common/TabsNavigation';
 import OverviewTab from '@/components/patient/OverviewTab';
 import AvailabilityTab from '@/components/patient/AvailabilityTab';
 import ReviewsTab from '@/components/patient/ReviewsTab';

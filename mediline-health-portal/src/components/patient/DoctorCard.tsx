@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Clock, DollarSign, MapPin, Star, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DoctorAvailabilityBadges from "@/components/patient/DoctorAvailabilityBadges";
+import UserImage from "@/components/common/UserImage";
 
 interface Doctor {
   doctorId: string;
@@ -24,19 +25,7 @@ const DoctorCard: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
     <Card className="hover:shadow-lg transition-shadow duration-200">
       <CardContent className="p-6">
         <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
-            {doctor.avatar ? (
-              <img
-                src={doctor.avatar}
-                alt={doctor.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-            ) : (
-              <div className="w-16 h-16 bg-medical-100 rounded-full flex items-center justify-center">
-                <User className="w-8 h-8 text-medical-600" />
-              </div>
-            )}
-          </div>
+          <UserImage avatar={doctor.avatar} name={doctor.name} />
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-2">
