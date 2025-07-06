@@ -59,11 +59,12 @@ public class BookAppointmentController {
         return ResponseEntity.ok("Appointment booked successfully");
     }
 
-    @GetMapping("/appointments")
+    @GetMapping("/upcoming-appointments")
     public ResponseEntity<List<AppointmentDTO>> getPatientAppointments(
             @CurrentPatient Patient patient) {
 
-        List<AppointmentDTO> appointments = appointmentService.getPatientAppointments(patient.getPatientId());
+        List<AppointmentDTO> appointments =
+                appointmentService.getPatientAppointments(patient.getPatientId());
 
         if (appointments.isEmpty()) {
             return ResponseEntity.noContent().build();

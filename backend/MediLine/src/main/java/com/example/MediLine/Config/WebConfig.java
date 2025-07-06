@@ -1,5 +1,6 @@
 package com.example.MediLine.Config;
 
+import com.example.MediLine.Annotation.CurrentDoctorArgumentResolver;
 import com.example.MediLine.Annotation.CurrentPatientArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +14,11 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     private final CurrentPatientArgumentResolver currentPatientArgumentResolver;
+    private final CurrentDoctorArgumentResolver currentDoctorArgumentResolver;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(currentPatientArgumentResolver);
+        resolvers.add(currentDoctorArgumentResolver);
     }
 }

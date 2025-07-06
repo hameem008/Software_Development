@@ -109,7 +109,7 @@ public class PatientHistoryService {
                 .build();
 
         List<Medication> medications =
-                prescribedMedicineRepository.findByPrescriptionId(prescriptionId)
+                prescribedMedicineRepository.findByPrescriptionId(prescriptionId, patientId)
                 .stream()
                 .map(this::createMedicationDTO)
                 .toList();
@@ -121,9 +121,13 @@ public class PatientHistoryService {
                 .summary(prescription.getSummary())
                 .vitals(vitals)
                 .symptoms(prescription.getSymptoms())
-                .diagnosis(diagnosedDiseaseRepository.findDiseaseNamesByPrescriptionId(prescriptionId))
+                .diagnosis(diagnosedDiseaseRepository
+                        .findDiseaseNamesByPrescriptionId(prescriptionId, patientId)
+                )
                 .medications(medications)
-                .tests(prescribedTestRepository.findTestsByPrescriptionId(prescriptionId))
+                .tests(prescribedTestRepository
+                        .findTestsByPrescriptionId(prescriptionId, patientId)
+                )
                 .notes(prescription.getNotes())
                 .nextAppointment(prescription.getNextAppointmentDate())
                 .build();

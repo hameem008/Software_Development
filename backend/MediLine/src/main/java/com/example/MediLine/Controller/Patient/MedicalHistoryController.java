@@ -90,6 +90,9 @@ public class MedicalHistoryController {
             @Valid
             TestResultRequest testResultRequest) {
 
+
+
+
         return null;
     }
 
@@ -101,8 +104,8 @@ public class MedicalHistoryController {
 
         PrescriptionDTO prescriptionDTO =
                 patientHistoryService
-                        .getPrescriptionDetails(
-                                prescriptionRequest.getPrescriptionId(), patient.getPatientId());
+                    .getPrescriptionDetails(
+                        prescriptionRequest.getPrescriptionId(), patient.getPatientId());
 
 
         if (prescriptionDTO == null)

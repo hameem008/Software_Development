@@ -13,10 +13,13 @@ import java.util.List;
 public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMedicine, PrescribedMedicineId> {
 
     @Query("""
+        SELECT pm
         FROM PrescribedMedicine pm
+        JOIN pm.prescription p
         JOIN pm.medicine m
-        WHERE pm.prescription.prescriptionId = :prescriptionId
+        WHERE p.prescriptionId = :prescriptionId AND p.patient.patientId = :patientId
     """)
-    List<PrescribedMedicine> findByPrescriptionId(@Param("prescriptionId") Integer prescriptionId);
+    List<PrescribedMedicine> findByPrescriptionId(
+            @Param("prescriptionId") Integer prescriptionId,
+            @Param("patientId") Integer patientId);
 }
-

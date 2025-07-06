@@ -16,8 +16,11 @@ public interface DiagnosedDiseaseRepository extends JpaRepository<DiagnosedDisea
         SELECT d.diseaseName
         FROM DiagnosedDisease dd
         JOIN dd.disease d
-        WHERE dd.prescription.prescriptionId = :prescriptionId
+        JOIN dd.prescription p
+        WHERE p.prescriptionId = :prescriptionId AND p.patient.patientId = :patientId
     """)
-    List<String> findDiseaseNamesByPrescriptionId(@Param("prescriptionId") Integer prescriptionId);
+    List<String> findDiseaseNamesByPrescriptionId(
+            @Param("prescriptionId") Integer prescriptionId,
+            @Param("patientId") Integer patientId);
 }
 

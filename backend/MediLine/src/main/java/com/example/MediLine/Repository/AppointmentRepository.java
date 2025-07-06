@@ -39,4 +39,29 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             @Param("slotId") Integer slotId,
             @Param("date") LocalDate date,
             @Param("time") LocalTime time);
+
+
+
+     @Query("""
+        FROM Appointment a
+        JOIN a.patient p
+        JOIN a.slot da
+        JOIN da.doctor d
+        JOIN da.hospital h
+        WHERE d.doctorId = :doctorId AND a.date >= CURRENT_DATE
+        ORDER BY a.date, a.time
+    """)
+    List<Appointment> findUpcomingAppointments(@Param("doctorId") Integer doctorId);
+
+    @Query("""
+        FROM Appointment a
+        JOIN a.patient p
+        JOIN a.slot da
+        JOIN da.doctor d
+        JOIN da.hospital h
+        WHERE d.doctorId = :doctorId AND a.date < CURRENT_DATE
+        ORDER BY a.date DESC, a.time DESC
+    """)
+    List<Appointment> findPastAppointments(@Param("doctorId") Integer doctorId);
+
 }
