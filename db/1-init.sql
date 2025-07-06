@@ -220,7 +220,7 @@ CREATE TABLE appointment (
     time TIME,
     slot_id INT REFERENCES doctor_availability(slot_id),
     serial_number INT,
-    CONSTRAINT unq_appointment_slot_serial UNIQUE (slot_id, serial_number)
+    CONSTRAINT unq_appointment_slot_serial UNIQUE (slot_id, serial_number, date)
 );
 
 -- Doctor Review Table

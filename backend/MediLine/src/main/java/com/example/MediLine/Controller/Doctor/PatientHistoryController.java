@@ -18,9 +18,7 @@ public class PatientHistoryController {
     @PostMapping("/prescription-details")
     public ResponseEntity<PrescriptionDTO> getPrescriptionDetails(
             @RequestBody
-             @Valid
-             PrescriptionRequest prescriptionRequest
-           ) {
+            @Valid PrescriptionRequest prescriptionRequest) {
 
 
          return ResponseEntity.ok(null);

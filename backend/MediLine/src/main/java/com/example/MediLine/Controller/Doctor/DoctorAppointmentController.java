@@ -51,7 +51,7 @@ public class DoctorAppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
-
+/*  [[][]][][][][][][][][][][][][][][][][][][][][][][][][[][][]  */
     @GetMapping("/slots")
     public ResponseEntity<List<DoctorSlotDTO>> getDoctorSlots() {
 

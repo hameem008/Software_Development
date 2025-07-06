@@ -162,7 +162,7 @@ public class PatientHistoryService {
 
         List<TestResultValue> values =
                 testResultValueRepository
-                        .findByPerformedTest_PerformedTestId(testId);
+                        .findByPerformedTestPerformedTestId(testId);
         List<TestParam> params =
                 testParamRepository
                         .findByTestId(performedTest.getTest().getTestId());

@@ -55,7 +55,7 @@ public class BookAppointmentController {
 
         request.setPatientId(patient.getPatientId());
 
-        appointmentService.bookAppointment(request);
+        appointmentService.bookAppointment(request/*, patient.getPatientId()*/);
         return ResponseEntity.ok("Appointment booked successfully");
     }
 

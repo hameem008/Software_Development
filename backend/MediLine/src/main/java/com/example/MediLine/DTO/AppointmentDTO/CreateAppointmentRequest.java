@@ -17,7 +17,6 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Builder
 public class CreateAppointmentRequest {
-    @NotNull(message = "Patient ID is required")
     private Integer patientId;
 
     @NotNull(message = "Slot ID is required")

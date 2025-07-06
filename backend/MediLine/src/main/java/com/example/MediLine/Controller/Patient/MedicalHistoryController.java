@@ -77,6 +77,7 @@ public class MedicalHistoryController {
         return ResponseEntity.ok(performedTests);
     }
 
+    /* [][][][][][][][][][][][][][][][][][][][][][] */
     @GetMapping("/all-requested-tests")
     public ResponseEntity<List<RequestedTestDTO>> getAllRequestedTests(
             @CurrentPatient Patient patient) {

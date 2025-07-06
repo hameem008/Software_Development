@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface TestResultValueRepository extends JpaRepository<TestResultValue, TestResultKey> {
-    List<TestResultValue> findByPerformedTest_PerformedTestId(Integer performedTestId);
+    List<TestResultValue> findByPerformedTestPerformedTestId(Integer performedTestId);
 }
