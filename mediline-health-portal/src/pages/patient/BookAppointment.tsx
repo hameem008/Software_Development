@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,132 +6,165 @@ import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { mockDoctors, mockTimeSlots, mockDoctorAvailability } from '@/data/mockData';
 import { ArrowLeft, User, MapPin, Clock, Calendar as CalendarIcon, Filter } from 'lucide-react';
-import { format, addDays, isSameDay } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import api from '@/lib/api';
+
+interface Hospital {
+  hospitalId: number;
+  hospitalName: string;
+  hospitalLocation: string;
+  availableWeekdays: string[];
+  consultationFee: number;
+}
+
+interface DoctorInfo {
+  doctorId: number;
+  name: string;
+  specialization: string;
+  designation: string;
+  academicInstitution: string;
+  availableWeekdays: string[];
+  consultationLocations: Hospital[];
+  avatar?: string;
+}
+
+interface TimeSlot {
+  slotId: number;
+  time: string;
+  booked: boolean;
+}
 
 const BookAppointment = () => {
   const { doctorId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+
+  const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
+  const [selectedLocationId, setSelectedLocationId] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState<string>('');
-  const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [reason, setReason] = useState('');
+  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [isBooking, setIsBooking] = useState(false);
 
-  const doctor = mockDoctors.find(d => d.id === doctorId);
-  const doctorSchedule = mockDoctorAvailability[doctorId as keyof typeof mockDoctorAvailability] || [];
+  useEffect(() => {
+    const fetchDoctorData = async () => {
+      try {
+        const response = await api.post('/patient/appointment/doctor', {
+          doctorId: Number(doctorId),
+        });
+        setDoctor(response.data);
+      } catch (err) {
+        console.error('Error fetching doctor info:', err);
+      }
+    };
 
-  if (!doctor) {
-    return (
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Doctor not found</h2>
-        <Button onClick={() => navigate('/patient/doctors')}>
-          Back to Doctor Search
-        </Button>
-      </div>
-    );
-  }
+    fetchDoctorData();
+  }, [doctorId]);
+
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      if (!selectedDate || !selectedLocationId || !doctorId) return;
+
+      try {
+        const response = await api.post('/patient/appointment/doctor/windows', {
+          doctorId: Number(doctorId),
+          hospitalId: selectedLocationId,
+          date: format(selectedDate, 'yyyy-MM-dd'),
+        });
+        setTimeSlots(response.data);
+      } catch (err) {
+        console.error('Error fetching time slots:', err);
+        setTimeSlots([]);
+      }
+    };
+
+    fetchTimeSlots();
+  }, [selectedDate, selectedLocationId, doctorId]);
 
   const today = new Date();
   const maxDate = addDays(today, 30);
 
-  // Get unique locations for the doctor
-  const availableLocations = [...new Set(doctorSchedule.map(schedule => schedule.location))];
+  const selectedHospital = doctor?.consultationLocations.find(
+    (loc) => loc.hospitalId === selectedLocationId
+  );
 
-  // Filter schedule based on selected location
-  const filteredSchedule = selectedLocation 
-    ? doctorSchedule.filter(schedule => schedule.location === selectedLocation)
-    : doctorSchedule;
-
-  // Get available days based on location filter
-  const availableDays = selectedLocation 
-    ? [...new Set(filteredSchedule.map(schedule => schedule.day))]
-    : doctor.availability;
+  const availableDays = selectedHospital?.availableWeekdays || [];
 
   const isDateDisabled = (date: Date) => {
     const dayName = format(date, 'EEEE');
     return !availableDays.includes(dayName) || date < today;
   };
 
-  const getAvailabilityForDate = (date: Date) => {
-    const dayName = format(date, 'EEEE');
-    return filteredSchedule.filter(schedule => schedule.day === dayName);
-  };
-
-  // Get time slots based on selected date and location
-  const getTimeSlots = () => {
-    if (!selectedDate) return [];
-    
-    const availabilityForDate = getAvailabilityForDate(selectedDate);
-    
-    if (selectedLocation) {
-      const locationSchedule = availabilityForDate.find(schedule => schedule.location === selectedLocation);
-      return locationSchedule ? mockTimeSlots.slice(0, 6) : [];
-    }
-    
-    return availabilityForDate.length > 0 ? mockTimeSlots.slice(0, 6) : [];
-  };
-
-  const handleDateSelect = (date: Date | undefined) => {
-    setSelectedDate(date);
-    setSelectedTime('');
-    
-    // If a location is not selected and date is selected, show available locations for that date
-    if (date && !selectedLocation) {
-      const availabilityForDate = getAvailabilityForDate(date);
-      if (availabilityForDate.length === 1) {
-        setSelectedLocation(availabilityForDate[0].location);
-      }
-    }
-  };
-
-  const handleLocationSelect = (location: string) => {
-    setSelectedLocation(location);
-    setSelectedDate(undefined);
-    setSelectedTime('');
-  };
-
-  const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
-  };
-
   const handleBookAppointment = async () => {
-    if (!selectedDate || !selectedTime || !selectedLocation) {
+    if (!selectedDate || !selectedTime || !selectedHospital) {
       toast({
-        title: "Missing Information",
-        description: "Please select date, time, and location for your appointment.",
-        variant: "destructive",
+        title: 'Missing Information',
+        description: 'Please select date, time, and location for your appointment.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const selectedSlot = timeSlots.find(slot => slot.time === selectedTime && !slot.booked);
+    if (!selectedSlot) {
+      toast({
+        title: 'Invalid Slot',
+        description: 'The selected time slot is already booked or unavailable.',
+        variant: 'destructive',
       });
       return;
     }
 
     setIsBooking(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Appointment Booked Successfully!",
-      description: `Your appointment with ${doctor.name} is confirmed for ${format(selectedDate, 'PPP')} at ${selectedTime} at ${selectedLocation}.`,
-    });
-    
-    setIsBooking(false);
-    navigate('/patient/appointments');
+
+    try {
+      await api.post('/patient/appointment/book', {
+        slotId: selectedSlot.slotId,
+        date: format(selectedDate, 'yyyy-MM-dd'),
+        time: selectedTime,
+      });
+
+      toast({
+        title: 'Appointment Booked Successfully!',
+        description: `Your appointment with ${doctor?.name} is confirmed for ${format(
+          selectedDate,
+          'PPP'
+        )} at ${selectedTime} at ${selectedHospital?.hospitalName}.`,
+      });
+
+      navigate('/patient/appointments');
+    } catch (error) {
+      console.error('Booking error:', error);
+      toast({
+        title: 'Booking Failed',
+        description: 'There was a problem booking your appointment. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsBooking(false);
+    }
   };
 
-  const availabilityForSelectedDate = selectedDate ? getAvailabilityForDate(selectedDate) : [];
+  if (!doctor) {
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Doctor not found</h2>
+        <Button onClick={() => navigate('/patient/doctors')}>Back to Doctor Search</Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
-          onClick={() => navigate(`/patient/doctors/${doctor.id}`)}
+          onClick={() => navigate(`/patient/doctors/${doctorId}`)}
           className="flex items-center"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -149,8 +181,8 @@ const BookAppointment = () => {
           <CardContent>
             <div className="flex items-center space-x-3 mb-4">
               {doctor.avatar ? (
-                <img 
-                  src={doctor.avatar} 
+                <img
+                  src={doctor.avatar}
                   alt={doctor.name}
                   className="w-12 h-12 rounded-full object-cover"
                 />
@@ -166,21 +198,17 @@ const BookAppointment = () => {
                 </Badge>
               </div>
             </div>
-            
+
             <div className="space-y-2 text-sm">
               <div className="flex items-center text-gray-600">
                 <MapPin className="w-4 h-4 mr-2" />
-                {doctor.hospital}
-              </div>
-              <div className="flex items-center text-gray-600">
-                <Clock className="w-4 h-4 mr-2" />
-                {doctor.experience} years experience
+                {selectedHospital?.hospitalLocation || 'Select a location'}
               </div>
             </div>
-            
+
             <div className="mt-4 p-3 bg-medical-50 rounded-lg">
               <p className="text-sm text-medical-700 font-medium">
-                Consultation Fee: ${doctor.consultationFee}
+                Consultation Fee: ${selectedHospital?.consultationFee || 'N/A'}
               </p>
             </div>
 
@@ -188,9 +216,9 @@ const BookAppointment = () => {
             <div className="mt-4">
               <h4 className="font-medium text-gray-900 mb-2">Available Locations</h4>
               <div className="space-y-2 text-sm">
-                {availableLocations.map((location, index) => (
-                  <div key={index} className="p-2 bg-gray-50 rounded text-gray-700">
-                    {location}
+                {doctor.consultationLocations.map((location) => (
+                  <div key={location.hospitalId} className="p-2 bg-gray-50 rounded text-gray-700">
+                    {location.hospitalName}
                   </div>
                 ))}
               </div>
@@ -207,62 +235,77 @@ const BookAppointment = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Location Filter */}
+            {/* Location */}
             <div>
               <h4 className="font-medium text-gray-900 mb-3">Choose Location</h4>
-              <Select value={selectedLocation} onValueChange={handleLocationSelect}>
+              <Select
+                value={selectedLocationId?.toString()}
+                onValueChange={(val) => {
+                  setSelectedLocationId(Number(val));
+                  setSelectedDate(undefined);
+                  setSelectedTime('');
+                }}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a location" />
                 </SelectTrigger>
                 <SelectContent>
-                  {availableLocations.map((location) => (
-                    <SelectItem key={location} value={location}>{location}</SelectItem>
+                  {doctor.consultationLocations.map((location) => (
+                    <SelectItem key={location.hospitalId} value={location.hospitalId.toString()}>
+                      {location.hospitalName}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Date Selection */}
-            {availableLocations.length > 0 && (
+            {/* Date */}
+            {selectedLocationId && (
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Choose Date</h4>
                 <div className="flex justify-center">
                   <Calendar
                     mode="single"
                     selected={selectedDate}
-                    onSelect={handleDateSelect}
+                    onSelect={(date) => {
+                      setSelectedDate(date);
+                      setSelectedTime('');
+                    }}
                     disabled={isDateDisabled}
                     fromDate={today}
                     toDate={maxDate}
                     className="rounded-md border"
                   />
                 </div>
-                {selectedLocation && (
-                  <p className="text-sm text-gray-600 mt-2 text-center">
-                    Available days for {selectedLocation}: {availableDays.join(', ')}
-                  </p>
-                )}
+                <p className="text-sm text-gray-600 mt-2 text-center">
+                  Available Days: {availableDays.join(', ')}
+                </p>
               </div>
             )}
 
-            {/* Time Selection */}
-            {selectedDate && selectedLocation && (
+            {/* Time */}
+            {selectedDate && (
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Choose Time</h4>
                 <div className="grid grid-cols-3 gap-2">
-                  {getTimeSlots().map((time) => (
+                  {timeSlots.map((slot) => (
                     <Button
-                      key={time}
-                      variant={selectedTime === time ? "default" : "outline"}
+                      key={slot.time}
+                      variant={selectedTime === slot.time ? 'default' : 'outline'}
                       size="sm"
-                      onClick={() => handleTimeSelect(time)}
-                      className={selectedTime === time ? "bg-medical-600 hover:bg-medical-700" : ""}
+                      onClick={() => setSelectedTime(slot.time)}
+                      disabled={slot.booked}
+                      className={
+                        selectedTime === slot.time
+                          ? 'bg-medical-600 hover:bg-medical-700'
+                          : ''
+                      }
                     >
-                      {time}
+                      {slot.time}
                     </Button>
                   ))}
                 </div>
-                {getTimeSlots().length === 0 && (
+                {timeSlots.length === 0 && (
                   <p className="text-sm text-gray-500 text-center py-4">
                     No available time slots for the selected date and location.
                   </p>
@@ -270,7 +313,7 @@ const BookAppointment = () => {
               </div>
             )}
 
-            {/* Reason for Visit */}
+            {/* Reason */}
             <div>
               <h4 className="font-medium text-gray-900 mb-3">Reason for Visit (Optional)</h4>
               <Textarea
@@ -282,7 +325,7 @@ const BookAppointment = () => {
             </div>
 
             {/* Summary */}
-            {selectedDate && selectedTime && selectedLocation && (
+            {selectedDate && selectedTime && selectedHospital && (
               <div className="p-4 bg-gray-50 rounded-lg">
                 <h4 className="font-medium text-gray-900 mb-2">Appointment Summary</h4>
                 <div className="space-y-1 text-sm text-gray-600">
@@ -300,18 +343,17 @@ const BookAppointment = () => {
                   </div>
                   <div className="flex items-center">
                     <MapPin className="w-4 h-4 mr-2" />
-                    {selectedLocation}
+                    {selectedHospital.hospitalName}
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Book Button */}
-            <Button 
+            <Button
               size="lg"
               className="w-full bg-medical-600 hover:bg-medical-700"
               onClick={handleBookAppointment}
-              disabled={!selectedDate || !selectedTime || !selectedLocation || isBooking}
+              disabled={!selectedDate || !selectedTime || !selectedHospital || isBooking}
             >
               {isBooking ? 'Booking...' : 'Confirm Appointment'}
             </Button>
