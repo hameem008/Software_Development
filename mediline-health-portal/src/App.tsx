@@ -27,7 +27,7 @@ const ProtectedRoute = ({ children, allowedUserType }: { children: React.ReactNo
   // If still loading, show a loading state
   // This is important to avoid redirecting before the auth check is complete
   if (isLoading) {
-    return <div>Loading authentication...</div>;
+    return <div>Loading authentication...</div>; // or use a spinner component
   }
 
   if (!user) {

@@ -1,6 +1,6 @@
 package com.example.MediLine.Repository;
 
-import com.example.MediLine.DTO.RefreshToken;
+import com.example.MediLine.Entity.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, RefreshToken.RefreshTokenId> {
 
-    Optional<RefreshToken> findByToken(String token);
+    Optional<RefreshToken> findByToken(@Param("token") String token);
 
     @Modifying
     @Query("DELETE FROM RefreshToken rt WHERE rt.email = :email AND rt.role = :role")

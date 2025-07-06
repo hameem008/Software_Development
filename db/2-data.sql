@@ -17,136 +17,1798 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Data for Name: patient; Type: TABLE DATA; Schema: public; Owner: myuser
---
-
-INSERT INTO public.patient VALUES (1, 'hameem@gmail.com', '$2a$10$0i69hPaehmg94zWNmGAU0uJF9HCaSvu7S3Q8gbi8LFQry50qFWqBS', 'Ha', 'Meem', 'Male', '2002-12-08', 'A+', '01944972610', 'Dhaka, Bangladesh', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face');
-
-
---
--- Data for Name: allergies; Type: TABLE DATA; Schema: public; Owner: myuser
---
-
-
-
---
 -- Data for Name: doctor; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
-INSERT INTO public.doctor VALUES (1, 'hameem812@gmail.com', '$2a$10$KOGWZXDJFvjF1GzD7OdkX.EAyJFxOlRg//GgffsrHsxsTtCB/knRC', 'Ha', 'Meem', 'Male', 'Neurology', 'Professor', 'Dhaka Medical College', '01944972611', 'Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (2, 'samiaahmed69@gmail.com', '$2a$10$QWCYg6paWpC02thzIYrCj.neDRTsc/7UKFEvs/Ts8yWG9RHOFdIx6', 'Samia', 'Ahmed', 'Female', 'Oncology', 'Assistant Professor', 'National Institute of Cancer Research & Hospital', '01839379694', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (3, 'rajibsaharony58@gmail.com', '$2a$10$HqbtFd0JAt3szCxHEKdN9OAMuz4o7nidoLneL/.u.85O.FqSItN9.', 'Rajib Saha', 'Rony', 'Male', 'Endocrinology', 'Medical Officer', 'Serajdikhan Upazila Health Complex Munshigonj', '01788510568', 'Munshigonj, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (4, 'tanmoyprakashghosh69@gmail.com', '$2a$10$/SHoNPg4UtdZu22ho9onl.iN51KNsrcJXoqgal8jvIWxdD1fbimg2', 'Tanmoy', 'Prakash Ghosh', 'Male', 'Orthopedics', 'Assistant Professor', 'Mymensingh Medical College', '01426728376', 'Mymensingh, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (5, 'mdsaifulislam39@gmail.com', '$2a$10$FNxUtRjpsZHdDUqXbMn7Ie3xCWtB8c1LinU2LFCCxReDIh9Ly2S6C', 'Mohammad Saiful Islam', 'Saif', 'Male', 'Otolaryngology', 'Associate Professor', 'Shaheed Suhrawardy Medical College', '01987652362', 'Mohakhali, Dhaka', NULL, NULL);
-INSERT INTO public.doctor VALUES (6, 'farhanayesmin88@gmail.com', '$2a$10$sn1FF/huTLXMS2hzobzgp.qyiwoQSA6J0J.aBHhOdoq4C6czdpjsK', 'Farhana', 'Yesmin', 'Female', 'Gynecology', 'Assistant Professor', 'Bangabandhu Sheikh Mujib Medical University', '01744305610', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (7, 'kazinazrulislam84@gmail.com', '$2a$10$Hh2osK9Xk.8kWQXP8UvQrOORgbq74EsM5gMkTTL0u.wvyl6TjF146', 'Kazi Nazrul', 'Islam', 'Male', 'Cardiology', 'Associate Professor', 'Dhaka Medical College & Hospital', '01551408335', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (8, 'mdalaminmridha82@gmail.com', '$2a$10$jESTOXGDdQWsRHkkFilJ1eIMP4PnYoo6iQkKhZRc0Y33AyPwMFa6.', 'Md Al-Amin', 'Mridha', 'Male', 'Pediatrics', 'Professor', 'Dr. M R Khan Shishu Hospital & Institute of Child Health', '01867060339', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (9, 'essormd.khairulanam73@gmail.com', '$2a$10$VWhd.1uy.pZ6Bx6QosLatuW.JXB1ZajNeD8cB3.8FQVVkph5CquJ.', 'essor Md. Khairul', 'Anam', 'Male', 'Pulmonology', 'Professor', 'National Institute of Diseases of the Chest & Hospital', '01612714338', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (10, 'a.k.m.amirulmorshedkhasru17@gmail.com', '$2a$10$axFtDZwtMjSmKQZyO9GRLOY6HfzvhX1/Vm5EuGxjEv52hr60QETGm', 'A.K.M. Amirul Morshed', 'Khasru', 'Male', 'Hematology', 'Professor', 'Dhaka Medical College & Hospital', '01692936527', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (11, 'abumd.mofakhkharulislamrana31@gmail.com', '$2a$10$OwC3fYi1crja.vpafTNOO.7DqWEWizf9uc2FdkPScJh7vmV8PEqSG', 'Abu Md. Mofakhkharul Islam', 'Rana', 'Male', 'Orthopedics', 'Assistant Professor', 'Bangabandhu Sheikh Mujib Medical University', '01311143191', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (12, 'a.b.m.riazkawsar53@gmail.com', '$2a$10$BzxfLkQbJxBJvkg6AryDeOwY.ZMW2ul2RN/5nT5QKdPvTISjJ7kvy', 'A.B.M. Riaz', 'Kawsar', 'Male', 'Cardiology', 'Assistant Professor', 'National Institute of Cardiovascular Diseases & Hospital', '01422889941', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (13, 'shalahuddinqusarbiplob60@gmail.com', '$2a$10$XXr4HcXOLdOtFULf2cYXhOF4CnDPmm/yM6xvAJqGI/kq/AQ3TZZ4.', 'Shalahuddin Qusar', 'Biplob', 'Male', 'Psychiatry', 'Professor', 'Bangabandhu Sheikh Mujib Medical University', '01931462388', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (14, 'hazerakhatun94@gmail.com', '$2a$10$/6iqlPkg/0ZjWZP3Fh5Zu.4QMmPIUPRQNsn0A8gCV8SOAdGqEYd8O', 'Hazera', 'Khatun', 'Female', 'Gynecology', 'Professor', 'Shaheed Suhrawardy Medical College & Hospital', '01989879255', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (15, 'g.m.ruhulquddus19@gmail.com', '$2a$10$SwjzIwwItRClWWufJM73ze0dbmliH8xMeRfHomQjxJdeYrLXbp7xO', 'G.M. Ruhul', 'Quddus', 'Male', 'Orthopedics', 'Assistant Professor', 'National Institute of Traumatology & Orthopedic Rehabilitation', '01728706203', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (16, 'md.ferdousurrahman82@gmail.com', '$2a$10$jOVrdpiR/rqTJxwJG2MuBeVo79M5P4o/2Ny/4xltWLQFUO2JVfG6m', 'Md. Ferdous Ur', 'Rahman', 'Male', 'Endocrinology', 'Professor', 'Bangabandhu Sheikh Mujib Medical University', '01980000920', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (17, 'md.faizurrahmanfahim88@gmail.com', '$2a$10$.Iq0xJRCHtwH5pubPGiOb.PJPktOfvfZxVwX5OYdtu3C5XEzQwuD6', 'Md. Faizur Rahman', 'Fahim', 'Male', 'Pulmonology', 'Associate Professor', 'Dhaka Medical College & Hospital', '01520103240', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (18, 'm.h.tofayelbiplob89@gmail.com', '$2a$10$OnNMxaTk6zGHA3BPwXRZ/eSeWYtQb/HGcKTwiXidEqvllKcRTd/MS', 'M.H. Tofayel', 'Biplob', 'Male', 'Orthopedics', 'Professor', 'National Institute of Traumatology & Orthopedic Rehabilitation', '01744865246', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (19, 'mohammademran13@gmail.com', '$2a$10$jJEaRp2xqdhkgFA1iX62Ye7M.24UBBLowTsHM8uR7R9DgeGjdfPFm', 'Mohammad', 'Emran', 'Male', 'Otolaryngology', 'Consultant', 'Chittagong Medical College & Hospital', '01794053177', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (20, 'ferozameher76@gmail.com', '$2a$10$b1SeKLRKOJOuiD/txm/6te4XkWZufc.LUbv4xjyktiTlvHzgyruZK', 'Feroza', 'Meher', 'Female', 'Dermatology', 'Consultant', 'Surecell Medical Chattogram', '01313247686', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (21, 'nishithranjandey10@gmail.com', '$2a$10$f3kOjargCj7dGRQ7RcbLWOBQ.0fE48ejllo/Vop2un2ognD2xeEJi', 'Nishith Ranjan', 'Dey', 'Male', 'Dermatology', 'Associate Professor', 'Chittagong Medical College & Hospital', '01566998231', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (22, 'pritishbarua36@gmail.com', '$2a$10$FRKHSXsoasGcqYLONWc1q.qaEUayOe18vqbG5V9s4DjygSIsLY7su', 'Pritish', 'Barua', 'Male', 'Dermatology', 'Consultant', 'Lab One Health Services Chittagong', '01567604079', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (23, 'md.jahangiralamchowdhury53@gmail.com', '$2a$10$4RN7ZpV/27e1T2pHN9A0LO3cQ04YnBTzABveZLXX9DqLptyVYRhXa', 'Md. Jahangir Alam', 'Chowdhury', 'Male', 'Orthopedics', 'Associate Professor', 'Chattogram Maa-O-Shishu Hospital Medical College', '01825993686', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (24, 'nazmunnaharrosy19@gmail.com', '$2a$10$3CPJ7KbT1D5gxyQbOmoG4uLaw.H1a61ro6RlA8kbnY/ILHYOc5M8i', 'Nazmun Nahar', 'Rosy', 'Female', 'Gynecology', 'Consultant', 'Health View Maternity & Child Hospital Chittagong', '01567190215', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (25, 'col.sohelahmed85@gmail.com', '$2a$10$BxmY8Jh.6AWaR2kDHRwyFu8x1NFkROWieWFKVHhCBWhldITZm2ltq', 'Col. Sohel', 'Ahmed', 'Male', 'Gastroenterology', 'Consultant', 'Apollo Imperial Hospital Chittagong', '01425665613', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (26, 'prasenjitbarua17@gmail.com', '$2a$10$t3voqv3yi5Hi66z96F49kunByxDS68/R5WfLSvjO3iHzUjUVpgOTG', 'Prasenjit', 'Barua', 'Male', 'Endocrinology', 'Assistant Professor', 'Chittagong Medical College & Hospital', '01870183059', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (27, 'md.akbarhusainbhuiyan12@gmail.com', '$2a$10$iq8nyK145si.6r/COH.x..z2h4YmBI20/q1iJWeOMnxLGUSrv6d/6', 'Md. Akbar Husain', 'Bhuiyan', 'Male', 'Pediatrics', 'Professor', 'Chittagong Medical College & Hospital', '01815791777', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (28, 's.m.ashrafali66@gmail.com', '$2a$10$hPYK2faF8dLlXv4362gn0.v9PboowF2AuNC4QjC2mLN/QfpeczOhu', 'S.M. Ashraf', 'Ali', 'Male', 'Gastroenterology', 'Professor', 'Marine City Medical College & Hospital', '01641119475', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (29, 'mohammedmaksudulkarim26@gmail.com', '$2a$10$R1zzxw.XlO4AswbE.syHQeNRuG.tx/dEm44p/DTZWrDzwwjIYD40e', 'Mohammed Maksudul', 'Karim', 'Male', 'Endocrinology', 'Consultant', 'Chittagong Medical College & Hospital', '01898620060', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (30, 'm.a.yousufchowdhury26@gmail.com', '$2a$10$zoAzqUTDEkvTWBRpMpXXa.vih1ON0rv1S/pcf.wZUjBEAEQ/vf2I2', 'M. A. Yousuf', 'Chowdhury', 'Male', 'Endocrinology', 'Associate Professor', 'Chittagong Medical College & Hospital', '01997844605', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (31, 'ashfaqahmad59@gmail.com', '$2a$10$df5NKrdmLAQVsYmEfIUuVeb6w1XUWm8IKQgJ08navo/aIGtyq39uC', 'Ashfaq', 'Ahmad', 'Male', 'Otolaryngology', 'Associate Professor', 'Chittagong Medical College & Hospital', '01912826448', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (32, 'md.minhajulhaque21@gmail.com', '$2a$10$FZhnkOdYGzOymtCKunkR.u6Gd4HD0ecCCj3v7aepbdToh/TmtmtJW', 'Md. Minhajul', 'Haque', 'Male', 'Otolaryngology', 'Medical Officer', 'Chittagong General Hospital', '01881907001', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (33, 'rupasreebiswas42@gmail.com', '$2a$10$/r2fXbVSnAFKZryqGbGOleBT0l.3NLD8pyApUa7dPE98ZX3blMUAK', 'Rupasree', 'Biswas', 'Female', 'Gynecology', 'Assistant Professor', 'Southern Medical College & Hospital', '01395078436', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (34, 'mohammadkhaledhossain67@gmail.com', '$2a$10$IcB/DhiTBMl/pqx7t6ORKORDyfa5L0FFL8qPg93fH4GbUZL2AiWWC', 'Mohammad Khaled', 'Hossain', 'Male', 'Pediatrics', 'Consultant', 'Parkview Hospital Chittagong', '01912453794', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (35, 'muslimuddinsobuj92@gmail.com', '$2a$10$wc8GPcoKxwI7eBAHAyt1vuXvhW8W0CiMar8gKgqP6xDN0RxKfT5SO', 'Muslim Uddin', 'Sobuj', 'Male', 'Pediatrics', 'Professor', 'Chittagong Medical College & Hospital', '01498936992', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (36, 'mohammadulhaquemezbah34@gmail.com', '$2a$10$xAy.QTmOJc9GNbY1oNR4/eXgvttTlLcoW1vc..MW2bHm6BQ54l0gq', 'Mohammadul Haque', 'Mezbah', 'Male', 'Ophthalmology', 'Consultant', 'Chittagong Medical College & Hospital', '01799824362', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (37, 'ahmedsharif47@gmail.com', '$2a$10$9MxWSbYfIkOenDnvqGLwBO7D3InSzoBFC3ZYAAmLQEqC2CXjUtm/y', 'Ahmed', 'Sharif', 'Male', 'Otolaryngology', 'Professor', 'Chittagong Medical College & Hospital', '01461230982', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (38, 'alokekumarraha40@gmail.com', '$2a$10$wljb6seOX7k69VK06TwvO.myQQswE37OKJNK20sRoeZZOPjDsa5Vm', 'Aloke Kumar', 'Raha', 'Male', 'Gastroenterology', 'Associate Professor', 'Chittagong Medical College & Hospital', '01689778766', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (39, 'bijankumarnath24@gmail.com', '$2a$10$BtC2/LupR39v7Hal.18wyeYto7jlUGS7Dyn6jp.HXWGpS6mKK2X8O', 'Bijan Kumar', 'Nath', 'Male', 'Gastroenterology', 'Consultant', 'General Hospital Chittagong', '01792156680', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (40, 'md.mizanurrahmanchowdhury20@gmail.com', '$2a$10$FAcO5Dap2PITha7.DbvQ7uobEEBrsNVqXTmgti29HAwfzTt2fW0tW', 'Md. Mizanur Rahman', 'Chowdhury', 'Male', 'Orthopedics', 'Professor', 'Chittagong Medical College & Hospital', '01310540581', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (41, 'md.nurhossainbhuiyan88@gmail.com', '$2a$10$LkvW3uWalOT53Yk3PD83ROYiNhI67YAsatFMj//yp5.s3WyJevs2m', 'Md. Nur Hossain', 'Bhuiyan', 'Male', 'Gastroenterology', 'Associate Professor', 'Dhaka Medical College & Hospital', '01994733890', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (42, 'aminurrahmanazad24@gmail.com', '$2a$10$hSjw91Qelv8.NtUor777duVQsBILaHpvqS7Auo9z8gQTBcAYa6bWC', 'Aminur Rahman', 'Azad', 'Male', 'Neurology', 'Consultant', 'Chittagong Medical College & Hospital', '01747236166', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (43, 'shantanubiswas30@gmail.com', '$2a$10$ZZMuXHewfo0qAP8zIBCAiua/Uk.kYdnwrWf6KRAJ12ejLI5stkbAi', 'Shantanu', 'Biswas', 'Male', 'Gastroenterology', 'Consultant', 'National Gastroliver Institute & Hospital', '01575052943', 'Mohakhali, Dhaka, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (44, 'sheikhmohammadmurad56@gmail.com', '$2a$10$oGwTgl0SgOHCUwVuQ5L8V.gRt/0LViVd1kf9nUl8ljHZ0MQJl/Awy', 'Sheikh Mohammad', 'Murad', 'Male', 'Ophthalmology', 'Consultant', 'Lions Charitable Eye Hospital Chittagong', '01729134025', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (45, 'sm.mizanulhoque22@gmail.com', '$2a$10$hXwtwuUkoIV5vzv5JhIPPuxtevtlR8K9jmMoXyOgGn/2KXDGTt2Eq', 'SM. Mizanul', 'Hoque', 'Male', 'Ophthalmology', 'Consultant', 'Lions Charitable Eye Hospital Chittagong', '01558535277', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (46, 'g.m.zakirhossain22@gmail.com', '$2a$10$XW2EuHCO4ETkj0sqhZ9neu3i8EyQlaGneQWt77hQznYlNKJSqSECe', 'G. M. Zakir', 'Hossain', 'Male', 'Urology', 'Professor', 'Chittagong Medical College & Hospital', '01784250532', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (47, 'mohammedrashedmirjada93@gmail.com', '$2a$10$rv.fyqxbO/.gWpv05iw9tO0Qmgf4elAIULkDTn76RVi6iTbJ.og.m', 'Mohammed Rashed', 'Mirjada', 'Male', 'Endocrinology', 'Associate Professor', 'Chittagong Medical College & Hospital', '01440605050', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (48, 'mirzanurulkarim45@gmail.com', '$2a$10$wfWdrtlmY.MNLjsfCEDXGufQDgC/jKfQatuHWTC4iiVC8JwLHYyiu', 'Mirza Nurul', 'Karim', 'Male', 'Endocrinology', 'Assistant Professor', 'Chittagong Medical College & Hospital', '01626168596', 'Chittagong, Bangladesh', NULL, NULL);
-INSERT INTO public.doctor VALUES (49, 'a.k.m.a.sobhan78@gmail.com', '$2a$10$ajenxqRqFq5AJYXECwpL/uXlLt/OoPwMZc2j3uH7cR.OplQD4XGgq', 'A. K. M. A.', 'Sobhan', 'Male', 'Otolaryngology', 'Professor', 'Shaheed Suhrawardy Medical College', '0151825066', 'Mohakhali, Dhaka', NULL, NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (1, 'samiaahmed69@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Samia', 'Ahmed', NULL, 'Cancer specialist', 'Assistant Professor (Department of Radiation Oncology)', 'National Institute of Cancer Research & Hospital (NICRH)', '01839379694', 'Dr. Samia Ahmed is a specialist in Cancer specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (2, 'rajibsaharony58@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Rajib Saha', 'Rony', NULL, 'Medicine', 'Medical Officer', 'Serajdikhan Upazila Health Complex Munshigonj', '01788510568', 'Dr. Rajib Saha Rony is a specialist in Medicine.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (3, 'a.k.m.a.sobhan78@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'A. K. M. A.', 'Sobhan', NULL, 'Ear Nose Throat Specialist, Head-Neck Surgeon', 'Professor (ENT & HN), Unit Head', 'Sh. Suhrawardy Medical College Hospital, Dhaka', '01518256601', 'Dr. A. K. M. A. Sobhan is a specialist in Ear Nose Throat Specialist, Head-Neck Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (4, 'tanmoyprakashghosh69@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Tanmoy Prakash', 'Ghosh', NULL, 'Plastic Surgery', 'Assistant Professor (Aesthetic Surgery)', 'Mymensingh Medical College', '01426728376', 'Dr. Tanmoy Prakash Ghosh is a specialist in Plastic Surgery.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (5, 'mohammadsaifulislamsaif39@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammad Saiful Islam', 'Saif', NULL, 'ENT & Head Neck Surgery', 'Associate Professor', 'Shaheed Suhrawardy Medical College', '01987652362', 'Dr. Mohammad Saiful Islam Saif is a specialist in ENT & Head Neck Surgery.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (6, 'farhanayesmin88@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Farhana', 'Yesmin', NULL, 'Breast, Colorectal, Laparoscopic & General Surgeon', 'Assistant Professor, Surgery', 'Attached to Bangabandhu Sheikh Mujib Medical University', '01744305610', 'Dr. Farhana Yesmin is a specialist in Breast, Colorectal, Laparoscopic & General Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (7, 'kazinazrulislam84@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Kazi Nazrul', 'Islam', NULL, 'Clinical and interventional cardiologist, medicine specialist, Rheumatic fever, Rheumatoid arthritis, Diabetic, High Blood pressure. CAG and stenting (Radial route), ICD, CRT, peripheral angiogram and stenting', 'Associate Professor & Head of the Department of Cardiology', 'Dhaka Medical College & Hospital', '01551408335', 'Dr. Kazi Nazrul Islam is a specialist in Clinical and interventional cardiologist, medicine specialist, Rheumatic fever, Rheumatoid arthritis, Diabetic, High Blood pressure. CAG and stenting (Radial route), ICD, CRT, peripheral angiogram and stenting.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (8, 'mdalaminmridha82@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md Al-Amin', 'Mridha', NULL, 'Child Specialist. Special Interest on Childhood Asthma, Pneumonia & other Chest Diseases', 'Professor of Paediatric Medicine', 'Dr. M R Khan Shishu Hospital & Institute of Child Health', '01867060339', 'Dr. Md Al-Amin Mridha is a specialist in Child Specialist. Special Interest on Childhood Asthma, Pneumonia & other Chest Diseases.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (9, 'essormd.khairulanam73@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'essor Md. Khairul', 'Anam', NULL, 'Chest Diseases, Asthma and Tuberculosis Specialist', 'Former Director and Professor of Respiratory Medicine', 'National Institute of Diseases of the Chest & Hospital (NIDCH), Mohakhali, Dhaka.', '01612714338', 'Dr. essor Md. Khairul Anam is a specialist in Chest Diseases, Asthma and Tuberculosis Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (10, 'a.k.m.amirulmorshedkhasru17@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'A.K.M. Amirul Morshed', '(Khasru)', NULL, 'Child Disease, Child Cancer & Child Blood Disease Specialist', 'Ex. Professor of Pediatric Hematology', 'Dhaka Medical College & Hospital', '01692936527', 'Dr. A.K.M. Amirul Morshed (Khasru) is a specialist in Child Disease, Child Cancer & Child Blood Disease Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (11, 'abumd.mofakhkharulislamrana31@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Abu Md. Mofakhkharul Islam', '(Rana)', NULL, 'Orthopedics (Bone, Joint, Spine) Specialist & Trauma Surgeon', 'Assistant Professor (Ortho Surgery)', 'Bangabandhu Sheikh Mujib Medical University Hospital', '01311143191', 'Dr. Abu Md. Mofakhkharul Islam (Rana) is a specialist in Orthopedics (Bone, Joint, Spine) Specialist & Trauma Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (12, 'a.b.m.riazkawsar53@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'A.B.M. Riaz', 'Kawsar', NULL, 'Cardiology (Heart Diseases, Hypertension, Rheumatic Fever) Specialist', 'Assistant Professor (Cardiology)', 'National Institute of Cardiovascular Diseases & Hospital', '01422889941', 'Dr. A.B.M. Riaz Kawsar is a specialist in Cardiology (Heart Diseases, Hypertension, Rheumatic Fever) Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (13, 'shalahuddinqusarbiplob60@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Shalahuddin Qusar', 'Biplob', NULL, 'Psychiatric Disorders, Sexual Problems & Drug Addiction Specialist', 'Professor & Ex. Chairman, Department of Psychiatry', 'Bangabandhu Sheikh Mujib Medical University Hospital', '01931462388', 'Dr. Shalahuddin Qusar Biplob is a specialist in Psychiatric Disorders, Sexual Problems & Drug Addiction Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (14, 'hazerakhatun94@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Hazera', 'Khatun', NULL, 'Gynecology, Obstetrics Specialist & Surgeon', 'Ex. Professor (Gyne & Obs)', 'Shaheed Suhrawardy Medical College & Hospital', '01989879255', 'Dr. Hazera Khatun is a specialist in Gynecology, Obstetrics Specialist & Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (15, 'g.m.ruhulquddus19@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'G.M. Ruhul', 'Quddus', NULL, 'Orthopedics (Bone, Joint, Spine) Specialist & Trauma Surgeon', 'Assistant Professor (Ortho Surgery)', 'National Institute of Traumatology & Orthopedic Rehabilitation', '01728706203', 'Dr. G.M. Ruhul Quddus is a specialist in Orthopedics (Bone, Joint, Spine) Specialist & Trauma Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (16, 'md.ferdousurrahman82@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Ferdous Ur', 'Rahman', NULL, 'Medicine & Diabetes Specialist', 'Professor of Medicine', 'Bangabandhu Sheikh Mujib Medical University Hospital', '01980000920', 'Dr. Md. Ferdous Ur Rahman is a specialist in Medicine & Diabetes Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (17, 'md.faizurrahmanfahim88@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Faizur Rahman', '(Fahim)', NULL, 'Medicine, Chest Disease & Diabetes Specialist', 'Associate Professor of Medicine', 'Dhaka Medical College & Hospital', '01520103240', 'Dr. Md. Faizur Rahman (Fahim) is a specialist in Medicine, Chest Disease & Diabetes Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (18, 'm.h.tofayelbiplob89@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'M.H. Tofayel', '(Biplob)', NULL, 'Bone, Joint, Arthritis, Spine, Joint Replacement, Pelvic Acetabular Surgeon', 'Professor (Orthopedic Surgery)', 'National Institute of Traumatology & Orthopedic Rehabilitation', '01744865246', 'Dr. M.H. Tofayel (Biplob) is a specialist in Bone, Joint, Arthritis, Spine, Joint Replacement, Pelvic Acetabular Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (19, 'mohammademran13@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammad', 'Emran', NULL, 'ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon', 'Consultant, ENT', 'Chittagong Medical College & Hospital', '01794053177', 'Dr. Mohammad Emran is a specialist in ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (20, 'ferozameher76@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Feroza', 'Meher', NULL, 'Aesthetic Dermatology & Cosmetology Specialist', 'Consultant, Dermatology', 'Surecell Medical, Chattogram', '01313247686', 'Dr. Feroza Meher is a specialist in Aesthetic Dermatology & Cosmetology Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (21, 'nishithranjandey10@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nishith Ranjan', 'Dey', NULL, 'Aesthetic Dermatology, Cosmetology & Regenerative Medicine Specialist', 'Associate Professor, Dermatology', 'Chittagong Medical College & Hospital', '01566998231', 'Dr. Nishith Ranjan Dey is a specialist in Aesthetic Dermatology, Cosmetology & Regenerative Medicine Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (22, 'pritishbarua36@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Pritish', 'Barua', NULL, 'Skin, Allergy, Hair, Nail, Sexual Diseases Specialist', 'Consultant, Dermatology & Venereology', 'Lab One Health Services, Chittagong', '01567604079', 'Dr. Pritish Barua is a specialist in Skin, Allergy, Hair, Nail, Sexual Diseases Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (23, 'md.jahangiralamchowdhury53@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Jahangir Alam', 'Chowdhury', NULL, 'Arthritis, Pain, Paralysis, Physical Medicine Rehabilitation Specialist', 'Associate Professor & Head, Physical Medicine & Rehabilitation', 'Chattogram Maa-O-Shishu Hospital Medical College', '01825993686', 'Dr. Md. Jahangir Alam Chowdhury is a specialist in Arthritis, Pain, Paralysis, Physical Medicine Rehabilitation Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (24, 'nazmunnaharrosy19@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nazmun Nahar', 'Rosy', NULL, 'Gynecology, Obstetrics, Infertility Specialist & Laparoscopic Surgeon', 'Consultant (Gyne & Obs)', 'Health View Maternity & Child Hospital, Chittagong', '01567190215', 'Dr. Nazmun Nahar Rosy is a specialist in Gynecology, Obstetrics, Infertility Specialist & Laparoscopic Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (25, 'col.sohelahmed85@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Col. Sohel', 'Ahmed', NULL, 'General, Laparoscopic & Colorectal Surgery Specialist', 'Consultant (Surgery)', 'Apollo Imperial Hospital, Chittagong', '01425665613', 'Dr. Col. Sohel Ahmed is a specialist in General, Laparoscopic & Colorectal Surgery Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (26, 'prasenjitbarua17@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Prasenjit', 'Barua', NULL, 'Medicine & Diabetes Specialist', 'Former Assistant Professor, Medicine', 'Chittagong Medical College & Hospital', '01870183059', 'Dr. Prasenjit Barua is a specialist in Medicine & Diabetes Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (27, 'md.akbarhusainbhuiyan12@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Akbar Husain', 'Bhuiyan', NULL, 'Child & Plastic Surgery Specialist', 'Professor & Head (Ex), Pediatric Surgery', 'Chittagong Medical College & Hospital', '01815791777', 'Dr. Md. Akbar Husain Bhuiyan is a specialist in Child & Plastic Surgery Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (28, 's.m.ashrafali66@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'S.M. Ashraf', 'Ali', NULL, 'General & Advanced Laparoscopic Surgeon', 'Professor & Head, Surgery', 'Marine City Medical College & Hospital', '01641119475', 'Dr. S.M. Ashraf Ali is a specialist in General & Advanced Laparoscopic Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (29, 'mohammedmaksudulkarim26@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammed Maksudul', 'Karim', NULL, 'Medicine Specialist', 'Consultant, Medicine', 'Chittagong Medical College & Hospital', '01898620060', 'Dr. Mohammed Maksudul Karim is a specialist in Medicine Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (30, 'm.a.yousufchowdhury26@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'M. A. Yousuf', 'Chowdhury', NULL, 'Medicine & Diabetes Specialist', 'Associate Professor, Medicine', 'Chittagong Medical College & Hospital', '01997844605', 'Dr. M. A. Yousuf Chowdhury is a specialist in Medicine & Diabetes Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (31, 'ashfaqahmad59@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Ashfaq', 'Ahmad', NULL, 'ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon', 'Associate Professor, ENT', 'Chittagong Medical College & Hospital', '01912826448', 'Dr. Ashfaq Ahmad is a specialist in ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (32, 'md.minhajulhaque21@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Minhajul', 'Haque', NULL, 'Ear, Nose, Throat Specialist & Head Neck Surgeon', 'Medical Officer, ENT', 'Chittagong General Hospital', '01881907001', 'Dr. Md. Minhajul Haque is a specialist in Ear, Nose, Throat Specialist & Head Neck Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (33, 'rupasreebiswas42@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Rupasree', 'Biswas', NULL, 'Gynecology, Obstetrics Specialist & Surgeon', 'Assistant Professor, Gynecology & Obstetrics', 'Southern Medical College & Hospital', '01395078436', 'Dr. Rupasree Biswas is a specialist in Gynecology, Obstetrics Specialist & Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (34, 'mohammadkhaledhossain67@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammad Khaled', 'Hossain', NULL, 'Child Diseases Specialist', 'Consultant, Pediatrics', 'Parkview Hospital, Chittagong', '01912453794', 'Dr. Mohammad Khaled Hossain is a specialist in Child Diseases Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (35, 'muslimuddinsobuj92@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Muslim Uddin', 'Sobuj', NULL, 'Newborn, Adolescent & Child Diseases Specialist', 'Professor & Head, Pediatrics', 'Chittagong Medical College & Hospital', '01498936992', 'Dr. Muslim Uddin Sobuj is a specialist in Newborn, Adolescent & Child Diseases Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (36, 'mohammadulhaquemezbah34@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammadul Haque', 'Mezbah', NULL, 'Eye Specialist & Phaco Surgeon', 'Consultant, Ophthalmology', 'Chittagong Medical College & Hospital', '01799824362', 'Dr. Mohammadul Haque Mezbah is a specialist in Eye Specialist & Phaco Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (37, 'ahmedsharif47@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Ahmed', 'Sharif', NULL, 'ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon', 'Professor & Head, ENT & HNS Department', 'Chittagong Medical College & Hospital', '01461230982', 'Dr. Ahmed Sharif is a specialist in ENT (Ear, Nose, Throat) Specialist & Head Neck Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (38, 'alokekumarraha40@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Aloke Kumar', 'Raha', NULL, 'Liver Diseases Specialist', 'Associate Professor & Head, Hepatology', 'Chittagong Medical College & Hospital', '01689778766', 'Dr. Aloke Kumar Raha is a specialist in Liver Diseases Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (39, 'bijankumarnath24@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Bijan Kumar', 'Nath', NULL, 'General & Laparoscopic Specialist Surgeon', 'Senior Consultant, Surgery', 'General Hospital, Chittagong', '01792156680', 'Dr. Bijan Kumar Nath is a specialist in General & Laparoscopic Specialist Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (40, 'md.mizanurrahmanchowdhury20@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Mizanur Rahman', 'Chowdhury', NULL, 'Orthopedics (Bone, Joint, Fractures, Sports Injury, Trauma) & Spine Surgeon', 'Professor & Head, Orthopedic Surgery', 'Chittagong Medical College & Hospital', '01310540581', 'Dr. Md. Mizanur Rahman Chowdhury is a specialist in Orthopedics (Bone, Joint, Fractures, Sports Injury, Trauma) & Spine Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (41, 'md.nurhossainbhuiyan88@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Md. Nur Hossain', 'Bhuiyan', NULL, 'General, Colorectal, Endo-Laparoscopic & Laser Surgeon', 'Associate Professor, Surgery', 'Dhaka Medical College & Hospital', '01994733890', 'Dr. Md. Nur Hossain Bhuiyan is a specialist in General, Colorectal, Endo-Laparoscopic & Laser Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (42, 'aminurrahmanazad24@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Aminur Rahman', 'Azad', NULL, 'Neurosurgery (Brain, Stroke, Spine Surgery) Specialist', 'Consultant, Neurosurgery', 'Chittagong Medical College & Hospital', '01747236166', 'Dr. Aminur Rahman Azad is a specialist in Neurosurgery (Brain, Stroke, Spine Surgery) Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (43, 'shantanubiswas30@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Shantanu', 'Biswas', NULL, 'Gastrointestinal, Hepatobiliary & Pancreatic Specialist Surgeon', 'Consultant, Surgical Gastroenterology', 'National Gastroliver Institute & Hospital', '01575052943', 'Dr. Shantanu Biswas is a specialist in Gastrointestinal, Hepatobiliary & Pancreatic Specialist Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (44, 'sheikhmohammadmurad56@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Sheikh Mohammad', 'Murad', NULL, 'Eye Specialist & Phaco Surgeon', 'Consultant, Ophthalmology', 'Lions Charitable Eye Hospital, Chittagong', '01729134025', 'Dr. Sheikh Mohammad Murad is a specialist in Eye Specialist & Phaco Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (45, 'sm.mizanulhoque22@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'SM. Mizanul', 'Hoque', NULL, 'Eye Specialist & Phaco Surgeon', 'Consultant, Ophthalmology', 'Lions Charitable Eye Hospital, Chittagong', '01558535277', 'Dr. SM. Mizanul Hoque is a specialist in Eye Specialist & Phaco Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (46, 'g.m.zakirhossain22@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'G. M. Zakir', 'Hossain', NULL, 'General & Urological Surgeon', 'Professor, Urology', 'Chittagong Medical College & Hospital', '01784250532', 'Dr. G. M. Zakir Hossain is a specialist in General & Urological Surgeon.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (47, 'mohammedrashedmirjada93@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mohammed Rashed', 'Mirjada', NULL, 'Medicine Specialist', 'Associate Professor, Medicine', 'Chittagong Medical College & Hospital', '01440605050', 'Dr. Mohammed Rashed Mirjada is a specialist in Medicine Specialist.', 'https://example.com/profile.jpg', NULL);
+INSERT INTO public.doctor (doctor_id, email, password_hash, first_name, last_name, gender, specialization, designation, academic_institution, phone_number, bio, profile_photo_url, address) VALUES (48, 'mirzanurulkarim45@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mirza Nurul', 'Karim', NULL, 'Medicine, Diabetes, Rheumatology & Chest Disease Specialist', 'Assistant Professor, Department of Medicine', 'Chittagong Medical College & Hospital', '01626168596', 'Dr. Mirza Nurul Karim is a specialist in Medicine, Diabetes, Rheumatology & Chest Disease Specialist.', 'https://example.com/profile.jpg', NULL);
 
 
 --
 -- Data for Name: hospital; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
-INSERT INTO public.hospital VALUES (1, 'dmc@gmail.com', '$2a$10$D5N39QPYgV9LRAKlgTtZUOIa9zhsNxBN9k5aTRaxcNsCQu8RXfwjm', 'Dhaka Medical College', 'Near Buet.', '01944972610', 'Dhaka, Bangladesh', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (1, 'info@medinova.com.bd', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Medinova Medical Services Ltd. | Malibagh', 'We are proud to introduce our Medinova Medical Services Ltd. | Malibagh a state-of-the-art facility dedicated to providing exceptional healthcare services. Medinova Medical Malibagh holds the privilege of being Dhaka’s first choice hospital. Since its founding we have become an integral part of the city, advancing our mission of providing access to compassionate care to our communities.', '01790118855', 'Gemcon Business Center (Lift 2-6 255, New Circular Road, Malibagh Mor Rd, Dhaka-1217', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (2, 'dhakatrauma14@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Dhaka Trauma Center And Specialised Orthopedic Hospital Ltd.', 'The most cutting-edge orthopaedic and trauma (injury) hospital is Trauma Centre. We offer 24-hour service. Our management team includes a highly skilled group of orthopaedic surgeons, neurosurgeons, cardiologists, urologists, and other professionals. Trauma Centre, a world-class super specialty hospital staffed by renowned orthopaedic surgeons, medicine specialists, urologists, cardiologists, brain and spinal surgeons, and other support staff recruited from home, is crucial to providing the nation''s orthopaedic patients with the care and treatment they need.', '01746046361', '23/6 rupayan shelford (3rd floor),opposite of city bank,shaymoly, Dhaka-1207', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (3, 'info@lifeaidhospital.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Life Aid Specialized Hospital', 'We welcome you to Life Aid Hospital, where your health is our top priority. We''re committed to providing excellent healthcare with a warm, personal touch. Our highly skilled team of doctors, nurses, and specialists goes above and beyond to ensure that you receive compassionate, expert care throughout your treatment. Life Aid Hospital provides emergency services, specialised treatments, and wellness programs to suit all of your health needs. We take pleasure in leveraging cutting-edge medical technology to deliver safe, effective, and patient-centered care. Choose Life Aid Hospital—your trusted partner for improved health and peace of mind.', '+8801743885210', 'Begam Rokeya Sarani Avenue, Beside Kazipara Metro Rail Station,, Dhaka-1216', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (4, 'info@phlctg.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Parkview Hospital Ltd. | Chittagong', 'We are proud to introduce our Parkview Hospital Ltd. | Chittagong, a state-of-the-art facility dedicated to providing exceptional healthcare services. Nowadays, a good medical facility is considered a basic need for all. There is an urgent need for moderate to excellent healthcare facilities in the city of Chattogram. In Chattogram, there are no well-equipped hospital compared to the hospital in Dhaka. We needed to decentralize these health care facilities and step forward to established a well-facilitated and modern hospital in the city of Chittagong.', '01894713303', '94/103 Road No 3, Chittagong-4000', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (5, 'info@chevronlab.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Chevron Clinical Laboratory (Pte.) Ltd. | Chittagong', 'As the first homegrown healthcare group in Bangladesh, CCLL was incorporated on 22nd February, 1984 and commenced operations as the country’s sole integrated investigative laboratory on 16th May, 1984 in Chittagong. It was a pioneering venture in the field of integrated and automated diagnostics in Bangladesh.', '01755666969', '12, 12 O.R. Nizam Rd, Chittagong-4203', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (6, 'info@ctgmhpl.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Chattogram Metropolitan Hospital Limited', 'In 2010, Chattagram Metropolitan Hashpatal started the Metropolitan Heart Center, which has since become the Best cardiac hospital in Chittagong. Our facility boasts cutting-edge cardiovascular equipment, including the latest Cath Lab machine and a specialized cardiac operation theater capable of performing 1st time in Chittagong MICS/Cosmetic Bypass Surgery and CABG, Open Heart Surgery, ASD, VSD, TOF, AV Fistula, and more, with comprehensive care units, including a modern Cardiac Intensive Care Unit (CICU) which makes it the best hospital in chittagong.', '01814651077', '698/752, O.R. Nizam Road, Panchlish, Chittagong-4000', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (7, 'info@maxhospitalbd.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Max Hospital and Diagnostics Ltd. | Chittagong', 'MAX Hospital & Diagnostics is leading provider of diagnostic information services needed to make better healthcare decisions. It began on July 1st, 2014. Our substantial medical and scientific personnel provides interpretation assistance, and our network of laboratories and patient service centers provides the widest access to diagnostic testing services. MAX Hospital & Diagnostics is a leader in creating cutting-edge medical IT systems and novel diagnostic tests that enhance patient care.', '01713998166', '35/36 Mehedibag, Chittagong-4000', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (8, 'info@epichcl.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Epic Health Care Ltd. | Chittagong', 'We are proud to introduce our Epic Health Care Ltd. | Chittagong, a state-of-the-art facility dedicated to providing exceptional healthcare services. Our hospital is designed with the patient in mind, offering a comfortable and welcoming environment where you and your loved ones can receive the care you need. Our range of medical services includes general medicine, surgery, emergency services, and specialized care in various fields. Whether you are seeking routine care or complex treatment, our team is here to support you every step of the way. Our goal is to provide personalized, patient-centered care that meets the unique needs of everyone. Come visit us today and experience the difference of exceptional care at our Epic Health Care Ltd. | Chittagong .', '01984499600', 'Epic Center, 19 k.b Fazlul Kader Road, Chittagong-4000', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (9, 'surgihospital@yahoo.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Surgiscope Hospital Ltd. | Chittagong', 'Experience precision and care like never before. Our state-of-the-art facility combines cutting-edge technology with compassionate expertise to ensure your surgical journey is seamless and effective. Trust us for unparalleled excellence in every procedure, where your well-being is our top priority. Let’s make your path to recovery as smooth as possible. Welcome to a new standard in surgical care', '01821533666', 'K.B Fazlul Kader Road, Punchlish, Chittagong., Chittagong-4212', NULL);
+INSERT INTO public.hospital (hospital_id, email, password_hash, name, description, phone_number, address, profile_photo_url) VALUES (10, 'deltahc.ctg2012@yahoo.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Delta Health Care | Chattogram', 'The first completely air-conditioned, state-of-the-art hospital and diagnostic facility is Delta Healthcare, Chittagong Limited. It is situated between Panchlaish Thana, Katalganj, and Mirzarpul. This hospital''s daily operations include using the newest and most cutting-edge concepts and technologies in medical care to keep up with the times. In order to guarantee that patients receive the right care and services, the 120-bed hospital has the capacity to examine 3,000 patients every day and treat 1,200 patients outside. Automation System Based on Computers.', '01841906090', '28 Mirzapul Rd, Chittagong-4212', NULL);
 
 
 --
 -- Data for Name: doctor_availability; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (1, 1, 2, '10:00:00', '12:20:00', 'Friday', 20, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (2, 1, 1, '11:00:00', '14:20:00', 'Sunday', 20, 700, 10, 'Room 206');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (3, 1, 2, '14:00:00', '15:45:00', 'Saturday', 15, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (4, 1, 1, '13:00:00', '15:30:00', 'Thursday', 15, 500, 10, 'Room 128');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (5, 2, 4, '14:00:00', '16:40:00', 'Friday', 20, 700, 8, 'Room 137');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (6, 2, 10, '09:00:00', '10:30:00', 'Tuesday', 10, 500, 9, 'Room 214');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (7, 2, 10, '13:00:00', '16:20:00', 'Monday', 20, 500, 10, 'Room 452');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (8, 2, 1, '10:00:00', '12:40:00', 'Saturday', 20, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (9, 3, 4, '15:00:00', '16:10:00', 'Tuesday', 10, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (10, 3, 2, '15:00:00', '18:20:00', 'Saturday', 20, 300, 10, 'Room 215');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (11, 3, 9, '14:00:00', '16:00:00', 'Wednesday', 15, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (12, 3, 7, '14:00:00', '16:15:00', 'Friday', 15, 500, 9, 'Room 293');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (13, 4, 3, '08:00:00', '09:30:00', 'Saturday', 10, 500, 9, 'Room 390');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (14, 4, 2, '12:00:00', '14:30:00', 'Wednesday', 15, 300, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (15, 4, 9, '11:00:00', '13:40:00', 'Thursday', 20, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (16, 4, 4, '08:00:00', '11:00:00', 'Friday', 20, 300, 9, 'Room 396');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (17, 5, 2, '11:00:00', '13:30:00', 'Sunday', 15, 300, 10, 'Room 190');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (18, 5, 10, '12:00:00', '14:40:00', 'Monday', 20, 700, 8, 'Room 428');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (19, 5, 5, '13:00:00', '15:30:00', 'Saturday', 15, 500, 10, 'Room 237');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (20, 5, 7, '09:00:00', '11:30:00', 'Friday', 15, 700, 10, 'Room 484');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (21, 6, 10, '09:00:00', '11:20:00', 'Friday', 20, 300, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (22, 6, 3, '14:00:00', '17:00:00', 'Wednesday', 20, 700, 9, 'Room 380');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (23, 6, 8, '13:00:00', '15:15:00', 'Thursday', 15, 700, 9, 'Room 386');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (24, 6, 9, '10:00:00', '11:20:00', 'Tuesday', 10, 500, 8, 'Room 488');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (25, 7, 7, '15:00:00', '17:30:00', 'Thursday', 15, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (26, 7, 7, '12:00:00', '13:10:00', 'Monday', 10, 500, 7, 'Room 475');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (27, 7, 4, '09:00:00', '11:15:00', 'Sunday', 15, 300, 9, 'Room 298');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (28, 7, 8, '09:00:00', '11:20:00', 'Saturday', 20, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (29, 8, 9, '10:00:00', '12:20:00', 'Monday', 20, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (30, 8, 10, '11:00:00', '12:40:00', 'Tuesday', 10, 300, 10, 'Room 475');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (31, 8, 7, '11:00:00', '12:40:00', 'Friday', 10, 300, 10, 'Room 412');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (32, 8, 9, '12:00:00', '15:20:00', 'Wednesday', 20, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (33, 9, 4, '11:00:00', '12:10:00', 'Tuesday', 10, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (34, 9, 3, '12:00:00', '13:30:00', 'Friday', 10, 700, 9, 'Room 293');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (35, 9, 8, '13:00:00', '14:30:00', 'Saturday', 10, 700, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (36, 9, 5, '15:00:00', '17:20:00', 'Monday', 20, 300, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (37, 10, 1, '08:00:00', '10:40:00', 'Sunday', 20, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (38, 10, 10, '15:00:00', '16:10:00', 'Monday', 10, 500, 7, 'Room 328');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (39, 10, 3, '15:00:00', '17:40:00', 'Wednesday', 20, 500, 8, 'Room 493');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (40, 10, 5, '12:00:00', '14:40:00', 'Thursday', 20, 500, 8, 'Room 499');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (41, 11, 10, '11:00:00', '13:20:00', 'Wednesday', 20, 300, 7, 'Room 496');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (42, 11, 5, '13:00:00', '14:30:00', 'Saturday', 10, 300, 9, 'Room 204');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (43, 11, 7, '14:00:00', '16:40:00', 'Friday', 20, 300, 8, 'Room 181');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (44, 11, 8, '14:00:00', '15:40:00', 'Tuesday', 10, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (45, 12, 8, '10:00:00', '12:20:00', 'Friday', 20, 500, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (46, 12, 6, '10:00:00', '13:20:00', 'Saturday', 20, 700, 10, 'Room 460');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (47, 12, 9, '12:00:00', '14:20:00', 'Monday', 20, 500, 7, 'Room 201');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (48, 12, 1, '15:00:00', '16:30:00', 'Sunday', 10, 300, 9, 'Room 174');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (49, 13, 5, '10:00:00', '13:20:00', 'Sunday', 20, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (50, 13, 7, '14:00:00', '17:00:00', 'Monday', 20, 300, 9, 'Room 137');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (51, 13, 6, '08:00:00', '09:10:00', 'Tuesday', 10, 700, 7, 'Room 304');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (52, 13, 6, '15:00:00', '16:45:00', 'Friday', 15, 300, 7, 'Room 104');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (53, 14, 4, '11:00:00', '13:20:00', 'Saturday', 20, 700, 7, 'Room 105');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (54, 14, 9, '09:00:00', '11:00:00', 'Friday', 15, 300, 8, 'Room 291');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (55, 14, 8, '08:00:00', '10:00:00', 'Sunday', 15, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (56, 14, 10, '12:00:00', '14:30:00', 'Monday', 15, 500, 10, 'Room 411');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (57, 15, 2, '08:00:00', '10:40:00', 'Sunday', 20, 300, 8, 'Room 336');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (58, 15, 9, '09:00:00', '12:20:00', 'Friday', 20, 500, 10, 'Room 445');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (59, 15, 4, '12:00:00', '13:20:00', 'Wednesday', 10, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (60, 15, 9, '09:00:00', '11:15:00', 'Tuesday', 15, 500, 9, 'Room 124');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (61, 16, 3, '10:00:00', '12:20:00', 'Monday', 20, 700, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (62, 16, 1, '10:00:00', '13:20:00', 'Wednesday', 20, 700, 10, 'Room 399');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (63, 16, 5, '10:00:00', '13:00:00', 'Saturday', 20, 300, 9, 'Room 126');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (64, 16, 3, '13:00:00', '15:15:00', 'Sunday', 15, 300, 9, 'Room 290');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (65, 17, 4, '13:00:00', '14:20:00', 'Tuesday', 10, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (66, 17, 4, '10:00:00', '12:00:00', 'Thursday', 15, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (67, 17, 2, '14:00:00', '15:40:00', 'Friday', 10, 300, 10, 'Room 474');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (68, 17, 1, '11:00:00', '13:00:00', 'Sunday', 15, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (69, 18, 3, '14:00:00', '17:00:00', 'Saturday', 20, 500, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (70, 18, 8, '12:00:00', '14:30:00', 'Thursday', 15, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (71, 18, 5, '14:00:00', '16:40:00', 'Tuesday', 20, 700, 8, 'Room 149');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (72, 18, 3, '09:00:00', '11:40:00', 'Friday', 20, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (73, 19, 8, '08:00:00', '10:00:00', 'Thursday', 15, 300, 8, 'Room 186');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (74, 19, 8, '10:00:00', '13:00:00', 'Saturday', 20, 500, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (75, 19, 6, '10:00:00', '12:30:00', 'Tuesday', 15, 500, 10, 'Room 401');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (76, 19, 6, '15:00:00', '17:20:00', 'Wednesday', 20, 700, 7, 'Room 188');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (77, 20, 5, '11:00:00', '12:10:00', 'Tuesday', 10, 700, 7, 'Room 357');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (78, 20, 4, '13:00:00', '14:40:00', 'Thursday', 10, 700, 10, 'Room 373');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (79, 20, 7, '13:00:00', '16:00:00', 'Saturday', 20, 700, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (80, 20, 1, '14:00:00', '16:30:00', 'Monday', 15, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (81, 21, 5, '14:00:00', '15:45:00', 'Saturday', 15, 300, 7, 'Room 378');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (82, 21, 3, '11:00:00', '12:20:00', 'Monday', 10, 700, 8, 'Room 313');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (83, 21, 6, '12:00:00', '14:30:00', 'Tuesday', 15, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (84, 21, 10, '12:00:00', '13:10:00', 'Sunday', 10, 700, 7, 'Room 406');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (85, 22, 9, '14:00:00', '17:00:00', 'Friday', 20, 700, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (86, 22, 2, '08:00:00', '09:10:00', 'Monday', 10, 700, 7, 'Room 178');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (87, 22, 5, '15:00:00', '16:10:00', 'Saturday', 10, 300, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (88, 22, 6, '09:00:00', '11:15:00', 'Wednesday', 15, 500, 9, 'Room 231');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (89, 23, 1, '15:00:00', '16:20:00', 'Tuesday', 10, 300, 8, 'Room 289');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (90, 23, 7, '08:00:00', '10:00:00', 'Friday', 15, 500, 8, 'Room 334');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (91, 23, 5, '14:00:00', '17:00:00', 'Wednesday', 20, 500, 9, 'Room 438');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (92, 23, 8, '15:00:00', '16:45:00', 'Saturday', 15, 500, 7, 'Room 290');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (93, 24, 4, '10:00:00', '11:45:00', 'Monday', 15, 700, 7, 'Room 247');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (94, 24, 7, '12:00:00', '15:00:00', 'Tuesday', 20, 700, 9, 'Room 356');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (95, 24, 1, '14:00:00', '16:30:00', 'Thursday', 15, 500, 10, 'Room 455');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (96, 24, 6, '15:00:00', '17:40:00', 'Wednesday', 20, 300, 8, 'Room 208');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (97, 25, 2, '11:00:00', '14:20:00', 'Thursday', 20, 500, 10, 'Room 110');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (98, 25, 5, '12:00:00', '13:40:00', 'Tuesday', 10, 500, 10, 'Room 297');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (99, 25, 4, '08:00:00', '10:00:00', 'Monday', 15, 300, 8, 'Room 311');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (100, 25, 2, '13:00:00', '16:20:00', 'Friday', 20, 300, 10, 'Room 241');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (101, 26, 8, '11:00:00', '12:20:00', 'Wednesday', 10, 500, 8, 'Room 460');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (102, 26, 4, '14:00:00', '15:40:00', 'Sunday', 10, 300, 10, 'Room 283');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (103, 26, 6, '09:00:00', '11:30:00', 'Monday', 15, 300, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (104, 26, 4, '10:00:00', '12:20:00', 'Thursday', 20, 300, 7, 'Room 266');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (105, 27, 4, '09:00:00', '10:30:00', 'Tuesday', 10, 700, 9, 'Room 264');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (106, 27, 5, '10:00:00', '12:30:00', 'Sunday', 15, 300, 10, 'Room 192');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (107, 27, 10, '08:00:00', '09:20:00', 'Wednesday', 10, 300, 8, 'Room 351');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (108, 27, 7, '11:00:00', '14:20:00', 'Monday', 20, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (109, 28, 9, '13:00:00', '16:00:00', 'Tuesday', 20, 300, 9, 'Room 320');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (110, 28, 9, '10:00:00', '11:20:00', 'Monday', 10, 700, 8, 'Room 246');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (111, 28, 10, '08:00:00', '11:00:00', 'Wednesday', 20, 500, 9, 'Room 132');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (112, 28, 1, '11:00:00', '12:20:00', 'Saturday', 10, 500, 8, 'Room 387');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (113, 29, 5, '10:00:00', '11:45:00', 'Sunday', 15, 300, 7, 'Room 161');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (114, 29, 8, '15:00:00', '17:00:00', 'Wednesday', 15, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (115, 29, 6, '08:00:00', '10:40:00', 'Monday', 20, 300, 8, 'Room 411');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (116, 29, 4, '14:00:00', '15:40:00', 'Thursday', 10, 700, 10, 'Room 163');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (117, 30, 2, '08:00:00', '09:20:00', 'Wednesday', 10, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (118, 30, 1, '15:00:00', '17:00:00', 'Friday', 15, 300, 8, 'Room 375');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (119, 30, 9, '08:00:00', '10:15:00', 'Sunday', 15, 700, 9, 'Room 415');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (120, 30, 6, '12:00:00', '14:15:00', 'Saturday', 15, 700, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (121, 31, 5, '09:00:00', '11:40:00', 'Tuesday', 20, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (122, 31, 6, '11:00:00', '12:30:00', 'Wednesday', 10, 700, 9, 'Room 264');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (123, 31, 3, '08:00:00', '10:30:00', 'Sunday', 15, 700, 10, 'Room 316');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (124, 31, 6, '13:00:00', '15:40:00', 'Friday', 20, 300, 8, 'Room 253');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (125, 32, 1, '11:00:00', '13:15:00', 'Thursday', 15, 500, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (126, 32, 9, '11:00:00', '14:00:00', 'Saturday', 20, 300, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (127, 32, 3, '08:00:00', '10:20:00', 'Sunday', 20, 500, 7, 'Room 206');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (128, 32, 8, '13:00:00', '15:20:00', 'Monday', 20, 300, 7, 'Room 319');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (129, 33, 1, '14:00:00', '15:20:00', 'Friday', 10, 300, 8, 'Room 164');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (130, 33, 7, '09:00:00', '11:15:00', 'Monday', 15, 700, 9, 'Room 440');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (131, 33, 1, '11:00:00', '12:30:00', 'Tuesday', 10, 300, 9, 'Room 141');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (132, 33, 4, '13:00:00', '16:20:00', 'Thursday', 20, 300, 10, 'Room 337');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (133, 34, 6, '10:00:00', '13:20:00', 'Sunday', 20, 300, 10, 'Room 419');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (134, 34, 10, '09:00:00', '10:10:00', 'Thursday', 10, 700, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (135, 34, 1, '09:00:00', '10:20:00', 'Monday', 10, 500, 8, 'Room 336');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (136, 34, 6, '12:00:00', '13:20:00', 'Saturday', 10, 500, 8, 'Room 438');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (137, 35, 7, '08:00:00', '11:20:00', 'Thursday', 20, 700, 10, 'Room 190');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (138, 35, 8, '09:00:00', '10:40:00', 'Friday', 10, 500, 10, 'Room 195');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (139, 35, 9, '11:00:00', '12:20:00', 'Wednesday', 10, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (140, 35, 5, '12:00:00', '13:10:00', 'Sunday', 10, 300, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (141, 36, 9, '12:00:00', '13:30:00', 'Sunday', 10, 300, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (142, 36, 3, '09:00:00', '10:20:00', 'Saturday', 10, 500, 8, 'Room 211');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (143, 36, 7, '15:00:00', '16:45:00', 'Wednesday', 15, 700, 7, 'Room 382');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (144, 36, 6, '11:00:00', '12:40:00', 'Friday', 10, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (145, 37, 1, '15:00:00', '17:30:00', 'Saturday', 15, 300, 10, 'Room 272');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (146, 37, 9, '08:00:00', '10:15:00', 'Sunday', 15, 700, 9, 'Room 257');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (147, 37, 6, '09:00:00', '10:40:00', 'Thursday', 10, 300, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (148, 37, 5, '11:00:00', '13:30:00', 'Wednesday', 15, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (149, 38, 9, '09:00:00', '10:20:00', 'Sunday', 10, 700, 8, 'Room 170');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (150, 38, 1, '15:00:00', '16:20:00', 'Wednesday', 10, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (151, 38, 9, '15:00:00', '17:30:00', 'Saturday', 15, 700, 10, 'Room 218');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (152, 38, 6, '13:00:00', '15:15:00', 'Tuesday', 15, 500, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (153, 39, 6, '13:00:00', '15:00:00', 'Wednesday', 15, 300, 8, 'Room 145');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (154, 39, 2, '09:00:00', '10:40:00', 'Thursday', 10, 500, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (155, 39, 4, '15:00:00', '17:00:00', 'Sunday', 15, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (156, 39, 10, '08:00:00', '10:20:00', 'Tuesday', 20, 700, 7, 'Room 346');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (157, 40, 4, '15:00:00', '17:00:00', 'Saturday', 15, 300, 8, 'Room 195');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (158, 40, 9, '12:00:00', '14:15:00', 'Thursday', 15, 700, 9, 'Room 476');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (159, 40, 3, '13:00:00', '16:00:00', 'Sunday', 20, 500, 9, 'Room 363');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (160, 40, 1, '13:00:00', '16:00:00', 'Tuesday', 20, 500, 9, 'Room 496');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (161, 41, 6, '13:00:00', '15:40:00', 'Thursday', 20, 500, 8, 'Room 442');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (162, 41, 8, '13:00:00', '15:00:00', 'Tuesday', 15, 500, 8, 'Room 254');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (163, 41, 10, '11:00:00', '13:20:00', 'Sunday', 20, 500, 7, 'Room 379');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (164, 41, 6, '09:00:00', '11:20:00', 'Wednesday', 20, 700, 7, 'Room 214');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (165, 42, 1, '12:00:00', '13:20:00', 'Saturday', 10, 500, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (166, 42, 5, '14:00:00', '16:15:00', 'Sunday', 15, 300, 9, 'Room 106');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (167, 42, 10, '15:00:00', '17:00:00', 'Friday', 15, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (168, 42, 6, '10:00:00', '11:20:00', 'Wednesday', 10, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (169, 43, 9, '13:00:00', '15:15:00', 'Tuesday', 15, 700, 9, 'Room 152');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (170, 43, 10, '10:00:00', '11:20:00', 'Thursday', 10, 300, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (171, 43, 9, '14:00:00', '15:45:00', 'Monday', 15, 300, 7, 'Room 493');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (172, 43, 10, '10:00:00', '11:30:00', 'Friday', 10, 300, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (173, 44, 4, '12:00:00', '15:00:00', 'Tuesday', 20, 700, 9, 'Room 342');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (174, 44, 3, '10:00:00', '11:45:00', 'Sunday', 15, 300, 7, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (175, 44, 8, '15:00:00', '17:20:00', 'Wednesday', 20, 300, 7, 'Room 413');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (176, 44, 1, '10:00:00', '11:40:00', 'Thursday', 10, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (177, 45, 3, '11:00:00', '13:20:00', 'Saturday', 20, 300, 7, 'Room 126');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (178, 45, 8, '13:00:00', '16:00:00', 'Sunday', 20, 300, 9, 'Room 269');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (179, 45, 10, '13:00:00', '16:20:00', 'Thursday', 20, 300, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (180, 45, 2, '12:00:00', '14:40:00', 'Friday', 20, 700, 8, 'Room 325');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (181, 46, 10, '11:00:00', '13:20:00', 'Monday', 20, 300, 7, 'Room 463');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (182, 46, 2, '12:00:00', '14:15:00', 'Wednesday', 15, 500, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (183, 46, 7, '15:00:00', '17:40:00', 'Friday', 20, 300, 8, 'Room 117');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (184, 46, 5, '12:00:00', '14:40:00', 'Saturday', 20, 700, 8, 'Room 499');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (185, 47, 9, '15:00:00', '16:20:00', 'Friday', 10, 700, 8, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (186, 47, 9, '09:00:00', '10:45:00', 'Monday', 15, 500, 7, 'Room 490');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (187, 47, 9, '13:00:00', '14:20:00', 'Saturday', 10, 500, 8, 'Room 451');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (188, 47, 8, '15:00:00', '17:20:00', 'Sunday', 20, 300, 7, 'Room 222');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (189, 48, 3, '09:00:00', '12:20:00', 'Thursday', 20, 700, 10, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (190, 48, 8, '08:00:00', '10:15:00', 'Friday', 15, 700, 9, 'Room 169');
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (191, 48, 6, '13:00:00', '15:15:00', 'Monday', 15, 300, 9, NULL);
+INSERT INTO public.doctor_availability (slot_id, doctor_id, hospital_id, start_time, end_time, week_day, duration, fee, visit_capacity, chamber) VALUES (192, 48, 8, '10:00:00', '12:15:00', 'Sunday', 15, 700, 9, 'Room 251');
+
+
+--
+-- Data for Name: patient; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (1, 'mehjabin.kabir217@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mehjabin', 'Kabir', 'Female', '1960-05-22', 'AB-', '01968179309', '90670 Carter Street Suite 363, Godagari, Rajshahi, Bangladesh', 'https://example.com/photos/mehjabin805.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (2, 'rafi.hossain258@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Rafi', 'Hossain', 'Male', '1997-12-01', 'A-', '01639777444', '5278 Marissa Trafficway Apt. 638, Ujirpur, Barisal, Bangladesh', 'https://example.com/photos/rafi953.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (3, 'farhan.hossain240@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Farhan', 'Hossain', 'Male', '2000-05-06', 'B-', '01560967154', '134 Peter Way Suite 477, Kaunia, Rangpur, Bangladesh', 'https://example.com/photos/farhan906.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (4, 'sabbir.kabir234@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Sabbir', 'Kabir', 'Male', '1967-01-14', 'A+', '01829510310', '4470 Briggs Fields Apt. 170, Dhanmondi, Dhaka, Bangladesh', 'https://example.com/photos/sabbir429.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (5, 'sabbir.miah522@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Sabbir', 'Miah', 'Male', '1984-09-09', 'A+', '01736311078', '789 Briggs Springs, Badarganj, Rangpur, Bangladesh', 'https://example.com/photos/sabbir275.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (6, 'nafis.hasan672@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nafis', 'Hasan', 'Male', '2002-09-16', 'B+', '01460516070', '543 Stacey Track, Badarganj, Rangpur, Bangladesh', 'https://example.com/photos/nafis266.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (7, 'farhan.miah30@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Farhan', 'Miah', 'Male', '1991-11-26', 'O-', '01319982839', '097 Christopher Throughway, Bakerganj, Barisal, Bangladesh', 'https://example.com/photos/farhan820.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (8, 'nusrat.ahmed637@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nusrat', 'Ahmed', 'Female', '1980-07-22', 'O+', '01317330294', '4983 Meza Locks Suite 521, Dighalia, Khulna, Bangladesh', 'https://example.com/photos/nusrat338.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (9, 'raisa.hossain269@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Raisa', 'Hossain', 'Female', '1984-07-03', 'B+', '01777486862', '6515 Alyssa Key, Dhanmondi, Dhaka, Bangladesh', 'https://example.com/photos/raisa628.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (10, 'mehjabin.rahman961@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Mehjabin', 'Rahman', 'Female', '1955-10-06', 'B-', '01793799073', '8786 Miller Vista, Dhanmondi, Dhaka, Bangladesh', 'https://example.com/photos/mehjabin199.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (11, 'tareq.chowdhury316@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Tareq', 'Chowdhury', 'Male', '1969-08-03', 'AB+', '01632097786', '8868 Tran Way, Kotwali, Chittagong, Bangladesh', 'https://example.com/photos/tareq573.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (12, 'sabbir.islam209@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Sabbir', 'Islam', 'Male', '1973-07-31', 'O-', '01351566051', '4844 Elizabeth Burg, Sonadanga, Khulna, Bangladesh', 'https://example.com/photos/sabbir995.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (13, 'nusrat.hasan7@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nusrat', 'Hasan', 'Female', '1982-06-15', 'O+', '01713377126', '494 Diane Forest Suite 249, Beanibazar, Sylhet, Bangladesh', 'https://example.com/photos/nusrat559.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (14, 'asif.ahmed629@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Asif', 'Ahmed', 'Male', '1958-12-22', 'B-', '01643955588', '3215 David Place, Paba, Rajshahi, Bangladesh', 'https://example.com/photos/asif736.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (15, 'nusrat.chowdhury776@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nusrat', 'Chowdhury', 'Female', '2004-07-26', 'O-', '01932132594', '238 Michael Summit, Gulshan, Dhaka, Bangladesh', 'https://example.com/photos/nusrat190.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (16, 'nusrat.kabir400@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nusrat', 'Kabir', 'Female', '1976-09-15', 'O+', '01366087455', '51755 Shaffer Drives, Godagari, Rajshahi, Bangladesh', 'https://example.com/photos/nusrat462.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (17, 'asif.rahman86@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Asif', 'Rahman', 'Male', '1965-07-11', 'A-', '01915414372', '173 Bradley Stream Suite 992, Dighalia, Khulna, Bangladesh', 'https://example.com/photos/asif826.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (18, 'nafis.hasan855@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Nafis', 'Hasan', 'Male', '2000-08-23', 'B+', '01327565881', '68946 Thomas Station Apt. 799, Bakerganj, Barisal, Bangladesh', 'https://example.com/photos/nafis112.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (19, 'arif.miah823@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Arif', 'Miah', 'Male', '1968-06-26', 'A+', '01438920832', '45001 Frank Cliff, Godagari, Rajshahi, Bangladesh', 'https://example.com/photos/arif417.jpg');
+INSERT INTO public.patient (patient_id, email, password_hash, first_name, last_name, gender, date_of_birth, blood_group, phone_number, address, profile_photo_url) VALUES (20, 'tareq.rahman138@gmail.com', '$2a$10$HCGlq1iZ38RSpqa/q0hjZOj/ROaDhgimHI7ghdm5RSlRq4yGrZW7a', 'Tareq', 'Rahman', 'Male', '1958-09-11', 'AB+', '01993857378', '4006 Schultz Field Suite 121, Ujirpur, Barisal, Bangladesh', 'https://example.com/photos/tareq743.jpg');
 
 
 --
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
-
-
---
--- Data for Name: chronic_condition; Type: TABLE DATA; Schema: public; Owner: myuser
---
-
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (1, 20, '2025-08-20', '12:45:00', 178, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (2, 10, '2025-08-21', '14:40:00', 164, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (3, 17, '2025-08-16', '13:00:00', 112, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (4, 7, '2025-08-15', '11:50:00', 49, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (5, 20, '2025-08-19', '14:45:00', 35, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (6, 15, '2025-08-15', '12:15:00', 16, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (7, 3, '2025-08-20', '12:30:00', 141, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (8, 5, '2025-08-22', '13:00:00', 147, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (9, 11, '2025-08-16', '09:45:00', 2, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (10, 7, '2025-08-15', '14:15:00', 129, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (11, 1, '2025-08-20', '13:15:00', 149, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (12, 3, '2025-08-25', '11:30:00', 22, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (13, 11, '2025-08-20', '10:00:00', 41, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (14, 2, '2025-08-18', '08:45:00', 160, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (15, 18, '2025-08-23', '09:30:00', 55, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (16, 7, '2025-08-16', '11:15:00', 163, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (17, 9, '2025-08-16', '12:15:00', 65, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (18, 1, '2025-08-15', '13:45:00', 152, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (19, 8, '2025-08-20', '14:40:00', 94, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (20, 16, '2025-08-17', '10:00:00', 122, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (21, 17, '2025-08-17', '12:25:00', 61, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (22, 5, '2025-08-16', '14:30:00', 140, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (23, 6, '2025-08-18', '10:15:00', 140, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (24, 8, '2025-08-25', '13:45:00', 150, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (25, 8, '2025-08-25', '11:30:00', 2, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (26, 15, '2025-08-20', '12:45:00', 179, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (27, 20, '2025-08-16', '10:00:00', 58, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (28, 4, '2025-08-18', '10:00:00', 90, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (29, 9, '2025-08-21', '10:50:00', 84, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (30, 2, '2025-08-23', '13:00:00', 45, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (31, 17, '2025-08-17', '08:45:00', 98, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (32, 11, '2025-08-23', '15:25:00', 111, 5);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (33, 6, '2025-08-24', '14:30:00', 117, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (34, 10, '2025-08-23', '10:40:00', 152, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (35, 8, '2025-08-22', '10:40:00', 106, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (36, 14, '2025-08-17', '15:00:00', 81, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (37, 4, '2025-08-20', '09:00:00', 86, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (38, 2, '2025-08-15', '12:35:00', 162, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (39, 9, '2025-08-20', '13:00:00', 30, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (40, 18, '2025-08-24', '10:15:00', 50, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (41, 2, '2025-08-19', '12:20:00', 62, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (42, 9, '2025-08-15', '10:45:00', 28, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (43, 15, '2025-08-20', '12:15:00', 36, 1);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (44, 15, '2025-08-23', '12:35:00', 19, 3);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (45, 14, '2025-08-15', '08:45:00', 44, 2);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (46, 2, '2025-08-19', '09:15:00', 19, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (47, 6, '2025-08-20', '13:45:00', 80, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (48, 20, '2025-08-17', '13:45:00', 23, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (49, 16, '2025-08-19', '13:15:00', 137, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (50, 16, '2025-08-19', '09:45:00', 83, 4);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (51, 2, '2025-07-06', '12:40:00', 2, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (52, 2, '2025-07-06', '13:00:00', 2, 7);
 
 
 --
 -- Data for Name: diseases; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (1, 'Hypertension', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (2, 'Diabetes Mellitus', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (3, 'Asthma', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (4, 'Chronic Kidney Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (5, 'Ischemic Heart Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (6, 'Tuberculosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (7, 'Dengue Fever', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (8, 'Hepatitis B', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (9, 'Hepatitis C', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (10, 'Anemia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (11, 'Malaria', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (12, 'Pneumonia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (13, 'Thalassemia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (14, 'Gastritis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (15, 'Migraine', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (16, 'Arthritis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (17, 'Rheumatoid Arthritis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (18, 'Depression', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (19, 'Anxiety Disorder', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (20, 'COVID-19', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (21, 'Typhoid', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (22, 'Chickenpox', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (23, 'Measles', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (24, 'Mumps', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (25, 'Rubella', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (26, 'Whooping Cough', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (27, 'Leptospirosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (28, 'HIV/AIDS', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (29, 'Polio', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (30, 'Tetanus', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (31, 'Cholera', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (32, 'Scabies', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (33, 'Ringworm', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (34, 'Fungal Skin Infection', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (35, 'Eczema', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (36, 'Psoriasis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (37, 'Cystic Fibrosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (38, 'Sickle Cell Anemia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (39, 'Hemophilia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (40, 'Hypothyroidism', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (41, 'Hyperthyroidism', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (42, 'Obesity', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (43, 'Metabolic Syndrome', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (44, 'Gout', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (45, 'Lupus', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (46, 'Multiple Sclerosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (47, 'Parkinson’s Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (48, 'Alzheimer’s Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (49, 'Cervical Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (50, 'Breast Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (51, 'Lung Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (52, 'Oral Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (53, 'Skin Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (54, 'Colon Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (55, 'Pancreatic Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (56, 'Prostate Cancer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (57, 'Brain Tumor', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (58, 'GERD', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (59, 'Peptic Ulcer', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (60, 'IBS', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (61, 'Crohn’s Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (62, 'Ulcerative Colitis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (63, 'Cirrhosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (64, 'Fatty Liver Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (65, 'Gallstones', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (66, 'Urinary Tract Infection', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (67, 'Kidney Stones', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (68, 'Glomerulonephritis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (69, 'Nephrotic Syndrome', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (70, 'UTI', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (71, 'Otitis Media', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (72, 'Sinusitis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (73, 'Conjunctivitis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (74, 'Tonsillitis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (75, 'Bronchitis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (76, 'Influenza', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (77, 'Zika Virus Infection', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (78, 'Ebola Virus Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (79, 'Scrub Typhus', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (80, 'Rickettsial Infections', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (81, 'Lassa Fever', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (82, 'Hantavirus Infection', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (83, 'Plague', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (84, 'Rabies', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (85, 'Hydrocephalus', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (86, 'Spina Bifida', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (87, 'Epilepsy', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (88, 'Stroke', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (89, 'Transient Ischemic Attack', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (90, 'Glaucoma', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (91, 'Cataract', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (92, 'Macular Degeneration', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (93, 'Retinopathy', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (94, 'Autism Spectrum Disorder', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (95, 'ADHD', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (96, 'Schizophrenia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (97, 'Bipolar Disorder', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (98, 'Dysthymia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (99, 'Insomnia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (100, 'Sleep Apnea', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (101, 'Anorexia Nervosa', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (102, 'Bulimia', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (103, 'Osteoporosis', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (104, 'Vitiligo', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (105, 'Melanoma', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (106, 'Hemorrhoids', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (107, 'Anal Fissure', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (108, 'Pelvic Inflammatory Disease', NULL);
+INSERT INTO public.diseases (disease_id, disease_name, description) VALUES (109, 'Endometriosis', NULL);
 
 
 --
 -- Data for Name: prescription; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (1, 7, 12, 3, 'Hypertension check-up', '2024-12-18', 'Mild fever, sore throat', 85.4, '110/70', 94, 'Prescribed antibiotics for 5 days. Avoid spicy food.', '2024-12-25');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (2, 14, 23, 7, 'Post-surgical follow-up', '2024-09-19', 'Nausea and loss of appetite', 74.5, '110/70', 92, 'Advise rest and maintain hydration. Monitor symptoms closely.', '2024-12-18');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (3, 12, 18, 3, 'Gastrointestinal discomfort', '2025-05-07', 'Nausea and loss of appetite', 85.8, '125/82', 80, 'Schedule lab tests for confirmation of diagnosis.', '2025-07-06');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (4, 2, 3, 2, 'Hypertension check-up', '2025-05-16', 'Cough and chest congestion', 48.7, '130/85', 92, 'Refer to specialist if symptoms persist beyond 1 week.', '2025-05-30');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (5, 12, 44, 7, 'Hypertension check-up', '2025-02-07', 'Cough and chest congestion', 62.4, '130/85', 69, 'Refer to specialist if symptoms persist beyond 1 week.', '2025-05-08');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (6, 8, 33, 4, 'Type 2 diabetes follow-up', '2025-05-30', 'Mild fever, sore throat', 53.8, '140/90', 93, 'Monitor blood pressure twice daily and record readings.', '2025-06-29');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (7, 8, 47, 9, 'Upper respiratory tract infection', '2024-10-10', 'Cough and chest congestion', 61.8, '140/90', 85, 'Recommend follow-up with endocrinologist.', '2024-10-24');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (8, 2, 22, 3, 'Post-surgical follow-up', '2024-11-17', 'Lower abdominal pain', 65.7, '130/85', 86, 'Schedule lab tests for confirmation of diagnosis.', '2024-12-01');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (9, 8, 44, 1, 'Routine health check-up', '2024-11-21', 'Lower abdominal pain', 47.2, '130/85', 81, 'Continue current medication. Come back if no improvement in 5 days.', '2025-01-20');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (10, 12, 25, 5, 'Routine health check-up', '2025-01-08', 'Swollen joints and stiffness', 85.0, '140/90', 75, 'Prescribed antibiotics for 5 days. Avoid spicy food.', '2025-03-09');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (11, 13, 1, 7, 'Gastrointestinal discomfort', '2024-10-26', 'Skin irritation and redness', 74.1, '110/70', 68, 'Schedule lab tests for confirmation of diagnosis.', '2024-11-09');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (12, 14, 15, 3, 'Routine health check-up', '2025-03-22', 'Muscle cramps, dizziness', 54.1, '120/80', 70, 'Continue current medication. Come back if no improvement in 5 days.', '2025-03-29');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (13, 11, 17, 6, 'Gastrointestinal discomfort', '2025-04-21', 'Swollen joints and stiffness', 49.4, '120/80', 65, 'Monitor blood pressure twice daily and record readings.', '2025-04-28');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (14, 1, 21, 7, 'Type 2 diabetes follow-up', '2024-08-29', 'Muscle cramps, dizziness', 82.3, '140/90', 84, 'Patient needs further evaluation if chest pain continues.', '2024-10-28');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (15, 2, 30, 1, 'Joint pain and swelling', '2024-10-06', 'Headache and fatigue', 61.9, '120/80', 79, 'Refer to specialist if symptoms persist beyond 1 week.', '2025-01-04');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (16, 12, 30, 8, 'Fever and body ache', '2025-04-22', 'Skin irritation and redness', 52.4, '110/70', 93, 'Advised dietary changes and regular exercise.', '2025-07-21');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (17, 1, 33, 4, 'Hypertension check-up', '2024-12-08', 'Cough and chest congestion', 45.8, '140/90', 93, 'Recommend follow-up with endocrinologist.', '2024-12-22');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (18, 4, 29, 5, 'Gastrointestinal discomfort', '2024-10-16', 'Swollen joints and stiffness', 66.6, '110/70', 69, 'Continue current medication. Come back if no improvement in 5 days.', '2024-10-30');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (19, 10, 2, 6, 'Routine health check-up', '2024-11-11', 'Cough and chest congestion', 54.9, '130/85', 85, 'Ensure medication adherence. Discussed possible side effects.', '2025-03-11');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (20, 2, 1, 4, 'Upper respiratory tract infection', '2025-02-12', 'Nausea and loss of appetite', 64.5, '110/70', 76, 'Schedule lab tests for confirmation of diagnosis.', '2025-06-12');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (21, 20, 15, 6, 'Joint pain and swelling', '2025-02-14', 'Swollen joints and stiffness', 77.3, '110/70', 72, 'Continue current medication. Come back if no improvement in 5 days.', '2025-02-28');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (22, 17, 7, 9, 'Post-surgical follow-up', '2024-10-11', 'Headache and fatigue', 78.6, '120/80', 75, 'Ensure medication adherence. Discussed possible side effects.', '2024-11-10');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (23, 19, 45, 3, 'Post-surgical follow-up', '2024-09-14', 'Nausea and loss of appetite', 76.0, '130/85', 88, 'Refer to specialist if symptoms persist beyond 1 week.', '2024-09-21');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (24, 9, 22, 10, 'Skin rash and itching', '2025-03-16', 'Muscle cramps, dizziness', 70.7, '125/82', 90, 'Advise rest and maintain hydration. Monitor symptoms closely.', '2025-04-15');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (25, 11, 35, 7, 'Gastrointestinal discomfort', '2024-12-27', 'Swollen joints and stiffness', 76.0, '130/85', 90, 'Recommend follow-up with endocrinologist.', '2025-01-10');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (26, 15, 3, 9, 'Chronic back pain evaluation', '2025-01-17', 'Mild fever, sore throat', 55.7, '130/85', 89, 'Monitor blood pressure twice daily and record readings.', '2025-02-16');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (27, 4, 43, 1, 'Chronic back pain evaluation', '2024-09-05', 'Swollen joints and stiffness', 67.4, '140/90', 71, 'Schedule lab tests for confirmation of diagnosis.', '2024-11-04');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (28, 9, 12, 9, 'Upper respiratory tract infection', '2024-11-07', 'Swollen joints and stiffness', 71.6, '130/85', 77, 'Monitor blood pressure twice daily and record readings.', '2024-11-21');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (29, 3, 46, 3, 'Upper respiratory tract infection', '2024-09-18', 'Skin irritation and redness', 89.4, '125/82', 65, 'Refer to specialist if symptoms persist beyond 1 week.', '2025-01-16');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (30, 9, 48, 4, 'Post-surgical follow-up', '2024-09-28', 'Mild fever, sore throat', 86.4, '125/82', 68, 'Prescribed antibiotics for 5 days. Avoid spicy food.', '2024-10-12');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (31, 5, 46, 6, 'Gastrointestinal discomfort', '2025-04-10', 'Cough and chest congestion', 46.2, '140/90', 85, 'Recommend follow-up with endocrinologist.', '2025-05-10');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (32, 11, 20, 9, 'Hypertension check-up', '2025-05-10', 'Nausea and loss of appetite', 66.9, '110/70', 79, 'Continue current medication. Come back if no improvement in 5 days.', '2025-05-24');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (33, 13, 24, 9, 'Joint pain and swelling', '2025-05-19', 'Skin irritation and redness', 77.4, '125/82', 93, 'Ensure medication adherence. Discussed possible side effects.', '2025-07-18');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (34, 14, 25, 4, 'Fever and body ache', '2025-02-27', 'Nausea and loss of appetite', 78.6, '120/80', 66, 'Advised dietary changes and regular exercise.', '2025-05-28');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (35, 19, 16, 1, 'Upper respiratory tract infection', '2025-05-06', 'Headache and fatigue', 56.9, '130/85', 99, 'Monitor blood pressure twice daily and record readings.', '2025-08-04');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (36, 9, 39, 1, 'Post-surgical follow-up', '2024-10-26', 'Swollen joints and stiffness', 88.4, '110/70', 82, 'Patient needs further evaluation if chest pain continues.', '2025-02-23');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (37, 2, 41, 5, 'Hypertension check-up', '2025-05-12', 'Lower abdominal pain', 55.7, '120/80', 89, 'Monitor blood pressure twice daily and record readings.', '2025-07-11');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (38, 8, 10, 5, 'Gastrointestinal discomfort', '2024-10-05', 'Headache and fatigue', 56.0, '120/80', 75, 'Advised dietary changes and regular exercise.', '2024-12-04');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (39, 20, 26, 7, 'Upper respiratory tract infection', '2025-03-20', 'Skin irritation and redness', 47.7, '125/82', 66, 'Ensure medication adherence. Discussed possible side effects.', '2025-05-19');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (40, 18, 3, 3, 'Joint pain and swelling', '2025-01-19', 'Mild fever, sore throat', 85.5, '140/90', 98, 'Advised dietary changes and regular exercise.', '2025-01-26');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (41, 19, 23, 8, 'Routine health check-up', '2024-10-09', 'Mild fever, sore throat', 50.0, '130/85', 83, 'Advise rest and maintain hydration. Monitor symptoms closely.', '2024-10-23');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (42, 19, 8, 1, 'Joint pain and swelling', '2024-11-27', 'Swollen joints and stiffness', 71.8, '140/90', 64, 'Ensure medication adherence. Discussed possible side effects.', '2025-01-26');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (43, 18, 17, 3, 'Skin rash and itching', '2024-12-14', 'Mild fever, sore throat', 85.9, '140/90', 85, 'Refer to specialist if symptoms persist beyond 1 week.', '2025-01-13');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (44, 18, 13, 1, 'Type 2 diabetes follow-up', '2024-11-16', 'Headache and fatigue', 79.2, '125/82', 76, 'Advised dietary changes and regular exercise.', '2025-01-15');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (45, 20, 18, 1, 'Routine health check-up', '2025-04-27', 'Muscle cramps, dizziness', 62.8, '110/70', 83, 'Ensure medication adherence. Discussed possible side effects.', '2025-07-26');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (46, 20, 25, 8, 'Hypertension check-up', '2025-05-04', 'Mild fever, sore throat', 73.9, '120/80', 66, 'Schedule lab tests for confirmation of diagnosis.', '2025-05-11');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (47, 4, 18, 4, 'Post-surgical follow-up', '2025-02-09', 'Mild fever, sore throat', 60.6, '110/70', 84, 'Ensure medication adherence. Discussed possible side effects.', '2025-05-10');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (48, 9, 40, 8, 'Routine health check-up', '2025-04-09', 'Lower abdominal pain', 87.3, '130/85', 68, 'Schedule lab tests for confirmation of diagnosis.', '2025-04-16');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (49, 11, 13, 10, 'Skin rash and itching', '2024-10-28', 'Skin irritation and redness', 82.5, '130/85', 63, 'Advised dietary changes and regular exercise.', '2025-02-25');
+INSERT INTO public.prescription (prescription_id, patient_id, doctor_id, hospital_id, summary, prescribed_date, symptoms, weight, blood_pressure, heart_rate, notes, next_appointment_date) VALUES (50, 8, 12, 9, 'Skin rash and itching', '2025-03-30', 'Swollen joints and stiffness', 48.9, '110/70', 69, 'Monitor blood pressure twice daily and record readings.', '2025-05-29');
 
 
 --
 -- Data for Name: diagnosed_diseases; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (1, 9);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (2, 51);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (3, 46);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (3, 104);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (4, 21);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (5, 25);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (5, 107);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (6, 68);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (6, 64);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (7, 77);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (7, 58);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (8, 9);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (9, 96);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (10, 94);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (10, 12);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (11, 98);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (12, 23);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (12, 86);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (13, 34);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (14, 68);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (15, 96);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (16, 47);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (16, 68);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (17, 69);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (18, 97);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (19, 21);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (19, 23);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (20, 69);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (20, 25);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (21, 77);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (22, 26);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (22, 39);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (23, 45);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (23, 46);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (24, 25);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (24, 67);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (25, 71);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (25, 30);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (26, 6);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (26, 108);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (27, 50);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (28, 30);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (28, 25);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (29, 32);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (29, 55);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (30, 43);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (31, 14);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (31, 95);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (32, 102);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (32, 51);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (33, 3);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (34, 12);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (35, 89);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (35, 97);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (36, 7);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (36, 3);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (37, 61);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (37, 104);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (38, 32);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (39, 89);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (40, 68);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (40, 55);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (41, 95);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (42, 8);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (42, 94);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (43, 25);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (43, 19);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (44, 29);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (45, 69);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (45, 24);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (46, 56);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (47, 59);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (47, 20);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (48, 7);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (48, 103);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (49, 6);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (50, 13);
+INSERT INTO public.diagnosed_diseases (prescription_id, disease_id) VALUES (50, 48);
 
 
 --
 -- Data for Name: doctor_degree; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (1, 'MBBS', 'Dhaka Medical College', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (1, 'M.Phil (Radiotherapy)', 'Sir Salimullah Medical College', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (2, 'MBBS BCS MCPS FCPS', 'Armed Forces Medical College', 1990);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'MBBS', 'Dinajpur Medical College', 1997);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'BCS (H)', 'Mymensingh Medical College', 1997);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'DLO (D.U.)', 'Sylhet Women’s Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'M.S (ENT)', 'IBN Sina Medical College', 2004);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'BSMMU', 'BSMMU', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (3, 'Dhaka', 'Shaheed Suhrawardy Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (4, 'MBBS', 'IBN Sina Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (4, 'MS (Plastic Surgery)', 'Medical College for Women and Hospital', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (5, 'MBBS MS MCPS', 'Shaheed Suhrawardy Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (6, 'MBBS', 'Comilla Medical College', 1992);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (6, 'BCS (Health)', 'Comilla Medical College', 1992);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (6, 'FCPS (Surgery)', 'Chittagong Medical College', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'MBBS (DMC)', 'Armed Forces Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'D-Card', 'Dhaka Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'MD (Cardiology', 'Ad-din Women’s Medical College', 1996);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'FACC (USA)', 'Sir Salimullah Medical College', 1998);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'FESC Urope)', 'BSMMU', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (7, 'WHO Fellow (India)', 'Popular Medical College', 2003);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (8, 'MBBS', 'Sylhet Women’s Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (8, 'MCPS', 'Sir Salimullah Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (8, 'FCPS', 'Sir Salimullah Medical College', 2015);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (8, 'MD (Paediatrics)', 'Medical College for Women and Hospital', 2017);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (8, 'FRCP (Glasg)', 'Harvard Medical School', 2020);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (9, 'MBBS', 'Sylhet MAG Osmani Medical College', 2003);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (9, 'MD (Chest Diseases)', 'University of Oxford', 2003);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (9, 'FCCP (America)', 'Mymensingh Medical College', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (9, 'FICC (Thailand)', 'Bangladesh Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (10, 'MBBS', 'Ad-din Women’s Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (10, 'DCM', 'Sher-e-Bangla Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (10, 'DCH', 'National Institute of Kidney Diseases & Urology (NIKDU)', 2014);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (10, 'MCPS', 'BSMMU', 2017);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (10, 'MD (Pediatrics) MD (Pediatric Hematology)', 'Royal College of Physicians (UK)', 2020);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (11, 'MBBS (DU)', 'Sher-e-Bangla Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (11, 'D-Ortho (BSMMU)', 'Sir Salimullah Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (12, 'MBBS', 'Sher-e-Bangla Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (12, 'BCS (Health)', 'University of Oxford', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (12, 'MD (Cardiology)', 'Rajshahi Medical College', 2013);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (13, 'MBBS', 'Rajshahi Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (13, 'M.Phil (Psychiatry)', 'Bangladesh Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (13, 'MD (Psychiatry)', 'Rajshahi Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (14, 'MBBS', 'Sher-e-Bangla Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (14, 'MCPS', 'Comilla Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (14, 'MS (Obs & Gyne)', 'Ad-din Women’s Medical College', 1996);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (15, 'MBBS', 'Dhaka Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (15, 'D-Ortho (BSMMU)', 'Armed Forces Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (16, 'MBBS', 'IBN Sina Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (16, 'FCPS (Medicine)', 'Ad-din Women’s Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (17, 'MBBS', 'Bangladesh Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (17, 'BCS (Health)', 'National Institute of Cardiovascular Diseases (NICVD)', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (17, 'FCPS (Medicine)', 'Dhaka Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (17, 'MACP (USA)', 'Rajshahi Medical College', 2012);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (18, 'MBBS', 'Ad-din Women’s Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (18, 'MS (Ortho Surgery)', 'Sylhet Women’s Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (18, 'FACS (USA)', 'Sir Salimullah Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (19, 'MBBS', 'Sylhet MAG Osmani Medical College', 1991);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (19, 'BCS (Health)', 'Royal College of Physicians (UK)', 1991);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (19, 'DLO (BSMMU)', 'Bangladesh Medical College', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (20, 'MBBS (CMC)', 'Shaheed Suhrawardy Medical College', 1991);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (20, 'Post Graduate Diploma in Dermatology (South Wales University', 'Bangladesh Medical College', 1991);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (20, 'UK)', 'Rajshahi Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (21, 'MBBS', 'Bangladesh Medical College', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (21, 'FRCP', 'Johns Hopkins University', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (21, 'MD (SKIN & VD)', 'Royal College of Physicians (UK)', 1996);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (22, 'MBBS (CU)', 'Rajshahi Medical College', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (22, 'DGUM (UK)', 'Sher-e-Bangla Medical College', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (22, 'DD (Australia)', 'IBN Sina Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (23, 'MBBS', 'Dhaka Medical College', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (23, 'FCPS (Physical Medicine)', 'Rajshahi Medical College', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (24, 'MBBS', 'Sher-e-Bangla Medical College', 2002);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (24, 'FCPS (Obs & Gyne)', 'Sylhet Women’s Medical College', 2002);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (25, 'MBBS (CU)', 'IBN Sina Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (25, 'FCPS (Surgery)', 'Dinajpur Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (25, 'FACS (USA)', 'Bangladesh Medical College', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (26, 'MBBS', 'Mymensingh Medical College', 1996);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (26, 'FCPS (Medicine)', 'University of Oxford', 1996);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (26, 'MACP (USA)', 'AIIMS New Delhi', 1999);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (27, 'MBBS', 'Sir Salimullah Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (27, 'MS (Pediatric Surgery)', 'Shaheed Suhrawardy Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (27, 'Trained in Plastic Surgery (Japan)', 'Royal College of Physicians (UK)', 1999);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (28, 'MBBS', 'Dhaka Medical College', 2002);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (28, 'FCPS (Surgery)', 'University of Oxford', 2002);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (28, 'FMAS (India)', 'University of Oxford', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (28, 'FACS (USA)', 'IBN Sina Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (29, 'MBBS', 'Comilla Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (29, 'BCS (Health)', 'Sir Salimullah Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (29, 'FCPS (Medicine)', 'Medical College for Women and Hospital', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (29, 'MCPS (Medicine)', 'Ad-din Women’s Medical College', 2013);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (30, 'MBBS', 'Mymensingh Medical College', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (30, 'BCS (Health)', 'AIIMS New Delhi', 2001);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (30, 'MD (Internal Medicine)', 'Popular Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (30, 'Fellow in Diabetology (BIRDEM)', 'Dhaka Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (31, 'MBBS', 'Rajshahi Medical College', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (31, 'FCPS (ENT)', 'National Institute of Diseases of the Chest and Hospital (NIDCH)', 1994);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (32, 'MBBS', 'Shaheed Suhrawardy Medical College', 1992);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (32, 'BCS (Health)', 'BSMMU', 1992);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (32, 'FCPS (ENT)', 'AIIMS New Delhi', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (33, 'MBBS', 'Armed Forces Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (33, 'FCPS (OBGYN)', 'National Institute of Kidney Diseases & Urology (NIKDU)', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (34, 'MBBS (DMC)', 'Medical College for Women and Hospital', 1998);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (34, 'BCS (Health)', 'BSMMU', 1998);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (34, 'FCPS (Pediatrics)', 'Mymensingh Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (35, 'MBBS', 'Ad-din Women’s Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (35, 'DCH', 'Dhaka Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (35, 'MD (Child Health)', 'Chittagong Medical College', 2013);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (36, 'MBBS', 'Bangladesh Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (36, 'BCS (Health)', 'Sir Salimullah Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (36, 'DO (BSMMU)', 'BSMMU', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (36, 'MCPS (EYE)', 'BSMMU', 2014);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (37, 'MBBS', 'Chittagong Medical College', 2003);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (37, 'MS (ENT)', 'Dinajpur Medical College', 2003);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (38, 'MBBS (Dhaka)', 'Comilla Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (38, 'MCPS (Medicine)', 'Armed Forces Medical College', 2000);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (38, 'MD (Hepatology)', 'Johns Hopkins University', 2004);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (39, 'MBBS', 'Sylhet MAG Osmani Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (39, 'FCPS (Surgery)', 'Rajshahi Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (40, 'MBBS', 'Sylhet Women’s Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (40, 'MS (Orthopedic)', 'Bangladesh Medical College', 1993);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (40, 'Training in Arthroplasty (India)', 'National Institute of Diseases of the Chest and Hospital (NIDCH)', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (41, 'MBBS', 'Bangladesh Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (41, 'FCPS (Surgery)', 'Royal College of Physicians (UK)', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (41, 'FMAS (India)', 'Dinajpur Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (41, 'FACS (USA)', 'Popular Medical College', 2013);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (41, 'FRCS (UK)', 'Chittagong Medical College', 2015);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (42, 'MBBS', 'Ad-din Women’s Medical College', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (42, 'MS (Neurosurgery)', 'BSMMU', 2007);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (43, 'MBBS', 'Sher-e-Bangla Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (43, 'BCS (Health)', 'Sher-e-Bangla Medical College', 2005);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (43, 'FCPS (Surgery)', 'Dhaka Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (44, 'MBBS', 'IBN Sina Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (44, 'MCPS (EYE)', 'IBN Sina Medical College', 1995);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (44, 'Training (Phaco Surgery)', 'Dinajpur Medical College', 1998);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (45, 'MBBS', 'Dhaka Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (45, 'DCO', 'Sylhet Women’s Medical College', 2008);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (45, 'Training in Phaco Surgery', 'AIIMS New Delhi', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (46, 'MBBS', 'Mymensingh Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (46, 'FCPS (Surgery)', 'Dinajpur Medical College', 2006);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (46, 'FCPS (Urology)', 'Popular Medical College', 2010);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (46, 'FRCS (Glassgow)', 'Bangladesh Medical College', 2012);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (47, 'MBBS', 'Chittagong Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (47, 'FCPS (Medicine)', 'Dhaka Medical College', 2011);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (48, 'MBBS', 'Mymensingh Medical College', 2009);
+INSERT INTO public.doctor_degree (doctor_id, degree_name, institution, passing_year) VALUES (48, 'FCPS (Medicine)', 'Popular Medical College', 2009);
 
 
 --
 -- Data for Name: doctor_review; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (1, 1, 12, 3, 'Decent consultation, room for improvement.', '2024-10-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (2, 1, 16, 4, NULL, '2024-12-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (3, 1, 7, 5, NULL, '2024-11-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (4, 1, 5, 2, 'Rushed through the appointment.', '2024-12-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (5, 1, 2, 2, NULL, '2024-12-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (6, 1, 19, 2, NULL, '2025-01-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (7, 1, 15, 2, 'Did not explain things well.', '2024-09-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (8, 1, 17, 5, NULL, '2025-02-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (9, 1, 20, 3, NULL, '2025-02-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (10, 1, 7, 3, 'Decent consultation, room for improvement.', '2024-11-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (11, 2, 7, 2, 'Expected better communication.', '2024-11-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (12, 2, 8, 3, NULL, '2025-02-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (13, 2, 1, 3, 'Felt a bit rushed but overall okay.', '2024-09-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (14, 2, 1, 1, NULL, '2024-10-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (15, 2, 19, 5, NULL, '2024-09-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (16, 2, 8, 2, 'Expected better communication.', '2025-03-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (17, 2, 3, 5, NULL, '2025-05-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (18, 2, 18, 5, 'Excellent care and very attentive.', '2024-10-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (19, 2, 3, 4, NULL, '2024-09-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (20, 2, 14, 4, 'Good service overall, just had to wait a bit.', '2025-01-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (21, 3, 4, 2, NULL, '2025-02-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (22, 3, 8, 4, 'Satisfied with the treatment.', '2024-09-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (23, 3, 3, 4, NULL, '2025-01-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (24, 3, 12, 3, 'Felt a bit rushed but overall okay.', '2025-04-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (25, 3, 18, 5, NULL, '2025-04-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (26, 3, 15, 3, NULL, '2025-03-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (27, 3, 2, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-05-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (28, 3, 6, 1, 'Felt ignored and uncared for.', '2025-02-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (29, 3, 9, 1, NULL, '2024-11-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (30, 3, 11, 2, 'Did not explain things well.', '2025-03-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (31, 4, 19, 4, NULL, '2024-08-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (32, 4, 15, 3, 'Average experience. Nothing exceptional.', '2024-08-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (33, 4, 1, 3, 'Felt a bit rushed but overall okay.', '2024-12-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (34, 4, 10, 5, NULL, '2025-03-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (35, 4, 1, 4, 'Satisfied with the treatment.', '2024-12-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (36, 4, 3, 2, NULL, '2024-10-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (37, 4, 1, 3, NULL, '2024-09-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (38, 4, 17, 3, 'Decent consultation, room for improvement.', '2025-03-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (39, 4, 14, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (40, 4, 8, 2, 'Expected better communication.', '2025-04-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (41, 5, 3, 3, 'Felt a bit rushed but overall okay.', '2025-04-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (42, 5, 4, 3, NULL, '2024-12-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (43, 5, 11, 1, 'Very dissatisfied with the service.', '2024-09-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (44, 5, 9, 2, NULL, '2025-02-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (45, 5, 10, 4, NULL, '2025-03-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (46, 5, 20, 1, 'Very dissatisfied with the service.', '2024-12-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (47, 5, 20, 2, 'Rushed through the appointment.', '2024-09-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (48, 5, 11, 3, 'Decent consultation, room for improvement.', '2025-05-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (49, 5, 2, 3, 'Felt a bit rushed but overall okay.', '2024-10-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (50, 5, 20, 5, 'Friendly, knowledgeable, and professional.', '2024-12-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (51, 6, 10, 2, 'Rushed through the appointment.', '2025-04-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (52, 6, 11, 3, NULL, '2024-09-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (53, 6, 5, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-02-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (54, 6, 5, 5, NULL, '2025-03-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (55, 6, 19, 2, NULL, '2024-12-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (56, 6, 14, 1, 'Very dissatisfied with the service.', '2025-02-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (57, 6, 15, 1, 'Felt ignored and uncared for.', '2025-04-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (58, 6, 19, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (59, 6, 2, 4, NULL, '2025-02-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (60, 6, 9, 4, NULL, '2024-12-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (61, 7, 15, 5, NULL, '2025-05-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (62, 7, 17, 3, NULL, '2024-09-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (63, 7, 14, 2, 'Did not explain things well.', '2025-02-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (64, 7, 11, 1, 'Felt ignored and uncared for.', '2025-04-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (65, 7, 16, 2, 'Did not explain things well.', '2024-11-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (66, 7, 14, 4, NULL, '2025-02-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (67, 7, 13, 1, 'Unprofessional behavior. Would not recommend.', '2024-11-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (68, 7, 16, 3, NULL, '2025-05-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (69, 7, 10, 5, 'Truly the best experience I''ve had. Highly recommended!', '2024-09-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (70, 7, 13, 4, 'Satisfied with the treatment.', '2025-02-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (71, 8, 20, 5, 'Excellent care and very attentive.', '2024-11-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (72, 8, 12, 4, 'Good service overall, just had to wait a bit.', '2024-08-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (73, 8, 4, 4, 'Very professional and helpful.', '2025-02-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (74, 8, 14, 5, NULL, '2025-02-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (75, 8, 18, 1, 'Unprofessional behavior. Would not recommend.', '2025-05-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (76, 8, 6, 3, 'Felt a bit rushed but overall okay.', '2024-08-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (77, 8, 11, 2, NULL, '2025-05-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (78, 8, 10, 3, 'Decent consultation, room for improvement.', '2024-09-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (79, 8, 12, 2, 'Did not explain things well.', '2025-04-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (80, 8, 20, 4, NULL, '2025-05-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (81, 9, 2, 1, 'Felt ignored and uncared for.', '2025-02-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (82, 9, 10, 1, 'Very dissatisfied with the service.', '2025-02-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (83, 9, 6, 5, 'Friendly, knowledgeable, and professional.', '2025-04-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (84, 9, 20, 4, 'Satisfied with the treatment.', '2024-10-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (85, 9, 17, 4, NULL, '2025-01-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (86, 9, 11, 5, NULL, '2025-02-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (87, 9, 2, 4, 'Satisfied with the treatment.', '2025-03-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (88, 9, 19, 1, NULL, '2024-11-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (89, 9, 3, 3, 'Average experience. Nothing exceptional.', '2024-11-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (90, 9, 1, 2, NULL, '2024-12-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (91, 10, 15, 5, NULL, '2025-04-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (92, 10, 9, 3, 'Decent consultation, room for improvement.', '2025-04-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (93, 10, 13, 5, NULL, '2025-01-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (94, 10, 3, 4, NULL, '2024-11-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (95, 10, 6, 5, NULL, '2025-02-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (96, 10, 12, 4, NULL, '2025-03-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (97, 10, 5, 3, NULL, '2025-01-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (98, 10, 18, 5, NULL, '2025-06-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (99, 10, 7, 2, 'Expected better communication.', '2025-02-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (100, 10, 11, 3, 'Decent consultation, room for improvement.', '2025-04-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (101, 11, 14, 2, NULL, '2024-12-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (102, 11, 7, 1, NULL, '2025-04-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (103, 11, 5, 2, NULL, '2025-01-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (104, 11, 11, 4, 'Good service overall, just had to wait a bit.', '2024-09-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (105, 11, 10, 1, NULL, '2024-09-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (106, 11, 1, 4, 'Satisfied with the treatment.', '2025-02-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (107, 11, 10, 3, 'Average experience. Nothing exceptional.', '2024-12-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (108, 11, 9, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-02-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (109, 11, 15, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-04-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (110, 11, 12, 2, 'Rushed through the appointment.', '2024-10-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (111, 12, 19, 1, NULL, '2025-05-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (112, 12, 17, 3, 'Decent consultation, room for improvement.', '2025-01-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (113, 12, 14, 4, 'Satisfied with the treatment.', '2024-10-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (114, 12, 6, 1, NULL, '2024-11-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (115, 12, 6, 4, 'Satisfied with the treatment.', '2024-09-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (116, 12, 20, 2, 'Rushed through the appointment.', '2025-05-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (117, 12, 5, 3, 'Felt a bit rushed but overall okay.', '2025-01-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (118, 12, 17, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (119, 12, 12, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (120, 12, 5, 5, NULL, '2024-12-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (121, 13, 10, 2, 'Expected better communication.', '2024-10-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (122, 13, 7, 4, NULL, '2025-05-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (123, 13, 4, 2, NULL, '2025-04-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (124, 13, 13, 5, 'Friendly, knowledgeable, and professional.', '2024-11-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (125, 13, 2, 5, 'Friendly, knowledgeable, and professional.', '2024-10-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (126, 13, 5, 3, 'Felt a bit rushed but overall okay.', '2024-09-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (127, 13, 20, 2, NULL, '2025-05-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (128, 13, 15, 2, NULL, '2024-10-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (129, 13, 14, 3, 'Average experience. Nothing exceptional.', '2025-01-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (130, 13, 1, 4, 'Satisfied with the treatment.', '2024-08-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (131, 14, 18, 4, 'Very professional and helpful.', '2025-04-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (132, 14, 4, 5, 'Friendly, knowledgeable, and professional.', '2024-10-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (133, 14, 19, 3, 'Felt a bit rushed but overall okay.', '2025-04-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (134, 14, 2, 4, NULL, '2024-10-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (135, 14, 18, 1, NULL, '2025-01-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (136, 14, 7, 4, 'Good service overall, just had to wait a bit.', '2025-01-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (137, 14, 1, 3, 'Average experience. Nothing exceptional.', '2024-12-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (138, 14, 1, 2, NULL, '2025-03-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (139, 14, 14, 2, NULL, '2024-10-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (140, 14, 11, 3, 'Average experience. Nothing exceptional.', '2025-03-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (141, 15, 5, 5, 'Friendly, knowledgeable, and professional.', '2025-03-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (142, 15, 11, 3, NULL, '2025-05-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (143, 15, 6, 3, NULL, '2024-10-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (144, 15, 16, 5, NULL, '2025-02-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (145, 15, 3, 5, 'Friendly, knowledgeable, and professional.', '2024-11-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (146, 15, 5, 1, 'Unprofessional behavior. Would not recommend.', '2024-12-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (147, 15, 10, 2, NULL, '2024-09-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (148, 15, 4, 2, 'Did not explain things well.', '2025-04-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (149, 15, 17, 4, NULL, '2024-11-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (150, 15, 19, 1, 'Unprofessional behavior. Would not recommend.', '2024-10-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (151, 16, 6, 3, NULL, '2025-02-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (152, 16, 2, 4, 'Satisfied with the treatment.', '2024-10-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (153, 16, 2, 2, NULL, '2024-08-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (154, 16, 1, 4, 'Satisfied with the treatment.', '2025-04-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (155, 16, 6, 3, 'Felt a bit rushed but overall okay.', '2025-06-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (156, 16, 16, 1, 'Felt ignored and uncared for.', '2024-12-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (157, 16, 5, 2, 'Rushed through the appointment.', '2025-03-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (158, 16, 7, 3, NULL, '2025-05-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (159, 16, 5, 2, 'Expected better communication.', '2025-04-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (160, 16, 19, 1, 'Felt ignored and uncared for.', '2024-12-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (161, 17, 12, 3, NULL, '2024-09-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (162, 17, 4, 1, NULL, '2025-01-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (163, 17, 5, 1, NULL, '2025-02-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (164, 17, 9, 2, 'Did not explain things well.', '2025-02-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (165, 17, 9, 5, 'Truly the best experience I''ve had. Highly recommended!', '2024-10-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (166, 17, 20, 1, 'Very dissatisfied with the service.', '2025-01-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (167, 17, 8, 3, 'Felt a bit rushed but overall okay.', '2025-02-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (168, 17, 17, 1, NULL, '2025-02-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (169, 17, 3, 2, 'Rushed through the appointment.', '2025-04-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (170, 17, 14, 3, NULL, '2025-01-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (171, 18, 16, 4, NULL, '2025-05-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (172, 18, 17, 4, 'Satisfied with the treatment.', '2025-04-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (173, 18, 12, 2, 'Rushed through the appointment.', '2025-06-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (174, 18, 1, 5, NULL, '2025-03-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (175, 18, 7, 4, 'Good service overall, just had to wait a bit.', '2025-02-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (176, 18, 11, 1, NULL, '2025-04-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (177, 18, 16, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-02-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (178, 18, 5, 4, NULL, '2025-03-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (179, 18, 6, 4, NULL, '2024-10-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (180, 18, 2, 3, 'Felt a bit rushed but overall okay.', '2024-09-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (181, 19, 2, 4, NULL, '2024-11-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (182, 19, 11, 2, 'Rushed through the appointment.', '2025-02-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (183, 19, 15, 4, 'Satisfied with the treatment.', '2025-04-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (184, 19, 4, 2, NULL, '2025-02-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (185, 19, 6, 4, 'Good service overall, just had to wait a bit.', '2025-05-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (186, 19, 15, 2, 'Expected better communication.', '2025-03-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (187, 19, 12, 5, 'Friendly, knowledgeable, and professional.', '2024-09-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (188, 19, 14, 3, 'Felt a bit rushed but overall okay.', '2024-12-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (189, 19, 18, 3, 'Average experience. Nothing exceptional.', '2025-04-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (190, 19, 1, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (191, 20, 13, 4, NULL, '2024-12-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (192, 20, 13, 5, NULL, '2024-10-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (193, 20, 12, 3, 'Average experience. Nothing exceptional.', '2025-01-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (194, 20, 14, 2, 'Did not explain things well.', '2025-03-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (195, 20, 7, 2, NULL, '2024-09-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (196, 20, 15, 2, 'Rushed through the appointment.', '2024-10-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (197, 20, 2, 1, NULL, '2024-10-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (198, 20, 19, 4, 'Satisfied with the treatment.', '2025-01-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (199, 20, 7, 5, 'Truly the best experience I''ve had. Highly recommended!', '2024-12-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (200, 20, 19, 2, 'Did not explain things well.', '2025-03-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (201, 21, 15, 5, 'Friendly, knowledgeable, and professional.', '2024-10-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (202, 21, 18, 1, 'Unprofessional behavior. Would not recommend.', '2025-02-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (203, 21, 13, 1, NULL, '2024-12-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (204, 21, 11, 2, NULL, '2024-11-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (205, 21, 9, 5, 'Friendly, knowledgeable, and professional.', '2025-03-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (206, 21, 14, 4, NULL, '2024-12-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (207, 21, 8, 3, NULL, '2025-05-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (208, 21, 15, 3, NULL, '2024-10-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (209, 21, 16, 2, NULL, '2024-10-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (210, 21, 3, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-05-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (211, 22, 8, 4, NULL, '2024-09-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (212, 22, 10, 5, 'Friendly, knowledgeable, and professional.', '2024-12-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (213, 22, 8, 2, 'Rushed through the appointment.', '2024-10-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (214, 22, 4, 1, 'Very dissatisfied with the service.', '2024-11-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (215, 22, 18, 1, 'Unprofessional behavior. Would not recommend.', '2024-12-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (216, 22, 17, 3, 'Decent consultation, room for improvement.', '2024-08-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (217, 22, 14, 2, 'Did not explain things well.', '2024-10-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (218, 22, 17, 5, NULL, '2024-11-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (219, 22, 19, 3, 'Decent consultation, room for improvement.', '2024-09-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (220, 22, 1, 3, 'Felt a bit rushed but overall okay.', '2024-11-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (221, 23, 15, 5, 'Excellent care and very attentive.', '2024-08-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (222, 23, 10, 3, 'Decent consultation, room for improvement.', '2024-09-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (223, 23, 4, 1, NULL, '2025-04-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (224, 23, 13, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-01-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (225, 23, 4, 5, 'Excellent care and very attentive.', '2025-03-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (226, 23, 3, 3, NULL, '2024-12-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (227, 23, 18, 1, NULL, '2024-09-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (228, 23, 12, 5, NULL, '2025-02-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (229, 23, 19, 2, 'Did not explain things well.', '2024-10-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (230, 23, 5, 3, NULL, '2024-10-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (231, 24, 8, 2, 'Rushed through the appointment.', '2024-12-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (232, 24, 7, 3, NULL, '2025-05-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (233, 24, 2, 4, NULL, '2025-04-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (234, 24, 9, 5, NULL, '2025-05-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (235, 24, 13, 3, 'Felt a bit rushed but overall okay.', '2024-10-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (236, 24, 8, 4, NULL, '2024-11-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (237, 24, 14, 5, NULL, '2024-09-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (238, 24, 19, 2, NULL, '2025-02-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (239, 24, 8, 5, NULL, '2024-12-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (240, 24, 2, 3, 'Decent consultation, room for improvement.', '2024-12-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (241, 25, 17, 1, NULL, '2025-06-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (242, 25, 12, 5, NULL, '2025-02-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (243, 25, 6, 1, 'Unprofessional behavior. Would not recommend.', '2025-05-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (244, 25, 1, 1, 'Felt ignored and uncared for.', '2025-05-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (245, 25, 13, 4, 'Good service overall, just had to wait a bit.', '2025-03-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (246, 25, 16, 2, 'Did not explain things well.', '2025-03-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (247, 25, 5, 2, NULL, '2025-05-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (248, 25, 17, 1, NULL, '2024-10-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (249, 25, 12, 5, NULL, '2025-02-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (250, 25, 1, 5, NULL, '2025-01-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (251, 26, 13, 3, NULL, '2024-10-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (252, 26, 17, 3, 'Average experience. Nothing exceptional.', '2024-08-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (253, 26, 13, 1, NULL, '2024-10-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (254, 26, 5, 1, 'Very dissatisfied with the service.', '2024-10-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (255, 26, 20, 2, NULL, '2025-03-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (256, 26, 1, 4, 'Very professional and helpful.', '2024-10-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (257, 26, 8, 2, NULL, '2024-11-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (258, 26, 6, 3, 'Felt a bit rushed but overall okay.', '2024-11-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (259, 26, 12, 1, 'Very dissatisfied with the service.', '2025-05-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (260, 26, 6, 1, 'Unprofessional behavior. Would not recommend.', '2025-06-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (261, 27, 14, 3, NULL, '2024-09-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (262, 27, 10, 1, NULL, '2025-03-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (263, 27, 5, 3, 'Decent consultation, room for improvement.', '2025-06-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (264, 27, 14, 1, 'Unprofessional behavior. Would not recommend.', '2024-12-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (265, 27, 8, 1, NULL, '2025-01-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (266, 27, 7, 3, NULL, '2025-03-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (267, 27, 1, 5, NULL, '2024-12-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (268, 27, 18, 4, 'Very professional and helpful.', '2024-12-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (269, 27, 19, 3, 'Average experience. Nothing exceptional.', '2024-12-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (270, 27, 11, 4, NULL, '2024-10-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (271, 28, 17, 5, 'Excellent care and very attentive.', '2025-03-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (272, 28, 20, 2, 'Rushed through the appointment.', '2025-03-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (273, 28, 8, 1, NULL, '2025-04-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (274, 28, 20, 3, 'Felt a bit rushed but overall okay.', '2025-01-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (275, 28, 3, 1, 'Felt ignored and uncared for.', '2024-12-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (276, 28, 4, 4, NULL, '2025-02-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (277, 28, 6, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-04-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (278, 28, 5, 2, 'Expected better communication.', '2025-05-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (279, 28, 18, 2, 'Did not explain things well.', '2025-02-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (280, 28, 15, 1, 'Very dissatisfied with the service.', '2024-09-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (281, 29, 3, 4, 'Satisfied with the treatment.', '2025-05-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (282, 29, 17, 3, 'Felt a bit rushed but overall okay.', '2025-01-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (283, 29, 3, 4, 'Very professional and helpful.', '2024-08-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (284, 29, 20, 2, NULL, '2025-04-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (285, 29, 9, 5, 'Excellent care and very attentive.', '2024-11-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (286, 29, 5, 5, NULL, '2024-10-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (287, 29, 11, 3, NULL, '2025-05-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (288, 29, 8, 1, NULL, '2025-02-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (289, 29, 6, 3, 'Felt a bit rushed but overall okay.', '2024-11-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (290, 29, 10, 4, NULL, '2025-03-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (291, 30, 7, 1, NULL, '2025-02-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (292, 30, 2, 2, 'Rushed through the appointment.', '2025-04-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (293, 30, 10, 3, 'Decent consultation, room for improvement.', '2024-10-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (294, 30, 19, 2, NULL, '2025-03-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (295, 30, 10, 5, NULL, '2025-02-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (296, 30, 1, 1, NULL, '2024-09-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (297, 30, 7, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-05-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (298, 30, 1, 1, 'Unprofessional behavior. Would not recommend.', '2025-02-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (299, 30, 2, 3, 'Felt a bit rushed but overall okay.', '2025-01-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (300, 30, 16, 4, 'Very professional and helpful.', '2025-02-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (301, 31, 15, 4, NULL, '2024-12-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (302, 31, 15, 4, 'Satisfied with the treatment.', '2025-04-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (303, 31, 2, 3, NULL, '2024-10-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (304, 31, 8, 4, NULL, '2025-01-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (305, 31, 11, 1, 'Very dissatisfied with the service.', '2024-10-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (306, 31, 14, 5, 'Friendly, knowledgeable, and professional.', '2024-12-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (307, 31, 6, 5, NULL, '2024-09-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (308, 31, 16, 4, NULL, '2025-02-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (309, 31, 10, 2, 'Did not explain things well.', '2024-11-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (310, 31, 2, 4, 'Good service overall, just had to wait a bit.', '2024-11-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (311, 32, 17, 2, NULL, '2025-03-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (312, 32, 10, 4, 'Very professional and helpful.', '2024-10-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (313, 32, 5, 3, 'Average experience. Nothing exceptional.', '2024-12-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (314, 32, 19, 4, 'Very professional and helpful.', '2025-01-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (315, 32, 1, 5, 'Friendly, knowledgeable, and professional.', '2025-05-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (316, 32, 7, 3, NULL, '2025-01-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (317, 32, 7, 3, 'Average experience. Nothing exceptional.', '2024-10-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (318, 32, 16, 2, NULL, '2025-05-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (319, 32, 17, 3, NULL, '2024-12-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (320, 32, 15, 2, 'Expected better communication.', '2024-09-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (321, 33, 20, 4, 'Good service overall, just had to wait a bit.', '2025-01-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (322, 33, 14, 5, 'Friendly, knowledgeable, and professional.', '2025-01-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (323, 33, 7, 1, 'Very dissatisfied with the service.', '2025-01-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (324, 33, 7, 2, NULL, '2024-11-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (325, 33, 3, 3, 'Average experience. Nothing exceptional.', '2025-03-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (326, 33, 11, 3, 'Felt a bit rushed but overall okay.', '2024-11-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (327, 33, 13, 1, 'Felt ignored and uncared for.', '2024-12-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (328, 33, 9, 4, NULL, '2024-12-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (329, 33, 18, 5, NULL, '2024-08-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (330, 33, 15, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (331, 34, 19, 3, 'Felt a bit rushed but overall okay.', '2025-03-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (332, 34, 20, 2, 'Expected better communication.', '2024-12-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (333, 34, 1, 1, NULL, '2024-11-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (334, 34, 13, 4, 'Good service overall, just had to wait a bit.', '2024-09-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (335, 34, 17, 3, 'Felt a bit rushed but overall okay.', '2025-01-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (336, 34, 18, 1, NULL, '2024-10-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (337, 34, 19, 3, 'Average experience. Nothing exceptional.', '2024-12-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (338, 34, 16, 5, NULL, '2024-08-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (339, 34, 15, 4, 'Good service overall, just had to wait a bit.', '2024-12-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (340, 34, 8, 2, NULL, '2025-04-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (341, 35, 17, 4, NULL, '2024-10-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (342, 35, 10, 3, 'Average experience. Nothing exceptional.', '2025-04-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (343, 35, 5, 4, 'Good service overall, just had to wait a bit.', '2025-04-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (344, 35, 11, 2, NULL, '2024-10-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (345, 35, 1, 3, 'Decent consultation, room for improvement.', '2024-10-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (346, 35, 9, 3, 'Average experience. Nothing exceptional.', '2024-11-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (347, 35, 20, 4, NULL, '2025-02-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (348, 35, 15, 4, NULL, '2024-12-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (349, 35, 19, 4, NULL, '2025-04-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (350, 35, 12, 2, 'Did not explain things well.', '2025-03-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (351, 36, 8, 4, NULL, '2025-03-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (352, 36, 2, 2, 'Did not explain things well.', '2025-03-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (353, 36, 9, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-02-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (354, 36, 6, 1, 'Unprofessional behavior. Would not recommend.', '2025-03-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (355, 36, 18, 4, 'Very professional and helpful.', '2025-04-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (356, 36, 9, 4, 'Very professional and helpful.', '2025-04-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (357, 36, 8, 3, 'Average experience. Nothing exceptional.', '2025-06-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (358, 36, 20, 2, 'Did not explain things well.', '2025-03-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (359, 36, 20, 4, 'Satisfied with the treatment.', '2024-08-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (360, 36, 13, 1, NULL, '2024-11-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (361, 37, 5, 3, 'Average experience. Nothing exceptional.', '2025-02-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (362, 37, 17, 5, NULL, '2025-04-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (363, 37, 7, 5, NULL, '2024-10-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (364, 37, 11, 4, NULL, '2025-03-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (365, 37, 15, 5, 'Friendly, knowledgeable, and professional.', '2025-04-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (366, 37, 8, 1, NULL, '2024-12-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (367, 37, 12, 3, 'Felt a bit rushed but overall okay.', '2025-04-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (368, 37, 8, 2, 'Rushed through the appointment.', '2024-12-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (369, 37, 18, 3, NULL, '2025-04-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (370, 37, 7, 1, 'Unprofessional behavior. Would not recommend.', '2025-04-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (371, 38, 8, 4, NULL, '2024-10-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (372, 38, 14, 4, 'Satisfied with the treatment.', '2025-06-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (373, 38, 18, 4, 'Satisfied with the treatment.', '2024-09-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (374, 38, 3, 4, 'Satisfied with the treatment.', '2024-09-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (375, 38, 11, 1, 'Very dissatisfied with the service.', '2025-03-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (376, 38, 12, 3, NULL, '2024-11-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (377, 38, 20, 4, NULL, '2024-08-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (378, 38, 1, 5, 'Friendly, knowledgeable, and professional.', '2024-11-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (379, 38, 20, 2, 'Rushed through the appointment.', '2024-11-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (380, 38, 5, 1, 'Felt ignored and uncared for.', '2025-03-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (381, 39, 11, 1, NULL, '2024-10-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (382, 39, 12, 3, 'Average experience. Nothing exceptional.', '2024-10-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (383, 39, 17, 4, 'Very professional and helpful.', '2025-01-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (384, 39, 10, 4, 'Good service overall, just had to wait a bit.', '2025-02-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (385, 39, 9, 2, NULL, '2025-03-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (386, 39, 7, 2, NULL, '2024-08-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (387, 39, 4, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-01-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (388, 39, 19, 1, NULL, '2024-11-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (389, 39, 8, 4, NULL, '2025-05-30');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (390, 39, 2, 2, NULL, '2025-03-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (391, 40, 2, 3, NULL, '2025-05-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (392, 40, 3, 5, NULL, '2025-04-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (393, 40, 14, 2, 'Rushed through the appointment.', '2025-01-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (394, 40, 19, 5, 'Friendly, knowledgeable, and professional.', '2024-12-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (395, 40, 1, 3, NULL, '2025-04-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (396, 40, 2, 1, NULL, '2025-01-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (397, 40, 13, 4, 'Very professional and helpful.', '2025-04-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (398, 40, 20, 3, NULL, '2024-09-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (399, 40, 4, 4, 'Good service overall, just had to wait a bit.', '2025-04-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (400, 40, 14, 4, 'Very professional and helpful.', '2025-03-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (401, 41, 6, 4, 'Very professional and helpful.', '2025-03-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (402, 41, 11, 3, 'Average experience. Nothing exceptional.', '2024-09-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (403, 41, 19, 2, 'Did not explain things well.', '2025-03-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (404, 41, 9, 2, NULL, '2024-11-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (405, 41, 6, 4, NULL, '2024-11-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (406, 41, 17, 4, 'Good service overall, just had to wait a bit.', '2025-04-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (407, 41, 7, 2, 'Did not explain things well.', '2024-11-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (408, 41, 20, 4, NULL, '2025-04-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (409, 41, 16, 5, NULL, '2024-12-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (410, 41, 19, 1, NULL, '2025-03-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (411, 42, 8, 2, 'Did not explain things well.', '2025-02-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (412, 42, 20, 1, 'Very dissatisfied with the service.', '2024-11-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (413, 42, 9, 5, NULL, '2024-12-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (414, 42, 2, 5, NULL, '2025-02-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (415, 42, 6, 5, 'Excellent care and very attentive.', '2025-02-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (416, 42, 3, 2, 'Expected better communication.', '2025-02-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (417, 42, 4, 3, 'Average experience. Nothing exceptional.', '2025-01-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (418, 42, 13, 2, 'Expected better communication.', '2024-12-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (419, 42, 6, 5, NULL, '2025-04-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (420, 42, 4, 5, 'Excellent care and very attentive.', '2025-01-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (421, 43, 11, 4, 'Good service overall, just had to wait a bit.', '2024-10-15');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (422, 43, 19, 1, 'Unprofessional behavior. Would not recommend.', '2025-05-27');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (423, 43, 4, 2, 'Rushed through the appointment.', '2024-10-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (424, 43, 20, 4, NULL, '2025-05-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (425, 43, 14, 4, 'Satisfied with the treatment.', '2024-11-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (426, 43, 12, 1, 'Felt ignored and uncared for.', '2025-01-26');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (427, 43, 9, 4, NULL, '2024-12-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (428, 43, 7, 2, 'Rushed through the appointment.', '2025-01-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (429, 43, 13, 2, 'Rushed through the appointment.', '2025-02-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (430, 43, 8, 5, 'Friendly, knowledgeable, and professional.', '2024-09-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (431, 44, 19, 2, NULL, '2025-02-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (432, 44, 2, 3, NULL, '2025-03-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (433, 44, 16, 1, 'Felt ignored and uncared for.', '2025-04-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (434, 44, 3, 4, 'Very professional and helpful.', '2025-01-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (435, 44, 2, 2, 'Did not explain things well.', '2024-12-24');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (436, 44, 5, 4, NULL, '2024-08-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (437, 44, 17, 3, NULL, '2024-10-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (438, 44, 3, 3, NULL, '2025-02-10');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (439, 44, 15, 2, 'Rushed through the appointment.', '2025-03-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (440, 44, 9, 2, 'Did not explain things well.', '2025-01-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (441, 45, 19, 4, 'Good service overall, just had to wait a bit.', '2024-12-13');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (442, 45, 16, 5, NULL, '2025-02-09');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (443, 45, 4, 5, 'Friendly, knowledgeable, and professional.', '2024-09-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (444, 45, 20, 5, 'Truly the best experience I''ve had. Highly recommended!', '2024-11-16');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (445, 45, 15, 1, 'Unprofessional behavior. Would not recommend.', '2024-09-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (446, 45, 2, 5, NULL, '2025-01-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (447, 45, 19, 5, NULL, '2024-12-04');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (448, 45, 7, 5, NULL, '2024-11-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (449, 45, 11, 1, NULL, '2024-11-03');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (450, 45, 16, 4, 'Very professional and helpful.', '2024-09-22');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (451, 46, 15, 4, NULL, '2024-10-31');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (452, 46, 10, 3, NULL, '2024-10-29');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (453, 46, 2, 4, 'Good service overall, just had to wait a bit.', '2025-04-28');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (454, 46, 5, 2, 'Rushed through the appointment.', '2025-03-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (455, 46, 17, 2, NULL, '2024-11-12');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (456, 46, 12, 2, NULL, '2024-09-17');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (457, 46, 2, 4, NULL, '2024-11-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (458, 46, 12, 2, 'Rushed through the appointment.', '2024-08-21');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (459, 46, 10, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-04-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (460, 46, 8, 2, 'Rushed through the appointment.', '2025-02-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (461, 47, 16, 5, NULL, '2024-11-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (462, 47, 14, 4, 'Very professional and helpful.', '2024-12-25');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (463, 47, 7, 4, 'Good service overall, just had to wait a bit.', '2025-02-02');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (464, 47, 16, 4, 'Good service overall, just had to wait a bit.', '2024-09-08');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (465, 47, 14, 3, NULL, '2024-11-23');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (466, 47, 17, 5, NULL, '2024-11-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (467, 47, 16, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-05-14');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (468, 47, 5, 3, 'Average experience. Nothing exceptional.', '2025-03-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (469, 47, 11, 2, 'Expected better communication.', '2025-05-18');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (470, 47, 4, 5, NULL, '2025-05-11');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (471, 48, 9, 3, 'Felt a bit rushed but overall okay.', '2024-12-20');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (472, 48, 15, 5, 'Friendly, knowledgeable, and professional.', '2025-01-07');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (473, 48, 7, 5, 'Truly the best experience I''ve had. Highly recommended!', '2025-04-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (474, 48, 2, 2, 'Did not explain things well.', '2025-04-05');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (475, 48, 11, 2, NULL, '2024-11-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (476, 48, 11, 3, NULL, '2024-09-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (477, 48, 7, 3, 'Felt a bit rushed but overall okay.', '2024-10-06');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (478, 48, 6, 3, NULL, '2025-02-01');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (479, 48, 5, 4, 'Good service overall, just had to wait a bit.', '2024-11-19');
+INSERT INTO public.doctor_review (review_id, doctor_id, patient_id, rating, description, date) VALUES (480, 48, 6, 2, 'Expected better communication.', '2025-03-10');
+
+
+--
+-- Data for Name: tests; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (1, 'Complete Blood Count (CBC)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (2, 'Hemoglobin (Hb)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (3, 'Total Leukocyte Count (TLC)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (4, 'Differential Leukocyte Count (DLC)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (5, 'Erythrocyte Sedimentation Rate (ESR)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (6, 'Platelet Count', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (7, 'Peripheral Blood Smear', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (8, 'Blood Grouping and Rh Typing', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (9, 'Reticulocyte Count', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (10, 'Prothrombin Time (PT)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (11, 'Activated Partial Thromboplastin Time (aPTT)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (12, 'INR (International Normalized Ratio)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (13, 'Blood Glucose (Fasting)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (14, 'Blood Glucose (Postprandial)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (15, 'Random Blood Sugar (RBS)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (16, 'HbA1c (Glycated Hemoglobin)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (17, 'Serum Creatinine', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (18, 'Blood Urea Nitrogen (BUN)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (19, 'Uric Acid', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (20, 'Liver Function Test (LFT)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (21, 'Serum Bilirubin', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (22, 'ALT (SGPT)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (23, 'AST (SGOT)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (24, 'Alkaline Phosphatase', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (25, 'Total Protein', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (26, 'Albumin', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (27, 'Globulin', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (28, 'A/G Ratio', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (29, 'Thyroid Stimulating Hormone (TSH)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (30, 'T3 (Triiodothyronine)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (31, 'T4 (Thyroxine)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (32, 'Urine Routine Examination', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (33, 'Stool Routine and Microscopy', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (34, 'Stool Occult Blood Test', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (35, 'Serum Calcium', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (36, 'Serum Phosphorus', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (37, 'Serum Magnesium', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (38, 'C-Reactive Protein (CRP)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (39, 'Erythropoietin', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (40, 'Serum Ferritin', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (41, 'Vitamin B12', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (42, 'Vitamin D (25-OH)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (43, 'Electrolytes (Na, K, Cl)', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (44, 'Iron Studies', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (45, 'Lipid Profile', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (46, 'Serum Amylase', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (47, 'Rheumatoid Factor', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (48, 'Serum Lipase', NULL, 'Pathology');
+INSERT INTO public.tests (test_id, test_name, description, type) VALUES (49, 'Serum Cortisol', NULL, 'Pathology');
+
+
+--
+-- Data for Name: hospital_test_availability; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 35, 1260.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 47, 1026.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 21, 602.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 23, 1193.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 37, 699.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 42, 1810.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 27, 687.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 15, 1798.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 17, 358.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 3, 1483.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 39, 1169.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 44, 1653.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 31, 1339.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 26, 1824.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 4, 1904.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 5, 1497.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 6, 998.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 18, 1567.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 12, 424.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 46, 1977.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 49, 1845.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 36, 1783.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 29, 302.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 28, 1208.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 25, 386.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 38, 855.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 45, 1974.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 33, 263.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 9, 752.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 43, 1457.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 14, 463.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 13, 586.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 11, 475.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 7, 1978.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 16, 646.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 10, 585.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 2, 1923.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 48, 508.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 1, 591.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 19, 195.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (1, 32, 1375.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 8, 1817.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 22, 1437.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 38, 784.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 15, 652.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 24, 1559.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 46, 109.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 37, 1336.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 48, 1945.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 26, 1767.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 2, 1684.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 12, 563.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 29, 148.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 4, 1533.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 7, 874.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 17, 1326.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 21, 1201.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 40, 1476.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 5, 685.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 32, 1623.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 1, 1485.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 9, 507.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 16, 109.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 11, 1524.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 25, 649.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 13, 1410.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 28, 737.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 27, 356.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 20, 830.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 19, 852.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 49, 1436.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 44, 1107.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 45, 1863.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 3, 1254.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 36, 1285.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 35, 218.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 31, 505.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 18, 1101.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 33, 1755.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 41, 1245.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 30, 911.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (2, 34, 857.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 30, 1090.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 28, 618.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 29, 1772.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 46, 1458.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 14, 1501.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 9, 875.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 43, 1421.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 36, 1746.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 26, 1370.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 20, 1458.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 11, 1552.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 49, 1433.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 41, 1054.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 25, 190.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 10, 1114.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 33, 1077.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 19, 1369.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 15, 1087.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 42, 1560.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 12, 642.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 6, 373.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 2, 1699.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 17, 121.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 8, 1921.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 18, 1628.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 31, 1536.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 22, 350.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 13, 757.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 45, 1824.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 5, 208.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 1, 974.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 38, 1347.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 32, 956.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 21, 1660.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 44, 328.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 7, 1902.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 37, 125.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 3, 207.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 48, 1401.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 47, 1728.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 39, 1964.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (3, 34, 852.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 46, 1686.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 4, 1412.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 35, 871.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 27, 214.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 31, 1837.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 34, 557.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 29, 1318.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 12, 1531.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 38, 1718.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 41, 135.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 17, 453.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 36, 1004.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 7, 967.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 37, 283.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 9, 1822.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 40, 1935.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 22, 347.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 44, 1653.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 5, 611.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 21, 243.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 26, 432.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 23, 946.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 8, 523.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 14, 268.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 45, 1444.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 2, 157.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 19, 1788.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 43, 765.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 42, 666.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 13, 1722.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 33, 1313.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 24, 317.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 25, 842.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 47, 332.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 10, 207.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 15, 1968.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 16, 1214.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 48, 1753.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 3, 1550.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 18, 1691.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 39, 721.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 20, 1930.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 1, 1918.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (4, 32, 1802.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 20, 1322.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 43, 651.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 33, 289.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 48, 120.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 35, 807.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 30, 1385.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 49, 282.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 14, 183.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 4, 706.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 36, 1081.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 5, 1261.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 19, 1419.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 24, 1575.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 32, 313.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 28, 455.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 25, 393.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 45, 541.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 37, 525.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 23, 1221.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 1, 1754.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 34, 1805.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 15, 630.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 18, 365.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 40, 973.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 29, 484.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 16, 581.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 8, 1580.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 39, 161.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 3, 1152.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 21, 1252.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 38, 490.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 22, 975.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 47, 574.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 7, 912.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 44, 300.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 11, 1186.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 46, 1594.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 17, 1382.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 31, 817.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (5, 6, 1288.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 34, 1900.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 28, 1256.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 10, 1814.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 14, 578.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 49, 1450.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 22, 1450.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 13, 566.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 1, 425.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 15, 1784.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 23, 1083.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 32, 908.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 31, 703.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 5, 710.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 45, 1557.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 33, 1317.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 30, 264.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 44, 747.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 40, 316.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 29, 668.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 37, 793.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 36, 686.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 42, 1524.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 35, 1404.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 19, 1057.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 47, 1391.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 46, 1967.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 7, 348.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 16, 771.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 17, 1975.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 6, 1663.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 12, 977.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 38, 1746.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 11, 102.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 39, 1198.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 26, 683.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (6, 8, 656.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 21, 448.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 23, 1468.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 47, 1885.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 37, 1351.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 29, 1529.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 43, 1252.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 13, 610.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 25, 1013.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 41, 368.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 9, 694.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 11, 307.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 33, 1363.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 8, 797.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 2, 685.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 16, 1068.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 27, 224.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 46, 798.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 30, 230.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 6, 1896.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 7, 1232.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 40, 1174.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 3, 208.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 48, 145.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 4, 667.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 12, 1955.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 10, 892.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 39, 1398.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 32, 1067.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 20, 313.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 24, 247.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 36, 1935.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 38, 689.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 14, 1987.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 15, 741.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 26, 1834.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 19, 653.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 34, 1369.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 5, 1821.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 49, 1260.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 1, 1013.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 31, 111.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 45, 334.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (7, 18, 490.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 33, 1570.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 12, 579.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 2, 1688.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 31, 1371.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 43, 1510.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 22, 746.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 24, 1916.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 42, 774.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 23, 1901.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 48, 1426.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 11, 1456.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 17, 528.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 18, 323.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 34, 1002.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 3, 284.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 49, 1919.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 28, 1041.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 16, 578.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 41, 231.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 36, 948.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 44, 688.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 5, 977.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 45, 1447.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 37, 1607.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 27, 839.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 32, 908.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 38, 232.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 14, 884.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 9, 1111.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 19, 1877.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 21, 1040.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 35, 576.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 10, 1523.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 20, 1856.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 4, 129.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 25, 112.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (8, 29, 1557.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 1, 541.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 4, 1304.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 25, 1597.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 18, 805.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 40, 918.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 10, 762.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 44, 917.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 16, 318.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 21, 1412.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 45, 1899.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 23, 1905.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 39, 666.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 27, 208.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 48, 1983.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 3, 1552.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 24, 468.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 15, 155.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 11, 1322.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 36, 1055.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 30, 558.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 22, 267.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 35, 829.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 9, 682.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 7, 966.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 46, 1203.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 17, 269.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 37, 1327.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 5, 387.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 26, 671.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 12, 1412.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 19, 998.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 43, 1351.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 29, 1973.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 49, 1614.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 13, 390.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (9, 32, 788.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 10, 1852.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 37, 1486.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 46, 1186.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 27, 1916.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 45, 294.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 44, 451.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 30, 1940.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 6, 1582.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 3, 257.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 36, 1898.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 20, 1445.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 49, 1259.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 12, 1864.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 23, 1368.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 34, 824.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 13, 751.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 18, 323.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 24, 1007.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 19, 1268.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 8, 1537.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 33, 957.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 15, 1867.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 25, 592.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 29, 1188.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 2, 1248.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 28, 1030.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 47, 1376.0, '12:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 38, 1774.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 22, 1556.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 39, 1452.0, '04:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 16, 1412.0, '3 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 11, 1351.0, '06:00:00');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 40, 1683.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 5, 924.0, '1 day');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 31, 172.0, '2 days');
+INSERT INTO public.hospital_test_availability (hospital_id, test_id, cost, estimated_report_time) VALUES (10, 17, 632.0, '06:00:00');
 
 
 --
 -- Data for Name: medicines; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (1, 'Napa', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (2, 'Napa Extra', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (3, 'Seclo', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (4, 'Sergel', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (5, 'Losectil', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (6, 'Tufnil', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (7, 'Alatrol', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (8, 'Monas', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (9, 'Ace', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (10, 'Pantonix', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (11, 'Omidon', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (12, 'Flagyl', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (13, 'Ace Plus', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (14, 'Maxpro', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (15, 'Entacyd Plus', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (16, 'PPI', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (17, 'Fexo', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (18, 'Viset', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (19, 'Rabe', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (20, 'Xeldrin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (21, 'Zimax', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (22, 'Ciprocin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (23, 'Bactrocin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (24, 'Aristovit-M', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (25, 'Neuro-B', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (26, 'Esonix', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (27, 'Fixcard', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (28, 'Doxicap', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (29, 'Zif', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (30, 'Roxim', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (31, 'Flexi', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (32, 'Napa Extend', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (33, 'Renova', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (34, 'Cef-3', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (35, 'Amdocal', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (36, 'Losan', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (37, 'Flamfix', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (38, 'Azithrocin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (39, 'Zithrin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (40, 'Furocef', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (41, 'Orsaline-N', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (42, 'Bion', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (43, 'Xpa', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (44, 'Sedil', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (45, 'Filmet', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (46, 'Ticas', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (47, 'Deltasone', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (48, 'Bislol', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (49, 'Rupadin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (50, 'Nexum', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (51, 'Zantac', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (52, 'Camlodin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (53, 'Tryptin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (54, 'Imotil', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (55, 'Eldopaque', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (56, 'Vermin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (57, 'Napa Rapid', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (58, 'Omastin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (59, 'Dormicum', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (60, 'Clonazepam', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (61, 'Barbit', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (62, 'Acifix', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (63, 'Histacin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (64, 'Nervalin', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (65, 'Oxycon', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (66, 'Montene', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (67, 'Ceflon', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (68, 'Zincet', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (69, 'Rivotril', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (70, 'Xynic', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (71, 'Dulox', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (72, 'Prolert', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (73, 'Salbutal', NULL);
+INSERT INTO public.medicines (medicine_id, medicine_name, description) VALUES (74, 'Ventolin', NULL);
 
 
 --
--- Data for Name: tests; Type: TABLE DATA; Schema: public; Owner: myuser
+-- Data for Name: mood_options; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.mood_options (mood_value, display_order) VALUES ('Excellent', 1);
+INSERT INTO public.mood_options (mood_value, display_order) VALUES ('Good', 2);
+INSERT INTO public.mood_options (mood_value, display_order) VALUES ('Fair', 3);
+INSERT INTO public.mood_options (mood_value, display_order) VALUES ('Poor', 4);
+
+
+--
+-- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
 
@@ -155,35 +1817,377 @@ INSERT INTO public.hospital VALUES (1, 'dmc@gmail.com', '$2a$10$D5N39QPYgV9LRAKl
 -- Data for Name: performed_tests; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (1, 1, 1, '2025-02-12', 'Mild anomaly detected, follow-up advised.', 42, 2, 7, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (2, 45, 2, '2025-03-11', 'Within normal range.', 14, 4, 9, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (3, 30, 4, '2024-12-08', 'Sample processed successfully.', 25, 15, 7, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (4, 23, 5, '2025-01-02', 'Slightly elevated WBC count.', 41, 26, 6, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (5, 6, 5, '2024-09-06', 'Within normal range.', 31, 38, 5, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (6, 46, 6, '2024-08-25', 'Sample processed successfully.', 13, 3, 2, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (7, 47, 6, '2025-05-07', 'Possible infection markers present.', 46, 44, 6, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (8, 21, 10, '2024-12-11', 'Possible infection markers present.', 27, 8, 10, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (9, 7, 14, '2025-01-02', 'Within normal range.', 19, 44, 4, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (10, 7, 18, '2025-02-18', 'Within normal range.', 44, 13, 6, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (11, 48, 21, '2024-11-27', 'Repeat test if symptoms persist.', 24, 2, 10, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (12, 38, 22, '2025-04-08', 'Sample processed successfully.', 6, 38, 5, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (13, 48, 23, '2025-01-31', 'Possible infection markers present.', 18, 34, 2, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (14, 1, 26, '2024-09-26', 'Repeat test if symptoms persist.', 21, 42, 9, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (15, 11, 27, '2024-09-02', 'Possible infection markers present.', 9, 34, 9, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (16, 23, 28, '2025-04-20', 'Mild anomaly detected, follow-up advised.', 4, 37, 6, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (17, 12, 29, '2024-10-22', 'Sample processed successfully.', 13, 26, 1, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (18, 33, 30, '2025-02-24', 'Within normal range.', 12, 15, 7, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (19, 31, 31, '2024-10-20', 'Slightly elevated WBC count.', 25, 3, 5, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (20, 33, 32, '2024-12-07', 'Mild anomaly detected, follow-up advised.', 15, 33, 3, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (21, 6, 33, '2025-05-08', 'Mild anomaly detected, follow-up advised.', 48, 16, 10, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (22, 30, 34, '2024-11-14', 'Sample processed successfully.', 22, 38, 9, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (23, 21, 34, '2025-05-16', 'Slightly elevated WBC count.', 24, 9, 6, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (24, 39, 35, '2025-03-04', 'Slightly elevated WBC count.', 45, 24, 10, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (25, 20, 36, '2024-09-17', 'Sample processed successfully.', 15, 7, 8, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (26, 46, 38, '2025-03-12', 'Sample processed successfully.', 45, 18, 5, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (27, 18, 42, '2025-01-31', 'Mild anomaly detected, follow-up advised.', 15, 45, 4, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (28, 32, 44, '2024-09-15', 'Repeat test if symptoms persist.', 47, 17, 1, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (29, 4, 46, '2025-03-07', 'Repeat test if symptoms persist.', 36, 44, 4, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (30, 35, 47, '2024-09-29', 'Repeat test if symptoms persist.', 28, 29, 4, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (31, 2, 48, '2024-08-20', 'Possible infection markers present.', 21, 14, 8, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (32, 26, 49, '2024-11-04', 'Slightly elevated WBC count.', 13, 4, 1, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (33, 40, 49, '2024-09-01', 'Slightly elevated WBC count.', 17, 12, 3, NULL);
+INSERT INTO public.performed_tests (performed_test_id, test_id, prescription_id, test_date, note, performed_by_doctor_id, reviewed_by_doctor_id, hospital_id, pdf_url) VALUES (34, 44, 50, '2024-09-03', 'Within normal range.', 44, 13, 4, NULL);
 
 
 --
 -- Data for Name: prescribed_medicine; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (1, 58, '250 mg', 'Twice daily', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (2, 68, '2 capsules', 'Once daily', 7, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (2, 39, '500 mg', 'Once daily', 10, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (2, 34, '500 mg', 'Every 8 hours', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (2, 31, '1 tablet', 'At bedtime', 15, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (3, 63, '500 mg', 'At bedtime', 15, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (4, 19, '1 tablet', 'Twice daily', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (4, 64, '500 mg', 'Once daily', 2, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (4, 55, '250 mg', 'Once daily', 3, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (4, 66, '500 mg', 'At bedtime', 5, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (5, 23, '250 mg', 'At bedtime', 7, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (5, 45, '500 mg', 'Every 8 hours', 5, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (5, 63, '500 mg', 'At bedtime', 8, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (5, 26, '500 mg', 'Once daily', 15, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (6, 23, '500 mg', 'At bedtime', 10, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (7, 26, '2 capsules', 'Once daily', 15, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (7, 36, '500 mg', 'Twice daily', 5, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (7, 30, '250 mg', 'At bedtime', 5, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (8, 59, '250 mg', 'At bedtime', 10, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (9, 63, '2 capsules', 'Every 8 hours', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (9, 33, '1 tablet', 'Once daily', 5, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (10, 54, '250 mg', 'Every 8 hours', 3, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (10, 68, '250 mg', 'Twice daily', 10, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (11, 12, '500 mg', 'Once daily', 8, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (11, 46, '250 mg', 'Every 8 hours', 7, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (11, 15, '1 tablet', 'Twice daily', 15, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (12, 19, '1 tablet', 'Every 8 hours', 7, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (13, 28, '250 mg', 'Every 8 hours', 5, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (13, 69, '2 capsules', 'Twice daily', 5, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (14, 70, '2 capsules', 'At bedtime', 15, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (15, 61, '1 tablet', 'Once daily', 1, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (15, 69, '2 capsules', 'Twice daily', 7, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (15, 36, '500 mg', 'At bedtime', 7, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (16, 50, '1 tablet', 'At bedtime', 15, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (16, 42, '1 tablet', 'Every 8 hours', 3, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (17, 53, '1 tablet', 'Twice daily', 8, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (17, 15, '2 capsules', 'Every 8 hours', 7, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (17, 28, '2 capsules', 'Every 8 hours', 5, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (18, 34, '1 tablet', 'Every 8 hours', 2, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (18, 70, '1 tablet', 'At bedtime', 3, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (18, 31, '250 mg', 'Once daily', 6, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (18, 49, '1 tablet', 'At bedtime', 2, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (19, 71, '250 mg', 'Twice daily', 1, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (20, 31, '250 mg', 'At bedtime', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (20, 32, '1 tablet', 'At bedtime', 15, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (20, 23, '1 tablet', 'Once daily', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (21, 13, '500 mg', 'Every 8 hours', 9, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (22, 26, '2 capsules', 'Twice daily', 4, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (23, 9, '250 mg', 'Every 8 hours', 8, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (23, 42, '2 capsules', 'At bedtime', 9, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (23, 53, '500 mg', 'Twice daily', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (23, 11, '250 mg', 'Once daily', 10, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (24, 39, '250 mg', 'At bedtime', 10, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (24, 14, '500 mg', 'Every 8 hours', 10, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (24, 41, '250 mg', 'At bedtime', 8, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (24, 23, '250 mg', 'Once daily', 15, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (25, 74, '250 mg', 'Twice daily', 1, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (26, 59, '1 tablet', 'Every 8 hours', 2, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (26, 55, '2 capsules', 'Once daily', 10, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (27, 40, '500 mg', 'Every 8 hours', 5, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (27, 47, '500 mg', 'Every 8 hours', 15, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (27, 52, '1 tablet', 'Once daily', 6, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (27, 69, '500 mg', 'Every 8 hours', 10, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (28, 62, '1 tablet', 'At bedtime', 10, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (28, 52, '1 tablet', 'Every 8 hours', 2, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (29, 67, '500 mg', 'Every 8 hours', 3, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (29, 48, '500 mg', 'Every 8 hours', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (29, 30, '2 capsules', 'Every 8 hours', 3, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (30, 42, '2 capsules', 'Once daily', 3, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (31, 3, '1 tablet', 'Once daily', 6, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (32, 48, '2 capsules', 'Twice daily', 3, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (32, 3, '500 mg', 'Once daily', 6, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (32, 53, '500 mg', 'Twice daily', 15, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (32, 31, '1 tablet', 'Twice daily', 3, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (33, 68, '1 tablet', 'At bedtime', 5, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (33, 19, '1 tablet', 'Twice daily', 7, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (33, 18, '1 tablet', 'At bedtime', 9, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (33, 32, '1 tablet', 'Every 8 hours', 7, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (34, 65, '500 mg', 'Every 8 hours', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (34, 47, '1 tablet', 'Twice daily', 3, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (34, 32, '1 tablet', 'At bedtime', 10, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (34, 28, '1 tablet', 'At bedtime', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (35, 32, '1 tablet', 'Once daily', 3, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (35, 35, '500 mg', 'Twice daily', 3, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (35, 47, '2 capsules', 'Once daily', 2, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (35, 54, '1 tablet', 'Once daily', 9, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (36, 14, '1 tablet', 'At bedtime', 7, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (36, 39, '2 capsules', 'Every 8 hours', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (37, 25, '1 tablet', 'Every 8 hours', 5, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (37, 34, '250 mg', 'At bedtime', 5, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (37, 59, '2 capsules', 'At bedtime', 5, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (38, 46, '500 mg', 'Once daily', 7, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (38, 73, '250 mg', 'At bedtime', 10, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (38, 51, '1 tablet', 'Every 8 hours', 1, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (39, 74, '2 capsules', 'Twice daily', 15, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (39, 42, '2 capsules', 'Twice daily', 7, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (40, 17, '500 mg', 'At bedtime', 7, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (41, 23, '1 tablet', 'Twice daily', 3, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (42, 37, '2 capsules', 'Once daily', 10, 'day', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (43, 63, '1 tablet', 'At bedtime', 15, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (44, 9, '1 tablet', 'Twice daily', 10, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (44, 36, '500 mg', 'At bedtime', 4, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (44, 12, '500 mg', 'At bedtime', 2, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (45, 27, '1 tablet', 'Every 8 hours', 3, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (45, 70, '500 mg', 'Twice daily', 10, 'day', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (45, 53, '250 mg', 'At bedtime', 2, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (46, 5, '1 tablet', 'Once daily', 9, 'month', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (46, 22, '500 mg', 'Once daily', 3, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (46, 70, '2 capsules', 'Twice daily', 2, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (47, 66, '1 tablet', 'At bedtime', 5, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (48, 23, '250 mg', 'Once daily', 1, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (48, 59, '250 mg', 'Once daily', 3, 'month', 'Take on an empty stomach');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (48, 56, '2 capsules', 'Every 8 hours', 8, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (48, 4, '2 capsules', 'Every 8 hours', 10, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (49, 8, '500 mg', 'At bedtime', 4, 'month', 'Take after meals');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (49, 39, '1 tablet', 'Once daily', 3, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (50, 3, '500 mg', 'Twice daily', 4, 'month', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (50, 52, '1 tablet', 'Once daily', 3, 'day', 'Take with plenty of water');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (50, 2, '2 capsules', 'Twice daily', 15, 'day', 'Avoid alcohol while taking this medication');
+INSERT INTO public.prescribed_medicine (prescription_id, medicine_id, dosage, frequency, duration_value, duration_unit, instruction) VALUES (50, 33, '500 mg', 'Once daily', 2, 'month', 'Take with plenty of water');
 
 
 --
 -- Data for Name: prescribed_tests; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (1, 1);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (2, 45);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (3, 9);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (3, 42);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (4, 35);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (4, 30);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (5, 23);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (5, 6);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (6, 46);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (6, 47);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (7, 23);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (9, 31);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (10, 21);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (10, 29);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (11, 4);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (11, 33);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (12, 33);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (14, 7);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (18, 7);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (21, 48);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (21, 38);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (22, 38);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (23, 11);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (23, 48);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (25, 6);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (26, 1);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (27, 11);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (28, 23);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (28, 37);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (29, 12);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (30, 33);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (31, 31);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (32, 33);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (33, 6);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (34, 30);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (34, 21);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (35, 39);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (36, 20);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (36, 46);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (38, 46);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (39, 14);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (40, 15);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (42, 33);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (42, 18);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (44, 32);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (45, 1);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (46, 4);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (47, 35);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (48, 36);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (48, 2);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (49, 26);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (49, 40);
+INSERT INTO public.prescribed_tests (prescription_id, test_id) VALUES (50, 44);
 
 
 --
 -- Data for Name: refresh_token; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
-INSERT INTO public.refresh_token VALUES ('hameem@gmail.com', 'ROLE_PATIENT', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYW1lZW1AZ21haWwuY29tIiwianRpIjoiMzI1NWZlM2QtNjc3MS00NGJmLTllYWYtNGFhZWE1Yzg3ZDMwIiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsImlhdCI6MTc1MDUxNjQ2MiwiZXhwIjoxNzUxMTIxMjYyfQ.xwhe502osTDmPYntk3dUeZcEoKGQqDygPdfA57PZzBs', '2025-06-28 14:34:22.222556');
+INSERT INTO public.refresh_token (email, role, token, expiry_date) VALUES ('rafi.hossain258@gmail.com', 'ROLE_PATIENT', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWZpLmhvc3NhaW4yNThAZ21haWwuY29tIiwianRpIjoiOTg4NzllY2YtODgwZS00N2Q1LWFmY2UtNmU5NzVhOTc3ZGRlIiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsImlhdCI6MTc1MTI4ODAxMSwiZXhwIjoxNzUxODkyODExfQ.Rq1IvnuDPv-wD4YOGXG7CXOyOmlEThKFxq4yOz0jCC4', '2025-07-07 12:53:31.002455');
+
+
+--
+-- Data for Name: severity_levels; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.severity_levels (severity_level, description) VALUES (1, '1-Very Mild');
+INSERT INTO public.severity_levels (severity_level, description) VALUES (2, '2-Mild');
+INSERT INTO public.severity_levels (severity_level, description) VALUES (3, '3-Moderate');
+INSERT INTO public.severity_levels (severity_level, description) VALUES (4, '4-Severe');
+INSERT INTO public.severity_levels (severity_level, description) VALUES (5, '5-Very Severe');
 
 
 --
 -- Data for Name: symptom; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (16, 'Sudden confusion and slurred speech', '2025-06-05', '11:51:23', 'Poor', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (9, 'Pain during urination', '2025-06-08', '15:30:23', 'Good', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Skin rash on arms', '2025-05-22', '17:07:23', 'Poor', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Sore throat and chills', '2025-06-09', '01:20:23', 'Good', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (12, 'Joint stiffness in the morning', '2025-06-16', '00:21:23', 'Fair', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (12, 'Swollen lymph nodes', '2025-06-16', '07:07:23', 'Excellent', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (2, 'Coughing for three days', '2025-05-26', '06:01:23', 'Excellent', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Shortness of breath', '2025-06-12', '03:24:23', 'Poor', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Sudden confusion and slurred speech', '2025-05-29', '08:29:23', 'Fair', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Fever with body ache', '2025-05-18', '22:59:23', 'Good', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (7, 'Pain during urination', '2025-06-09', '18:56:23', 'Fair', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (17, 'Mild tremors in hands', '2025-06-11', '12:23:23', 'Excellent', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Coughing for three days', '2025-06-13', '07:47:23', 'Good', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (6, 'Itchy eyes and nose', '2025-05-27', '22:30:23', 'Good', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Coughing for three days', '2025-05-26', '08:34:23', 'Fair', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (13, 'Back pain that worsens at night', '2025-06-11', '07:40:23', 'Fair', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (4, 'Sore throat and chills', '2025-05-27', '18:21:23', 'Good', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Chest tightness after running', '2025-05-18', '15:35:23', 'Excellent', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (11, 'Back pain that worsens at night', '2025-06-03', '23:09:23', 'Poor', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Pain during urination', '2025-06-16', '10:46:23', 'Excellent', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (11, 'Back pain that worsens at night', '2025-06-08', '02:05:23', 'Fair', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (12, 'Intermittent abdominal pain', '2025-05-29', '11:49:23', 'Good', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (16, 'Coughing for three days', '2025-06-15', '18:40:23', 'Fair', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Chest tightness after running', '2025-06-01', '00:36:23', 'Poor', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (4, 'Coughing for three days', '2025-05-24', '08:40:23', 'Good', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (17, 'Headache and dizziness', '2025-06-09', '00:53:23', 'Good', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Vomiting with dehydration', '2025-05-17', '08:18:23', 'Fair', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (13, 'Dry cough and fever', '2025-06-15', '07:38:23', 'Good', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (16, 'Numbness in fingers', '2025-05-25', '08:23:23', 'Good', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Chest tightness after running', '2025-05-30', '13:51:23', 'Fair', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Sudden weight loss', '2025-06-05', '08:27:23', 'Good', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (1, 'Swollen lymph nodes', '2025-05-26', '13:53:23', 'Excellent', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (9, 'Fever with body ache', '2025-06-03', '21:39:23', 'Fair', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (10, 'Sudden confusion and slurred speech', '2025-06-10', '11:31:23', 'Excellent', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (4, 'Fever with body ache', '2025-05-17', '01:07:23', 'Fair', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (17, 'Irregular heartbeat', '2025-06-06', '00:26:23', 'Good', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (3, 'Intermittent abdominal pain', '2025-05-25', '18:51:23', 'Poor', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (12, 'Persistent fatigue', '2025-06-07', '03:43:23', 'Good', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (2, 'Headache and dizziness', '2025-06-07', '14:57:23', 'Excellent', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (18, 'Numbness in fingers', '2025-06-02', '23:28:23', 'Fair', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (12, 'Skin rash on arms', '2025-06-01', '05:13:23', 'Fair', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Intermittent abdominal pain', '2025-06-01', '22:02:23', 'Good', 2);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (6, 'Mild tremors in hands', '2025-06-01', '12:47:23', 'Good', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Mild tremors in hands', '2025-06-05', '03:44:23', 'Excellent', 1);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (7, 'Numbness in fingers', '2025-05-25', '15:44:23', 'Excellent', 4);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Intermittent abdominal pain', '2025-06-07', '13:39:23', 'Poor', 3);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (20, 'Joint stiffness in the morning', '2025-05-21', '07:46:23', 'Fair', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (5, 'Sudden weight loss', '2025-06-05', '10:54:23', 'Excellent', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (3, 'Sudden weight loss', '2025-06-14', '10:55:23', 'Poor', 5);
+INSERT INTO public.symptom (patient_id, description, date, "time", overall_mood, severity_level) VALUES (2, 'Dry cough and fever', '2025-05-17', '14:58:23', 'Excellent', 3);
 
 
 --
 -- Data for Name: test_params; Type: TABLE DATA; Schema: public; Owner: myuser
+--
+
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (1, 'Hemoglobin', 'g/dL', '13.5-17.5', '12.0-15.5', '11.0-13.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (1, 'RBC Count', 'million/µL', '4.5-5.9', '4.1-5.1', '4.5-5.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (1, 'WBC Count', 'cells/µL', '4000-11000', '4000-11000', '5000-13000');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (1, 'Platelet Count', 'cells/µL', '150000-450000', '150000-450000', '150000-450000');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (2, 'Hemoglobin', 'g/dL', '13.5-17.5', '12.0-15.5', '11.0-13.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (3, 'Total WBC', 'cells/µL', '4000-11000', '4000-11000', '5000-13000');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (4, 'Neutrophils', '%', '40-75', '40-75', '40-75');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (4, 'Lymphocytes', '%', '20-45', '20-45', '20-45');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (4, 'Monocytes', '%', '2-10', '2-10', '2-10');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (4, 'Eosinophils', '%', '1-6', '1-6', '1-6');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (5, 'ESR', 'mm/hr', '0-15', '0-20', '0-10');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (6, 'Platelet Count', 'cells/µL', '150000-450000', '150000-450000', '150000-450000');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (7, 'RBC Morphology', 'N/A', 'Normal', 'Normal', 'Normal');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (8, 'Blood Group', 'N/A', 'A/B/AB/O', 'A/B/AB/O', 'A/B/AB/O');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (8, 'Rh Factor', 'N/A', 'Positive/Negative', 'Positive/Negative', 'Positive/Negative');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (9, 'Reticulocyte Count', '%', '0.5-2.5', '0.5-2.5', '0.5-2.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (10, 'PT', 'seconds', '11-13.5', '11-13.5', '11-13.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (11, 'aPTT', 'seconds', '25-35', '25-35', '25-35');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (12, 'INR', 'N/A', '0.8-1.2', '0.8-1.2', '0.8-1.2');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (13, 'Fasting Glucose', 'mg/dL', '70-99', '70-99', '70-99');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (14, 'Postprandial Glucose', 'mg/dL', '<140', '<140', '<140');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (15, 'Random Glucose', 'mg/dL', '70-140', '70-140', '70-140');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (16, 'HbA1c', '%', '4.0-5.6', '4.0-5.6', '4.0-5.6');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (17, 'Creatinine', 'mg/dL', '0.7-1.3', '0.6-1.1', '0.3-0.7');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (18, 'BUN', 'mg/dL', '7-20', '7-20', '5-18');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (19, 'Uric Acid', 'mg/dL', '3.4-7.0', '2.4-6.0', '2.0-5.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (20, 'ALT (SGPT)', 'U/L', '7-56', '7-56', '7-56');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (20, 'AST (SGOT)', 'U/L', '10-40', '10-40', '10-40');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (20, 'Bilirubin Total', 'mg/dL', '0.1-1.2', '0.1-1.2', '0.1-1.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (21, 'Bilirubin Total', 'mg/dL', '0.1-1.2', '0.1-1.2', '0.1-1.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (22, 'ALT', 'U/L', '7-56', '7-56', '7-56');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (23, 'AST', 'U/L', '10-40', '10-40', '10-40');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (24, 'Alkaline Phosphatase', 'U/L', '44-147', '44-147', '100-320');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (25, 'Total Protein', 'g/dL', '6.4-8.3', '6.4-8.3', '6.0-8.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (26, 'Albumin', 'g/dL', '3.5-5.0', '3.5-5.0', '3.5-5.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (27, 'Globulin', 'g/dL', '2.0-3.5', '2.0-3.5', '2.0-3.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (28, 'A/G Ratio', 'N/A', '1.1-2.5', '1.1-2.5', '1.1-2.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (29, 'TSH', 'µIU/mL', '0.4-4.0', '0.4-4.0', '0.7-6.4');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (30, 'T3', 'ng/dL', '80-200', '80-200', '80-200');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (31, 'T4', 'µg/dL', '4.5-11.2', '4.5-11.2', '4.5-11.2');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (32, 'Color', 'N/A', 'Pale yellow', 'Pale yellow', 'Pale yellow');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (32, 'Protein', 'N/A', 'Negative', 'Negative', 'Negative');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (32, 'Glucose', 'N/A', 'Negative', 'Negative', 'Negative');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (33, 'Color', 'N/A', 'Brown', 'Brown', 'Brown');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (33, 'Occult Blood', 'N/A', 'Negative', 'Negative', 'Negative');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (34, 'Occult Blood', 'N/A', 'Negative', 'Negative', 'Negative');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (35, 'Calcium', 'mg/dL', '8.5-10.2', '8.5-10.2', '8.8-10.8');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (36, 'Phosphorus', 'mg/dL', '2.5-4.5', '2.5-4.5', '4.0-7.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (37, 'Magnesium', 'mg/dL', '1.7-2.2', '1.7-2.2', '1.7-2.2');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (38, 'CRP', 'mg/L', '<10', '<10', '<10');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (39, 'Erythropoietin', 'mIU/mL', '4.1-19.5', '4.1-19.5', '4.1-19.5');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (40, 'Ferritin', 'ng/mL', '30-400', '15-150', '7-140');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (41, 'Vitamin B12', 'pg/mL', '200-900', '200-900', '200-900');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (42, 'Vitamin D', 'ng/mL', '30-100', '30-100', '30-100');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (43, 'Sodium', 'mmol/L', '135-145', '135-145', '135-145');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (43, 'Potassium', 'mmol/L', '3.5-5.0', '3.5-5.0', '3.5-5.0');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (43, 'Chloride', 'mmol/L', '98-106', '98-106', '98-106');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (44, 'Serum Iron', 'µg/dL', '65-175', '50-170', '50-120');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (44, 'TIBC', 'µg/dL', '250-400', '250-400', '250-400');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (44, 'Transferrin Saturation', '%', '20-50', '15-50', '15-50');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (45, 'Total Cholesterol', 'mg/dL', '<200', '<200', '<170');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (45, 'HDL Cholesterol', 'mg/dL', '40-60', '50-60', '45-65');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (45, 'LDL Cholesterol', 'mg/dL', '<100', '<100', '<100');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (45, 'Triglycerides', 'mg/dL', '<150', '<150', '<150');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (46, 'Amylase', 'U/L', '23-85', '23-85', '23-85');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (47, 'Rheumatoid Factor', 'IU/mL', '<14', '<14', '<14');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (48, 'Lipase', 'U/L', '13-60', '13-60', '13-60');
+INSERT INTO public.test_params (test_id, parameter_name, unit, ideal_male_range, ideal_female_range, ideal_children_range) VALUES (49, 'Cortisol', 'µg/dL', '5-23', '5-23', '5-23');
+
+
+--
+-- Data for Name: test_request; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
 
@@ -192,83 +2196,151 @@ INSERT INTO public.refresh_token VALUES ('hameem@gmail.com', 'ROLE_PATIENT', 'ey
 -- Data for Name: test_result_value; Type: TABLE DATA; Schema: public; Owner: myuser
 --
 
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (1, 'Hemoglobin', '16.65');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (1, 'RBC Count', '4.64');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (1, 'WBC Count', '7200.43');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (1, 'Platelet Count', '366069.12');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (2, 'Total Cholesterol', '0.35');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (2, 'HDL Cholesterol', '53.2');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (2, 'LDL Cholesterol', '0.23');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (2, 'Triglycerides', '0.51');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (3, 'T3', '96.8');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (4, 'AST', '35.68');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (5, 'Platelet Count', '381207.92');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (6, 'Amylase', '72.2');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (7, 'Rheumatoid Factor', '0.68');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (8, 'Bilirubin Total', '0.15');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (9, 'RBC Morphology', '0.79');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (10, 'RBC Morphology', '0.39');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (11, 'Lipase', '58.73');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (12, 'CRP', '0.9');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (13, 'Lipase', '30.63');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (14, 'Hemoglobin', '16.04');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (14, 'RBC Count', '4.64');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (14, 'WBC Count', '4781.06');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (14, 'Platelet Count', '361592.49');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (15, 'aPTT', '29.72');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (16, 'AST', '10.42');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (17, 'INR', '1.03');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (18, 'Color', '0.23');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (18, 'Occult Blood', '0.46');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (19, 'T4', '7.29');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (20, 'Color', '0.31');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (20, 'Occult Blood', '0.43');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (21, 'Platelet Count', '428012.33');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (22, 'T3', '134.0');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (23, 'Bilirubin Total', '0.73');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (24, 'Erythropoietin', '13.77');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (25, 'ALT (SGPT)', '42.36');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (25, 'AST (SGOT)', '22.29');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (25, 'Bilirubin Total', '0.94');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (26, 'Amylase', '25.15');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (27, 'BUN', '16.3');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (28, 'Color', '0.07');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (28, 'Protein', '0.38');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (28, 'Glucose', '0.59');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (29, 'Neutrophils', '62.32');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (29, 'Lymphocytes', '40.39');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (29, 'Monocytes', '4.74');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (29, 'Eosinophils', '1.9');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (30, 'Calcium', '9.49');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (31, 'Hemoglobin', '15.02');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (32, 'Albumin', '4.0');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (33, 'Ferritin', '175.03');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (34, 'Serum Iron', '95.48');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (34, 'TIBC', '259.17');
+INSERT INTO public.test_result_value (performed_test_id, parameter_name, result_value) VALUES (34, 'Transferrin Saturation', '30.21');
 
 
 --
 -- Name: appointment_appointment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.appointment_appointment_id_seq', 1, false);
+SELECT pg_catalog.setval('public.appointment_appointment_id_seq', 52, true);
 
 
 --
 -- Name: diseases_disease_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.diseases_disease_id_seq', 1, false);
+SELECT pg_catalog.setval('public.diseases_disease_id_seq', 109, true);
 
 
 --
 -- Name: doctor_availability_slot_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.doctor_availability_slot_id_seq', 1, false);
+SELECT pg_catalog.setval('public.doctor_availability_slot_id_seq', 192, true);
 
 
 --
 -- Name: doctor_doctor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.doctor_doctor_id_seq', 49, true);
+SELECT pg_catalog.setval('public.doctor_doctor_id_seq', 48, true);
 
 
 --
 -- Name: doctor_review_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.doctor_review_review_id_seq', 1, false);
+SELECT pg_catalog.setval('public.doctor_review_review_id_seq', 480, true);
 
 
 --
 -- Name: hospital_hospital_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.hospital_hospital_id_seq', 1, true);
+SELECT pg_catalog.setval('public.hospital_hospital_id_seq', 10, true);
 
 
 --
 -- Name: medicines_medicine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.medicines_medicine_id_seq', 1, false);
+SELECT pg_catalog.setval('public.medicines_medicine_id_seq', 74, true);
+
+
+--
+-- Name: notification_notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
+--
+
+SELECT pg_catalog.setval('public.notification_notification_id_seq', 1, false);
 
 
 --
 -- Name: patient_patient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.patient_patient_id_seq', 1, true);
+SELECT pg_catalog.setval('public.patient_patient_id_seq', 20, true);
 
 
 --
 -- Name: performed_tests_performed_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.performed_tests_performed_test_id_seq', 1, false);
+SELECT pg_catalog.setval('public.performed_tests_performed_test_id_seq', 34, true);
 
 
 --
 -- Name: prescription_prescription_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.prescription_prescription_id_seq', 1, false);
+SELECT pg_catalog.setval('public.prescription_prescription_id_seq', 50, true);
+
+
+--
+-- Name: test_request_request_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
+--
+
+SELECT pg_catalog.setval('public.test_request_request_id_seq', 1, false);
 
 
 --
 -- Name: tests_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myuser
 --
 
-SELECT pg_catalog.setval('public.tests_test_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tests_test_id_seq', 49, true);
 
 
 --

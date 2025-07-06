@@ -1,10 +1,25 @@
 package com.example.MediLine.Controller;
 
-import com.example.MediLine.DTO.*;
+import com.example.MediLine.DTO.DoctorAuthDTO.DoctorLoginRequest;
+import com.example.MediLine.DTO.DoctorAuthDTO.DoctorRegisterRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalRegisterRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalLoginRequest;
+import com.example.MediLine.DTO.HospitalDTO.HospitalRegisterRequest;
+import com.example.MediLine.DTO.PatientAuthDTO.PatientLoginRequest;
+import com.example.MediLine.DTO.PatientAuthDTO.PatientRegisterRequest;
+import com.example.MediLine.DTO.User;
+import com.example.MediLine.Entity.Doctor;
+import com.example.MediLine.Entity.Hospital;
+import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Repository.DoctorRepository;
 import com.example.MediLine.Repository.HospitalRepository;
 import com.example.MediLine.Repository.PatientRepository;
-import com.example.MediLine.Service.*;
+import com.example.MediLine.Service.Doctor.DoctorLoginService;
+import com.example.MediLine.Service.Doctor.DoctorRegisterService;
+import com.example.MediLine.Service.Hospital.HospitalLoginService;
+import com.example.MediLine.Service.Hospital.HospitalRegisterService;
+import com.example.MediLine.Service.Patient.PatientLoginService;
+import com.example.MediLine.Service.Patient.PatientRegisterService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -110,7 +125,7 @@ public class AuthenticationController {
             String email = authentication.getName();
             String roles = authentication.getAuthorities().toString();
             User responseBody = new User();
-            if (roles.equals("[ROLE_PATIENT]")) {
+            if (roles.equals("[ROLE_PATIENT]")){
                 Patient patient = patientRepository.findByEmail(email)
                         .orElseThrow(() -> new IllegalArgumentException("No Patient found with this email."));
                 responseBody.setId(patient.getPatientId().toString());

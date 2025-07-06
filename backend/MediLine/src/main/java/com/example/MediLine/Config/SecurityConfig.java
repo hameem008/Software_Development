@@ -84,7 +84,15 @@ public class SecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/ping", "/register/**", "/login/**", "/refresh").permitAll()
+                        .requestMatchers(
+                                "/ping",
+                                "/register/**", "/login/**",
+                                "/refresh", "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/configuration/ui",
+                                "/configuration/security").permitAll()
                         .requestMatchers("/logout").authenticated()
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .requestMatchers("/doctor/**").hasRole("DOCTOR")

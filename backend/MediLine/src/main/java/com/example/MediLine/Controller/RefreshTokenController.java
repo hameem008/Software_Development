@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MediLine.Config.CookieConfig;
-import com.example.MediLine.DTO.RefreshToken;
+import com.example.MediLine.Entity.RefreshToken;
 import com.example.MediLine.Security.JwtUtil;
 import com.example.MediLine.Service.RefreshTokenService;
 
