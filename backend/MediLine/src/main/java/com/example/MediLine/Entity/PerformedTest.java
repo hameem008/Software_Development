@@ -17,6 +17,10 @@ public class PerformedTest {
     private Integer performedTestId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "prescription_id")
+    private Prescription prescription;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "test_id")
     private MedicalTest test;
 
@@ -37,5 +41,8 @@ public class PerformedTest {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
+
+    @Column(name = "pdf_url")
+    private String pdfUrl;
 
 }

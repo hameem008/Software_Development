@@ -1,6 +1,7 @@
 package com.example.MediLine.DTO.MedicalHistoryDTO;
 
 import com.example.MediLine.DTO.DoctorBaseDTO;
+import com.example.MediLine.DTO.HospitalBaseDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +29,5 @@ public class TestSummaryDTO {
 
     private DoctorBaseDTO reviewedBy;
 
-    private DoctorBaseDTO hospital;
+    private HospitalBaseDTO hospital;
 }

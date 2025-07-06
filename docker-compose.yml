@@ -17,19 +17,19 @@ services:
     networks:
       - mediline-net
 
-#  backend:
-#    build:
-#      context: ./backend/MediLine
-#      dockerfile: Dockerfile
-#    container_name: backend
-#    ports:
-#      - "8080:8080"
-#    env_file:
-#      - ./backend/MediLine/.env
-#    depends_on:
-#      - db
-#    networks:
-#      - mediline-net
+  backend:
+    build:
+      context: ./backend/MediLine
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/MediLine/.env
+    depends_on:
+      - db
+    networks:
+      - mediline-net
 
 #  frontend:
 #    build:

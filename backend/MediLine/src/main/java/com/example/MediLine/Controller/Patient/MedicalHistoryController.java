@@ -68,7 +68,13 @@ public class MedicalHistoryController {
     public ResponseEntity<List<TestSummaryDTO>> getAllMedicalTests(
             @CurrentPatient Patient patient) {
 
-        return null;
+        List<TestSummaryDTO> performedTests =
+                patientHistoryService.getAllPerformedTests(patient.getPatientId());
+
+        if (performedTests.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(performedTests);
     }
 
     @GetMapping("/all-requested-tests")

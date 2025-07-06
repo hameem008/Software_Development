@@ -1,16 +1,13 @@
 package com.example.MediLine.Service.Patient;
 
 
-import com.example.MediLine.DTO.MedicalHistoryDTO.CreateSymptomRequest;
-import com.example.MediLine.DTO.MedicalHistoryDTO.MoodOptionDTO;
-import com.example.MediLine.DTO.MedicalHistoryDTO.SeverityLevelDTO;
-import com.example.MediLine.DTO.MedicalHistoryDTO.SymptomDTO;
+import com.example.MediLine.DTO.DoctorBaseDTO;
+import com.example.MediLine.DTO.HospitalBaseDTO;
+import com.example.MediLine.DTO.MedicalHistoryDTO.*;
+import com.example.MediLine.Entity.Doctor;
 import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Entity.Symptom;
-import com.example.MediLine.Repository.MoodOptionRepository;
-import com.example.MediLine.Repository.PatientRepository;
-import com.example.MediLine.Repository.SeverityLevelRepository;
-import com.example.MediLine.Repository.SymptomRepository;
+import com.example.MediLine.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,7 @@ import java.util.List;
 public class PatientHistoryService {
 
     private final SymptomRepository symptomRepository;
+    private final PerformedTestRepository performedTestRepository;
     private final PatientRepository patientRepository;
     private final SeverityLevelRepository severityRepository;
     private final MoodOptionRepository moodRepository;
@@ -63,6 +61,73 @@ public class PatientHistoryService {
     }
 
 
+    public List<TestSummaryDTO> getAllPerformedTests(Integer patientId) {
+        return performedTestRepository.findByPatientIdWithDetails(patientId).stream().map(pt -> {
+
+            DoctorBaseDTO orderedBy;
+            Doctor doctor = pt.getPrescription().getDoctor();
+            if (doctor != null) {
+                orderedBy = DoctorBaseDTO.builder()
+                    .doctorId(doctor.getDoctorId())
+                    .name(doctor.getFirstName() + " " + doctor.getLastName())
+                    .specialization(doctor.getSpecialization())
+                    .designation(doctor.getDesignation())
+                    .academicInstitution(doctor.getAcademicInstitution())
+                    .build();
+            } else {
+                orderedBy = null;
+            }
+
+            DoctorBaseDTO performedBy;
+            doctor = pt.getPerformedByDoctor();
+            if (doctor != null) {
+                performedBy = DoctorBaseDTO.builder()
+                    .doctorId(doctor.getDoctorId())
+                    .name(doctor.getFirstName() + " " + doctor.getLastName())
+                    .specialization(doctor.getSpecialization())
+                    .designation(doctor.getDesignation())
+                    .academicInstitution(doctor.getAcademicInstitution())
+                    .build();
+            } else {
+                performedBy = null;
+            }
+
+            DoctorBaseDTO reviewedBy;
+            doctor = pt.getReviewedByDoctor();
+            if (doctor != null) {
+                reviewedBy = DoctorBaseDTO.builder()
+                    .doctorId(doctor.getDoctorId())
+                    .name(doctor.getFirstName() + " " + doctor.getLastName())
+                    .specialization(doctor.getSpecialization())
+                    .designation(doctor.getDesignation())
+                    .academicInstitution(doctor.getAcademicInstitution())
+                    .build();
+            } else {
+                reviewedBy = null;
+            }
+
+            HospitalBaseDTO hospital;
+            if (pt.getHospital() != null) {
+                hospital = HospitalBaseDTO.builder()
+                    .hospitalId(pt.getHospital().getHospitalId())
+                    .name(pt.getHospital().getName())
+                    .address(pt.getHospital().getAddress())
+                    .build();
+            } else {
+                hospital = null;
+            }
+
+            return TestSummaryDTO.builder()
+                    .performedTestId(pt.getPerformedTestId())
+                    .name(pt.getTest().getName())
+                    .orderedBy(orderedBy)
+                    .date(pt.getTestDate())
+                    .performedBy(performedBy)
+                    .reviewedBy(reviewedBy)
+                    .hospital(hospital)
+                    .build();
+        }).toList();
+    }
 
 
     public List<SeverityLevelDTO> getAllSeverityLevels() {
