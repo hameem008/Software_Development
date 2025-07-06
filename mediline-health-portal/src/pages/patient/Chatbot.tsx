@@ -145,7 +145,6 @@ const Chatbot = () => {
       const response = await api.post('/patient/chat', {
         conversationHistory: conversationHistory
       });
-      console.log("chat history send");
 
       const botResponse = response.data.response || 'Error: No response from server';
 
