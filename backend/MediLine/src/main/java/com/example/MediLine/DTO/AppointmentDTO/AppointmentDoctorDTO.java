@@ -27,6 +27,7 @@ public class AppointmentDoctorDTO {
         private int hospitalId;
         private String hospitalName;
         private String hospitalLocation;
+        private List<String> availableWeekdays;
         private double consultationFee;
     }
 }

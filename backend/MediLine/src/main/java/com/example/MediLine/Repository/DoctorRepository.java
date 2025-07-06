@@ -41,7 +41,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     Optional<Doctor> findWithDegreesById(@Param("id") Integer id);
 
 
-    @EntityGraph(attributePaths = "availabilities")
+    @EntityGraph(attributePaths = {"availabilities", "availabilities.hospital"})
     @Query("SELECT d FROM Doctor d WHERE d.doctorId = :id")
     Optional<Doctor> findWithAvailabilitiesById(@Param("id") Integer id);
 }

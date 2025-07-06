@@ -2,6 +2,7 @@ package com.example.MediLine.Service.Patient;
 
 import com.example.MediLine.DTO.AppointmentDTO.AppointmentDTO;
 import com.example.MediLine.DTO.AppointmentDTO.AppointmentDoctorDTO;
+import com.example.MediLine.DTO.AppointmentDTO.AppointmentDoctorDTO.ConsultationLocation;
 import com.example.MediLine.DTO.AppointmentDTO.AppointmentWindowDTO;
 import com.example.MediLine.DTO.AppointmentDTO.CreateAppointmentRequest;
 import com.example.MediLine.Entity.*;
@@ -35,7 +36,7 @@ public class BookAppointmentService {
 
     public AppointmentDoctorDTO getBookAppointmentDoctor(int doctorId) {
         Doctor doctor = doctorRepository.findWithAvailabilitiesById(doctorId)
-                .orElseThrow(() -> new IllegalArgumentException("Doctor not found with ID: " + doctorId));
+                .orElseThrow(() -> new IllegalArgumentException("Doctor not found"));
 
 
         return AppointmentDoctorDTO.builder()
@@ -50,16 +51,37 @@ public class BookAppointmentService {
                             .distinct()
                         .toList())
                 .consultationLocations(
-                        doctor.getAvailabilities().stream()
-                            .map(availability ->
-                                    new AppointmentDoctorDTO.ConsultationLocation(
-                                        availability.getHospital().getHospitalId(),
-                                        availability.getHospital().getName(),
-                                        availability.getHospital().getAddress(),
-                                        (double) availability.getVisitFee()))
-                            .distinct()
-                            .toList())
+                        createConsultationLocations(doctor.getAvailabilities())
+                )
                 .build();
+    }
+
+    private List<ConsultationLocation> createConsultationLocations(
+            Set<DoctorAvailability> availabilities) {
+
+            return availabilities.stream()
+                .collect(Collectors.groupingBy(
+                    availability -> availability.getHospital().getHospitalId(),
+                    Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        groupedAvailabilities -> {
+                            DoctorAvailability first = groupedAvailabilities.getFirst();
+                            return new ConsultationLocation(
+                                first.getHospital().getHospitalId(),
+                                first.getHospital().getName(),
+                                first.getHospital().getAddress(),
+                                groupedAvailabilities.stream()
+                                    .map(DoctorAvailability::getWeekDay)
+                                    .distinct()
+                                    .toList(),
+                                (double) first.getVisitFee()
+                            );
+                        }
+                    )
+                ))
+                .values()
+                .stream()
+                .toList();
     }
 
 
