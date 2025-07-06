@@ -6,12 +6,15 @@ import com.example.MediLine.DTO.HospitalBaseDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.*;
 import com.example.MediLine.Repository.*;
+import com.example.MediLine.DTO.MedicalHistoryDTO.TestResultDTO.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +29,8 @@ public class PatientHistoryService {
     private final DiagnosedDiseaseRepository diagnosedDiseaseRepository;
     private final PrescribedMedicineRepository prescribedMedicineRepository;
     private final PrescribedTestRepository prescribedTestRepository;
+    private final TestResultValueRepository testResultValueRepository;
+    private final TestParamRepository testParamRepository;
 
 
     public List<SymptomDTO> getAllSymptoms(
@@ -150,6 +155,33 @@ public class PatientHistoryService {
                 .toList();
     }
 
+    public TestResultDTO getTestResult(Integer testId, Integer patientId) {
+        PerformedTest performedTest = performedTestRepository
+                .findByIdAndPatientId(testId, patientId)
+                .orElseThrow(() -> new IllegalArgumentException("Test not found or access denied."));
+
+        List<TestResultValue> values =
+                testResultValueRepository
+                        .findByPerformedTest_PerformedTestId(testId);
+        List<TestParam> params =
+                testParamRepository
+                        .findByTestId(performedTest.getTest().getTestId());
+
+        List<ResultEntry> results = createResultEntries(values, params);
+
+        return TestResultDTO.builder()
+                .performedTestId(performedTest.getPerformedTestId())
+                .name(performedTest.getTest().getName())
+                .date(performedTest.getTestDate())
+                .notes(performedTest.getNote())
+                .orderedBy(createDoctorBaseDTO(performedTest.getPrescription().getDoctor()))
+                .performedBy(createDoctorBaseDTO(performedTest.getPerformedByDoctor()))
+                .reviewedBy(createDoctorBaseDTO(performedTest.getReviewedByDoctor()))
+                .hospital(createMedicationDTO(performedTest.getHospital()))
+                .results(results)
+                .build();
+    }
+
     private DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
         if (doctor == null) {
             return null;
@@ -164,6 +196,18 @@ public class PatientHistoryService {
     }
 
 
+    private HospitalBaseDTO createMedicationDTO(Hospital hospital) {
+        if (hospital == null) {
+            return null;
+        }
+        return HospitalBaseDTO.builder()
+                .hospitalId(hospital.getHospitalId())
+                .name(hospital.getName())
+                .address(hospital.getAddress())
+                .build();
+    }
+
+
     private Medication createMedicationDTO(PrescribedMedicine prescribedMedicine) {
         return Medication.builder()
                 .name(prescribedMedicine.getMedicine().getMedicineName())
@@ -172,5 +216,22 @@ public class PatientHistoryService {
                 .duration(prescribedMedicine.getDurationValue() + " " +
                         prescribedMedicine.getDurationUnit())
                 .build();
+    }
+
+    private List<ResultEntry> createResultEntries(List<TestResultValue> values, List<TestParam> params) {
+        Map<String, TestParam> paramMap = params.stream()
+                .collect(Collectors.toMap(p -> p.getId().getParameterName(), p -> p));
+
+        return values.stream().map(value -> {
+            TestParam param = paramMap.get(value.getId().getParameterName());
+            return ResultEntry.builder()
+                    .name(value.getId().getParameterName())
+                    .value(value.getResultValue())
+                    .unit(param != null ? param.getUnit() : null)
+                    .idealMaleRange(param != null ? param.getIdealMaleRange() : null)
+                    .idealFemaleRange(param != null ? param.getIdealFemaleRange() : null)
+                    .idealChildRange(param != null ? param.getIdealChildrenRange() : null)
+                    .build();
+        }).collect(Collectors.toList());
     }
 }

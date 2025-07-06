@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/patient/book-appointment")
+@RequestMapping("/patient/appointment")
 @RequiredArgsConstructor
 public class BookAppointmentController {
 
@@ -59,7 +59,7 @@ public class BookAppointmentController {
         return ResponseEntity.ok("Appointment booked successfully");
     }
 
-    @GetMapping("/upcoming-appointments")
+    @GetMapping("/upcoming")
     public ResponseEntity<List<AppointmentDTO>> getPatientAppointments(
             @CurrentPatient Patient patient) {
 

@@ -85,15 +85,19 @@ public class MedicalHistoryController {
     }
 
     @PostMapping("/test-result")
-    public ResponseEntity<List<TestResultDTO>> getTestResult(
+    public ResponseEntity<TestResultDTO> getTestResult(
             @RequestBody
-            @Valid
-            TestResultRequest testResultRequest) {
+            @Valid TestResultRequest testResultRequest,
+            @CurrentPatient Patient patient) {
 
+        TestResultDTO testResults =
+                patientHistoryService.getTestResult(
+                        testResultRequest.getPerformedTestId(), patient.getPatientId());
 
+        if (testResults == null)
+            return ResponseEntity.notFound().build();
 
-
-        return null;
+        return ResponseEntity.ok(testResults);
     }
 
     @PostMapping("/prescription-details")

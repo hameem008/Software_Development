@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PerformedTestRepository extends JpaRepository<PerformedTest, Integer> {
@@ -25,5 +26,19 @@ public interface PerformedTestRepository extends JpaRepository<PerformedTest, In
         ORDER BY pt.testDate DESC
     """)
     List<PerformedTest> findByPatientIdWithDetails(@Param("patientId") Integer patientId);
+
+
+    @Query("""
+        SELECT pt
+        FROM PerformedTest pt
+        JOIN pt.prescription p
+        WHERE pt.performedTestId = :id AND
+        p.patient.patientId = :patientId
+    """)
+    Optional<PerformedTest> findByIdAndPatientId(
+            @Param("id") Integer id,
+            @Param("patientId") Integer patientId);
+
+
 
 }
