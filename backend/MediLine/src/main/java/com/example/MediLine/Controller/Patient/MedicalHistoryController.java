@@ -92,4 +92,22 @@ public class MedicalHistoryController {
 
         return null;
     }
+
+    @PostMapping("/prescription-details")
+    public ResponseEntity<PrescriptionDTO> getPrescriptionDetails(
+             @RequestBody
+             @Valid PrescriptionRequest prescriptionRequest,
+             @CurrentPatient Patient patient) {
+
+        PrescriptionDTO prescriptionDTO =
+                patientHistoryService
+                        .getPrescriptionDetails(
+                                prescriptionRequest.getPrescriptionId(), patient.getPatientId());
+
+
+        if (prescriptionDTO == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(prescriptionDTO);
+    }
 }

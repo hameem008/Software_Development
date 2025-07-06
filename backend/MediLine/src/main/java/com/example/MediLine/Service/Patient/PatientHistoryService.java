@@ -4,9 +4,7 @@ package com.example.MediLine.Service.Patient;
 import com.example.MediLine.DTO.DoctorBaseDTO;
 import com.example.MediLine.DTO.HospitalBaseDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
-import com.example.MediLine.Entity.Doctor;
-import com.example.MediLine.Entity.Patient;
-import com.example.MediLine.Entity.Symptom;
+import com.example.MediLine.Entity.*;
 import com.example.MediLine.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,10 @@ public class PatientHistoryService {
     private final PatientRepository patientRepository;
     private final SeverityLevelRepository severityRepository;
     private final MoodOptionRepository moodRepository;
+    private final PrescriptionRepository prescriptionRepository;
+    private final DiagnosedDiseaseRepository diagnosedDiseaseRepository;
+    private final PrescribedMedicineRepository prescribedMedicineRepository;
+    private final PrescribedTestRepository prescribedTestRepository;
 
 
     public List<SymptomDTO> getAllSymptoms(
@@ -64,47 +66,9 @@ public class PatientHistoryService {
     public List<TestSummaryDTO> getAllPerformedTests(Integer patientId) {
         return performedTestRepository.findByPatientIdWithDetails(patientId).stream().map(pt -> {
 
-            DoctorBaseDTO orderedBy;
-            Doctor doctor = pt.getPrescription().getDoctor();
-            if (doctor != null) {
-                orderedBy = DoctorBaseDTO.builder()
-                    .doctorId(doctor.getDoctorId())
-                    .name(doctor.getFirstName() + " " + doctor.getLastName())
-                    .specialization(doctor.getSpecialization())
-                    .designation(doctor.getDesignation())
-                    .academicInstitution(doctor.getAcademicInstitution())
-                    .build();
-            } else {
-                orderedBy = null;
-            }
-
-            DoctorBaseDTO performedBy;
-            doctor = pt.getPerformedByDoctor();
-            if (doctor != null) {
-                performedBy = DoctorBaseDTO.builder()
-                    .doctorId(doctor.getDoctorId())
-                    .name(doctor.getFirstName() + " " + doctor.getLastName())
-                    .specialization(doctor.getSpecialization())
-                    .designation(doctor.getDesignation())
-                    .academicInstitution(doctor.getAcademicInstitution())
-                    .build();
-            } else {
-                performedBy = null;
-            }
-
-            DoctorBaseDTO reviewedBy;
-            doctor = pt.getReviewedByDoctor();
-            if (doctor != null) {
-                reviewedBy = DoctorBaseDTO.builder()
-                    .doctorId(doctor.getDoctorId())
-                    .name(doctor.getFirstName() + " " + doctor.getLastName())
-                    .specialization(doctor.getSpecialization())
-                    .designation(doctor.getDesignation())
-                    .academicInstitution(doctor.getAcademicInstitution())
-                    .build();
-            } else {
-                reviewedBy = null;
-            }
+            DoctorBaseDTO orderedBy = createDoctorBaseDTO(pt.getPrescription().getDoctor());
+            DoctorBaseDTO performedBy = createDoctorBaseDTO(pt.getPerformedByDoctor());
+            DoctorBaseDTO reviewedBy = createDoctorBaseDTO(pt.getReviewedByDoctor());
 
             HospitalBaseDTO hospital;
             if (pt.getHospital() != null) {
@@ -130,6 +94,42 @@ public class PatientHistoryService {
     }
 
 
+    public PrescriptionDTO getPrescriptionDetails(Integer prescriptionId, Integer patientId) {
+        Prescription prescription = prescriptionRepository
+                .findByPrescriptionIdAndPatientId(prescriptionId, patientId)
+                .orElseThrow(() -> new IllegalArgumentException("Prescription not found"));
+
+        Vitals vitals = Vitals.builder()
+                .bloodPressure(new Vitals.Measurement(
+                        "Blood Pressure", prescription.getBloodPressure(), "mmHg"))
+                .weight(new Vitals.Measurement(
+                        "Weight", prescription.getWeight() + "", "kg"))
+                .heartRate(new Vitals.Measurement(
+                        "Heart Rate", prescription.getHeartRate() + "", "kg"))
+                .build();
+
+        List<Medication> medications =
+                prescribedMedicineRepository.findByPrescriptionId(prescriptionId)
+                .stream()
+                .map(this::createMedicationDTO)
+                .toList();
+
+        return PrescriptionDTO.builder()
+                .prescriptionId(prescriptionId.toString())
+                .doctor(createDoctorBaseDTO(prescription.getDoctor()))
+                .issuedDate(prescription.getPrescribedDate())
+                .summary(prescription.getSummary())
+                .vitals(vitals)
+                .symptoms(prescription.getSymptoms())
+                .diagnosis(diagnosedDiseaseRepository.findDiseaseNamesByPrescriptionId(prescriptionId))
+                .medications(medications)
+                .tests(prescribedTestRepository.findTestsByPrescriptionId(prescriptionId))
+                .notes(prescription.getNotes())
+                .nextAppointment(prescription.getNextAppointmentDate())
+                .build();
+    }
+
+
     public List<SeverityLevelDTO> getAllSeverityLevels() {
         return severityRepository.findAllByOrderBySeverityLevelAsc()
                 .stream()
@@ -144,5 +144,29 @@ public class PatientHistoryService {
                 .map(m ->
                         new MoodOptionDTO(m.getDisplayOrder(), m.getMoodValue()))
                 .toList();
+    }
+
+    private DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
+        if (doctor == null) {
+            return null;
+        }
+        return DoctorBaseDTO.builder()
+                .doctorId(doctor.getDoctorId())
+                .name(doctor.getFirstName() + " " + doctor.getLastName())
+                .specialization(doctor.getSpecialization())
+                .designation(doctor.getDesignation())
+                .academicInstitution(doctor.getAcademicInstitution())
+                .build();
+    }
+
+
+    private Medication createMedicationDTO(PrescribedMedicine prescribedMedicine) {
+        return Medication.builder()
+                .name(prescribedMedicine.getMedicine().getMedicineName())
+                .dosage(prescribedMedicine.getDosage())
+                .frequency(prescribedMedicine.getFrequency())
+                .duration(prescribedMedicine.getDurationValue() + " " +
+                        prescribedMedicine.getDurationUnit())
+                .build();
     }
 }

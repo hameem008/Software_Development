@@ -1,6 +1,8 @@
 package com.example.MediLine.Controller.Doctor;
 
+import com.example.MediLine.Annotation.CurrentPatient;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
+import com.example.MediLine.Entity.Patient;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,10 @@ public class PatientHistoryController {
 
     @PostMapping("/prescription-details")
     public ResponseEntity<PrescriptionDTO> getPrescriptionDetails(
-             @RequestBody
+            @RequestBody
              @Valid
-             PrescriptionRequest prescriptionRequest) {
+             PrescriptionRequest prescriptionRequest
+           ) {
 
 
          return ResponseEntity.ok(null);

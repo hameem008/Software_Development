@@ -23,11 +23,8 @@ public class Vitals {
 
     @Valid
     @NotNull
-    private Measurement glucose;
+    private Measurement heartRate;
 
-    @Valid
-    @NotNull
-    private Measurement temperature;
 
     @Data
     @AllArgsConstructor
