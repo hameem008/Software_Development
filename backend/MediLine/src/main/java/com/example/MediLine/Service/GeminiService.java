@@ -13,8 +13,6 @@ import java.util.*;
 @Service
 public class GeminiService {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
-
     @Value("${gemini.api.key}")
     private String geminiApiKey;
 
@@ -29,12 +27,10 @@ public class GeminiService {
 
     public String getGeminiResponse(String prompt) {
         if (prompt == null || prompt.trim().isEmpty()) {
-            logger.warn("Prompt is null or empty");
             return "Error: Prompt cannot be empty";
         }
 
         String apiUrl = geminiApiUrl + "?key=" + geminiApiKey;
-        logger.info("Sending request to Gemini API");
 
         // Create request body according to Gemini API format
         Map<String, Object> requestBody = Map.of(
@@ -55,12 +51,10 @@ public class GeminiService {
     // New method to handle conversation context
     public String getGeminiResponseWithContext(List<Map<String, String>> conversationHistory) {
         if (conversationHistory == null || conversationHistory.isEmpty()) {
-            logger.warn("Conversation history is null or empty");
             return "Error: Conversation history cannot be empty";
         }
 
         String apiUrl = geminiApiUrl + "?key=" + geminiApiKey;
-        logger.info("Sending request to Gemini API with conversation context");
 
         // Build contents array with conversation history
         List<Map<String, Object>> contents = new ArrayList<>();
@@ -94,32 +88,25 @@ public class GeminiService {
         while (retryCount < maxRetries) {
             try {
                 ResponseEntity<Map> responseEntity = restTemplate.postForEntity(apiUrl, request, Map.class);
-                logger.info("Received response from Gemini API with status: {}", responseEntity.getStatusCode());
 
                 Map<String, Object> body = responseEntity.getBody();
                 if (body == null) {
-                    logger.error("Response body is null");
                     return "Error: No response from Gemini API";
                 }
-
-                logger.debug("Full response body: {}", body);
 
                 // Check for error in response
                 if (body.containsKey("error")) {
                     Map<String, Object> error = (Map<String, Object>) body.get("error");
                     String errorMessage = error.get("message").toString();
-                    logger.error("Gemini API error: {}", errorMessage);
                     return "Error: " + errorMessage;
                 }
 
                 if (!body.containsKey("candidates")) {
-                    logger.warn("No candidates found in response: {}", body);
                     return "Error: No valid response from Gemini API";
                 }
 
                 List<Map<String, Object>> candidates = (List<Map<String, Object>>) body.get("candidates");
                 if (candidates == null || candidates.isEmpty()) {
-                    logger.warn("Candidates list is empty");
                     return "Error: No candidates in response";
                 }
 
@@ -128,43 +115,35 @@ public class GeminiService {
                 // Check if content was blocked
                 if (firstCandidate.containsKey("finishReason") &&
                         "SAFETY".equals(firstCandidate.get("finishReason"))) {
-                    logger.warn("Content was blocked by safety filters");
                     return "Error: Content was blocked by safety filters";
                 }
 
                 Map<String, Object> content = (Map<String, Object>) firstCandidate.get("content");
                 if (content == null) {
-                    logger.warn("Content is null in first candidate");
                     return "Error: No content in response";
                 }
 
                 List<Map<String, String>> parts = (List<Map<String, String>>) content.get("parts");
                 if (parts == null || parts.isEmpty()) {
-                    logger.warn("Parts list is empty");
                     return "Error: No parts in response";
                 }
 
                 String responseText = parts.get(0).get("text");
                 if (responseText == null || responseText.isEmpty()) {
-                    logger.warn("Response text is null or empty");
                     return "Error: No response text found";
                 }
 
-                logger.info("Successfully parsed response with {} characters", responseText.length());
                 return responseText;
 
             } catch (RestClientException e) {
                 retryCount++;
-                logger.error("Error on attempt {}: {}", retryCount, e.getMessage());
                 if (retryCount >= maxRetries) {
-                    logger.error("Max retries reached, giving up");
                     return "Error talking to Gemini API: " + e.getMessage();
                 }
                 try {
                     Thread.sleep(1000L * retryCount); // Exponential backoff
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
-                    logger.error("Retry interrupted: {}", ie.getMessage());
                     return "Error: Retry interrupted";
                 }
             }
