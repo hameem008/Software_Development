@@ -1,163 +1,134 @@
-
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle , CardDescription} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { mockTestResults, mockDoctors } from '@/data/mockData';
+import { Button } from '@/components/ui/button';
+import { TestTube, Calendar, Clock, MapPin, FileText, Eye } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { TestTube, Download, Calendar, User, AlertCircle, CheckCircle } from 'lucide-react';
+import { format } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
+import api from '@/lib/api';
 
 const TestResults = () => {
-  const { user } = useAuth();
-  const [filterType, setFilterType] = useState('all-types');
-  const [filterStatus, setFilterStatus] = useState('all-status');
+  const [testSummaries, setTestSummaries] = useState([]);
+  const [expandedTestId, setExpandedTestId] = useState<number | null>(null);
+  const [testDetailsMap, setTestDetailsMap] = useState<{ [id: number]: any }>({});
 
-  const userTestResults = mockTestResults.filter(test => test.patientId === user?.id);
-
-  const filteredResults = userTestResults.filter(test => {
-    const matchesType = filterType === 'all-types' || test.testType === filterType;
-    const matchesStatus = filterStatus === 'all-status' || test.status === filterStatus;
-    return matchesType && matchesStatus;
-  });
-
-  const getDoctor = (testResult: any) => {
-    return mockDoctors.find(doc => doc.name === testResult.performedBy);
+  const fetchTestSummaries = async () => {
+    try {
+      const res = await api.get('/patient/history/all-medical-tests');
+      setTestSummaries(res.data);
+    } catch (err) {
+      console.error('Failed to fetch test summaries:', err);
+    }
   };
 
-  const getParameterColor = (isNormal: boolean) => {
-    return isNormal ? 'text-green-600' : 'text-red-600';
+  const fetchTestDetail = async (performedTestId: number) => {
+    if (testDetailsMap[performedTestId]) return;
+
+    try {
+      const res = await api.post('/patient/history/test-result', { performedTestId });
+      setTestDetailsMap(prev => ({ ...prev, [performedTestId]: res.data }));
+    } catch (err) {
+      console.error('Failed to fetch test detail:', err);
+    }
   };
+
+  const toggleExpanded = (performedTestId: number) => {
+    if (expandedTestId === performedTestId) {
+      setExpandedTestId(null);
+    } else {
+      setExpandedTestId(performedTestId);
+      fetchTestDetail(performedTestId);
+    }
+  };
+
+  useEffect(() => {
+    fetchTestSummaries();
+  }, []);
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">My Test Results</h1>
-        <p className="text-gray-600">View and download your medical test reports</p>
+        <p className="text-gray-600">Review completed medical test reports</p>
       </div>
 
-      {/* Filters */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Filter Results</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="All Test Types" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="all-types">All Test Types</SelectItem>
-                  <SelectItem value="Pathology">Pathology</SelectItem>
-                  <SelectItem value="Imaging">Imaging</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Select value={filterStatus} onValueChange={setFilterStatus}>
-                <SelectTrigger>
-                  <SelectValue placeholder="All Status" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="all-status">All Status</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Button variant="outline" onClick={() => {
-                setFilterType('all-types');
-                setFilterStatus('all-status');
-              }}>
-                Clear Filters
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Test Results */}
       <div className="space-y-4">
-        {filteredResults.length > 0 ? (
-          filteredResults.map((test) => {
-            const doctor = getDoctor(test);
+        {testSummaries.length > 0 ? (
+          testSummaries.map((test) => {
+            const isExpanded = expandedTestId === test.performedTestId;
+            const detail = testDetailsMap[test.performedTestId];
+
             return (
-              <Card key={test.id}>
-                <CardHeader>
+              <Card
+                key={test.performedTestId}
+                className="hover:shadow-md transition-shadow"
+              >
+                <CardHeader
+                  onClick={() => toggleExpanded(test.performedTestId)}
+                  className="cursor-pointer"
+                >
                   <div className="flex items-start justify-between">
                     <div>
-                      <CardTitle className="flex items-center">
+                      <CardTitle className="text-lg flex items-center">
                         <TestTube className="w-5 h-5 mr-2 text-medical-600" />
-                        {test.testName}
+                        {test.name}
                       </CardTitle>
-                      <CardDescription className="mt-1">
-                        <div className="flex items-center space-x-4 text-sm">
-                          <span className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {test.date}
-                          </span>
-                          <span className="flex items-center">
-                            <User className="w-4 h-4 mr-1" />
-                            {test.performedBy}
-                          </span>
+                      <CardDescription className="mt-1 space-y-1 text-sm text-gray-600">
+                        <div className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {test.date}
+                        </div>
+                        <div className="flex items-center">
+                          <MapPin className="w-4 h-4 mr-1" />
+                          {test.hospital.name}
                         </div>
                       </CardDescription>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Badge 
-                        variant={test.status === 'completed' ? 'default' : 'secondary'}
-                        className={test.status === 'completed' ? 'bg-green-100 text-green-800' : ''}
-                      >
-                        {test.status === 'completed' ? (
-                          <CheckCircle className="w-3 h-3 mr-1" />
-                        ) : (
-                          <AlertCircle className="w-3 h-3 mr-1" />
-                        )}
-                        {test.status}
-                      </Badge>
-                      <Badge variant="outline">{test.testType}</Badge>
+                    <div className="flex flex-col items-end space-y-2">
+                      <Badge variant="outline">Completed</Badge>
+                      <Button size="sm" variant="outline">
+                        <FileText className="w-4 h-4 mr-1" />
+                        View Report
+                      </Button>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm font-medium text-gray-700">Result Summary:</p>
-                      <p className="text-gray-900">{test.result}</p>
+
+                {isExpanded && detail && (
+                  <CardContent className="space-y-4 border-t pt-4">
+                    {/* Doctor Info */}
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <p><strong>Ordered By:</strong> {detail.orderedBy?.name} ({detail.orderedBy?.specialization})</p>
+                      <p><strong>Performed By:</strong> {detail.performedBy?.name}</p>
+                      <p><strong>Reviewed By:</strong> {detail.reviewedBy?.name}</p>
+                      <p><strong>Hospital:</strong> {detail.hospital?.name}</p>
                     </div>
 
-                    {test.parameters && test.parameters.length > 0 && (
+                    {/* Results */}
+                    {detail.results?.length > 0 && (
                       <div>
-                        <p className="text-sm font-medium text-gray-700 mb-2">Test Parameters:</p>
+                        <h4 className="font-medium text-gray-900 mb-2">Test Parameters</h4>
                         <div className="overflow-x-auto">
-                          <table className="w-full text-sm">
+                          <table className="w-full text-sm border">
                             <thead>
-                              <tr className="border-b">
-                                <th className="text-left py-2">Parameter</th>
-                                <th className="text-left py-2">Value</th>
-                                <th className="text-left py-2">Unit</th>
-                                <th className="text-left py-2">Normal Range</th>
-                                <th className="text-left py-2">Status</th>
+                              <tr className="border-b text-left bg-gray-100">
+                                <th className="py-2 px-3">Parameter</th>
+                                <th className="py-2 px-3">Value</th>
+                                <th className="py-2 px-3">Unit</th>
+                                <th className="py-2 px-3">Ideal Range</th>
                               </tr>
                             </thead>
                             <tbody>
-                              {test.parameters.map((param, index) => (
-                                <tr key={index} className="border-b">
-                                  <td className="py-2 font-medium">{param.name}</td>
-                                  <td className={`py-2 font-medium ${getParameterColor(param.isNormal)}`}>
-                                    {param.value}
-                                  </td>
-                                  <td className="py-2 text-gray-600">{param.unit}</td>
-                                  <td className="py-2 text-gray-600">{param.normalRange}</td>
-                                  <td className="py-2">
-                                    {param.isNormal ? (
-                                      <span className="text-green-600 font-medium">Normal</span>
-                                    ) : (
-                                      <span className="text-red-600 font-medium">Abnormal</span>
-                                    )}
+                              {detail.results.map((r, i) => (
+                                <tr key={i} className="border-b">
+                                  <td className="py-2 px-3 font-medium">{r.name}</td>
+                                  <td className="py-2 px-3">{r.value}</td>
+                                  <td className="py-2 px-3">{r.unit || '-'}</td>
+                                  <td className="py-2 px-3 text-gray-500">
+                                    {r.idealMaleRange || r.idealFemaleRange || r.idealChildRange || 'N/A'}
                                   </td>
                                 </tr>
                               ))}
@@ -167,26 +138,15 @@ const TestResults = () => {
                       </div>
                     )}
 
-                    {test.notes && (
+                    {/* Notes */}
+                    {detail.notes && (
                       <div>
-                        <p className="text-sm font-medium text-gray-700">Notes:</p>
-                        <p className="text-gray-600">{test.notes}</p>
+                        <h4 className="font-medium text-gray-900 mb-1">Doctor Notes</h4>
+                        <p className="text-gray-700">{detail.notes}</p>
                       </div>
                     )}
-
-                    <div className="flex space-x-3 pt-2">
-                      {test.reportUrl && (
-                        <Button size="sm" variant="outline">
-                          <Download className="w-4 h-4 mr-2" />
-                          Download Report
-                        </Button>
-                      )}
-                      <Button size="sm" variant="outline">
-                        Share with Doctor
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
+                  </CardContent>
+                )}
               </Card>
             );
           })
@@ -194,8 +154,8 @@ const TestResults = () => {
           <Card>
             <CardContent className="text-center py-12">
               <TestTube className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No test results found</h3>
-              <p className="text-gray-600">Test results will appear here once available</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No test results yet</h3>
+              <p className="text-gray-600">Your test results will appear here when available</p>
             </CardContent>
           </Card>
         )}

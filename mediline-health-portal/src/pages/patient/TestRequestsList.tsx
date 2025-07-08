@@ -1,11 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { TestTube, Calendar, Clock, MapPin, FileText, Eye } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
+import { format } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
+import api from '@/lib/api';
 
 const mockTestRequestsList = [
   {
