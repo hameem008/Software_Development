@@ -59,7 +59,8 @@ public class FindDoctorServiceTest {
 
         List<DoctorCardDTO> result = findDoctorService.searchDoctors(request);
         assertEquals(1, result.size());
-        assertEquals("John Doe", result.getFirst().getName());
+        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+                result.getFirst().getName());
         assertEquals("Cardiology", result.getFirst().getSpecialization());
         assertEquals(4.5, result.getFirst().getRating());
     }
@@ -78,7 +79,8 @@ public class FindDoctorServiceTest {
                 .thenReturn(4.8);
 
         DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
-        assertEquals("John Doe", details.getName());
+        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+                details.getName());
         assertEquals(1, details.getAvailableMedCenters().size());
         assertEquals("Apollo Hospital",
                 details.getAvailableMedCenters().getFirst().getHospitalName());
@@ -109,7 +111,8 @@ public class FindDoctorServiceTest {
 
         DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
 
-        assertEquals("John Doe", details.getName());
+        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+                details.getName());
         assertTrue(details.getAvailableMedCenters().isEmpty());
         assertEquals(4.8, details.getRating());
     }
@@ -130,7 +133,8 @@ public class FindDoctorServiceTest {
 
         DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
 
-        assertEquals("John Doe", details.getName());
+        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+                details.getName());
         assertEquals(1, details.getAvailableMedCenters().size());
         assertEquals(0, details.getRating());
     }

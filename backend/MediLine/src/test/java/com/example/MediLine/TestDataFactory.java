@@ -81,7 +81,7 @@ public class TestDataFactory {
 
      private static Test createTest() {
         Test test = new Test();
-        test.setTestId(1);
+        test.setId(1);
         test.setTestName("Complete blood count");
         return test;
     }
