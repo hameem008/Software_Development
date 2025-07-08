@@ -44,7 +44,7 @@ public class FindDoctorServiceTest {
 
         MockitoAnnotations.openMocks(this);
 
-        doctor = TestDataFactory.createDoctor();
+        doctor = TestDataFactory.createDoctor(1);
     }
 
     @Test

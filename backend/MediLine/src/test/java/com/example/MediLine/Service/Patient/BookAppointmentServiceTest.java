@@ -34,7 +34,7 @@ public class BookAppointmentServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        doctor = TestDataFactory.createDoctor();
+        doctor = TestDataFactory.createDoctor(1);
         slot = TestDataFactory.createDoctorAvailability();
         app = TestDataFactory.createAppointment();
     }

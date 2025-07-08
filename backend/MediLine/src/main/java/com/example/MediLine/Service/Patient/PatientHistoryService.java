@@ -33,8 +33,7 @@ public class PatientHistoryService {
     private final TestParamRepository testParamRepository;
 
 
-    public List<SymptomDTO> getAllSymptoms(
-              Integer patientId) {
+    public List<SymptomDTO> getAllSymptoms(Integer patientId) {
 
         return symptomRepository.findSymptomsByPatientId(patientId)
             .stream()
@@ -69,26 +68,19 @@ public class PatientHistoryService {
 
 
     public List<TestSummaryDTO> getAllPerformedTests(Integer patientId) {
-        return performedTestRepository.findByPatientIdWithDetails(patientId).stream().map(pt -> {
+        return performedTestRepository.findByPatientIdWithDetails(patientId)
+                .stream().map(pt -> {
 
             DoctorBaseDTO orderedBy = createDoctorBaseDTO(pt.getPrescription().getDoctor());
             DoctorBaseDTO performedBy = createDoctorBaseDTO(pt.getPerformedByDoctor());
             DoctorBaseDTO reviewedBy = createDoctorBaseDTO(pt.getReviewedByDoctor());
 
-            HospitalBaseDTO hospital;
-            if (pt.getHospital() != null) {
-                hospital = HospitalBaseDTO.builder()
-                    .hospitalId(pt.getHospital().getHospitalId())
-                    .name(pt.getHospital().getName())
-                    .address(pt.getHospital().getAddress())
-                    .build();
-            } else {
-                hospital = null;
-            }
+            HospitalBaseDTO hospital =
+                    createHospitalBaseDTO(pt.getHospital());
 
             return TestSummaryDTO.builder()
                     .performedTestId(pt.getPerformedTestId())
-                    .name(pt.getTest().getName())
+                    .name(pt.getTest().getTestName())
                     .orderedBy(orderedBy)
                     .date(pt.getTestDate())
                     .performedBy(performedBy)
@@ -155,34 +147,45 @@ public class PatientHistoryService {
                 .toList();
     }
 
+
     public TestResultDTO getTestResult(Integer testId, Integer patientId) {
-        PerformedTest performedTest = performedTestRepository
-                .findByIdAndPatientId(testId, patientId)
+        PerformedTest performedTest = getPerformedTestOrThrow(testId, patientId);
+        List<ResultEntry> results = mapTestResults(performedTest);
+
+        return buildTestResultDTO(performedTest, results);
+    }
+
+    protected PerformedTest getPerformedTestOrThrow(Integer testId, Integer patientId) {
+        return performedTestRepository.findByIdAndPatientId(testId, patientId)
                 .orElseThrow(() -> new IllegalArgumentException("Test not found or access denied."));
+    }
 
-        List<TestResultValue> values =
-                testResultValueRepository
-                        .findByPerformedTestPerformedTestId(testId);
-        List<TestParam> params =
-                testParamRepository
-                        .findByTestId(performedTest.getTest().getTestId());
+    protected List<ResultEntry> mapTestResults(PerformedTest performedTest) {
+        Integer testId = performedTest.getTest().getTestId();
 
-        List<ResultEntry> results = createResultEntries(values, params);
+        List<TestResultValue> values = testResultValueRepository
+                .findByPerformedTestPerformedTestId(testId);
+        List<TestParam> params = testParamRepository
+                .findByTestId(testId);
 
+        return createResultEntries(values, params);
+    }
+
+    protected TestResultDTO buildTestResultDTO(PerformedTest test, List<ResultEntry> results) {
         return TestResultDTO.builder()
-                .performedTestId(performedTest.getPerformedTestId())
-                .name(performedTest.getTest().getName())
-                .date(performedTest.getTestDate())
-                .notes(performedTest.getNote())
-                .orderedBy(createDoctorBaseDTO(performedTest.getPrescription().getDoctor()))
-                .performedBy(createDoctorBaseDTO(performedTest.getPerformedByDoctor()))
-                .reviewedBy(createDoctorBaseDTO(performedTest.getReviewedByDoctor()))
-                .hospital(createMedicationDTO(performedTest.getHospital()))
+                .performedTestId(test.getPerformedTestId())
+                .name(test.getTest().getTestName())
+                .date(test.getTestDate())
+                .notes(test.getNote())
+                .orderedBy(createDoctorBaseDTO(test.getPrescription().getDoctor()))
+                .performedBy(createDoctorBaseDTO(test.getPerformedByDoctor()))
+                .reviewedBy(createDoctorBaseDTO(test.getReviewedByDoctor()))
+                .hospital(createHospitalBaseDTO(test.getHospital()))
                 .results(results)
                 .build();
     }
 
-    private DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
+    protected DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
         if (doctor == null) {
             return null;
         }
@@ -196,7 +199,7 @@ public class PatientHistoryService {
     }
 
 
-    private HospitalBaseDTO createMedicationDTO(Hospital hospital) {
+    protected HospitalBaseDTO createHospitalBaseDTO(Hospital hospital) {
         if (hospital == null) {
             return null;
         }
@@ -208,7 +211,12 @@ public class PatientHistoryService {
     }
 
 
-    private Medication createMedicationDTO(PrescribedMedicine prescribedMedicine) {
+    protected Medication createMedicationDTO(PrescribedMedicine prescribedMedicine) {
+        if( prescribedMedicine == null ||
+                prescribedMedicine.getMedicine() == null) {
+            return null;
+        }
+
         return Medication.builder()
                 .name(prescribedMedicine.getMedicine().getMedicineName())
                 .dosage(prescribedMedicine.getDosage())
@@ -218,7 +226,7 @@ public class PatientHistoryService {
                 .build();
     }
 
-    private List<ResultEntry> createResultEntries(List<TestResultValue> values, List<TestParam> params) {
+    protected List<ResultEntry> createResultEntries(List<TestResultValue> values, List<TestParam> params) {
         Map<String, TestParam> paramMap = params.stream()
                 .collect(Collectors.toMap(p -> p.getId().getParameterName(), p -> p));
 

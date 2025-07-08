@@ -22,7 +22,7 @@ public class PerformedTest {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "test_id")
-    private MedicalTest test;
+    private Test test;
 
     @Column(name = "test_date", nullable = false)
     private LocalDate testDate;

@@ -364,8 +364,8 @@ INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_i
 INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (48, 20, '2025-08-17', '13:45:00', 23, 4);
 INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (49, 16, '2025-08-19', '13:15:00', 137, 4);
 INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (50, 16, '2025-08-19', '09:45:00', 83, 4);
-INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (51, 2, '2025-07-06', '12:40:00', 2, 6);
-INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (52, 2, '2025-07-06', '13:00:00', 2, 7);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (51, 2, '2025-09-06', '12:40:00', 2, 6);
+INSERT INTO public.appointment (appointment_id, patient_id, date, "time", slot_id, serial_number) VALUES (52, 2, '2025-09-06', '13:00:00', 2, 7);
 
 
 --

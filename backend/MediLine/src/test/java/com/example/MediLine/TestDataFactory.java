@@ -1,6 +1,9 @@
 package com.example.MediLine;
 
 import com.example.MediLine.Entity.*;
+import com.example.MediLine.Entity.Symptom.SymptomId;
+import com.example.MediLine.Entity.TestResultValue.TestResultKey;
+import com.example.MediLine.Entity.TestParam.TestParamKey;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,11 +11,11 @@ import java.util.Set;
 
 public class TestDataFactory {
 
-    public static Doctor createDoctor() {
+    public static Doctor createDoctor(int doctorId) {
         Doctor doctor = new Doctor();
-        doctor.setDoctorId(1);
+        doctor.setDoctorId(doctorId);
         doctor.setFirstName("John");
-        doctor.setLastName("Doe");
+        doctor.setLastName("Doe " + doctorId);
         doctor.setSpecialization("Cardiology");
         doctor.setDesignation("Professor");
         doctor.setAcademicInstitution("BSMMU");
@@ -60,7 +63,7 @@ public class TestDataFactory {
         app.setSerialNumber(5);
 
         DoctorAvailability availability = createDoctorAvailability();
-        availability.setDoctor(createDoctor());
+        availability.setDoctor(createDoctor(1));
         app.setSlot(availability);
 
         return app;
@@ -74,7 +77,81 @@ public class TestDataFactory {
         review.setDate(LocalDate.of(2025, 6, 1));
 
         return  review;
+    }
 
+     private static Test createTest() {
+        Test test = new Test();
+        test.setTestId(1);
+        test.setTestName("Complete blood count");
+        return test;
+    }
+
+    public static PerformedTest createPerformedTest() {
+        PerformedTest performedTest = new PerformedTest();
+        performedTest.setPerformedTestId(1);
+        performedTest.setTest(createTest());
+        performedTest.setTestDate(LocalDate.now());
+        performedTest.setPerformedByDoctor(createDoctor(2));
+        performedTest.setReviewedByDoctor(createDoctor(3));
+        performedTest.setHospital(createHospital());
+        performedTest.setPrescription(createPrescription());
+        return performedTest;
+    }
+
+    public static TestResultValue createTestResultValue() {
+        TestResultValue testResultValue = new TestResultValue();
+        TestResultKey key = new TestResultKey(1, "Hemoglobin");
+
+        testResultValue.setId(key);
+        testResultValue.setResultValue("13.5");
+        testResultValue.setPerformedTest(createPerformedTest());
+        return testResultValue;
+    }
+
+    public static TestParam createTestParam() {
+        TestParamKey testParamKey = new TestParamKey(1, "Hemoglobin");
+        TestParam param = new TestParam();
+
+        param.setTest(createTest());
+        param.setId(testParamKey);
+        param.setUnit("g/dL");
+        return param;
+    }
+
+    public static Prescription createPrescription() {
+        Prescription prescription = new Prescription();
+        prescription.setPrescriptionId(1);
+        prescription.setDoctor(createDoctor(1));
+        prescription.setPatient(createPatient());
+        prescription.setHospital(createHospital());
+        prescription.setBloodPressure("120/80");
+        return prescription;
+    }
+
+
+
+    public static Symptom createSymptom() {
+        Symptom symptom = new Symptom();
+        symptom.setSymptomId(new SymptomId(1, LocalDate.now(), LocalTime.now()));
+        symptom.setDescription("Sudden confusion and slurred speech");
+        symptom.setOverallMood("Poor");
+        symptom.setSeverityLevel(4);
+        return symptom;
+    }
+
+    public static PrescribedMedicine createPrescribedMedicine() {
+        Medicine medicine = new Medicine();
+        medicine.setMedicineName("Napa");
+
+        PrescribedMedicine prescribedMedicine = new PrescribedMedicine();
+
+        prescribedMedicine.setMedicine(medicine);
+        prescribedMedicine.setDosage("500mg");
+        prescribedMedicine.setFrequency("2 times a day");
+        prescribedMedicine.setDurationValue(5);
+        prescribedMedicine.setDurationUnit("days");
+
+        return prescribedMedicine;
     }
 
 }
