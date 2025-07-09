@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "types": ["vitest/globals", "@testing-library/jest-dom", "cypress", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -12,13 +12,25 @@
     "noUnusedParameters": false,
     "noUnusedLocals": false,
     "jsx": "react-jsx",
-    // ✅ Add this line
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
-  "include": ["src", "tests", "vitest.config.ts", "vite.config.ts"],
+  "include": [
+    "src/**/*.{ts,tsx}",
+    "tests/**/*.{ts,tsx}",
+    "vitest.config.ts",
+    "vite.config.ts",
+    "cypress.config.ts",
+    "cypress/**/*.{ts,tsx}"
+  ],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.test.json"}
+    { "path": "./tsconfig.test.json" }
   ]
 }
