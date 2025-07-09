@@ -3,8 +3,6 @@ package com.example.MediLine.Security;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,8 +24,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -58,15 +54,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             String token = null;
-            logger.debug("Processing request for URI: {}", request.getRequestURI());
             
             if (request.getCookies() != null) {
-                logger.debug("Cookies found in request: {}", request.getCookies().length);
                 for (Cookie cookie : request.getCookies()) {
-                    logger.debug("Cookie: {} = {}", cookie.getName(), cookie.getValue());
                     if ("accessToken".equals(cookie.getName())) {
                         token = cookie.getValue();
-                        logger.info("Access token found: {}", token);
                         break;
                     }
                 }
@@ -82,7 +74,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             if (!jwtUtil.validateToken(token)) {
-                logger.warn("Invalid or expired access token: {}", token);
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.getWriter().write("Unauthorized: Invalid or expired token");
                 return;
@@ -90,20 +81,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             String email = jwtUtil.getEmailFromToken(token);
             String role = jwtUtil.getRoleFromToken(token);
-            logger.info("Access token valid. Email: {}, Role: {}", email, role);
             
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                     email, null, Collections.singletonList(new SimpleGrantedAuthority(role)));
             SecurityContextHolder.getContext().setAuthentication(auth);
-            logger.debug("Authentication set for email: {}", email);
 
             filterChain.doFilter(request, response);
         } catch (AuthenticationException e) {
-            logger.error("Authentication error: {}", e.getMessage());
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write("Unauthorized: " + e.getMessage());
         } catch (Exception e) {
-            logger.error("Unexpected error during authentication: {}", e.getMessage());
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.getWriter().write("Internal server error during authentication");
         }
