@@ -20,16 +20,32 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     @EntityGraph(attributePaths = {"degrees", "availabilities"})
     @Query("""
-    SELECT d FROM Doctor d
-    WHERE (:specialization IS NULL OR d.specialization = :specialization)
-    AND (:location IS NULL OR EXISTS (
-       SELECT da FROM d.availabilities da
-       WHERE LOWER(da.hospital.address) LIKE LOWER(CONCAT('%', :location, '%'))
-    ))
-""")
+        SELECT d FROM Doctor d
+        WHERE (:specialization IS NULL OR d.specialization = :specialization)
+        AND (:location IS NULL OR EXISTS (
+           SELECT da FROM d.availabilities da
+           WHERE LOWER(da.hospital.address) LIKE LOWER(CONCAT('%', :location, '%'))
+        ))
+    """)
     List<Doctor> searchDoctors(
             @Param("specialization") String specialization,
             @Param("location") String location);
+
+    @EntityGraph(attributePaths = {"degrees", "availabilities"})
+    @Query(value = """
+        SELECT * FROM doctor d
+        WHERE similarity(LOWER(CONCAT(d.first_name, ' ', d.last_name)), LOWER(:name)) > 0.3
+        ORDER BY similarity(LOWER(CONCAT(d.first_name, ' ', d.last_name)), LOWER(:name)) DESC
+    """, nativeQuery = true)
+    List<Doctor> searchDoctorsByNameFuzzy(@Param("name") String name);
+
+
+    @EntityGraph(attributePaths = {"degrees", "availabilities"})
+    @Query(value = """
+        SELECT * FROM doctor d
+        WHERE LOWER(CONCAT(d.first_name, ' ', d.last_name)) ILIKE CONCAT('%', LOWER(:name), '%')
+    """, nativeQuery = true)
+    List<Doctor> searchDoctorsByName(@Param("name") String name);
 
 
     @Query("SELECT DISTINCT d.specialization FROM Doctor d WHERE d.specialization IS NOT NULL")

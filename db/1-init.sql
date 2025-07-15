@@ -1,3 +1,6 @@
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+
 -- Refresh Token Table
 CREATE TABLE refresh_token (
     email VARCHAR(255) NOT NULL,

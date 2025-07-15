@@ -21,7 +21,15 @@ public class PatientHistoryController {
             @Valid PrescriptionRequest prescriptionRequest) {
 
 
-         return ResponseEntity.ok(null);
+        PrescriptionDTO prescriptionDTO =
+                patientHistoryService
+                    .getPrescriptionDetails(
+                        prescriptionRequest.getPrescriptionId(), patient.getPatientId());
+
+        if (prescriptionDTO == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(prescriptionDTO);
     }
 
     @GetMapping("/all-tests")
@@ -30,7 +38,15 @@ public class PatientHistoryController {
             @Valid
             PatientHistoryRequest patientRequest) {
 
-         return ResponseEntity.ok(null);
+        List<TestSummaryDTO> performedTests =
+                patientHistoryService.getAllPerformedTests(patient.getPatientId());
+
+        if (performedTests.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(performedTests);
+
+
     }
 
     @PostMapping("/test-result")
@@ -39,6 +55,13 @@ public class PatientHistoryController {
              @Valid
              TestResultRequest testResultRequest) {
 
-         return ResponseEntity.ok(null);
+         TestResultDTO testResults =
+                patientHistoryService.getTestResult(
+                        testResultRequest.getPerformedTestId(), patient.getPatientId());
+
+        if (testResults == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(testResults);
     }
 }

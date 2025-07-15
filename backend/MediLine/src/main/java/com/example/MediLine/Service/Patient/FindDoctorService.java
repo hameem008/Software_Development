@@ -34,29 +34,23 @@ public class FindDoctorService {
         List<Doctor> doctors = doctorRepository.searchDoctors(
                 findDoctorRequest.getSpecialization(), findDoctorRequest.getLocation());
 
-        return doctors.stream().map(doctor -> DoctorCardDTO.builder()
-                .doctorId(doctor.getDoctorId())
-                .name(doctor.getFirstName() + " " + doctor.getLastName())
-                .specialization(doctor.getSpecialization())
-                .designation(doctor.getDesignation())
-                .academicInstitution(doctor.getAcademicInstitution())
-                .degrees(doctor.getDegrees().stream()
-                        .map(degree -> new DoctorDegreeDTO(
-                                degree.getId().getDegreeName(),
-                                degree.getInstitution(),
-                                degree.getPassingYear()))
-                        .toList())
-                .availableDays(
-                        doctor.getAvailabilities().stream()
-                                .map(DoctorAvailability::getWeekDay)
-                                .distinct()
-                                .toList()
-                )
-                .rating(
-                        doctorReviewRepository.findAverageRatingByDoctorId(doctor.getDoctorId())
-                )
-                .build()
-        ).collect(Collectors.toList());
+        return doctors.stream()
+            .map(this::mapDoctorToDTO)
+            .toList();
+    }
+
+    public List<DoctorCardDTO> searchDoctorsByName(FindDoctorRequest findDoctorRequest) {
+        List<Doctor> doctors = doctorRepository
+                .searchDoctorsByNameFuzzy(findDoctorRequest.getName());
+
+        if (doctors.isEmpty()) {
+            doctors = doctorRepository
+                    .searchDoctorsByName(findDoctorRequest.getName());
+        }
+
+        return doctors.stream()
+            .map(this::mapDoctorToDTO)
+            .toList();
     }
 
     public DoctorDetailsDTO getDoctorDetails(int doctorId) {
@@ -124,6 +118,30 @@ public class FindDoctorService {
                 )
                 .toList();
     }
+
+    protected DoctorCardDTO mapDoctorToDTO(Doctor doctor) {
+    return DoctorCardDTO.builder()
+            .doctorId(doctor.getDoctorId())
+            .name(doctor.getFirstName() + " " + doctor.getLastName())
+            .specialization(doctor.getSpecialization())
+            .designation(doctor.getDesignation())
+            .academicInstitution(doctor.getAcademicInstitution())
+            .degrees(doctor.getDegrees().stream()
+                    .map(degree -> new DoctorDegreeDTO(
+                            degree.getId().getDegreeName(),
+                            degree.getInstitution(),
+                            degree.getPassingYear()))
+                    .toList())
+            .availableDays(
+                    doctor.getAvailabilities().stream()
+                            .map(DoctorAvailability::getWeekDay)
+                            .distinct()
+                            .toList())
+            .rating(
+                    doctorReviewRepository.findAverageRatingByDoctorId(doctor.getDoctorId()))
+            .build();
+}
+
 
 
 }
