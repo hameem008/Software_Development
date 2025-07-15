@@ -216,7 +216,6 @@ CREATE TABLE doctor_availability (
 -- Appointment Table
 CREATE TABLE appointment (
     appointment_id SERIAL PRIMARY KEY,
-    doctor_id INT REFERENCES doctor(doctor_id) ON DELETE CASCADE,
     patient_id INT REFERENCES patient(patient_id) ON DELETE CASCADE,
     date DATE CHECK (date >= CURRENT_DATE),
     time TIME,
