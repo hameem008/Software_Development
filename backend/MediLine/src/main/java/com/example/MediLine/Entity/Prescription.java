@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "prescription")
@@ -52,5 +53,10 @@ public class Prescription {
 
     @Column(name = "next_appointment_date")
     private LocalDate nextAppointmentDate;
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY
+    )
+    private Set<DiagnosedDisease> diagnosedDiseases;
 }
 

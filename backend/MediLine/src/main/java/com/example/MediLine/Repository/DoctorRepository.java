@@ -31,21 +31,36 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
             @Param("specialization") String specialization,
             @Param("location") String location);
 
-    @EntityGraph(attributePaths = {"degrees", "availabilities"})
+
     @Query(value = """
-        SELECT * FROM doctor d
-        WHERE similarity(LOWER(CONCAT(d.first_name, ' ', d.last_name)), LOWER(:name)) > 0.3
-        ORDER BY similarity(LOWER(CONCAT(d.first_name, ' ', d.last_name)), LOWER(:name)) DESC
+        SELECT d.doctor_id
+        FROM doctor d
+        WHERE
+            similarity(LOWER(d.first_name), LOWER(:firstName)) > 0.3
+            OR similarity(LOWER(d.last_name), LOWER(:lastName)) > 0.3
+        ORDER BY
+            GREATEST(
+                similarity(LOWER(d.first_name), LOWER(:firstName)),
+                similarity(LOWER(d.last_name), LOWER(:lastName))
+            ) DESC
     """, nativeQuery = true)
-    List<Doctor> searchDoctorsByNameFuzzy(@Param("name") String name);
+    List<Integer> searchDoctorIdsByNameFuzzy(
+            @Param("firstName") String firstName,
+            @Param("lastName") String lastName
+    );
 
 
-    @EntityGraph(attributePaths = {"degrees", "availabilities"})
+
     @Query(value = """
-        SELECT * FROM doctor d
+        SELECT d.doctor_id
+        FROM doctor d
         WHERE LOWER(CONCAT(d.first_name, ' ', d.last_name)) ILIKE CONCAT('%', LOWER(:name), '%')
     """, nativeQuery = true)
-    List<Doctor> searchDoctorsByName(@Param("name") String name);
+    List<Integer> searchDoctorIdsByName(@Param("name") String name);
+
+
+    @EntityGraph(attributePaths = {"degrees", "availabilities"})
+    List<Doctor> findByDoctorIdIn(List<Integer> doctorIds);
 
 
     @Query("SELECT DISTINCT d.specialization FROM Doctor d WHERE d.specialization IS NOT NULL")

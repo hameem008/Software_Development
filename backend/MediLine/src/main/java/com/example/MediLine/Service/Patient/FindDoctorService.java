@@ -15,6 +15,7 @@ import com.example.MediLine.Repository.DoctorReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -40,13 +41,20 @@ public class FindDoctorService {
     }
 
     public List<DoctorCardDTO> searchDoctorsByName(FindDoctorRequest findDoctorRequest) {
-        List<Doctor> doctors = doctorRepository
-                .searchDoctorsByNameFuzzy(findDoctorRequest.getName());
+        String[] tokens = findDoctorRequest.getName().trim().split("\\s+");
+        String lastName = tokens[tokens.length - 1];
+        String firstName = String.join(" ", Arrays.copyOf(tokens, tokens.length - 1));
 
-        if (doctors.isEmpty()) {
-            doctors = doctorRepository
-                    .searchDoctorsByName(findDoctorRequest.getName());
+
+        List<Integer> doctorIds = doctorRepository
+                .searchDoctorIdsByNameFuzzy(firstName, lastName);
+
+        if (doctorIds.isEmpty()) {
+            doctorIds = doctorRepository
+                    .searchDoctorIdsByName(findDoctorRequest.getName());
         }
+
+        List<Doctor> doctors = doctorRepository.findByDoctorIdIn(doctorIds);
 
         return doctors.stream()
             .map(this::mapDoctorToDTO)

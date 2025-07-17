@@ -1,7 +1,7 @@
 package com.example.MediLine.Controller.Patient;
 
 import com.example.MediLine.Annotation.CurrentPatient;
-import com.example.MediLine.DTO.FindDoctorDTO.DoctorCardDTO;
+import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Service.Patient.PatientHistoryService;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/patient/history")
 @RequiredArgsConstructor
-public class MedicalHistoryController {
+public class PatientMedicalHistoryController {
 
     private final PatientHistoryService patientHistoryService;
 
@@ -64,6 +64,21 @@ public class MedicalHistoryController {
     }
 
 
+    @GetMapping("/test-names")
+    public ResponseEntity<List<IdNameDTO>> getAllTestNames(
+            @CurrentPatient Patient patient) {
+
+        List<IdNameDTO> testNames =
+                patientHistoryService.getPerformedTestNames(
+                        patient.getPatientId()
+                );
+
+        if (testNames.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(testNames);
+    }
+
     @GetMapping("/all-medical-tests")
     public ResponseEntity<List<TestSummaryDTO>> getAllMedicalTests(
             @CurrentPatient Patient patient) {
@@ -99,6 +114,55 @@ public class MedicalHistoryController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(testResults);
+    }
+
+    @PostMapping("/all-prescriptions")
+    public ResponseEntity<List<PrescriptionSummaryDTO>> getAllPrescriptions(
+            @RequestBody PrescriptionListRequest prescriptionListRequest,
+            @CurrentPatient Patient patient) {
+
+        System.out.println("Received prescription list request: " + prescriptionListRequest);
+
+        List<PrescriptionSummaryDTO> prescriptionList =
+                patientHistoryService.getPrescriptionSummaries(
+                        prescriptionListRequest,
+                        patient.getPatientId()
+                );
+
+        if (prescriptionList.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(prescriptionList);
+    }
+
+    @GetMapping("/prescription/doctors")
+    public ResponseEntity<List<IdNameDTO>> getPrescriptionDoctors(
+            @CurrentPatient Patient patient) {
+
+        List<IdNameDTO> prescriptionList =
+                patientHistoryService.getPrescriptionDoctors(
+                        patient.getPatientId()
+                );
+
+        if (prescriptionList.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(prescriptionList);
+    }
+
+    @GetMapping("/prescription/diseases")
+    public ResponseEntity<List<IdNameDTO>> getPrescriptionDiseases(
+            @CurrentPatient Patient patient) {
+
+        List<IdNameDTO> prescriptionList =
+                patientHistoryService.getDiagnosedDiseaseNames(
+                        patient.getPatientId()
+                );
+
+        if (prescriptionList.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(prescriptionList);
     }
 
     @PostMapping("/prescription-details")

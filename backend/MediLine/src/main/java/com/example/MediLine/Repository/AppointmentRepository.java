@@ -64,4 +64,15 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     """)
     List<Appointment> findPastAppointments(@Param("doctorId") Integer doctorId);
 
+    @EntityGraph(attributePaths = {"slot", "slot.doctor"})
+    @Query("""
+        SELECT COUNT(a) > 0
+        FROM Appointment a
+        WHERE a.patient.patientId = :patientId
+            AND a.slot.doctor.doctorId = :doctorId
+    """)
+    boolean existsByDoctorAndPatient(
+            @Param("doctorId") Integer doctorId,
+            @Param("patientId") Integer patientId);
+
 }

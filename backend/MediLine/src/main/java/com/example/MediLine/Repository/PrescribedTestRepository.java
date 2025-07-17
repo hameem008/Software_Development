@@ -17,9 +17,8 @@ public interface PrescribedTestRepository extends JpaRepository<PrescribedTest, 
         FROM PrescribedTest pt
         JOIN pt.test t
         JOIN pt.prescription p
-        WHERE p.prescriptionId = :prescriptionId AND p.patient.patientId = :patientId
+        WHERE p.prescriptionId = :prescriptionId
     """)
     List<String> findTestsByPrescriptionId(
-            @Param("prescriptionId") Integer prescriptionId,
-            @Param("patientId") Integer patientId);
+            @Param("prescriptionId") Integer prescriptionId);
 }

@@ -3,18 +3,17 @@ package com.example.MediLine.Service.Patient;
 
 import com.example.MediLine.DTO.DoctorBaseDTO;
 import com.example.MediLine.DTO.HospitalBaseDTO;
+import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.*;
 import com.example.MediLine.Repository.*;
-import com.example.MediLine.DTO.MedicalHistoryDTO.TestResultDTO.*;
+import com.example.MediLine.Service.MedicalHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,25 +25,12 @@ public class PatientHistoryService {
     private final SeverityLevelRepository severityRepository;
     private final MoodOptionRepository moodRepository;
     private final PrescriptionRepository prescriptionRepository;
-    private final DiagnosedDiseaseRepository diagnosedDiseaseRepository;
-    private final PrescribedMedicineRepository prescribedMedicineRepository;
-    private final PrescribedTestRepository prescribedTestRepository;
-    private final TestResultValueRepository testResultValueRepository;
-    private final TestParamRepository testParamRepository;
+    private final MedicalHistoryService medicalHistoryService;
 
 
     public List<SymptomDTO> getAllSymptoms(Integer patientId) {
 
-        return symptomRepository.findSymptomsByPatientId(patientId)
-            .stream()
-            .map(s -> new SymptomDTO(
-                    s.getDescription(),
-                    s.getSymptomId().getDate(),
-                    s.getSymptomId().getTime(),
-                    s.getOverallMood(),
-                    s.getSeverityLevel()
-            ))
-            .toList();
+       return medicalHistoryService.getAllSymptoms(patientId);
     }
 
     public void createSymptom(Integer patientId, CreateSymptomRequest request) {
@@ -92,42 +78,11 @@ public class PatientHistoryService {
 
 
     public PrescriptionDTO getPrescriptionDetails(Integer prescriptionId, Integer patientId) {
-        Prescription prescription = prescriptionRepository
-                .findByPrescriptionIdAndPatientId(prescriptionId, patientId)
-                .orElseThrow(() -> new IllegalArgumentException("Prescription not found"));
+        if(!prescriptionRepository.patientIsAuthorized(prescriptionId, patientId)) {
+            throw new IllegalArgumentException("Access denied");
+        }
 
-        Vitals vitals = Vitals.builder()
-                .bloodPressure(new Vitals.Measurement(
-                        "Blood Pressure", prescription.getBloodPressure(), "mmHg"))
-                .weight(new Vitals.Measurement(
-                        "Weight", prescription.getWeight() + "", "kg"))
-                .heartRate(new Vitals.Measurement(
-                        "Heart Rate", prescription.getHeartRate() + "", "kg"))
-                .build();
-
-        List<Medication> medications =
-                prescribedMedicineRepository.findByPrescriptionId(prescriptionId, patientId)
-                .stream()
-                .map(this::createMedicationDTO)
-                .toList();
-
-        return PrescriptionDTO.builder()
-                .prescriptionId(prescriptionId.toString())
-                .doctor(createDoctorBaseDTO(prescription.getDoctor()))
-                .issuedDate(prescription.getPrescribedDate())
-                .summary(prescription.getSummary())
-                .vitals(vitals)
-                .symptoms(prescription.getSymptoms())
-                .diagnosis(diagnosedDiseaseRepository
-                        .findDiseaseNamesByPrescriptionId(prescriptionId, patientId)
-                )
-                .medications(medications)
-                .tests(prescribedTestRepository
-                        .findTestsByPrescriptionId(prescriptionId, patientId)
-                )
-                .notes(prescription.getNotes())
-                .nextAppointment(prescription.getNextAppointmentDate())
-                .build();
+        return medicalHistoryService.getPrescriptionDetails(prescriptionId);
     }
 
 
@@ -149,40 +104,30 @@ public class PatientHistoryService {
 
 
     public TestResultDTO getTestResult(Integer testId, Integer patientId) {
-        PerformedTest performedTest = getPerformedTestOrThrow(testId, patientId);
-        List<ResultEntry> results = mapTestResults(performedTest);
+        if(!performedTestRepository.patientIsAuthorized(testId, patientId)) {
+            throw new IllegalArgumentException("Access denied");
+        }
 
-        return buildTestResultDTO(performedTest, results);
+        return medicalHistoryService.getTestResultDetails(testId);
     }
 
-    protected PerformedTest getPerformedTestOrThrow(Integer testId, Integer patientId) {
-        return performedTestRepository.findByIdAndPatientId(testId, patientId)
-                .orElseThrow(() -> new IllegalArgumentException("Test not found or access denied."));
+    public List<PrescriptionSummaryDTO> getPrescriptionSummaries(
+            PrescriptionListRequest request,
+            Integer patientId) {
+
+        return medicalHistoryService.getAllPrescriptionsList(request, patientId);
     }
 
-    protected List<ResultEntry> mapTestResults(PerformedTest performedTest) {
-        Integer testId = performedTest.getTest().getId();
-
-        List<TestResultValue> values = testResultValueRepository
-                .findByPerformedTestPerformedTestId(testId);
-        List<TestParam> params = testParamRepository
-                .findByTestId(testId);
-
-        return createResultEntries(values, params);
+    public List<IdNameDTO> getDiagnosedDiseaseNames(Integer patientId) {
+        return medicalHistoryService.getDiagnosedDiseaseNames(patientId);
     }
 
-    protected TestResultDTO buildTestResultDTO(PerformedTest test, List<ResultEntry> results) {
-        return TestResultDTO.builder()
-                .performedTestId(test.getPerformedTestId())
-                .name(test.getTest().getTestName())
-                .date(test.getTestDate())
-                .notes(test.getNote())
-                .orderedBy(createDoctorBaseDTO(test.getPrescription().getDoctor()))
-                .performedBy(createDoctorBaseDTO(test.getPerformedByDoctor()))
-                .reviewedBy(createDoctorBaseDTO(test.getReviewedByDoctor()))
-                .hospital(createHospitalBaseDTO(test.getHospital()))
-                .results(results)
-                .build();
+    public List<IdNameDTO> getPrescriptionDoctors(Integer patientId) {
+        return medicalHistoryService.getPrescriptionDoctors(patientId);
+    }
+
+    public List<IdNameDTO> getPerformedTestNames(Integer patientId) {
+        return medicalHistoryService.getPerformedTestNames(patientId);
     }
 
     protected DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
@@ -211,35 +156,6 @@ public class PatientHistoryService {
     }
 
 
-    protected Medication createMedicationDTO(PrescribedMedicine prescribedMedicine) {
-        if( prescribedMedicine == null ||
-                prescribedMedicine.getMedicine() == null) {
-            return null;
-        }
 
-        return Medication.builder()
-                .name(prescribedMedicine.getMedicine().getMedicineName())
-                .dosage(prescribedMedicine.getDosage())
-                .frequency(prescribedMedicine.getFrequency())
-                .duration(prescribedMedicine.getDurationValue() + " " +
-                        prescribedMedicine.getDurationUnit())
-                .build();
-    }
-
-    protected List<ResultEntry> createResultEntries(List<TestResultValue> values, List<TestParam> params) {
-        Map<String, TestParam> paramMap = params.stream()
-                .collect(Collectors.toMap(p -> p.getId().getParameterName(), p -> p));
-
-        return values.stream().map(value -> {
-            TestParam param = paramMap.get(value.getId().getParameterName());
-            return ResultEntry.builder()
-                    .name(value.getId().getParameterName())
-                    .value(value.getResultValue())
-                    .unit(param != null ? param.getUnit() : null)
-                    .idealMaleRange(param != null ? param.getIdealMaleRange() : null)
-                    .idealFemaleRange(param != null ? param.getIdealFemaleRange() : null)
-                    .idealChildRange(param != null ? param.getIdealChildrenRange() : null)
-                    .build();
-        }).collect(Collectors.toList());
-    }
 }
+
