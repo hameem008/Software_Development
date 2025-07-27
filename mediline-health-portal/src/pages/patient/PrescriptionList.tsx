@@ -21,12 +21,12 @@ interface PrescriptionSummary {
 }
 
 interface Doctor {
-  doctorId: number;
+  id: number;
   name: string;
 }
 
 interface Disease {
-  diseaseId: number;
+  id: number;
   name: string;
 }
 
@@ -164,7 +164,7 @@ const PrescriptionListView = () => {
                 <SelectContent>
                   <SelectItem value="0">All</SelectItem>
                   {doctors.map((doc) => (
-                    <SelectItem key={doc.doctorId} value={doc.doctorId.toString()}>
+                    <SelectItem key={doc.id} value={doc.id.toString()}>
                       {doc.name}
                     </SelectItem>
                   ))}
@@ -183,7 +183,7 @@ const PrescriptionListView = () => {
                 <SelectContent>
                   <SelectItem value="0">All</SelectItem>
                   {diseases.map((disease) => (
-                    <SelectItem key={disease.diseaseId} value={disease.diseaseId.toString()}>
+                    <SelectItem key={disease.id} value={disease.id.toString()}>
                       {disease.name}
                     </SelectItem>
                   ))}

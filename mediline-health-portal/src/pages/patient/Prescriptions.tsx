@@ -12,7 +12,8 @@ interface Medication {
   name: string;
   dosage: string;
   frequency: string;
-  duration: string;
+  durationValue: number;
+  durationUnit: string;
   instructions: string | null;
 }
 
@@ -193,7 +194,7 @@ const PatientPrescriptions = () => {
                         </div>
                         <div className="space-y-1 text-sm text-gray-600">
                           <p><strong>Frequency:</strong> {med.frequency}</p>
-                          <p><strong>Duration:</strong> {med.duration}</p>
+                          <p><strong>Duration:</strong> {med.durationValue + med.durationUnit}</p>
                           {med.instructions && (
                             <p><strong>Instructions:</strong> {med.instructions}</p>
                           )}

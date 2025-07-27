@@ -2,9 +2,6 @@ package com.example.MediLine.Service.Doctor;
 
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
-import com.example.MediLine.Repository.AppointmentRepository;
-import com.example.MediLine.Repository.PerformedTestRepository;
-import com.example.MediLine.Repository.PrescriptionRepository;
 import com.example.MediLine.Service.MedicalHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,16 +11,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DoctorMedicalHistoryService {
-    private final PrescriptionRepository prescriptionRepository;
-    private final AppointmentRepository appointmentRepository;
     private final MedicalHistoryService medicalHistoryService;
-    private final PerformedTestRepository performedTestRepository;
+    private final DoctorAuthorizationService doctorAuthorizationService;
 
 
     public List<SymptomDTO> getPatientsSymptoms(Integer patientId, Integer doctorId) {
-        if (notDoctorsPatient(doctorId, patientId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(doctorId, patientId);
 
         return medicalHistoryService.getAllSymptoms(patientId);
     }
@@ -31,9 +25,10 @@ public class DoctorMedicalHistoryService {
     public List<TestSummaryDTO> getPatientsAllTestsList(
             DoctorTestListRequest doctorTestListRequest, Integer doctorId) {
 
-        if (notDoctorsPatient(doctorId, doctorTestListRequest.getPatientId())) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+         doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, doctorTestListRequest.getPatientId());
+
 
         TestListRequest testRequest = TestListRequest.builder()
                 .dateFrom(doctorTestListRequest.getDateFrom())
@@ -46,9 +41,8 @@ public class DoctorMedicalHistoryService {
     }
 
     public TestResultDTO getPatientsTestResultDetails(Integer performedTestId, Integer doctorId) {
-        if (!performedTestRepository.doctorIsAuthorized(doctorId, performedTestId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToTestResult(doctorId, performedTestId);
 
         return medicalHistoryService.getTestResultDetails(performedTestId);
     }
@@ -56,9 +50,10 @@ public class DoctorMedicalHistoryService {
     public List<PrescriptionSummaryDTO> getPatientsAllPrescriptions(
             DoctorPrescriptionListRequest request, Integer doctorId) {
 
-        if(notDoctorsPatient(doctorId, request.getPatientId())) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, request.getPatientId());
+
 
         PrescriptionListRequest prescriptionRequest = PrescriptionListRequest.builder()
                 .dateFrom(request.getDateFrom())
@@ -72,45 +67,32 @@ public class DoctorMedicalHistoryService {
     }
 
     public PrescriptionDTO getPatientsPrescription(Integer prescriptionId, Integer doctorId) {
-        if(!prescriptionRepository.doctorIsAuthorized(prescriptionId, doctorId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPrescription(doctorId, prescriptionId);
 
         return medicalHistoryService.getPrescriptionDetails(prescriptionId);
     }
 
     public List<IdNameDTO> getPatientsDiseaseNames(Integer patientId, Integer doctorId) {
-        if (notDoctorsPatient(doctorId, patientId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(doctorId, patientId);
 
         return medicalHistoryService.getDiagnosedDiseaseNames(patientId);
     }
 
     public List<IdNameDTO> getPatientsDoctorNames(Integer patientId, Integer doctorId) {
-        if (notDoctorsPatient(doctorId, patientId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(doctorId, patientId);
 
         return medicalHistoryService.getPrescriptionDoctors(patientId);
     }
 
     public List<IdNameDTO> getPatientsTestNames(Integer patientId, Integer doctorId) {
-        if (notDoctorsPatient(doctorId, patientId)) {
-            throw new IllegalArgumentException("Doctor is not associated with this patient.");
-        }
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(doctorId, patientId);
+
 
         return medicalHistoryService.getPerformedTestNames(patientId);
-    }
-
-
-    protected boolean notDoctorsPatient(Integer doctorId, Integer patientId) {
-        boolean viaPrescription = prescriptionRepository
-                .existsByDoctorAndPatient(doctorId, patientId);
-        boolean viaAppointment = appointmentRepository
-                .existsByDoctorAndPatient(doctorId, patientId);
-
-        return !viaPrescription && !viaAppointment;
     }
 
 }

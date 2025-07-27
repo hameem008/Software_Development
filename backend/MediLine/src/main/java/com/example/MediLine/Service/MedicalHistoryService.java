@@ -214,11 +214,13 @@ public class MedicalHistoryService {
         }
 
         return Medication.builder()
+                .medicineId(prescribedMedicine.getMedicine().getMedicineId())
                 .name(prescribedMedicine.getMedicine().getMedicineName())
                 .dosage(prescribedMedicine.getDosage())
                 .frequency(prescribedMedicine.getFrequency())
-                .duration(prescribedMedicine.getDurationValue() + " " +
-                        prescribedMedicine.getDurationUnit())
+                .durationValue(prescribedMedicine.getDurationValue())
+                .durationUnit(prescribedMedicine.getDurationUnit())
+                .instructions(prescribedMedicine.getInstruction())
                 .build();
     }
 
