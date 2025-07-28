@@ -1,8 +1,10 @@
 package com.example.MediLine.Controller.Patient;
 
 import com.example.MediLine.Annotation.CurrentPatient;
+import com.example.MediLine.DTO.AppointmentDTO.AppointmentDTO;
 import com.example.MediLine.DTO.CurrentMedicineDTO;
 import com.example.MediLine.Entity.Patient;
+import com.example.MediLine.Repository.AppointmentRepository;
 import com.example.MediLine.Repository.PrescribedMedicineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DashboardController {
 
     private final PrescribedMedicineRepository prescribedMedicineRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @GetMapping("/current-medicine")
     public ResponseEntity getCurrentMedicines(@CurrentPatient Patient patient) {
@@ -25,7 +28,15 @@ public class DashboardController {
             return ResponseEntity.badRequest().body(null);
         }
         List<CurrentMedicineDTO> currentMedicines = prescribedMedicineRepository.findActiveMedicinesByPatientId(patient.getPatientId());
-        System.out.println(currentMedicines);
         return ResponseEntity.ok(currentMedicines);
+    }
+
+    @GetMapping("/upcoming-appointments")
+    public ResponseEntity<?> getUpcomingAppointments(@CurrentPatient Patient patient) {
+        if (patient == null) {
+            return ResponseEntity.badRequest().body("Patient not authenticated");
+        }
+        List<AppointmentDTO> upcomingAppointments = appointmentRepository.getUpcomingAppointmentsByPatientId(patient.getPatientId());
+        return ResponseEntity.ok(upcomingAppointments);
     }
 }

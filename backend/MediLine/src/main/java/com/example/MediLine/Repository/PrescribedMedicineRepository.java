@@ -25,7 +25,7 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
             @Param("patientId") Integer patientId);
 
     @Query("""
-        SELECT new com.example.MediLine.DTO.PrescribedMedicineDTO(
+        SELECT new com.example.MediLine.DTO.CurrentMedicineDTO(
             pm.id.prescriptionId,
             pm.id.medicineId,
             m.medicineName,

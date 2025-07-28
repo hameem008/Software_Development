@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Pill, Clock, X } from 'lucide-react';
+import { Pill, Clock, X, CodeSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import api from '@/lib/api';
 
@@ -67,8 +67,6 @@ const DailyMedications = () => {
     };
     fetchCurrentMedicines();
   }, []);
-
-  console.log(medications);
 
   if (!medications) return <div>Loading medications...</div>;
 

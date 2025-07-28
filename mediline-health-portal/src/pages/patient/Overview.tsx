@@ -9,9 +9,57 @@ import HealthMetricsCarousel from '@/components/patient/HealthMetricsCarousel';
 import DailyMedications from '@/components/patient/DailyMedications';
 import api from '@/lib/api';
 
+const mockDailyMedications = [
+  {
+    id: '1',
+    name: 'Lisinopril',
+    dosage: '10mg',
+    frequency: 'Once daily',
+    durationValue: '3',
+    durationUnit: 'day',
+    status: 'active',
+    instruction: 'Take with or without food'
+  }
+];
+
+const mockUpcomingAppointments = [
+  {
+    id: '1',
+    doctorName: 'Dr. Sarah Johnson',
+    hospitalName: 'City General Hospital',
+    date: '2025-06-05',
+    time: '10:00 AM',
+    chamber: 'Room 2002',
+    serialNumber: '8'
+  }
+];
+
+const recentTests = [
+  {
+    id: '1',
+    name: 'Complete Blood Count (CBC)',
+    date: '2024-05-30',
+    status: 'completed'
+  },
+  {
+    id: '2',
+    name: 'Lipid Panel',
+    date: '2024-05-30',
+    status: 'completed'
+  },
+  {
+    id: '3',
+    name: 'MRI Scan',
+    date: '2024-06-01',
+    status: 'pending'
+  }
+];
+
 const PatientOverview = () => {
   const navigate = useNavigate();
   const [patientProfile, setPatientProfile] = useState(null);
+  const [medications, setMedications] = useState(mockDailyMedications);
+  const [upcomingAppointments, setUpcomingAppointments] = useState(mockUpcomingAppointments);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -20,58 +68,36 @@ const PatientOverview = () => {
         setPatientProfile(response.data);
       } catch (error) {
         console.error('Error fetching profile:', error);
-      } 
+      }
     };
     fetchProfile();
   }, []);
 
-  const upcomingAppointments = [
-    {
-      id: '1',
-      doctor: 'Dr. Sarah Johnson',
-      specialization: 'Cardiology',
-      date: '2025-06-05',
-      time: '10:00 AM',
-      hospital: 'City General Hospital'
-    },
-    {
-      id: '2',
-      doctor: 'Dr. Michael Chen',
-      specialization: 'Dermatology',
-      date: '2025-06-10',
-      time: '2:30 PM',
-      hospital: 'Metro Health Center'
-    },
-    {
-      id: '3',
-      doctor: 'Dr. Emily Rodriguez',
-      specialization: 'Pediatrics',
-      date: '2025-06-15',
-      time: '9:00 AM',
-      hospital: 'Children\'s Medical Center'
-    }
-  ];
+  useEffect(() => {
+    const fetchCurrentMedicines = async () => {
+      try {
+        const response = await api.get('/patient/current-medicine');
+        setMedications(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching current mediciens:', error);
+      }
+    };
+    fetchCurrentMedicines();
+  }, []);
 
-  const recentTests = [
-    {
-      id: '1',
-      name: 'Complete Blood Count (CBC)',
-      date: '2024-05-30',
-      status: 'completed'
-    },
-    {
-      id: '2',
-      name: 'Lipid Panel',
-      date: '2024-05-30',
-      status: 'completed'
-    },
-    {
-      id: '3',
-      name: 'MRI Scan',
-      date: '2024-06-01',
-      status: 'pending'
-    }
-  ];
+  useEffect(() => {
+    const fetchUpcomingAppointments = async () => {
+      try {
+        const response = await api.get('/patient/upcoming-appointments');
+        setUpcomingAppointments(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching upcoming appointments:', error);
+      }
+    };
+    fetchUpcomingAppointments();
+  }, []);
 
   const handleTestClick = (test: any) => {
     if (test.status === 'completed') {
@@ -83,7 +109,7 @@ const PatientOverview = () => {
 
   // Stats for the top cards
   const nextAppointment = upcomingAppointments[0];
-  const activeMedications = 2; // From DailyMedications component
+  const activeMedications = medications.length; // From DailyMedications component
   const pendingTests = recentTests.filter(test => test.status === 'pending').length;
   const healthScore = "Good";
 
@@ -106,8 +132,8 @@ const PatientOverview = () => {
             </div>
             <div>
               <p className="text-sm text-gray-600">Next Appointment</p>
-              <p className="text-xl font-bold text-gray-900">
-                {nextAppointment ? `Jun ${new Date(nextAppointment.date).getDate()}` : 'None'}
+              <p className="text-xl font-bold text-gray-900"> 
+                {nextAppointment ? `${new Date(nextAppointment.date).toLocaleString('default', { month: 'short' })} ${new Date(nextAppointment.date).getDate()}` : 'None'}
               </p>
             </div>
           </div>
@@ -156,7 +182,7 @@ const PatientOverview = () => {
         <div>
           <HealthMetricsCarousel />
         </div>
-        
+
         {/* Daily Medications */}
         <div>
           <DailyMedications />
@@ -180,17 +206,17 @@ const PatientOverview = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {upcomingAppointments.slice(0, 2).map((appointment) => (
+              {upcomingAppointments.map((appointment) => (
                 <div key={appointment.id} className="border rounded-lg p-4 bg-blue-50">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="font-medium text-gray-900">{appointment.doctor}</h4>
-                      <p className="text-sm text-gray-600">{appointment.specialization}</p>
+                      <h4 className="font-medium text-gray-900">{appointment.doctorName}</h4>
+                      <p className="text-sm text-gray-600">{appointment.hospitalName}</p>
+                      <p className="text-xs text-gray-500 mt-1"> Chamber: {appointment.chamber}</p>
                       <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
                         <span>{appointment.date}</span>
                         <span>{appointment.time}</span>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">{appointment.hospital}</p>
                     </div>
                     <Badge className="bg-green-100 text-green-800">Confirmed</Badge>
                   </div>
@@ -216,11 +242,10 @@ const PatientOverview = () => {
           <CardContent>
             <div className="space-y-4">
               {recentTests.map((test) => (
-                <div 
-                  key={test.id} 
-                  className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                    test.status === 'completed' ? 'bg-green-50 hover:bg-green-100' : 'bg-yellow-50 hover:bg-yellow-100'
-                  }`}
+                <div
+                  key={test.id}
+                  className={`border rounded-lg p-4 cursor-pointer transition-colors ${test.status === 'completed' ? 'bg-green-50 hover:bg-green-100' : 'bg-yellow-50 hover:bg-yellow-100'
+                    }`}
                   onClick={() => handleTestClick(test)}
                 >
                   <div className="flex items-center justify-between">

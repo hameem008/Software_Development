@@ -1,6 +1,7 @@
 package com.example.MediLine.Repository;
 
 
+import com.example.MediLine.DTO.AppointmentDTO.AppointmentDTO;
 import com.example.MediLine.Entity.Appointment;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -64,4 +65,25 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     """)
     List<Appointment> findPastAppointments(@Param("doctorId") Integer doctorId);
 
+    @Query("""
+        SELECT new com.example.MediLine.DTO.AppointmentDTO.AppointmentDTO(
+            a.appointmentId,
+            d.doctorId,
+            CONCAT(d.firstName, ' ', d.lastName),
+            h.hospitalId,
+            h.name,
+            a.date,
+            a.time,
+            da.chamber,
+            a.serialNumber
+        )
+        FROM Appointment a
+        JOIN a.slot da
+        JOIN da.doctor d
+        JOIN da.hospital h
+        WHERE a.patient.patientId = :patientId
+          AND a.date >= CURRENT_DATE
+        ORDER BY a.date, a.time
+    """)
+    List<AppointmentDTO> getUpcomingAppointmentsByPatientId(@Param("patientId") Integer patientId);
 }
