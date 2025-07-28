@@ -42,7 +42,7 @@ public class TestRequest {
     private LocalDate requestedDate;
 
 
-    public static enum TestRequestStatus {
+    public enum TestRequestStatus {
         PENDING,
         COMPLETED
     }

@@ -47,7 +47,7 @@ public class HospitalTestService {
                 .test(test)
                 .patient(patient)
                 .prescription(prescription)
-                .status(TestRequestStatus.Pending)
+                .status(TestRequestStatus.PENDING)
                 .requestedDate(LocalDate.now())
                 .hospital(hospital)
                 .build();
@@ -60,7 +60,7 @@ public class HospitalTestService {
         TestRequest testRequest = testRequestRepository
                 .findByTestRequestIdAndStatus(
                         saveTestResultRequest.getRequestId(),
-                        TestRequestStatus.Pending)
+                        TestRequestStatus.PENDING)
                 .orElseThrow(() -> new IllegalArgumentException("Test request not found"));
 
         System.out.println("checking authorization..................................");
@@ -105,7 +105,7 @@ public class HospitalTestService {
 
         System.out.println("uploaded..................................");
 
-        testRequest.setStatus(TestRequestStatus.Complete);
+        testRequest.setStatus(TestRequestStatus.COMPLETED);
 
         System.out.println("done ..................................");
     }

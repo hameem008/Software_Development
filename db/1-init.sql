@@ -219,12 +219,12 @@ CREATE TABLE doctor_availability (
 -- Appointment Table
 CREATE TABLE appointment (
     appointment_id SERIAL PRIMARY KEY,
-    doctor_id INT REFERENCES doctor(doctor_id) ON DELETE CASCADE,
     patient_id INT REFERENCES patient(patient_id) ON DELETE CASCADE,
     date DATE CHECK (date >= CURRENT_DATE),
     time TIME,
     slot_id INT REFERENCES doctor_availability(slot_id),
     serial_number INT,
+    status VARCHAR(20) CHECK (status IN ('UPCOMING', 'COMPLETED')),
     CONSTRAINT unq_appointment_slot_serial UNIQUE (slot_id, serial_number, date)
 );
 
