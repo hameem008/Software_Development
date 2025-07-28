@@ -255,7 +255,7 @@ CREATE TABLE test_request (
     test_id INT REFERENCES tests(test_id),
     hospital_id INT REFERENCES hospital(hospital_id),
     requested_date DATE DEFAULT CURRENT_DATE,
-    status VARCHAR(10) CHECK (status IN ('Pending', 'Accepted', 'Rejected', 'Sample Collected')),
+    status VARCHAR(10) CHECK (status IN ('PENDING', 'COMPLETED')),
     prescription_id INT REFERENCES prescription(prescription_id) ON DELETE CASCADE,
     notes TEXT
 );

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "performed_tests")
@@ -45,5 +47,9 @@ public class PerformedTest {
 
     @Column(name = "pdf_url")
     private String pdfUrl;
+
+    @OneToMany(mappedBy = "performedTest", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<TestResultValue> resultValues = new HashSet<>();
 
 }
