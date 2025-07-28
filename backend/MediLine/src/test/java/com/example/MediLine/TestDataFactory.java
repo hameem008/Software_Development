@@ -1,12 +1,15 @@
 package com.example.MediLine;
 
+import com.example.MediLine.DTO.MedicalHistoryDTO.TestListRequest;
 import com.example.MediLine.Entity.*;
 import com.example.MediLine.Entity.Symptom.SymptomId;
 import com.example.MediLine.Entity.TestResultValue.TestResultKey;
 import com.example.MediLine.Entity.TestParam.TestParamKey;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 public class TestDataFactory {
@@ -125,6 +128,12 @@ public class TestDataFactory {
         prescription.setPatient(createPatient());
         prescription.setHospital(createHospital());
         prescription.setBloodPressure("120/80");
+        prescription.setWeight(BigDecimal.valueOf(70.0));
+        prescription.setHeartRate(75);
+        prescription.setSummary("General Checkup");
+        prescription.setSymptoms("Fever, Cough");
+        prescription.setPrescribedDate(LocalDate.now());
+        prescription.setNextAppointmentDate(LocalDate.now().plusDays(7));
         return prescription;
     }
 
@@ -152,6 +161,14 @@ public class TestDataFactory {
         prescribedMedicine.setDurationUnit("days");
 
         return prescribedMedicine;
+    }
+
+    public static TestListRequest createTestListRequest() {
+        TestListRequest request = new TestListRequest();
+        request.setTestId(1);
+        request.setDateFrom(LocalDate.now().minusDays(7));
+        request.setDateTo(LocalDate.now().minusDays(7));
+        return request;
     }
 
 }

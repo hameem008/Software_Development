@@ -151,7 +151,6 @@ public class MedicalHistoryService {
     }
 
     protected PerformedTest getPerformedTest(Integer performedTestId) {
-        System.out.println("Fetching performed test with ID: " + performedTestId);
         return performedTestRepository.findByPerformedTestId(performedTestId)
                 .orElseThrow(() -> new IllegalArgumentException("Test not found or access denied."));
     }
