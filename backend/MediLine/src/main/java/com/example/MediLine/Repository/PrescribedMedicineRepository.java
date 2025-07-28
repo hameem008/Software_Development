@@ -22,7 +22,6 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
     """)
     List<PrescribedMedicine> findByPrescriptionId(
             @Param("prescriptionId") Integer prescriptionId);
-}
 
     @Query("""
         SELECT new com.example.MediLine.DTO.CurrentMedicineDTO(
