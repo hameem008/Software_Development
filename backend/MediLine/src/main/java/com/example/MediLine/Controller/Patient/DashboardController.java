@@ -1,7 +1,7 @@
 package com.example.MediLine.Controller.Patient;
 
 import com.example.MediLine.Annotation.CurrentPatient;
-import com.example.MediLine.DTO.PrescribedMedicineDTO;
+import com.example.MediLine.DTO.CurrentMedicineDTO;
 import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Repository.PrescribedMedicineRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,8 @@ public class DashboardController {
         if (patient == null) {
             return ResponseEntity.badRequest().body(null);
         }
-        List<PrescribedMedicineDTO> currentMedicines = prescribedMedicineRepository.findActiveMedicinesByPatientId(patient.getPatientId());
+        List<CurrentMedicineDTO> currentMedicines = prescribedMedicineRepository.findActiveMedicinesByPatientId(patient.getPatientId());
+        System.out.println(currentMedicines);
         return ResponseEntity.ok(currentMedicines);
     }
 }

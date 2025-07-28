@@ -1,8 +1,8 @@
 package com.example.MediLine.Repository;
 
-import com.example.MediLine.DTO.PrescribedMedicineDTO;
 import com.example.MediLine.Entity.PrescribedMedicine;
 import com.example.MediLine.Entity.PrescribedMedicine.PrescribedMedicineId;
+import com.example.MediLine.DTO.CurrentMedicineDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,6 +28,7 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
         SELECT new com.example.MediLine.DTO.PrescribedMedicineDTO(
             pm.id.prescriptionId,
             pm.id.medicineId,
+            m.medicineName,
             pm.dosage,
             pm.frequency,
             pm.durationValue,
@@ -36,6 +37,7 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
         )
         FROM PrescribedMedicine pm
         JOIN pm.prescription p
+        JOIN pm.medicine m
         WHERE p.patient.patientId = :patientId
         AND p.prescribedDate <= CURRENT_DATE
         AND CASE pm.durationUnit
@@ -44,5 +46,5 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
             WHEN 'month' THEN p.prescribedDate + (pm.durationValue * 30) DAY >= CURRENT_DATE
         END
     """)
-    List<PrescribedMedicineDTO> findActiveMedicinesByPatientId(@Param("patientId") Integer patientId);
+    List<CurrentMedicineDTO> findActiveMedicinesByPatientId(@Param("patientId") Integer patientId);
 }
