@@ -4,6 +4,7 @@ package com.example.MediLine.Repository;
 import com.example.MediLine.Entity.Appointment;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -25,16 +26,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             @Param("patientId") Integer patientId);
 
 
-    @Query("SELECT MAX(a.serialNumber) FROM Appointment a WHERE a.slot.slotId = :slotId")
-    int findMaxSerialNumberBySlotId(
-            @Param("slotId") Integer slotId);
-
-
-    int countBySlotSlotIdAndTimeBetween(
-            @Param("slotId") Integer slotId,
-            @Param("start") LocalTime start,
-            @Param("end") LocalTime end);
-
     boolean existsBySlotSlotIdAndDateAndTime(
             @Param("slotId") Integer slotId,
             @Param("date") LocalDate date,
@@ -48,7 +39,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
         JOIN a.slot da
         JOIN da.doctor d
         JOIN da.hospital h
-        WHERE d.doctorId = :doctorId AND a.date >= CURRENT_DATE
+        WHERE d.doctorId = :doctorId
+            AND a.status = 'UPCOMING'
         ORDER BY a.date, a.time
     """)
     List<Appointment> findUpcomingAppointments(@Param("doctorId") Integer doctorId);
@@ -59,7 +51,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
         JOIN a.slot da
         JOIN da.doctor d
         JOIN da.hospital h
-        WHERE d.doctorId = :doctorId AND a.date < CURRENT_DATE
+        WHERE d.doctorId = :doctorId
+            AND a.status = 'COMPLETED'
         ORDER BY a.date DESC, a.time DESC
     """)
     List<Appointment> findPastAppointments(@Param("doctorId") Integer doctorId);
@@ -74,5 +67,34 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     boolean existsByDoctorAndPatient(
             @Param("doctorId") Integer doctorId,
             @Param("patientId") Integer patientId);
+
+
+    @Modifying
+    @Query("""
+        UPDATE Appointment ap
+        SET ap.status = 'COMPLETED'
+        WHERE ap.appointmentId = :appointmentId
+    """)
+    void setStatusToComplete(@Param("appointmentId") Integer appointmentId);
+
+    @Query("""
+        SELECT COUNT(a) > 0
+        FROM Appointment a
+        JOIN a.patient p
+        JOIN a.slot da
+        JOIN da.doctor d
+        JOIN da.hospital h
+        WHERE a.appointmentId = :appointmentId
+            AND d.doctorId = :doctorId
+            AND p.patientId = :patientId
+            AND h.hospitalId = :hospitalId
+            AND a.status = 'UPCOMING'
+            AND a.date = CURRENT_DATE
+    """)
+    boolean existsScheduled(
+        @Param("appointmentId") Integer appointmentId,
+        @Param("patientId") Integer patientId,
+        @Param("doctorId") Integer doctorId,
+        @Param("hospitalId") Integer hospitalId);
 
 }

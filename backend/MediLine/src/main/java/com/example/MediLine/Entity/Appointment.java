@@ -36,4 +36,13 @@ public class Appointment {
 
     @Column(name = "serial_number")
     private Integer serialNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AppointmentStatus status;
+
+    public enum AppointmentStatus {
+        UPCOMING,
+        COMPLETED
+    }
 }

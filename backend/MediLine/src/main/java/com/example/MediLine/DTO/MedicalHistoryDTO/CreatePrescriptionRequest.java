@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatePrescriptionRequest {
+    private Integer appointmentId;
+
     @NotNull
     private Integer patientId;
 

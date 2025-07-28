@@ -26,10 +26,14 @@ public class AddPrescriptionService {
     private final DiseaseRepository diseaseRepository;
     private final TestRepository testRepository;
     private final DoctorAuthorizationService doctorAuthorizationService;
+    private final AppointmentRepository appointmentRepository;
 
 
     @Transactional
     public void createPrescription(CreatePrescriptionRequest request, Integer doctorId) {
+
+        checkAppointmentValidity(request, doctorId);
+
         doctorAuthorizationService
                 .checkDoctorsAccessToPatient(doctorId, request.getPatientId());
 
@@ -58,6 +62,7 @@ public class AddPrescriptionService {
         prescription.setPrescribedMedicines(prescribedMedicines);
 
         prescriptionRepository.save(prescription);
+        changeAppointmentStatusToComplete(request);
     }
 
     public List<IdNameDTO> getAllDiseaseNames() {
@@ -155,5 +160,25 @@ public class AddPrescriptionService {
                     return diagnosedDisease;
                 })
                 .collect(Collectors.toSet());
+    }
+
+    private void checkAppointmentValidity(
+            CreatePrescriptionRequest request, Integer doctorId) {
+
+        if(request.getAppointmentId() == null) return;
+
+        if(!appointmentRepository.existsScheduled(
+                request.getAppointmentId(),
+                request.getPatientId(),
+                doctorId,
+                request.getHospitalId()
+        )) {
+            throw new IllegalArgumentException("Appointment is not valid or does not exist.");
+        }
+    }
+
+    private void changeAppointmentStatusToComplete(CreatePrescriptionRequest request) {
+        if(request.getAppointmentId() == null) return;
+        appointmentRepository.setStatusToComplete(request.getAppointmentId());
     }
 }
