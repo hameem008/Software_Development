@@ -54,7 +54,6 @@ public class ChatController {
             String reply = geminiService.getGeminiResponse(message);
 
             if (reply.startsWith("Error:")) {
-                logger.error("Error response from Gemini service: {}", reply);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(Map.of("error", reply));
             }

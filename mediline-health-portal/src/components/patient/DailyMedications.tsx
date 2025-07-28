@@ -1,20 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Pill, Clock, X } from 'lucide-react';
+import { Pill, Clock, X, CodeSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import api from '@/lib/api';
 
 interface DailyMedication {
   id: string;
   name: string;
   dosage: string;
   frequency: string;
-  instructions: string;
-  startDate: string;
-  endDate: string;
-  status: 'active' | 'pending_discontinue' | 'discontinued';
+  durationValue: string;
+  durationUnit: string;
+  instruction: string;
+  status: 'active';
 }
 
 const mockDailyMedications: DailyMedication[] = [
@@ -23,19 +24,19 @@ const mockDailyMedications: DailyMedication[] = [
     name: 'Lisinopril',
     dosage: '10mg',
     frequency: 'Once daily',
-    instructions: 'Take with or without food',
-    startDate: '2024-05-28',
-    endDate: '2024-06-28',
-    status: 'active'
+    durationValue: '3',
+    durationUnit: 'day',
+    status: 'active',
+    instruction: 'Take with or without food'
   },
   {
     id: '2',
     name: 'Aspirin',
     dosage: '81mg',
     frequency: 'Once daily',
-    instructions: 'Take with food to avoid stomach upset',
-    startDate: '2024-05-28',
-    endDate: '2024-06-28',
+    durationValue: '3',
+    durationUnit: 'day',
+    instruction: 'Take with food to avoid stomach upset',
     status: 'active'
   },
   {
@@ -43,31 +44,46 @@ const mockDailyMedications: DailyMedication[] = [
     name: 'Metformin',
     dosage: '500mg',
     frequency: 'Twice daily',
-    instructions: 'Take with meals',
-    startDate: '2024-05-20',
-    endDate: '2024-06-20',
-    status: 'pending_discontinue'
+    durationValue: '3',
+    durationUnit: 'day',
+    instruction: 'Take with meals',
+    status: 'active'
   }
 ];
 
 const DailyMedications = () => {
-  const [medications, setMedications] = useState(mockDailyMedications);
+  const [medications, setMedications] = useState(null);
   const { toast } = useToast();
 
-  const requestDiscontinue = (medicationId: string, medicationName: string) => {
-    setMedications(prev => 
-      prev.map(med => 
-        med.id === medicationId 
-          ? { ...med, status: 'pending_discontinue' as const }
-          : med
-      )
-    );
+  useEffect(() => {
+    const fetchCurrentMedicines = async () => {
+      try {
+        const response = await api.get('/patient/current-medicine');
+        setMedications(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching current mediciens:', error);
+      }
+    };
+    fetchCurrentMedicines();
+  }, []);
+
+  if (!medications) return <div>Loading medications...</div>;
+
+  // const requestDiscontinue = (medicationId: string, medicationName: string) => {
+  //   setMedications(prev => 
+  //     prev.map(med => 
+  //       med.id === medicationId 
+  //         ? { ...med, status: 'pending_discontinue' as const }
+  //         : med
+  //     )
+  //   );
     
-    toast({
-      title: "Request Sent",
-      description: `Your request to discontinue ${medicationName} has been sent to the doctor.`,
-    });
-  };
+  //   toast({
+  //     title: "Request Sent",
+  //     description: `Your request to discontinue ${medicationName} has been sent to the doctor.`,
+  //   });
+  // };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -102,18 +118,18 @@ const DailyMedications = () => {
                     <div className="flex items-center space-x-3 mb-2">
                       <h4 className="font-medium text-gray-900">{medication.name}</h4>
                       <Badge variant="secondary">{medication.dosage}</Badge>
-                      {getStatusBadge(medication.status)}
+                      {getStatusBadge('active')}
                     </div>
                     <div className="space-y-1 text-sm text-gray-600">
                       <div className="flex items-center">
                         <Clock className="w-3 h-3 mr-1" />
                         <span>{medication.frequency}</span>
                       </div>
-                      <p><strong>Instructions:</strong> {medication.instructions}</p>
-                      <p><strong>Duration:</strong> {medication.startDate} to {medication.endDate}</p>
+                      <p><strong>Instruction:</strong> {medication.instruction}</p>
+                      <p><strong>Duration:</strong> {medication.durationValue} {medication.durationUnit}</p>
                     </div>
                   </div>
-                  {medication.status === 'active' && (
+                  {/* {medication.status === 'active' && (
                     <Button
                       variant="ghost"
                       size="sm"
@@ -123,7 +139,7 @@ const DailyMedications = () => {
                       <X className="w-4 h-4 mr-1" />
                       Stop
                     </Button>
-                  )}
+                  )} */}
                 </div>
               </div>
             ))
