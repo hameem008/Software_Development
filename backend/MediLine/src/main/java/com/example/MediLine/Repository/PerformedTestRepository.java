@@ -1,10 +1,7 @@
 package com.example.MediLine.Repository;
 
-import com.example.MediLine.DTO.IdNameDTO;
-import com.example.MediLine.Entity.Disease;
 import com.example.MediLine.Entity.PerformedTest;
 import com.example.MediLine.Entity.Test;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,20 +16,6 @@ import java.util.Optional;
 
 @Repository
 public interface PerformedTestRepository extends JpaRepository<PerformedTest, Integer>, JpaSpecificationExecutor<PerformedTest> {
-    @EntityGraph(attributePaths = {
-        "prescription",
-        "prescription.doctor",
-        "performedByDoctor",
-        "reviewedByDoctor",
-        "hospital"
-    })
-    @Query("""
-        SELECT pt FROM PerformedTest pt
-        JOIN pt.prescription p
-        WHERE p.patient.patientId = :patientId
-        ORDER BY pt.testDate DESC
-    """)
-    List<PerformedTest> findByPatientIdWithDetails(@Param("patientId") Integer patientId);
 
 
     @EntityGraph(attributePaths = {

@@ -4,7 +4,7 @@ import com.example.MediLine.Annotation.CurrentPatient;
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.Patient;
-import com.example.MediLine.Service.Patient.PatientHistoryService;
+import com.example.MediLine.Service.Patient.PatientMedicalHistoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientMedicalHistoryController {
 
-    private final PatientHistoryService patientHistoryService;
+    private final PatientMedicalHistoryService patientHistoryService;
 
 
     @GetMapping("/severity-level-options")
@@ -65,7 +65,7 @@ public class PatientMedicalHistoryController {
 
 
     @GetMapping("/test-names")
-    public ResponseEntity<List<IdNameDTO>> getAllTestNames(
+    public ResponseEntity<List<IdNameDTO>> getPerformedTestNames(
             @CurrentPatient Patient patient) {
 
         List<IdNameDTO> testNames =
@@ -79,12 +79,13 @@ public class PatientMedicalHistoryController {
         return ResponseEntity.ok(testNames);
     }
 
-    @GetMapping("/all-medical-tests")
+    @PostMapping("/all-performed-tests")
     public ResponseEntity<List<TestSummaryDTO>> getAllMedicalTests(
+            @RequestBody TestListRequest testListRequest,
             @CurrentPatient Patient patient) {
 
         List<TestSummaryDTO> performedTests =
-                patientHistoryService.getAllPerformedTests(patient.getPatientId());
+                patientHistoryService.getAllPerformedTests(testListRequest, patient.getPatientId());
 
         if (performedTests.isEmpty())
             return ResponseEntity.noContent().build();

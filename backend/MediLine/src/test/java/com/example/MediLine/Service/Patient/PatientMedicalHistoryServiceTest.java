@@ -6,6 +6,7 @@
 //import com.example.MediLine.DTO.MedicalHistoryDTO.TestResultDTO.ResultEntry;
 //import com.example.MediLine.Entity.*;
 //import com.example.MediLine.Repository.*;
+//import com.example.MediLine.Service.MedicalHistoryService;
 //import com.example.MediLine.TestDataFactory;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@
 //import static org.mockito.ArgumentMatchers.any;
 //import static org.mockito.Mockito.*;
 //
-//public class PatientHistoryServiceTest {
+//public class PatientMedicalHistoryServiceTest {
 //
 //    @Mock
 //    private SymptomRepository symptomRepository;
@@ -37,19 +38,19 @@
 //    @Mock private TestParamRepository testParamRepository;
 //
 //    @InjectMocks
-//    private PatientHistoryService patientHistoryService;
+//    private PatientMedicalHistoryService patientHistoryService;
+//
+//    @InjectMocks
+//    private MedicalHistoryService medicalHistoryService;
 //
 //    @BeforeEach
 //    void setup() {
 //        MockitoAnnotations.openMocks(this);
 //
-//        patientHistoryService = new PatientHistoryService(
+//        patientHistoryService = new PatientMedicalHistoryService(
 //                symptomRepository, performedTestRepository,
 //                patientRepository, severityRepository,
-//                moodRepository, prescriptionRepository,
-//                diagnosedDiseaseRepository, prescribedMedicineRepository,
-//                prescribedTestRepository, testResultValueRepository,
-//                testParamRepository
+//                moodRepository, prescriptionRepository, medicalHistoryService
 //        );
 //    }
 //

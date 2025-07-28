@@ -115,8 +115,8 @@ public class MedicalHistoryService {
     }
 
 
-    public TestResultDTO getTestResultDetails(Integer testId) {
-        PerformedTest performedTest = getPerformedTest(testId);
+    public TestResultDTO getTestResultDetails(Integer performedTestId) {
+        PerformedTest performedTest = getPerformedTest(performedTestId);
         List<ResultEntry> results = getTestResultValues(performedTest);
 
         return createTestResultDTO(performedTest, results);
@@ -150,9 +150,9 @@ public class MedicalHistoryService {
                 .build();
     }
 
-    protected PerformedTest getPerformedTest(Integer testId) {
-        System.out.println("Fetching performed test with ID: " + testId);
-        return performedTestRepository.findByPerformedTestId(testId)
+    protected PerformedTest getPerformedTest(Integer performedTestId) {
+        System.out.println("Fetching performed test with ID: " + performedTestId);
+        return performedTestRepository.findByPerformedTestId(performedTestId)
                 .orElseThrow(() -> new IllegalArgumentException("Test not found or access denied."));
     }
 
@@ -160,7 +160,8 @@ public class MedicalHistoryService {
         Integer testId = performedTest.getTest().getId();
 
         List<TestResultValue> values = testResultValueRepository
-                .findByPerformedTestPerformedTestId(testId);
+                .findByPerformedTestId(performedTest.getPerformedTestId());
+
         List<TestParam> params = testParamRepository
                 .findByTestId(testId);
 

@@ -1,8 +1,6 @@
 package com.example.MediLine.Service.Patient;
 
 
-import com.example.MediLine.DTO.DoctorBaseDTO;
-import com.example.MediLine.DTO.HospitalBaseDTO;
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
 import com.example.MediLine.Entity.*;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PatientHistoryService {
+public class PatientMedicalHistoryService {
 
     private final SymptomRepository symptomRepository;
     private final PerformedTestRepository performedTestRepository;
@@ -53,29 +51,10 @@ public class PatientHistoryService {
     }
 
 
-    public List<TestSummaryDTO> getAllPerformedTests(Integer patientId) {
-        return performedTestRepository.findByPatientIdWithDetails(patientId)
-                .stream().map(pt -> {
+    public List<TestSummaryDTO> getAllPerformedTests(TestListRequest testListRequest, Integer patientId) {
 
-            DoctorBaseDTO orderedBy = createDoctorBaseDTO(pt.getPrescription().getDoctor());
-            DoctorBaseDTO performedBy = createDoctorBaseDTO(pt.getPerformedByDoctor());
-            DoctorBaseDTO reviewedBy = createDoctorBaseDTO(pt.getReviewedByDoctor());
-
-            HospitalBaseDTO hospital =
-                    createHospitalBaseDTO(pt.getHospital());
-
-            return TestSummaryDTO.builder()
-                    .performedTestId(pt.getPerformedTestId())
-                    .name(pt.getTest().getTestName())
-                    .orderedBy(orderedBy)
-                    .date(pt.getTestDate())
-                    .performedBy(performedBy)
-                    .reviewedBy(reviewedBy)
-                    .hospital(hospital)
-                    .build();
-        }).toList();
+        return medicalHistoryService.getAllPerformedTests(testListRequest, patientId);
     }
-
 
     public PrescriptionDTO getPrescriptionDetails(Integer prescriptionId, Integer patientId) {
         if(!prescriptionRepository.patientIsAuthorized(prescriptionId, patientId)) {
@@ -103,12 +82,12 @@ public class PatientHistoryService {
     }
 
 
-    public TestResultDTO getTestResult(Integer testId, Integer patientId) {
-        if(!performedTestRepository.patientIsAuthorized(testId, patientId)) {
+    public TestResultDTO getTestResult(Integer performedTestId, Integer patientId) {
+        if(!performedTestRepository.patientIsAuthorized(performedTestId, patientId)) {
             throw new IllegalArgumentException("Access denied");
         }
 
-        return medicalHistoryService.getTestResultDetails(testId);
+        return medicalHistoryService.getTestResultDetails(performedTestId);
     }
 
     public List<PrescriptionSummaryDTO> getPrescriptionSummaries(
@@ -129,33 +108,6 @@ public class PatientHistoryService {
     public List<IdNameDTO> getPerformedTestNames(Integer patientId) {
         return medicalHistoryService.getPerformedTestNames(patientId);
     }
-
-    protected DoctorBaseDTO createDoctorBaseDTO(Doctor doctor) {
-        if (doctor == null) {
-            return null;
-        }
-        return DoctorBaseDTO.builder()
-                .doctorId(doctor.getDoctorId())
-                .name(doctor.getFirstName() + " " + doctor.getLastName())
-                .specialization(doctor.getSpecialization())
-                .designation(doctor.getDesignation())
-                .academicInstitution(doctor.getAcademicInstitution())
-                .build();
-    }
-
-
-    protected HospitalBaseDTO createHospitalBaseDTO(Hospital hospital) {
-        if (hospital == null) {
-            return null;
-        }
-        return HospitalBaseDTO.builder()
-                .hospitalId(hospital.getHospitalId())
-                .name(hospital.getName())
-                .address(hospital.getAddress())
-                .build();
-    }
-
-
 
 }
 
