@@ -23,6 +23,15 @@ public class ChatController {
     private final SymptomRepository symptomRepository;
     private final DoctorRepository doctorRepository;
 
+    // Valid specializations list
+    private static final Set<String> VALID_SPECIALIZATIONS = Set.of(
+            "Immunology", "Anesthesiology", "Cardiology", "Dermatology",
+            "Endocrinology", "Gastroenterology", "Gynecology", "Hematology",
+            "Nephrology", "Neurology", "Oncology", "Ophthalmology",
+            "Orthopedics", "Otolaryngology", "Pediatrics", "Psychiatry",
+            "Pulmonology", "Radiology", "Urology", "Medicine"
+    );
+
     // Message type enum
     public enum MessageType {
         GENERAL,
@@ -141,11 +150,15 @@ public class ChatController {
      */
     private String extractSpecializationWithLLM(String message) {
         try {
+            // Create specializations list for the prompt
+            String specializationsList = String.join(", ", VALID_SPECIALIZATIONS);
+
             String extractionPrompt = "Extract the medical specialization mentioned in the following message. " +
-                    "If no specific specialization is mentioned, respond with 'General Medicine'. " +
-                    "Available specializations: Cardiology, Neurology, Dermatology, Orthopedics, Pediatrics, " +
-                    "Gynecology, Psychiatry, Oncology, Gastroenterology, ENT, Ophthalmology, Urology. " +
-                    "Respond with ONLY the specialization name.\n\n" +
+                    "If no specific specialization is mentioned, respond with 'Medicine'. " +
+                    "Available specializations: " + specializationsList + ". " +
+                    "Respond with ONLY the exact specialization name from the list above. " +
+                    "If the user mentions a doctor type that corresponds to a specialization (like 'cardiologist' for 'Cardiology'), " +
+                    "return the corresponding specialization name.\n\n" +
                     "Message: \"" + message + "\"";
 
             List<Map<String, String>> extractionHistory = new ArrayList<>();
@@ -155,53 +168,25 @@ public class ChatController {
 
             if (response != null && !response.startsWith("Error:")) {
                 String cleanResponse = response.trim();
-                // Validate if the response is a known specialization
-                Set<String> validSpecializations = Set.of(
-                        "Cardiology", "Neurology", "Dermatology", "Orthopedics", "Pediatrics",
-                        "Gynecology", "Psychiatry", "Oncology", "Gastroenterology", "ENT",
-                        "Ophthalmology", "Urology", "General Medicine"
-                );
 
-                for (String specialization : validSpecializations) {
+                // Check if the response matches any valid specialization (case-insensitive)
+                for (String specialization : VALID_SPECIALIZATIONS) {
                     if (cleanResponse.equalsIgnoreCase(specialization)) {
+                        logger.info("LLM extracted specialization: {} from message: {}", specialization,
+                                message.substring(0, Math.min(50, message.length())));
                         return specialization;
                     }
                 }
+
+                logger.warn("LLM returned invalid specialization: {}, defaulting to Medicine", cleanResponse);
             }
         } catch (Exception e) {
             logger.error("Error in LLM specialization extraction: {}", e.getMessage());
         }
 
-        // Fallback to pattern matching
-        return extractSpecializationWithPatterns(message);
-    }
-
-    /**
-     * Fallback pattern-based specialization extraction
-     */
-    private String extractSpecializationWithPatterns(String message) {
-        String lowerMessage = message.toLowerCase();
-
-        Map<String, String> specializationMap = Map.of(
-                "cardiologist", "Cardiology",
-                "neurologist", "Neurology",
-                "dermatologist", "Dermatology",
-                "orthopedic", "Orthopedics",
-                "pediatrician", "Pediatrics",
-                "gynecologist", "Gynecology",
-                "psychiatrist", "Psychiatry",
-                "oncologist", "Oncology",
-                "gastroenterologist", "Gastroenterology",
-                "ent", "ENT"
-        );
-
-        for (Map.Entry<String, String> entry : specializationMap.entrySet()) {
-            if (lowerMessage.contains(entry.getKey())) {
-                return entry.getValue();
-            }
-        }
-
-        return "General Medicine"; // Default specialization
+        // Fallback to default specialization
+        logger.info("Falling back to default specialization: Medicine");
+        return "Medicine";
     }
 
     /**
