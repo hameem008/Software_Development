@@ -28,7 +28,7 @@ const DoctorRegister = () => {
   });
 
   const specializations = [
-    'Allergy and Immunology',
+    'Immunology',
     'Anesthesiology',
     'Cardiology',
     'Dermatology',
@@ -36,7 +36,6 @@ const DoctorRegister = () => {
     'Gastroenterology',
     'Gynecology',
     'Hematology',
-    'Infectious Disease',
     'Nephrology',
     'Neurology',
     'Oncology',
@@ -47,7 +46,8 @@ const DoctorRegister = () => {
     'Psychiatry',
     'Pulmonology',
     'Radiology',
-    'Urology'
+    'Urology',
+    'Medicine'
   ].sort();
 
   const designations = [
