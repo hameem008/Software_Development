@@ -8,6 +8,8 @@ on:
 jobs:
   test-and-build:
     runs-on: ubuntu-22.04
+    env:
+      SPRING_PROFILES_ACTIVE: test
 
     steps:
       - name: ⬇️ Checkout code
@@ -24,35 +26,51 @@ jobs:
             exit 1
           fi
 
+      # ☕ Set up JDK 21 with explicit configuration
       - name: ☕ Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: maven
+          cache: 'maven'
+          check-latest: true
+          cache-dependency-path: '**/pom.xml'
 
       - name: 🔍 Verify Java setup
         run: |
+          echo "=== Java Version ==="
           java -version
+          echo "=== Javac Version ==="
           javac -version
+          echo "=== JAVA_HOME ==="
+          echo $JAVA_HOME
+          echo "=== Maven Version ==="
+          mvn -version
 
       - name: 📦 Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      # ✅ Run backend tests
+      # ✅ Run backend tests with Java 21 verification
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
         run: |
+          echo "=== Verifying Java Version in Maven ==="
+          ./mvnw -v
+          echo "=== Building with Maven ==="
           ./mvnw clean test -B
+          echo "=== Java Version Used in Build ==="
+          ./mvnw help:evaluate -Dexpression=java.version -q -DforceStdout
 
       # Install frontend dependencies
       - name: 📦 Install frontend dependencies
         working-directory: ./mediline-health-portal
-        run: npm install
+        run: npm ci
 
-      # Start backend server in background
+      # Start backend server in background with test profile
       - name: 🚀 Start Backend server
         working-directory: ./backend/MediLine
         run: |
@@ -66,7 +84,7 @@ jobs:
               echo "✅ Backend is up!"
               break
             fi
-            echo "⏳ Waiting for backend..."
+            echo "⏳ Waiting for backend (attempt $i/30)..."
             sleep 5
           done
 
@@ -83,7 +101,7 @@ jobs:
               echo "✅ Frontend is up!"
               break
             fi
-            echo "⏳ Waiting for frontend..."
+            echo "⏳ Waiting for frontend (attempt $i/30)..."
             sleep 5
           done
 
@@ -98,18 +116,18 @@ jobs:
           pkill -f 'spring-boot:run' || true
           pkill -f 'vite' || true
 
-      # Set up Docker Buildx
+      # 🐳 Set up Docker Buildx
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Log in to Docker Hub
+      # 🔐 Log in to Docker Hub
       - name: 🔐 Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
-      # Build and push DB image
+      # 📦 Build and push DB image
       - name: 📦 Build & Push DB image
         uses: docker/build-push-action@v5
         with:
@@ -117,15 +135,17 @@ jobs:
           push: true
           tags: hameem08/mediline-db:latest
 
-      # Build and push Backend image
+      # 📦 Build and push Backend image
       - name: 📦 Build & Push Backend image
         uses: docker/build-push-action@v5
         with:
           context: ./backend/MediLine
           push: true
           tags: hameem08/mediline-backend:latest
+          build-args:
+            JAVA_VERSION: 21
 
-      # Build and push Frontend image
+      # 📦 Build and push Frontend image
       - name: 📦 Build & Push Frontend image
         uses: docker/build-push-action@v5
         with:
