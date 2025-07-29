@@ -1,4 +1,4 @@
-package com.example.MediLine.DTO;
+package com.example.MediLine.DTO.TestUploadDTO;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,11 @@
 package com.example.MediLine.Service.Hospital;
 
-import com.example.MediLine.DTO.CreateTestRequest;
-import com.example.MediLine.DTO.SaveTestResultRequest;
-import com.example.MediLine.DTO.SaveTestResultRequest.ResultEntry;
+import com.example.MediLine.DTO.PatientInfoDTO;
+import com.example.MediLine.DTO.TestUploadDTO.CreateTestRequest;
+import com.example.MediLine.DTO.IdNameDTO;
+import com.example.MediLine.DTO.TestUploadDTO.SaveTestResultRequest;
+import com.example.MediLine.DTO.TestUploadDTO.SaveTestResultRequest.ResultEntry;
+import com.example.MediLine.DTO.TestUploadDTO.TestParamsDTO;
 import com.example.MediLine.Entity.*;
 import com.example.MediLine.Entity.TestResultValue.TestResultKey;
 import com.example.MediLine.Entity.TestRequest.TestRequestStatus;
@@ -65,8 +68,8 @@ public class HospitalTestService {
 
         System.out.println("checking authorization..................................");
         hospitalAuthorizationService.checkAuthorizationToTestRequest(
-                saveTestResultRequest.getRequestId(),
-                hospitalId
+                hospitalId,
+                saveTestResultRequest.getRequestId()
         );
 
         validateResultParameters(
@@ -159,4 +162,62 @@ public class HospitalTestService {
                 .map(param -> param.getId().getParameterName())
                 .collect(Collectors.toList());
     }
+
+    public List<IdNameDTO> getAllDoctors() {
+        return doctorRepository.findAll().stream()
+                .map(doctor -> new IdNameDTO(
+                        doctor.getDoctorId(),
+                        doctor.getFirstName() + " " + doctor.getLastName()))
+                .collect(Collectors.toList());
+    }
+
+     public TestParamsDTO getTestParams(Integer testRequestId) {
+        TestRequest testRequest = testRequestRepository.findByIdWithPrescription(testRequestId)
+            .orElseThrow(() -> new IllegalArgumentException("Test request not found"));
+
+        List<TestParam> params = testParamRepository
+            .findByTestId(testRequest.getTest().getId());
+
+        TestParamsDTO testParamsDTO = TestParamsDTO.builder()
+            .testId(testRequest.getTest().getId())
+            .testName(testRequest.getTest().getTestName())
+            .parameters(createTestParamEntries(params))
+            .build();
+
+        if(testRequest.getPrescription() == null) return testParamsDTO;
+
+        Doctor suggestedByDoctor = testRequest.getPrescription().getDoctor();
+
+        testParamsDTO.setSuggestedByDoctorId(suggestedByDoctor.getDoctorId());
+        testParamsDTO.setSuggestedByDoctorName(
+            suggestedByDoctor.getFirstName() + " " + suggestedByDoctor.getLastName());
+
+        return testParamsDTO;
+    }
+
+    private List<TestParamsDTO.TestParamEntry> createTestParamEntries(List<TestParam> testParams) {
+        return testParams.stream().map(param -> TestParamsDTO.TestParamEntry.builder()
+                .name(param.getId().getParameterName())
+                .unit(param.getUnit())
+                .normalMaleRange(param.getIdealMaleRange())
+                .normalFemaleRange(param.getIdealFemaleRange())
+                .normalChildRange(param.getIdealChildrenRange())
+                .build()).collect(Collectors.toList());
+    }
+
+    public PatientInfoDTO getPatientInfo(Integer patientId) {
+        Patient patient = patientRepository.findById(Long.valueOf(patientId))
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found"));
+
+        return PatientInfoDTO.builder()
+                .id(patient.getPatientId())
+                .name(patient.getFirstName() + " " + patient.getLastName())
+                .email(patient.getEmail())
+                .phoneNumber(patient.getPhoneNumber())
+                .dateOfBirth(patient.getDateOfBirth())
+                .bloodGroup(patient.getBloodGroup())
+                .build();
+    }
+
+
 }
