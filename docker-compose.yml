@@ -13,9 +13,16 @@ jobs:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
 
-      # ✅ Fix Maven wrapper permissions right after checkout
+      # ✅ Fix Maven wrapper permissions right after checkout with debugging
       - name: 🛠 Fix Maven wrapper permissions
-        run: chmod +x ./backend/MediLine/mvnw
+        working-directory: ./backend/MediLine
+        run: |
+          echo "📋 Checking current permissions..."
+          ls -la mvnw
+          echo "🔧 Setting execute permissions..."
+          chmod +x mvnw
+          echo "✅ Verifying permissions after chmod..."
+          ls -la mvnw
 
       - name: ☕ Set up JDK 17
         uses: actions/setup-java@v3
