@@ -100,7 +100,13 @@ const DoctorAppointments = () => {
             </div>
 
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900">{appointment.patientName}</h3>
+              <Link 
+                  to={`/doctor/patients`}
+                  className="text-lg font-semibold text-gray-900 hover:text-medical-600 transition-colors"
+                >
+                  {appointment.patientName}
+                </Link>
+              {/* <h3 className="text-lg font-semibold text-gray-900">{appointment.patientName}</h3> */}
               <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
                 <Calendar className="w-4 h-4 mr-1 text-medical-600" />
                 {appointment.date}
@@ -108,7 +114,10 @@ const DoctorAppointments = () => {
                 {appointment.time}
               </div>
               <p className="text-sm text-gray-500 mt-2">
-                Hospital: {appointment.hospital} — {appointment.chamber}
+                Hospital: {appointment.hospital}
+              </p>
+              <p className="text-sm text-gray-500">
+                Serial: {appointment.serialNumber}
               </p>
             </div>
           </div>

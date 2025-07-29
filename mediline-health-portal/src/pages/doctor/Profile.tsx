@@ -1,18 +1,20 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useAuth } from '@/context/AuthContext';
-import { mockDoctors } from '@/data/mockData';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Calendar, 
-  Star, 
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
+import api from '@/lib/api';
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  Star,
   Edit3,
   GraduationCap,
   Building,
@@ -20,19 +22,45 @@ import {
 } from 'lucide-react';
 
 const DoctorProfile = () => {
-  const { user } = useAuth();
+  const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Find current doctor data
-  const doctorData = mockDoctors.find(d => d.id === user?.id) || mockDoctors[0];
+  const [doctorProfile, setDoctorProfile] = useState(null);
 
-  const handleEditProfile = () => {
-    setIsEditing(!isEditing);
-    if (isEditing) {
-      // Simulate save
-      console.log('Profile saved');
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await api.get('/doctor/profiles');
+        setDoctorProfile(response.data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const handleSave = async () => {
+    try {
+      const response = await api.post('/doctor/profile/update', doctorProfile);
+      toast({
+        title: 'Profile updated successfully!',
+        description: 'Your changes have been saved.'
+      });
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast({
+        title: 'Error updating profile',
+        description: 'There was an issue saving your changes.',
+        variant: 'destructive'
+      });
     }
   };
+
+  const handleInputChange = (field, value) => {
+    setDoctorProfile(prev => ({ ...prev, [field]: value }));
+  };
+
+  if (!doctorProfile) return <div>Loading profile...</div>;
 
   return (
     <div className="space-y-6">
@@ -41,169 +69,158 @@ const DoctorProfile = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">My Profile</h1>
           <p className="text-gray-600">Manage your professional information</p>
         </div>
-        <Button onClick={handleEditProfile} className="bg-medical-600 hover:bg-medical-700">
-          <Edit3 className="w-4 h-4 mr-2" />
-          {isEditing ? 'Save Changes' : 'Edit Profile'}
-        </Button>
+        {!isEditing ? (
+          <Button onClick={() => setIsEditing(true)} className="bg-medical-600 hover:bg-medical-700">
+            <Edit3 className="w-4 h-4 mr-2" /> Edit Profile
+          </Button>
+        ) : (
+          <div className="space-x-2">
+            <Button variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
+            <Button onClick={handleSave} className="bg-medical-600 hover:bg-medical-700">
+              Save Changes
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Profile Card */}
+        {/* Profile Picture */}
         <Card className="lg:col-span-1">
           <CardContent className="p-6">
             <div className="text-center space-y-4">
               <Avatar className="w-32 h-32 mx-auto">
-                <AvatarImage src={doctorData.avatar} alt={doctorData.name} />
+                <AvatarImage src={doctorProfile.profilePhotoUrl} alt={doctorProfile.firstName} />
                 <AvatarFallback className="text-2xl">
-                  {doctorData.name.split(' ').map(n => n[0]).join('')}
+                  {doctorProfile.firstName?.[0] || 'D'}{doctorProfile.lastName?.[0] || ''}
                 </AvatarFallback>
               </Avatar>
+              {isEditing && (
+                <Input
+                  placeholder="Profile Photo URL"
+                  value={doctorProfile.profilePhotoUrl || ''}
+                  onChange={(e) => handleInputChange('profilePhotoUrl', e.target.value)}
+                />
+              )}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">{doctorData.name}</h2>
-                <p className="text-medical-600 font-medium">{doctorData.specialization}</p>
-                <div className="flex items-center justify-center mt-2">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="ml-1 text-sm font-medium">{doctorData.rating}</span>
-                  <span className="ml-1 text-sm text-gray-500">(245 reviews)</span>
-                </div>
+                <h2 className="text-2xl font-bold text-gray-900">{doctorProfile.firstName} {doctorProfile.lastName}</h2>
+                <p className="text-medical-600 font-medium">{doctorProfile.specialization}</p>
               </div>
-              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+              {/* <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                 Active
-              </Badge>
+              </Badge> */}
             </div>
           </CardContent>
         </Card>
 
-        {/* Profile Details */}
+        {/* Editable Fields */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Personal Information */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <User className="w-5 h-5 mr-2 text-medical-600" />
-                Personal Information
+                <User className="w-5 h-5 mr-2 text-medical-600" /> Personal Information
               </CardTitle>
+              <CardDescription>Update your contact and personal info</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Full Name</p>
-                  <p className="text-base text-gray-900">{doctorData.name}</p>
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    id="firstName"
+                    value={doctorProfile.firstName || ''}
+                    onChange={(e) => handleInputChange('firstName', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Email</p>
-                  <p className="text-base text-gray-900 flex items-center">
-                    <Mail className="w-4 h-4 mr-2 text-gray-400" />
-                    {doctorData.email}
-                  </p>
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    id="lastName"
+                    value={doctorProfile.lastName || ''}
+                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Phone</p>
-                  <p className="text-base text-gray-900 flex items-center">
-                    <Phone className="w-4 h-4 mr-2 text-gray-400" />
-                    +1 (555) 123-4567
-                  </p>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    value={doctorProfile.email || ''}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Gender</p>
-                  <p className="text-base text-gray-900">Male</p>
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input
+                    id="phone"
+                    value={doctorProfile.phoneNumber || ''}
+                    onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
+                <div>
+                  <Label htmlFor="gender">Gender</Label>
+                  <Select
+                    value={doctorProfile.gender || ''}
+                    onValueChange={(value) => handleInputChange('gender', value)}
+                    disabled={!isEditing}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Gender" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="address">Address</Label>
+                <Input
+                  id="address"
+                  value={doctorProfile.address || ''}
+                  onChange={(e) => handleInputChange('address', e.target.value)}
+                  disabled={!isEditing}
+                />
               </div>
             </CardContent>
           </Card>
 
-          {/* Professional Information */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <GraduationCap className="w-5 h-5 mr-2 text-medical-600" />
-                Professional Information
+                <GraduationCap className="w-5 h-5 mr-2 text-medical-600" /> Professional Details
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Specialization</p>
-                  <p className="text-base text-gray-900">{doctorData.specialization}</p>
+                  <Label>Specialization</Label>
+                  <Input
+                    value={doctorProfile.specialization || ''}
+                    onChange={(e) => handleInputChange('specialization', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Degree</p>
-                  <p className="text-base text-gray-900">{doctorData.degree}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Experience</p>
-                  <p className="text-base text-gray-900">{doctorData.experience} years</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Consultation Fee</p>
-                  <p className="text-base text-gray-900">${doctorData.consultationFee}</p>
+                  <Label>Designation</Label>
+                  <Input
+                    value={doctorProfile.designation || ''}
+                    onChange={(e) => handleInputChange('designation', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div className="md:col-span-2">
-                  <p className="text-sm font-medium text-gray-600">Bio</p>
-                  <p className="text-base text-gray-900">{doctorData.bio}</p>
+                  <Label>Academic Institution / Bio</Label>
+                  <Input
+                    value={doctorProfile.academicInstitution || ''}
+                    onChange={(e) => handleInputChange('academicInstitution', e.target.value)}
+                    disabled={!isEditing}
+                  />
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Practice Information */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Building className="w-5 h-5 mr-2 text-medical-600" />
-                Practice Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Primary Hospital</p>
-                  <p className="text-base text-gray-900">{doctorData.hospital}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Affiliated Centers</p>
-                  <div className="flex flex-wrap gap-2 mt-1">
-                    {doctorData.affiliatedCenters?.map((center, index) => (
-                      <Badge key={index} variant="secondary">{center}</Badge>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Consulting Address</p>
-                  <p className="text-base text-gray-900 flex items-start">
-                    <MapPin className="w-4 h-4 mr-2 text-gray-400 mt-0.5" />
-                    {doctorData.consultingAddress}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Availability */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-medical-600" />
-                Availability Schedule
-              </CardTitle>
-              <CardDescription>
-                Your regular consultation hours
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {doctorData.availability.map((day, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium text-gray-900">{day}</span>
-                    <span className="text-sm text-gray-600">9:00 AM - 5:00 PM</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4">
-                <Button variant="outline" className="w-full">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Manage Schedule
-                </Button>
               </div>
             </CardContent>
           </Card>

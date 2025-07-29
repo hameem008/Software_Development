@@ -117,10 +117,13 @@ public class FindDoctorService {
                             entry.getKey().getName(),
                             entry.getKey().getAddress(),
                             entry.getValue().stream()
-                                    .map(availability -> new DoctorDetailsDTO.AvailabilitySlot(
-                                            availability.getWeekDay(),
-                                            availability.getStartTime(),
-                                            availability.getEndTime()))
+                                    .map(availability ->  DoctorDetailsDTO.AvailabilitySlot.builder()
+                                    .weekDay(availability.getWeekDay())
+                                    .startTime(availability.getStartTime())
+                                    .endTime(availability.getEndTime())
+                                    .visitFee(availability.getVisitFee())
+                                    .visitCapacity(availability.getVisitCapacity())
+                                    .build())
                                     .toList()
                         )
                 )

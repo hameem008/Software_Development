@@ -78,9 +78,9 @@ const Index = () => {
 
             {/* Quick Access Portals */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Choose Your healthcare role</h3>
-              <p className="text-sm text-gray-600">Different interfaces designed for different healthcare roles</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <h3 className="text-lg font-semibold text-gray-900">Start Your healthcare journey</h3>
+              {/* <p className="text-sm text-gray-600">Different interfaces designed for different healthcare roles</p> */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-l-blue-500">
                   <CardContent className="p-4 text-center">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
@@ -94,7 +94,7 @@ const Index = () => {
                   </CardContent>
                 </Card>
                 
-                <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-l-green-500">
+                {/* <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-l-green-500">
                   <CardContent className="p-4 text-center">
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
                       <Stethoscope className="w-6 h-6 text-green-600" />
@@ -118,7 +118,7 @@ const Index = () => {
                       <Link to="/register/hospital">Register as Hospital</Link>
                     </Button>
                   </CardContent>
-                </Card>
+                </Card> */}
               </div>
             </div>
           </div>
@@ -238,9 +238,36 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="h-10 w-10 bg-gradient-to-br from-medical-600 to-medical-700 rounded-lg flex items-center justify-center">
-                <Heart className="h-6 w-6 text-white" />
-              </div>
+              <div className="h-12 w-12 bg-gradient-to-br from-medical-600 to-medical-700 rounded-xl flex items-center justify-center shadow-lg">
+              <svg
+                className="h-7 w-7"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2L4 6V18L12 22L20 18V6L12 2Z"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12 8V16"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8 12H16"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
               <h3 className="text-xl font-bold">MediLine Health</h3>
             </div>
             <p className="text-gray-400 max-w-2xl mx-auto">
@@ -249,7 +276,7 @@ const Index = () => {
           </div>
           
           <div className="text-center text-sm text-gray-400 space-y-2 border-t border-gray-800 pt-8">
-            <p>© 2024 MediLine Health. All rights reserved.</p>
+            <p>© 2025 MediLine Health. All rights reserved.</p>
             <div className="flex justify-center space-x-4">
               <span className="hover:text-white cursor-pointer">Privacy Policy</span>
               <span className="hover:text-white cursor-pointer">Terms of Service</span>

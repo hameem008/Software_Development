@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,48 +26,52 @@ interface ScheduleSlot {
   capacity: number;
 }
 
-const DoctorSchedule = () => {
-  const [scheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([
-    {
-      id: '1',
-      day: 'Monday',
-      startTime: '10:00',
-      endTime: '13:00',
-      location: 'Green Life Hospital',
-      fee: 500,
-      capacity: 10
-    },
-    {
-      id: '2',
-      day: 'Wednesday',
-      startTime: '14:00',
-      endTime: '17:00',
-      location: 'Central Clinic',
-      fee: 700,
-      capacity: 5
-    },
-    {
-      id: '3',
-      day: 'Friday',
-      startTime: '09:00',
-      endTime: '12:00',
-      location: 'City General Hospital',
-      fee: 600,
-      capacity: 8
-    },
-    {
-      id: '4',
-      day: 'Saturday',
-      startTime: '16:00',
-      endTime: '19:00',
-      location: 'Metro Health Center',
-      fee: 800,
-      capacity: 6
-    }
-  ]);
+import api from '@/lib/api'; 
+import { useToast } from '@/hooks/use-toast';
 
+function convertTo24H(timeStr: string): string {
+  const [time, meridian] = timeStr.split(' ');
+  let [hours, minutes] = time.split(':').map(Number);
+
+  if (meridian === 'PM' && hours !== 12) hours += 12;
+  if (meridian === 'AM' && hours === 12) hours = 0;
+
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+}
+
+const DoctorSchedule = () => {
+  const [scheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
   const [isEditing, setIsEditing] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        const response = await api.get('/doctor/schedule');
+        const data = response.data;
+
+        const transformedSlots: ScheduleSlot[] = data.availableMedCenters.flatMap(center =>
+          center.availabilitySlots.map((slot, index) => ({
+            id: `${center.hospitalName}-${index}`,
+            day: slot.weekDay,
+            startTime: convertTo24H(slot.startTime),
+            endTime: convertTo24H(slot.endTime),
+            location: `${center.hospitalName}`,
+            fee: slot.visitFee, // placeholder (backend does not provide fee)
+            capacity: slot.visitCapacity // placeholder (backend does not provide capacity)
+          }))
+        );
+
+        setScheduleSlots(transformedSlots);
+      } catch (err) {
+        console.error('Failed to load schedule:', err);
+      }
+    };
+
+    fetchSchedule();
+  }, []);
+
+
 
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
