@@ -32,10 +32,10 @@ jobs:
             exit 1
           fi
 
-      - name: ☕ Set up JDK 17
+      - name: ☕ Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: maven
 
@@ -43,6 +43,8 @@ jobs:
         run: |
           echo "📋 Java version:"
           java -version
+          echo "📋 Javac version:"
+          javac -version
           echo "📋 JAVA_HOME:"
           echo $JAVA_HOME
           echo "📋 Maven version:"
@@ -53,16 +55,21 @@ jobs:
         with:
           node-version: 18
 
-      # ✅ Run backend tests with Java 17 override
+      # ✅ Run backend tests with Java 21
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
         run: |
+          echo "📋 Final verification before tests:"
+          java -version
+          javac -version
+          echo "JAVA_HOME: $JAVA_HOME"
+          
           if [ -x "./mvnw" ]; then
-            echo "✅ Using Maven wrapper with Java 17..."
-            ./mvnw clean test -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 -Dmaven.compiler.release=17
+            echo "✅ Using Maven wrapper with Java 21..."
+            ./mvnw clean test
           else
             echo "⚠️ Maven wrapper not executable, using Maven directly..."
-            mvn clean test -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 -Dmaven.compiler.release=17
+            mvn clean test
           fi
 
       # ✅ Install frontend dependencies (for Cypress and dev server)
@@ -70,16 +77,16 @@ jobs:
         working-directory: ./mediline-health-portal
         run: npm install
 
-      # 🚀 Start backend server in background with Java 17
+      # 🚀 Start backend server in background with Java 21
       - name: 🚀 Start Backend server
         working-directory: ./backend/MediLine
         run: |
           if [ -x "./mvnw" ]; then
-            echo "✅ Using Maven wrapper to start server..."
-            ./mvnw spring-boot:run -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 -Dmaven.compiler.release=17 &
+            echo "✅ Using Maven wrapper to start server with Java 21..."
+            ./mvnw spring-boot:run &
           else
             echo "⚠️ Maven wrapper not executable, using Maven directly..."
-            mvn spring-boot:run -Dmaven.compiler.source=17 -Dmaven.compiler.target=17 -Dmaven.compiler.release=17 &
+            mvn spring-boot:run &
           fi
 
       # ⏳ Wait for backend server to be ready
