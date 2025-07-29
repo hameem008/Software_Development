@@ -24,15 +24,12 @@ jobs:
         with:
           node-version: 18
 
-      # ⛏️ Make mvnw executable before running tests
-      - name: 🛠 Make Maven Wrapper executable
-        working-directory: ./backend/MediLine
-        run: chmod +x mvnw
-
       # ✅ Run backend tests
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
-        run: ./mvnw test
+        run: |
+          chmod +x mvnw
+          ./mvnw test
 
       # ✅ Install frontend dependencies (for Cypress and dev server)
       - name: 📦 Install frontend dependencies
