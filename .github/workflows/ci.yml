@@ -121,7 +121,7 @@ jobs:
           SERVER_PORT: 8080
         run: |
           ./mvnw spring-boot:run &
-          echo $! > backend.pid
+          echo $! > ../../backend.pid
         
       - name: ⏳ Wait for backend to be ready
         run: |
@@ -133,7 +133,7 @@ jobs:
         working-directory: ./mediline-health-portal
         run: |
           npm run start &
-          echo $! > frontend.pid
+          echo $! > ../frontend.pid
         env:
           CI: false
 
@@ -184,18 +184,29 @@ jobs:
         if: always()
         run: |
           # Stop frontend
-          if [ -f ./mediline-health-portal/frontend.pid ]; then
-            kill $(cat ./mediline-health-portal/frontend.pid) || true
+          if [ -f frontend.pid ]; then
+            echo "Stopping frontend process $(cat frontend.pid)"
+            kill $(cat frontend.pid) || true
+            rm -f frontend.pid
           fi
           
           # Stop backend
-          if [ -f ./backend/MediLine/backend.pid ]; then
-            kill $(cat ./backend/MediLine/backend.pid) || true
+          if [ -f backend.pid ]; then
+            echo "Stopping backend process $(cat backend.pid)"
+            kill $(cat backend.pid) || true
+            rm -f backend.pid
           fi
           
-          # Kill any remaining processes
+          # Kill any remaining processes (backup cleanup)
+          echo "Cleaning up any remaining processes..."
           pkill -f "spring-boot:run" || true
           pkill -f "npm run start" || true
+          pkill -f "node.*react-scripts" || true
+          
+          # Wait a moment for processes to terminate
+          sleep 2
+          
+          echo "Service cleanup completed"
 
       # Docker Build & Push Section (only on main branch)
       - name: 🐳 Set up Docker Buildx
@@ -232,4 +243,3 @@ jobs:
           context: ./mediline-health-portal
           push: true
           tags: hameem08/mediline-frontend:latest
-          
