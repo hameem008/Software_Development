@@ -11,4 +11,3 @@ Before push
 1. Comment dot env form application in backend
 2. Change the axios form api.ts
 3. Check docker yml file
-4. Check application.properties
