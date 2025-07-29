@@ -55,7 +55,7 @@ jobs:
         with:
           node-version: 18
 
-      # ✅ Run backend tests with Java 21
+      # ✅ Run backend tests with enhanced debugging
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
         run: |
@@ -63,13 +63,17 @@ jobs:
           java -version
           javac -version
           echo "JAVA_HOME: $JAVA_HOME"
+          echo "PATH: $PATH"
+          
+          # Clear any cached Maven files
+          rm -rf ~/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/ || true
           
           if [ -x "./mvnw" ]; then
             echo "✅ Using Maven wrapper with Java 21..."
-            ./mvnw clean test
+            ./mvnw clean compile test -e -X
           else
             echo "⚠️ Maven wrapper not executable, using Maven directly..."
-            mvn clean test
+            mvn clean compile test -e -X
           fi
 
       # ✅ Install frontend dependencies (for Cypress and dev server)
