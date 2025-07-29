@@ -6,3 +6,9 @@ scp -r /home/hameem08/My_Codes/Software_Lab/Software_Development/vm hameem08@74.
 
 Website URL:
 http://74.225.218.7:3000
+
+Before push
+1. Comment dot env form application in backend
+2. Change the axios form api.ts
+3. Check docker yml file
+4. Check application.properties
