@@ -1,162 +1,52 @@
-name: CI - Test, Build & Push Docker Images
+version: "3.8"
 
-on:
-  push:
-    branches:
-      - main
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: my_postgres_db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mediline-net
 
-jobs:
-  test-and-build:
-    runs-on: ubuntu-22.04
-    env:
-      SPRING_PROFILES_ACTIVE: test
-      MAVEN_OPTS: -Djava.version=21 -Xmx2048m -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+  backend:
+    build:
+      context: ./backend/MediLine
+      dockerfile: Dockerfile
+    container_name: mediline-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - mediline-net
 
-    steps:
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+  frontend:
+    build:
+      context: ./mediline-health-portal
+      dockerfile: Dockerfile
+    container_name: mediline-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - mediline-net
 
-      # Clean any existing Java installations
-      - name: 🗑️ Clean existing Java installations
-        run: |
-          sudo rm -rf /usr/local/lib/jvm/*
-          sudo rm -rf /opt/hostedtoolcache/Java_*
-          sudo rm -rf /opt/hostedtoolcache/java_*
+volumes:
+  postgres_data:
 
-      # Set up JDK 21
-      - name: ☕ Set up JDK 21 (Temurin)
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
-          check-latest: true
-          cache-dependency-path: '**/pom.xml'
-          overwrite-settings: true
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-
-      # Verify Java installation
-      - name: 🔍 Verify Java setup
-        run: |
-          echo "=== Java Version ==="
-          java -version
-          echo "=== Javac Version ==="
-          javac -version
-          echo "=== JAVA_HOME ==="
-          echo $JAVA_HOME
-          echo "=== Maven Version ==="
-          ./backend/MediLine/mvnw -v
-
-      # Fix Maven wrapper permissions
-      - name: 🛠 Fix Maven wrapper permissions
-        working-directory: ./backend/MediLine
-        run: |
-          chmod +x mvnw
-          ./mvnw -v
-
-      # Set up Node.js
-      - name: 📦 Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-
-      # Run backend tests
-      - name: ⚙️ Run backend tests
-        working-directory: ./backend/MediLine
-        run: |
-          ./mvnw clean test -B -Djava.version=21 -Dmaven.compiler.release=21
-
-      # Install frontend dependencies
-      - name: 📦 Install frontend dependencies
-        working-directory: ./mediline-health-portal
-        run: npm ci
-
-      # Start backend server
-      - name: 🚀 Start Backend server
-        working-directory: ./backend/MediLine
-        run: |
-          ./mvnw spring-boot:run -Dspring-boot.run.profiles=test &
-
-      # Wait for backend
-      - name: ⏳ Wait for Backend
-        run: |
-          for i in {1..30}; do
-            if curl --silent --fail http://localhost:8080/actuator/health; then
-              echo "✅ Backend is up!"
-              break
-            fi
-            echo "⏳ Waiting for backend (attempt $i/30)..."
-            sleep 5
-          done
-
-      # Start frontend server
-      - name: 🚀 Start Frontend server
-        working-directory: ./mediline-health-portal
-        run: npm run dev &
-
-      # Wait for frontend
-      - name: ⏳ Wait for Frontend
-        run: |
-          for i in {1..30}; do
-            if curl --silent --fail http://localhost:5173; then
-              echo "✅ Frontend is up!"
-              break
-            fi
-            echo "⏳ Waiting for frontend (attempt $i/30)..."
-            sleep 5
-          done
-
-      # Run Cypress tests
-      - name: 🧪 Run Cypress E2E tests
-        working-directory: ./mediline-health-portal
-        run: npx cypress run
-
-      # Kill servers
-      - name: 🛑 Kill servers
-        run: |
-          pkill -f 'spring-boot:run' || true
-          pkill -f 'vite' || true
-
-      # Docker setup
-      - name: 🐳 Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: 🔐 Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-
-      - name: 📦 Build & Push DB image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./db
-          push: true
-          tags: hameem08/mediline-db:latest
-
-      - name: 📦 Build & Push Backend image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/MediLine
-          push: true
-          tags: hameem08/mediline-backend:latest
-          build-args:
-            JAVA_VERSION: 21
-
-      - name: 📦 Build & Push Frontend image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./mediline-health-portal
-          push: true
-          tags: hameem08/mediline-frontend:latest
-
-
+# networks:
+#   mediline-net:
+#     driver: bridge
 
 # version: "3.8"
 
