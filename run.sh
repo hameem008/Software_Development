@@ -19,3 +19,4 @@ docker-compose down -v
 docker-compose up --build -d
 
 # ./mvnw spring-boot:run
+# PGPASSWORD=mypassword docker exec -it my_postgres_db psql -U myuser -d mydb
