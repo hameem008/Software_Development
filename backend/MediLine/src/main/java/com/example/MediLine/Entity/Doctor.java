@@ -57,5 +57,5 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<DoctorDegree> degrees = new HashSet<>();
+    private Set<DoctorDegree> degrees;
 }

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PrescribedMedicine {
 
     @EmbeddedId

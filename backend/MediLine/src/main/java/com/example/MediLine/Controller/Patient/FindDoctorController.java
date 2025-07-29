@@ -37,6 +37,19 @@ public class FindDoctorController {
 
     }
 
+    @PostMapping("/find-doctors/by-name")
+    public ResponseEntity<List<DoctorCardDTO>> findDoctorsByName(
+            @RequestBody FindDoctorRequest doctorRequest) {
+
+        List<DoctorCardDTO> doctors = findDoctorService.searchDoctorsByName(doctorRequest);
+
+        if (doctors.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(doctors);
+
+    }
+
     @GetMapping("/specialties")
     public ResponseEntity<List<String>> getAllSpecialties() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

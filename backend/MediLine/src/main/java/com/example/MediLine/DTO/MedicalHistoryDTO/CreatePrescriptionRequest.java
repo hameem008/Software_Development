@@ -2,12 +2,12 @@ package com.example.MediLine.DTO.MedicalHistoryDTO;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,26 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatePrescriptionRequest {
-    @NotBlank
-    private String patientId;
-
-    @NotBlank
-    private String summary;
+    private Integer appointmentId;
 
     @NotNull
-    private Vitals vitals;
+    private Integer patientId;
 
-    @NotEmpty
-    private List<@NotBlank String> symptoms;
+    @NotNull
+    private Integer hospitalId;
 
-    @NotEmpty
-    private List<@NotBlank String> diagnosis;
+    private String summary;
 
-    @NotEmpty
+    private String bloodPressure;
+    private BigDecimal weight;
+    private Integer heartRate;
+
+    private String symptoms;
+
+    private List<@NotNull Integer> diagnosis;
+    private List<@NotNull Integer> tests;
     private List<@Valid Medication> medications;
 
     private String notes;
 
-    @NotNull
     private LocalDate nextAppointment;
 }

@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { mockPrescriptions, mockDoctors } from '@/data/mockData';
 import { useToast } from '@/hooks/use-toast';
 import { FileText, User, Calendar, Pill, Download } from 'lucide-react';
 import api from '@/lib/api';
@@ -12,7 +12,8 @@ interface Medication {
   name: string;
   dosage: string;
   frequency: string;
-  duration: string;
+  durationValue: number;
+  durationUnit: string;
   instructions: string | null;
 }
 
@@ -41,30 +42,32 @@ interface Prescription {
   symptoms: string;
   diagnosis: string[];
   medications: Medication[];
-  tests: any[]; // optional
+  tests: any[];
   notes: string;
   nextAppointment: string;
 }
 
-const prescriptionIdsToLoad = ['8']; // ← replace with dynamic list in production
-
 const PatientPrescriptions = () => {
   const { toast } = useToast();
-  const [prescriptions, setPrescriptions] = useState<Prescription[]>([]);
+  const [prescription, setPrescription] = useState<Prescription>(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { prescriptionId } = location.state || {};
 
   const fetchPrescriptionDetails = async () => {
+    if (!prescriptionId) {
+      navigate('/patient/prescriptions');
+      return;
+    }
+
     try {
-      const allPrescriptions: Prescription[] = [];
-
-      for (const id of prescriptionIdsToLoad) {
         const response = await api.post('/patient/history/prescription-details', {
-          prescriptionId: id,
+          prescriptionId: prescriptionId,
         });
-        allPrescriptions.push(response.data);
-      }
 
-      setPrescriptions(allPrescriptions);
+      setPrescription(response.data);
     } catch (error) {
       console.error('Error loading prescriptions', error);
       toast({
@@ -78,7 +81,7 @@ const PatientPrescriptions = () => {
   };
 
   useEffect(() => {
-    fetchPrescriptionDetails();
+    fetchPrescriptionDetails().then(() => {});
   }, []);
 
   const handleDownloadPrescription = (prescriptionId: string) => {
@@ -97,8 +100,7 @@ const PatientPrescriptions = () => {
         <p className="text-gray-600">View and manage your medical prescriptions</p>
       </div>
 
-      {prescriptions.length > 0 ? (
-        prescriptions.map((prescription) => (
+      {prescription != null ? (
           <Card key={prescription.prescriptionId} className="hover:shadow-md transition-shadow">
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between">
@@ -192,7 +194,7 @@ const PatientPrescriptions = () => {
                         </div>
                         <div className="space-y-1 text-sm text-gray-600">
                           <p><strong>Frequency:</strong> {med.frequency}</p>
-                          <p><strong>Duration:</strong> {med.duration}</p>
+                          <p><strong>Duration:</strong> {med.durationValue + med.durationUnit}</p>
                           {med.instructions && (
                             <p><strong>Instructions:</strong> {med.instructions}</p>
                           )}
@@ -220,19 +222,19 @@ const PatientPrescriptions = () => {
               )}
             </CardContent>
           </Card>
-        ))
-      ) : (
-        <Card>
-          <CardContent className="text-center py-12">
-            <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No prescriptions found</h3>
-            <p className="text-gray-600 mb-4">Your prescriptions will appear here after doctor visits</p>
-            <Button className="bg-medical-600 hover:bg-medical-700">
-              Book an Appointment
-            </Button>
-          </CardContent>
-        </Card>
-      )}
+        ) : (
+          <Card>
+            <CardContent className="text-center py-12">
+              <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No prescriptions found</h3>
+              <p className="text-gray-600 mb-4">Your prescriptions will appear here after doctor visits</p>
+              <Button className="bg-medical-600 hover:bg-medical-700">
+                Book an Appointment
+              </Button>
+            </CardContent>
+          </Card>
+        )
+      }
     </div>
   );
 };

@@ -28,6 +28,8 @@ import TestRequest from '@/pages/patient/TestRequest';
 import TestRequests from '@/pages/patient/TestRequests';
 import TestRequestsList from '@/pages/patient/TestRequestsList';
 import Chatbot from '@/pages/patient/Chatbot';
+import Prescriptions from "./Prescriptions";
+import PrescriptionListView from "./PrescriptionList";
 
 const PatientDashboard = () => {
   const location = useLocation();
@@ -83,7 +85,8 @@ const PatientDashboard = () => {
         <Route path="doctors/:doctorId" element={<DoctorProfile />} />
         <Route path="book-appointment/:doctorId" element={<BookAppointment />} />
         <Route path="appointments" element={<PatientAppointments />} />
-        <Route path="prescriptions" element={<PatientPrescriptions />} />
+        <Route path="prescriptions" element={<PrescriptionListView />} />
+        <Route path="prescriptions/details" element={<PatientPrescriptions />} />
         <Route path="symptoms" element={<SymptomTracker />} />
         <Route path="tests" element={<TestResults />} />
         <Route path="tests/request" element={<TestRequest />} />

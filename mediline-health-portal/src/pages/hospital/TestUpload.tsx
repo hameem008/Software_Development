@@ -9,13 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { mockPatients, mockPrescriptions, mockDoctors } from '@/data/mockData';
 import { Upload, FileText, User, TestTube, Search } from 'lucide-react';
+import api from "../../lib/api";
 
 const TestUpload = () => {
   const { toast } = useToast();
-  const [selectedPatient, setSelectedPatient] = useState('');
-  const [selectedPrescription, setSelectedPrescription] = useState('');
-  const [testName, setTestName] = useState('');
-  const [testType, setTestType] = useState('');
+  const [selectedPatient, setSelectedPatient] = useState();
+  const [selectedPrescription, setSelectedPrescription] = useState(0);
+  const [testName, setTestName] = useState(0);
+   const [date, setDate] = useState('');
+  const [testType, setTestType] = useState();
   const [result, setResult] = useState('');
   const [notes, setNotes] = useState('');
   const [performedBy, setPerformedBy] = useState('');
@@ -94,10 +96,10 @@ const TestUpload = () => {
     setParameters(updated);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!selectedPatient || !testName.trim() || !testType || !result.trim() || !performedBy) {
+    if (!selectedPatient || !testType || !result.trim() || !performedBy) {
       toast({
         title: 'Missing required fields',
         description: 'Please fill in all required fields.',
@@ -106,22 +108,48 @@ const TestUpload = () => {
       return;
     }
 
-    // Mock upload operation
-    toast({
-      title: 'Test results uploaded successfully!',
-      description: 'The test results have been saved and are now available to the patient and their doctor.',
-    });
+    try {
+        const response = await api.post('/hospital/test-upload', {
+          prescriptionId: 5,
+          testId: 5,
+          date: '2025-06-12',
+          note: "its a note",
+          suggested: 2,
+          reviewed: 3,
+          cost: 500,
+          hospitalId: 1
+        });
+        console.log('Profile data updated:', response.data);
+        toast({
+          title: 'Test updated successfully!',
+          description: 'Your changes have been saved.',
+        });
+
+      } catch (error) {
+        console.error('Error uploading test', error);
+        toast({
+          title: 'Error uploading test',
+          description: 'There was an issue saving your changes.',
+          variant: 'destructive',
+        });
+      }
+
 
     // Reset form
-    setSelectedPatient('');
-    setSelectedPrescription('');
-    setTestName('');
-    setTestType('');
+    // setSelectedPatient('');
+    setSelectedPrescription(5);
+    setTestName(10);
+    setDate('2025-02-12')
+    // setTestType('');
     setResult('');
     setNotes('');
     setPerformedBy('');
     setSelectedFile(null);
     setParameters([{ name: '', value: '', unit: '', normalRange: '' }]);
+  };
+
+  const handleInputChange = (field, value) => {
+    setSelectedPrescription(value);
   };
 
   return (
@@ -161,23 +189,23 @@ const TestUpload = () => {
                 </Select>
               </div>
               
-              {selectedPatient && (
+
                 <div>
                   <Label htmlFor="prescription">Related Prescription (Optional)</Label>
-                  <Select value={selectedPrescription} onValueChange={setSelectedPrescription}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choose related prescription" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white">
+                  <Input
+                      id="firstName"
+                      value={selectedPrescription}
+                    onChange={(e) => handleInputChange('firstName', e.target.value)}
+                  >
+                   {/* <SelectContent className="bg-white">
                       {getPatientPrescriptions(selectedPatient).map((prescription) => (
                         <SelectItem key={prescription.id} value={prescription.id}>
                           {prescription.diagnosis} - {prescription.date}
                         </SelectItem>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </SelectContent>*/}
+                  </Input>
                 </div>
-              )}
             </div>
             
             {selectedPatient && (
@@ -227,7 +255,7 @@ const TestUpload = () => {
               
               <div>
                 <Label htmlFor="testName">Test Name *</Label>
-                <Select value={testName} onValueChange={setTestName}>
+                <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Select test name" />
                   </SelectTrigger>

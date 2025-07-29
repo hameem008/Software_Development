@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "prescription")
@@ -52,5 +54,17 @@ public class Prescription {
 
     @Column(name = "next_appointment_date")
     private LocalDate nextAppointmentDate;
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<DiagnosedDisease> diagnosedDiseases = new HashSet<>();
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<PrescribedMedicine> prescribedMedicines = new HashSet<>();
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<PrescribedTest> prescribedTests = new HashSet<>();
 }
 

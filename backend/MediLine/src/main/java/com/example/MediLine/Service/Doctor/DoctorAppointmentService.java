@@ -30,8 +30,10 @@ public class DoctorAppointmentService {
     private DoctorAppointmentDTO createAppointmentDTO(Appointment appointment) {
         return DoctorAppointmentDTO.builder()
                 .appointmentId(appointment.getAppointmentId())
+                .patientId(appointment.getPatient().getPatientId())
                 .patientName(appointment.getPatient().getFirstName() + " " +
                         appointment.getPatient().getLastName())
+                .hospitalId(appointment.getSlot().getHospital().getHospitalId())
                 .hospitalName(appointment.getSlot().getHospital().getName())
                 .hospitalAddress(appointment.getSlot().getHospital().getAddress())
                 .date(appointment.getDate())

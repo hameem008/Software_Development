@@ -5,6 +5,7 @@ import com.example.MediLine.DTO.DoctorBaseDTO;
 import com.example.MediLine.DTO.DoctorDegreeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class DoctorCardDTO extends DoctorBaseDTO {
     private List<DoctorDegreeDTO> degrees;
     private List<String> availableDays;

@@ -15,6 +15,7 @@ import com.example.MediLine.Repository.DoctorReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,29 +35,30 @@ public class FindDoctorService {
         List<Doctor> doctors = doctorRepository.searchDoctors(
                 findDoctorRequest.getSpecialization(), findDoctorRequest.getLocation());
 
-        return doctors.stream().map(doctor -> DoctorCardDTO.builder()
-                .doctorId(doctor.getDoctorId())
-                .name(doctor.getFirstName() + " " + doctor.getLastName())
-                .specialization(doctor.getSpecialization())
-                .designation(doctor.getDesignation())
-                .academicInstitution(doctor.getAcademicInstitution())
-                .degrees(doctor.getDegrees().stream()
-                        .map(degree -> new DoctorDegreeDTO(
-                                degree.getId().getDegreeName(),
-                                degree.getInstitution(),
-                                degree.getPassingYear()))
-                        .toList())
-                .availableDays(
-                        doctor.getAvailabilities().stream()
-                                .map(DoctorAvailability::getWeekDay)
-                                .distinct()
-                                .toList()
-                )
-                .rating(
-                        doctorReviewRepository.findAverageRatingByDoctorId(doctor.getDoctorId())
-                )
-                .build()
-        ).collect(Collectors.toList());
+        return doctors.stream()
+            .map(this::mapDoctorToDTO)
+            .toList();
+    }
+
+    public List<DoctorCardDTO> searchDoctorsByName(FindDoctorRequest findDoctorRequest) {
+        String[] tokens = findDoctorRequest.getName().trim().split("\\s+");
+        String lastName = tokens[tokens.length - 1];
+        String firstName = String.join(" ", Arrays.copyOf(tokens, tokens.length - 1));
+
+
+        List<Integer> doctorIds = doctorRepository
+                .searchDoctorIdsByNameFuzzy(firstName, lastName);
+
+        if (doctorIds.isEmpty()) {
+            doctorIds = doctorRepository
+                    .searchDoctorIdsByName(findDoctorRequest.getName());
+        }
+
+        List<Doctor> doctors = doctorRepository.findByDoctorIdIn(doctorIds);
+
+        return doctors.stream()
+            .map(this::mapDoctorToDTO)
+            .toList();
     }
 
     public DoctorDetailsDTO getDoctorDetails(int doctorId) {
@@ -124,6 +126,30 @@ public class FindDoctorService {
                 )
                 .toList();
     }
+
+    protected DoctorCardDTO mapDoctorToDTO(Doctor doctor) {
+    return DoctorCardDTO.builder()
+            .doctorId(doctor.getDoctorId())
+            .name(doctor.getFirstName() + " " + doctor.getLastName())
+            .specialization(doctor.getSpecialization())
+            .designation(doctor.getDesignation())
+            .academicInstitution(doctor.getAcademicInstitution())
+            .degrees(doctor.getDegrees().stream()
+                    .map(degree -> new DoctorDegreeDTO(
+                            degree.getId().getDegreeName(),
+                            degree.getInstitution(),
+                            degree.getPassingYear()))
+                    .toList())
+            .availableDays(
+                    doctor.getAvailabilities().stream()
+                            .map(DoctorAvailability::getWeekDay)
+                            .distinct()
+                            .toList())
+            .rating(
+                    doctorReviewRepository.findAverageRatingByDoctorId(doctor.getDoctorId()))
+            .build();
+}
+
 
 
 }

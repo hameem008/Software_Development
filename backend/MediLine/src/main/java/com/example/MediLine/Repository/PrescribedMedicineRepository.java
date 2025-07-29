@@ -18,11 +18,10 @@ public interface PrescribedMedicineRepository extends JpaRepository<PrescribedMe
         FROM PrescribedMedicine pm
         JOIN pm.prescription p
         JOIN pm.medicine m
-        WHERE p.prescriptionId = :prescriptionId AND p.patient.patientId = :patientId
+        WHERE p.prescriptionId = :prescriptionId
     """)
     List<PrescribedMedicine> findByPrescriptionId(
-            @Param("prescriptionId") Integer prescriptionId,
-            @Param("patientId") Integer patientId);
+            @Param("prescriptionId") Integer prescriptionId);
 
     @Query("""
         SELECT new com.example.MediLine.DTO.CurrentMedicineDTO(

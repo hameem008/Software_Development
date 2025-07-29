@@ -1,29 +1,41 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { mockPatients } from '@/data/mockData';
 import { useSearchParams } from 'react-router-dom';
-import { Plus, Trash2, FileText, User, Pill, TestTube, Heart } from 'lucide-react';
+import {Plus, Trash2, FileText, User, Pill, TestTube, Heart, NotepadText} from 'lucide-react';
+import { Combobox } from "../../components/ui/combobox";
+import api from "../../lib/api";
+
+// Generic Option Interface
+interface Option {
+  id: number;
+  name: string;
+}
+
 
 interface Medication {
-  id: string;
-  name: string;
+  id: number;
+  medicine: Option;
   dosage: string;
   frequency: string;
-  duration: string;
+  durationValue: number;
+  durationUnit: string;
   instructions: string;
 }
 
 interface TestOrder {
-  id: string;
-  testName: string;
-  reason: string;
+  id: number;
+  test: Option | null;
+}
+
+interface Diagnosis {
+  id: number;
+  disease: Option | null;
 }
 
 interface HealthVitals {
@@ -31,29 +43,29 @@ interface HealthVitals {
   bloodPressureSystolic: string;
   bloodPressureDiastolic: string;
   weight: string;
-  height: string;
-  temperature: string;
-  oxygenSaturation: string;
 }
 
 const CreatePrescription = () => {
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const [selectedPatient, setSelectedPatient] = useState('');
-  const [diagnosis, setDiagnosis] = useState('');
-  const [notes, setNotes] = useState('');
+  const [selectedDiagnoses, setSelectedDiagnoses] = useState<Diagnosis[]>([]);
   const [medications, setMedications] = useState<Medication[]>([]);
   const [testOrders, setTestOrders] = useState<TestOrder[]>([]);
   const [healthVitals, setHealthVitals] = useState<HealthVitals>({
     heartRate: '',
     bloodPressureSystolic: '',
     bloodPressureDiastolic: '',
-    weight: '',
-    height: '',
-    temperature: '',
-    oxygenSaturation: ''
+    weight: ''
   });
+  const [diseases, setDiseases] = useState<Option[]>([]);
+  const [medicines, setMedicines] = useState<Option[]>([]);
+  const [tests, setTests] = useState<Option[]>([]);
+  const [notes, setNotes] = useState('');
+  const [summary, setSummary] = useState('');
+  const [nextAppointment, setNextAppointment] = useState('');
 
+  // Fetch data from backend
   useEffect(() => {
     const patientId = searchParams.get('patientId');
     if (patientId) {
@@ -61,93 +73,177 @@ const CreatePrescription = () => {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    fetchDiagnoses();
+    fetchMedicines();
+    fetchTests();
+  }, []);
+
+  const fetchDiagnoses = async () => {
+    try {
+      const response = await api.get('/doctor/prescription/all-diseases');
+      setDiseases(response.data);
+    } catch (error) {
+      console.error('Error fetching diseases:', error);
+    }
+  };
+
+  const fetchMedicines = async () => {
+    try {
+      const response = await api.get('/doctor/prescription/all-medicines');
+      setMedicines(response.data);
+    } catch (error) {
+      console.error('Error fetching medicines:', error);
+    }
+  };
+
+  const fetchTests = async () => {
+    try {
+      const response = await api.get('/doctor/prescription/all-tests');
+      setTests(response.data);
+    } catch (error) {
+      console.error('Error fetching tests:', error);
+    }
+  };
+
+  // Diagnosis handlers
+  const addDiagnosis = () => {
+    const newDiagnosis: Diagnosis = {
+      id: Date.now(),
+      disease: { id: null, name: '' }
+    };
+    setSelectedDiagnoses([...selectedDiagnoses, newDiagnosis]);
+  };
+
+  const removeDiagnosis = (index: number) => {
+    setSelectedDiagnoses(selectedDiagnoses.filter(diagnosis=> diagnosis.id !== index));
+  };
+
+  const updateDiagnosis = (index: number, disease: Option) => {
+    const newDiagnoses = [...selectedDiagnoses];
+    newDiagnoses[index].disease = disease;
+    setSelectedDiagnoses(newDiagnoses);
+  };
+
+  // Medication handlers
   const addMedication = () => {
     const newMedication: Medication = {
-      id: Date.now().toString(),
-      name: '',
+      id: Date.now(),
+      medicine: { id: null, name: '' },
       dosage: '',
       frequency: '',
-      duration: '',
+      durationValue: 0,
+      durationUnit: '',
       instructions: ''
     };
     setMedications([...medications, newMedication]);
   };
 
-  const removeMedication = (id: string) => {
+  const removeMedication = (id: number) => {
     setMedications(medications.filter(med => med.id !== id));
   };
 
-  const updateMedication = (id: string, field: keyof Medication, value: string) => {
-    setMedications(medications.map(med => 
+  const updateMedication = (id: number, field: keyof Medication, value: any) => {
+  setMedications((prev) =>
+    prev.map((med) =>
       med.id === id ? { ...med, [field]: value } : med
-    ));
-  };
+    )
+  );
+};
 
+  // Test order handlers
   const addTestOrder = () => {
-    const newTest: TestOrder = {
-      id: Date.now().toString(),
-      testName: '',
-      reason: ''
+    const newSuggestedTest: TestOrder = {
+      id: Date.now(),
+      test: { id: null, name: '' }
     };
-    setTestOrders([...testOrders, newTest]);
+    setTestOrders([...testOrders, newSuggestedTest]);
   };
 
-  const removeTestOrder = (id: string) => {
-    setTestOrders(testOrders.filter(test => test.id !== id));
+  const removeTestOrder = (index: number) => {
+    setTestOrders(testOrders.filter(test => test.id !== index));
   };
 
-  const updateTestOrder = (id: string, field: keyof TestOrder, value: string) => {
-    setTestOrders(testOrders.map(test => 
-      test.id === id ? { ...test, [field]: value } : test
-    ));
+  const updateTestOrder = (index: number, test: Option) => {
+    const newTestOrders = [...testOrders];
+    newTestOrders[index].test = test;
+    setTestOrders(newTestOrders);
   };
 
+  // Health vitals handler
   const updateHealthVital = (field: keyof HealthVitals, value: string) => {
     setHealthVitals(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!selectedPatient || !diagnosis.trim()) {
+  // Form submission
+  const handleSubmit = async () => {
+
+    const validDiagnoses = selectedDiagnoses.filter(d => d.disease !== null);
+
+    const validMedications = medications.filter(m => m.medicine !== null);
+
+    const invalidMedications = validMedications
+        .filter(m => !m.frequency ||  !m.durationUnit || !m.durationValue);
+    if (invalidMedications.length > 0) {
       toast({
-        title: 'Missing required fields',
-        description: 'Please select a patient and enter a diagnosis.',
+        title: 'Invalid medications',
+        description: 'Please fill all required fields for medications.',
         variant: 'destructive',
       });
       return;
     }
 
-    if (medications.length === 0) {
+    const validTestOrders = testOrders.filter(t => t.test !== null);
+
+    const prescriptionData = {
+      patientId: 2,
+      hospitalId: 1,
+      summary: summary,
+      bloodPressure: `${healthVitals.bloodPressureSystolic}/${healthVitals.bloodPressureDiastolic}`,
+      weight: healthVitals.weight,
+      heartRate: healthVitals.heartRate,
+      diagnosis: validDiagnoses.map(d => d.disease.id),
+      tests: validTestOrders.map(t => t.test.id),
+      medications: validMedications.map(m => ({
+        medicineId: m.medicine.id,
+        name: m.medicine.name,
+        dosage: m.dosage,
+        frequency: m.frequency,
+        durationValue: m.durationValue,
+        durationUnit: m.durationUnit,
+        instructions: m.instructions
+      })),
+      notes: notes,
+      nextAppointment: nextAppointment ? new Date(nextAppointment).toISOString() : null
+    };
+
+    try {
+      console.log('Prescription data:', prescriptionData);
+      const response = await api.post('/doctor/prescription/add', prescriptionData);
+      console.log('Server response:', response.data);
+
       toast({
-        title: 'No medications added',
-        description: 'Please add at least one medication.',
+        title: 'Prescription created successfully!',
+        description: 'The prescription has been saved and sent to the patient.',
+      });
+
+      setSelectedPatient('');
+      setSelectedDiagnoses([]);
+      setMedications([]);
+      setTestOrders([]);
+      setHealthVitals({
+        heartRate: '',
+        bloodPressureSystolic: '',
+        bloodPressureDiastolic: '',
+        weight: ''
+      });
+    } catch (error) {
+      toast({
+        title: 'Error creating prescription',
+        description: 'There was an error saving the prescription. Please try again.',
         variant: 'destructive',
       });
-      return;
     }
-
-    // Mock save operation
-    toast({
-      title: 'Prescription created successfully!',
-      description: 'The prescription has been saved and sent to the patient.',
-    });
-
-    // Reset form
-    setSelectedPatient('');
-    setDiagnosis('');
-    setNotes('');
-    setMedications([]);
-    setTestOrders([]);
-    setHealthVitals({
-      heartRate: '',
-      bloodPressureSystolic: '',
-      bloodPressureDiastolic: '',
-      weight: '',
-      height: '',
-      temperature: '',
-      oxygenSaturation: ''
-    });
   };
 
   return (
@@ -157,7 +253,7 @@ const CreatePrescription = () => {
         <p className="text-gray-600">Create a new prescription for your patient</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-6">
         {/* Patient Selection */}
         <Card>
           <CardHeader>
@@ -257,72 +353,64 @@ const CreatePrescription = () => {
                   placeholder="e.g., 70.5"
                 />
               </div>
-              <div>
-                <Label htmlFor="height">Height (cm)</Label>
-                <Input
-                  id="height"
-                  type="number"
-                  value={healthVitals.height}
-                  onChange={(e) => updateHealthVital('height', e.target.value)}
-                  placeholder="e.g., 175"
-                />
-              </div>
-              <div>
-                <Label htmlFor="temperature">Temperature (°C)</Label>
-                <Input
-                  id="temperature"
-                  type="number"
-                  step="0.1"
-                  value={healthVitals.temperature}
-                  onChange={(e) => updateHealthVital('temperature', e.target.value)}
-                  placeholder="e.g., 37.0"
-                />
-              </div>
-              <div>
-                <Label htmlFor="oxygenSaturation">Oxygen Saturation (%)</Label>
-                <Input
-                  id="oxygenSaturation"
-                  type="number"
-                  value={healthVitals.oxygenSaturation}
-                  onChange={(e) => updateHealthVital('oxygenSaturation', e.target.value)}
-                  placeholder="e.g., 98"
-                />
-              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Diagnosis */}
+        {/* Diagnoses */}
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <FileText className="w-5 h-5 mr-2 text-medical-600" />
-              Diagnosis & Assessment
-            </CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <div>
+              <CardTitle className="flex items-center">
+                <FileText className="w-5 h-5 mr-2 text-medical-600" />
+                Diagnoses
+              </CardTitle>
+              <CardDescription>
+                Add one or more diagnoses for the patient
+              </CardDescription>
+            </div>
+            <Button type="button" onClick={addDiagnosis} variant="outline">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Diagnosis
+            </Button>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="diagnosis">Primary Diagnosis *</Label>
-                <Input
-                  id="diagnosis"
-                  value={diagnosis}
-                  onChange={(e) => setDiagnosis(e.target.value)}
-                  placeholder="Enter primary diagnosis"
-                  required
-                />
+            {selectedDiagnoses.length > 0 ? (
+              <div className="space-y-4">
+                {selectedDiagnoses.map((diagnosis, index) => (
+                  <div key={index} className="p-4 border rounded-lg space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-medium text-gray-900">Diagnosis {index + 1}</h4>
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => removeDiagnosis(diagnosis.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    <div>
+                      <Label>Diagnosis</Label>
+                      <Combobox
+                        options={diseases}
+                        selectedId={diagnosis.disease.id || null}
+                        onChange={(id, name) => updateDiagnosis(index, { id: Number(id), name })}
+                        placeholder="Select diagnosis"
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div>
-                <Label htmlFor="notes">Clinical Notes</Label>
-                <Textarea
-                  id="notes"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Additional notes, follow-up instructions, etc."
-                  className="min-h-[100px]"
-                />
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                <p>No diagnoses added yet</p>
+                <Button type="button" onClick={addDiagnosis} variant="outline" className="mt-2">
+                  Add First Diagnosis
+                </Button>
               </div>
-            </div>
+            )}
           </CardContent>
         </Card>
 
@@ -346,42 +434,43 @@ const CreatePrescription = () => {
           <CardContent>
             {medications.length > 0 ? (
               <div className="space-y-4">
-                {medications.map((medication, index) => (
-                  <div key={medication.id} className="p-4 border rounded-lg space-y-3">
+                {medications.map((medicine, index) => (
+                  <div key={medicine.id} className="p-4 border rounded-lg space-y-3">
                     <div className="flex items-center justify-between">
                       <h4 className="font-medium text-gray-900">Medication {index + 1}</h4>
                       <Button
                         type="button"
                         variant="destructive"
                         size="sm"
-                        onClick={() => removeMedication(medication.id)}
+                        onClick={() => removeMedication(medicine.id)}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
                       <div>
                         <Label>Medicine Name</Label>
-                        <Input
-                          value={medication.name}
-                          onChange={(e) => updateMedication(medication.id, 'name', e.target.value)}
-                          placeholder="e.g., Paracetamol"
+                        <Combobox
+                          options={medicines}
+                          selectedId={medicine.medicine?.id || null}
+                          onChange={(id, name) =>
+                              updateMedication(medicine.id, 'medicine', { id, name })}
+                          placeholder="Select medicine"
                         />
                       </div>
                       <div>
                         <Label>Dosage</Label>
                         <Input
-                          value={medication.dosage}
-                          onChange={(e) => updateMedication(medication.id, 'dosage', e.target.value)}
+                          value={medicine.dosage}
+                          onChange={(e) => updateMedication(medicine.id, 'dosage', e.target.value)}
                           placeholder="e.g., 500mg"
                         />
                       </div>
                       <div>
                         <Label>Frequency</Label>
-                        <Select 
-                          value={medication.frequency} 
-                          onValueChange={(value) => updateMedication(medication.id, 'frequency', value)}
+                        <Select
+                          value={medicine.frequency}
+                          onValueChange={(value) => updateMedication(medicine.id, 'frequency', value)}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="Select frequency" />
@@ -397,19 +486,33 @@ const CreatePrescription = () => {
                       </div>
                       <div>
                         <Label>Duration</Label>
-                        <Input
-                          value={medication.duration}
-                          onChange={(e) => updateMedication(medication.id, 'duration', e.target.value)}
-                          placeholder="e.g., 7 days"
-                        />
+                          <Input
+                            value={medicine.durationValue}
+                            onChange={(e) => updateMedication(medicine.id, 'durationValue', e.target.value)}
+                            placeholder="e.g., 7"
+                          />
+                      </div>
+                      <div>
+                          <Label>Duration Unit</Label>
+                          <Select
+                            value={medicine.durationUnit}
+                            onValueChange={(value) => updateMedication(medicine.id, 'durationUnit', value)}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select unit..." />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="day">Days</SelectItem>
+                              <SelectItem value="month">Months</SelectItem>
+                            </SelectContent>
+                          </Select>
                       </div>
                     </div>
-                    
                     <div>
                       <Label>Special Instructions</Label>
                       <Input
-                        value={medication.instructions}
-                        onChange={(e) => updateMedication(medication.id, 'instructions', e.target.value)}
+                        value={medicine.instructions}
+                        onChange={(e) => updateMedication(medicine.id, 'instructions', e.target.value)}
                         placeholder="e.g., Take with food"
                       />
                     </div>
@@ -448,35 +551,27 @@ const CreatePrescription = () => {
           <CardContent>
             {testOrders.length > 0 ? (
               <div className="space-y-3">
-                {testOrders.map((test, index) => (
-                  <div key={test.id} className="p-3 border rounded-lg">
+                {testOrders.map((testOrder, index) => (
+                  <div key={index} className="p-3 border rounded-lg">
                     <div className="flex items-center justify-between mb-3">
                       <h4 className="font-medium text-gray-900">Test {index + 1}</h4>
                       <Button
                         type="button"
                         variant="destructive"
                         size="sm"
-                        onClick={() => removeTestOrder(test.id)}
+                        onClick={() => removeTestOrder(testOrder.id)}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
                         <Label>Test Name</Label>
-                        <Input
-                          value={test.testName}
-                          onChange={(e) => updateTestOrder(test.id, 'testName', e.target.value)}
-                          placeholder="e.g., Complete Blood Count"
-                        />
-                      </div>
-                      <div>
-                        <Label>Reason/Indication</Label>
-                        <Input
-                          value={test.reason}
-                          onChange={(e) => updateTestOrder(test.id, 'reason', e.target.value)}
-                          placeholder="e.g., Routine monitoring"
+                        <Combobox
+                          options={tests}
+                          selectedId={testOrder.test.id || null}
+                          onChange={(id, name) => updateTestOrder(index, { id: Number(id), name })}
+                          placeholder="Select test"
                         />
                       </div>
                     </div>
@@ -491,24 +586,57 @@ const CreatePrescription = () => {
             )}
           </CardContent>
         </Card>
+        {/* Notes, Summary & Next Appointment */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="flex items-center">
+                <NotepadText className="w-5 h-5 mr-2 text-medical-600"/>
+                Additional Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="notes">Additional Notes</Label>
+                <Input
+                  id="notes"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="any additional important notes...."
+                />
+              </div>
+              <div>
+                <Label htmlFor="summary">Prescription Summary</Label>
+                <Input
+                  id="summary"
+                  value={summary}
+                  onChange={(e) => setSummary(e.target.value)}
+                  placeholder="Short summary of prescription...."
+                />
+              </div>
+              <div>
+                <Label htmlFor="nextAppointment">Next Appointment Date</Label>
+                <Input
+                  id="nextAppointment"
+                  type="date"
+                  value={nextAppointment}
+                  min={new Date().toISOString().split('T')[0]}
+                  onChange={(e) => setNextAppointment(e.target.value)}
+                />
+              </div>
+            </CardContent>
+          </Card>
 
         {/* Submit */}
         <Card>
           <CardContent className="pt-6">
             <div className="flex space-x-4">
-              <Button type="submit" className="bg-medical-600 hover:bg-medical-700">
+              <Button onClick={handleSubmit} className="bg-medical-600 hover:bg-medical-700">
                 Save Prescription
-              </Button>
-              <Button type="button" variant="outline">
-                Save as Draft
-              </Button>
-              <Button type="button" variant="outline">
-                Preview
               </Button>
             </div>
           </CardContent>
         </Card>
-      </form>
+      </div>
     </div>
   );
 };

@@ -2,23 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle , CardDescription} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { TestTube, Calendar, Clock, MapPin, FileText, Eye } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Link } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import { format } from 'date-fns';
-import { useToast } from '@/hooks/use-toast';
+import {TestTube, Calendar, MapPin, FileText, User} from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/lib/api';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+
+
+interface Test {
+  id: number;
+  name: string;
+}
+
 
 const TestResults = () => {
   const [testSummaries, setTestSummaries] = useState([]);
   const [expandedTestId, setExpandedTestId] = useState<number | null>(null);
   const [testDetailsMap, setTestDetailsMap] = useState<{ [id: number]: any }>({});
+  const [testOptions, setTestOptions] = useState<Test[]>([]);
+  const [filters, setFilters] = useState({
+    dateFrom: '',
+    dateTo: '',
+    testId: 0
+  });
+
+
+  const fetchAllPerformedTests = async () => {
+    try {
+      const response = await api.get('/patient/history/test-names');
+      setTestOptions(response.data);
+    } catch (error) {
+      console.error('Error fetching diseases:', error);
+    }
+  };
+
+  useEffect(() => {
+      fetchAllPerformedTests().then(r => {
+        console.log('Test options fetched:', r);
+      });
+  }, []);
 
   const fetchTestSummaries = async () => {
     try {
-      const res = await api.get('/patient/history/all-medical-tests');
-      setTestSummaries(res.data);
+      // const response = await api.get('/patient/history/all-performed-tests');
+      const response = await api.post('/patient/history/all-performed-tests', {
+          dateFrom: filters.dateFrom || undefined,
+          dateTo: filters.dateTo || undefined,
+          testId: filters.testId!== 0 ? filters.testId : undefined
+      });
+      setTestSummaries(response.data);
     } catch (err) {
       console.error('Failed to fetch test summaries:', err);
     }
@@ -44,9 +76,26 @@ const TestResults = () => {
     }
   };
 
+  const handleFilterChange = (key: string, value: string | number) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      dateFrom: '',
+      dateTo: '',
+      testId: 0
+    });
+    fetchTestSummaries().then(r => {
+      console.log('Filters cleared and test summaries fetched');
+    });
+  };
+
   useEffect(() => {
-    fetchTestSummaries();
-  }, []);
+    fetchTestSummaries().then(r => {
+        console.log('Test summaries fetched with filters:', filters);
+    });
+  }, [filters]);
 
   return (
     <div className="space-y-6">
@@ -54,6 +103,62 @@ const TestResults = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">My Test Results</h1>
         <p className="text-gray-600">Review completed medical test reports</p>
       </div>
+
+      <Card className="p-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* From Date */}
+          <div className="space-y-2">
+            <Label htmlFor="fromDate">From Date</Label>
+            <Input
+              id="fromDate"
+              max={new Date().toISOString().split('T')[0]}
+              type="date"
+              value={filters.dateFrom}
+              onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
+            />
+          </div>
+
+          {/* To Date */}
+          <div className="space-y-2">
+            <Label htmlFor="toDate">To Date</Label>
+            <Input
+              id="toDate"
+              max={new Date().toISOString().split('T')[0]}
+              type="date"
+              value={filters.dateTo}
+              onChange={(e) => handleFilterChange('dateTo', e.target.value)}
+            />
+          </div>
+
+          {/* Test Type */}
+          <div className="space-y-2">
+            <Label>Test Name</Label>
+            <Select
+                value={filters.testId.toString()}
+                onValueChange={(value) => handleFilterChange('testId', parseInt(value))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Doctor" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0">All</SelectItem>
+                  {testOptions.map((test) => (
+                    <SelectItem key={test.id} value={test.id.toString()}>
+                      {test.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+          </div>
+        {/* Clear Filters */}
+        <div className="flex items-end justify-end space-x-2 mt-4 md:mt-0">
+          {/*<Label>Test Name</Label>*/}
+          <Button onClick={clearFilters} >
+            Clear All Filters
+          </Button>
+        </div>
+        </div>
+      </Card>
 
       <div className="space-y-4">
         {testSummaries.length > 0 ? (
@@ -70,14 +175,19 @@ const TestResults = () => {
                   onClick={() => toggleExpanded(test.performedTestId)}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-start justify-between">
+                  <div
+                      data-testid={`test-card-${test.performedTestId}`}
+                      className="flex items-start justify-between"
+                  >
                     <div>
                       <CardTitle className="text-lg flex items-center">
                         <TestTube className="w-5 h-5 mr-2 text-medical-600" />
                         {test.name}
                       </CardTitle>
                       <CardDescription className="mt-1 space-y-1 text-sm text-gray-600">
-                        <div className="flex items-center">
+                        <div data-testid="test-date"
+                            className="flex items-center"
+                        >
                           <Calendar className="w-4 h-4 mr-1" />
                           {test.date}
                         </div>
@@ -98,55 +208,94 @@ const TestResults = () => {
                 </CardHeader>
 
                 {isExpanded && detail && (
-                  <CardContent className="space-y-4 border-t pt-4">
-                    {/* Doctor Info */}
-                    <div className="text-sm text-gray-700 space-y-1">
-                      <p><strong>Ordered By:</strong> {detail.orderedBy?.name} ({detail.orderedBy?.specialization})</p>
-                      <p><strong>Performed By:</strong> {detail.performedBy?.name}</p>
-                      <p><strong>Reviewed By:</strong> {detail.reviewedBy?.name}</p>
-                      <p><strong>Hospital:</strong> {detail.hospital?.name}</p>
+                <CardContent className="space-y-6 border-t pt-6 bg-gray-50">
+                  {/* Doctor Info Section */}
+                  <div className="space-y-3">
+                    <h4 className="flex items-center text-lg font-semibold text-gray-800">
+                      <User className="w-5 h-5 mr-2 text-medical-600" />
+                      Doctor Information
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-sm">
+                      <p className="text-sm">
+                        <span className="font-semibold text-blue-950 px-2 py-1">Ordered By:</span>{' '}
+                        {detail.orderedBy?.name
+                          ? `${detail.orderedBy.name} (${detail.orderedBy?.specialization || 'N/A'})`
+                          : 'N/A'}
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold text-blue-950 px-2 py-1">Performed By:</span>{' '}
+                        {detail.performedBy?.name || 'N/A'}
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold text-blue-950 px-2 py-1">Reviewed By:</span>{' '}
+                        {detail.reviewedBy?.name || 'N/A'}
+                      </p>
                     </div>
+                  </div>
 
-                    {/* Results */}
-                    {detail.results?.length > 0 && (
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-2">Test Parameters</h4>
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-sm border">
-                            <thead>
-                              <tr className="border-b text-left bg-gray-100">
-                                <th className="py-2 px-3">Parameter</th>
-                                <th className="py-2 px-3">Value</th>
-                                <th className="py-2 px-3">Unit</th>
-                                <th className="py-2 px-3">Ideal Range</th>
+                  {/* Test Parameters Section */}
+                  {detail.results?.length > 0 ? (
+                    <div className="space-y-3">
+                      <h4 className="flex items-center text-lg font-semibold text-gray-800">
+                        <TestTube className="w-5 h-5 mr-2 text-medical-600" />
+                        Test Parameters
+                      </h4>
+                      <div className="overflow-x-auto rounded-lg shadow-sm">
+                        <table className="w-full text-sm border border-gray-200">
+                          <thead>
+                            <tr className="bg-medical-100 text-gray-800 font-medium">
+                              <th className="py-3 px-4 text-left">Parameter</th>
+                              <th className="py-3 px-4 text-left">Value</th>
+                              <th className="py-3 px-4 text-left">Unit</th>
+                              <th className="py-3 px-4 text-left">Ideal Male Range</th>
+                              <th className="py-3 px-4 text-left">Ideal Female Range</th>
+                              <th className="py-3 px-4 text-left">Ideal Child Range</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {detail.results.map((r, i) => (
+                              <tr
+                                key={i}
+                                className={`border-b border-gray-200 ${
+                                  i % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                                } hover:bg-gray-100 transition-colors`}
+                              >
+                                <td className="py-3 px-4 font-medium text-gray-900">{r.name || 'N/A'}</td>
+                                <td className="py-3 px-4">{r.value || 'N/A'}</td>
+                                <td className="py-3 px-4">{r.unit || '-'}</td>
+                                <td className="py-3 px-4 text-gray-600">{r.idealMaleRange || 'N/A'}</td>
+                                <td className="py-3 px-4 text-gray-600">{r.idealFemaleRange || 'N/A'}</td>
+                                <td className="py-3 px-4 text-gray-600">{r.idealChildRange || 'N/A'}</td>
                               </tr>
-                            </thead>
-                            <tbody>
-                              {detail.results.map((r, i) => (
-                                <tr key={i} className="border-b">
-                                  <td className="py-2 px-3 font-medium">{r.name}</td>
-                                  <td className="py-2 px-3">{r.value}</td>
-                                  <td className="py-2 px-3">{r.unit || '-'}</td>
-                                  <td className="py-2 px-3 text-gray-500">
-                                    {r.idealMaleRange || r.idealFemaleRange || r.idealChildRange || 'N/A'}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
-                    )}
+                    </div>
+                  ) : (
+                    <div className="text-center py-4 text-gray-500">
+                      <p className="text-sm">No test parameters available</p>
+                    </div>
+                  )}
 
-                    {/* Notes */}
-                    {detail.notes && (
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-1">Doctor Notes</h4>
-                        <p className="text-gray-700">{detail.notes}</p>
+                  {/* Notes Section */}
+                  {detail.notes ? (
+                    <div className="space-y-3">
+                      <h4 className="flex items-center text-lg font-semibold text-gray-800">
+                        <FileText className="w-5 h-5 mr-2 text-medical-600" />
+                        Test Result Notes
+                      </h4>
+                      <div className="bg-white p-4 rounded-lg shadow-sm">
+                        <p className="text-sm text-gray-700">{detail.notes}</p>
                       </div>
-                    )}
-                  </CardContent>
-                )}
+                    </div>
+                  ) : (
+                    <div className="text-center py-4 text-gray-500">
+                      <p className="text-sm">No doctor notes available</p>
+                    </div>
+                  )}
+                </CardContent>
+              )}
               </Card>
             );
           })
