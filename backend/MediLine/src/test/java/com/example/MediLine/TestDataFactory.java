@@ -23,6 +23,15 @@ public class TestDataFactory {
         doctor.setDesignation("Professor");
         doctor.setAcademicInstitution("BSMMU");
         doctor.setAvailabilities(Set.of(createDoctorAvailability()));
+
+
+        DoctorDegree doctorDegree = new DoctorDegree();
+        doctorDegree.setId(new DoctorDegree.DoctorDegreeId(doctorId, "MBBS"));
+        doctorDegree.setInstitution("Dhaka Medical College");
+        doctorDegree.setPassingYear(2010);
+
+        doctor.setDegrees(Set.of(doctorDegree));
+
         return doctor;
     }
 
@@ -82,7 +91,7 @@ public class TestDataFactory {
         return  review;
     }
 
-     private static Test createTest() {
+    private static Test createTest() {
         Test test = new Test();
         test.setId(1);
         test.setTestName("Complete blood count");
