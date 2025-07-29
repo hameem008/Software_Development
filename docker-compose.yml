@@ -30,7 +30,7 @@ jobs:
 
       - name: 🧪 Run frontend tests with Vitest
         working-directory: ./mediline-health-portal
-        run: npm run test
+        run: npm test
 
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
