@@ -120,13 +120,53 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           SERVER_PORT: 8080
         run: |
-          ./mvnw spring-boot:run &
-          echo $! > ../../backend.pid
+          echo "Starting Spring Boot application..."
+          ./mvnw spring-boot:run > ../../backend.log 2>&1 &
+          BACKEND_PID=$!
+          echo "Started backend with PID: $BACKEND_PID"
+          echo $BACKEND_PID > ../../backend.pid
+          
+          # Give it a moment to start
+          sleep 5
+          
+          # Check if process is still alive
+          if kill -0 $BACKEND_PID 2>/dev/null; then
+            echo "✅ Backend process is running"
+          else
+            echo "❌ Backend process failed to start"
+            echo "Backend logs:"
+            cat ../../backend.log || echo "No logs available"
+            exit 1
+          fi
         
       - name: ⏳ Wait for backend to be ready
         run: |
           echo "Waiting for backend to start..."
-          timeout 60 bash -c 'until curl -f http://localhost:8080/actuator/health 2>/dev/null; do sleep 2; done'
+          
+          # First, check if the process is still running
+          if [ -f backend.pid ]; then
+            BACKEND_PID=$(cat backend.pid)
+            if ! kill -0 $BACKEND_PID 2>/dev/null; then
+              echo "❌ Backend process $BACKEND_PID is not running!"
+              exit 1
+            fi
+            echo "✅ Backend process $BACKEND_PID is running"
+          else
+            echo "❌ Backend PID file not found!"
+            exit 1
+          fi
+          
+          # Try multiple health check endpoints
+          echo "Checking backend health endpoints..."
+          timeout 120 bash -c '
+            until curl -f http://localhost:8080/actuator/health 2>/dev/null || \
+                  curl -f http://localhost:8080/health 2>/dev/null || \
+                  curl -f http://localhost:8080/ 2>/dev/null; do 
+              echo "Backend not ready yet... waiting 3 seconds"
+              sleep 3
+            done
+          '
+          
           echo "Backend is ready!"
 
       - name: 🚀 Start frontend for E2E tests
@@ -144,6 +184,17 @@ jobs:
           echo "Frontend is ready!"
 
       - name: 🧪 Run Cypress E2E tests
+        if: failure()
+        run: |
+          echo "=== Backend Logs ==="
+          if [ -f backend.log ]; then
+            tail -100 backend.log
+          else
+            echo "No backend logs found"
+          fi
+          
+          echo "=== Process Status ==="
+          ps aux | grep -E "(java|spring)" || echo "No Java processes found"
         working-directory: ./mediline-health-portal
         run: |
           # Install Cypress if not already in package.json
