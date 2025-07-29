@@ -50,6 +50,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test-and-build:
@@ -154,7 +157,7 @@ jobs:
           CYPRESS_baseUrl: http://localhost:3000
 
       - name: 📸 Upload Cypress screenshots on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots
@@ -162,7 +165,7 @@ jobs:
           retention-days: 7
 
       - name: 📹 Upload Cypress videos
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-videos
@@ -170,7 +173,7 @@ jobs:
           retention-days: 7
 
       - name: 📊 Upload Cypress test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-results
@@ -229,4 +232,4 @@ jobs:
           context: ./mediline-health-portal
           push: true
           tags: hameem08/mediline-frontend:latest
-
+          
