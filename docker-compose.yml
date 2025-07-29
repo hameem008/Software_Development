@@ -10,24 +10,23 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       SPRING_PROFILES_ACTIVE: test
+      MAVEN_OPTS: -Djava.version=21 -Xmx2048m -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      # ✅ Fix Maven wrapper permissions
-      - name: 🛠 Fix Maven wrapper permissions
-        working-directory: ./backend/MediLine
+      # Clean any existing Java installations
+      - name: 🗑️ Clean existing Java installations
         run: |
-          if [ -f "mvnw" ]; then
-            chmod +x mvnw
-          else
-            echo "❌ mvnw file not found!"
-            exit 1
-          fi
+          sudo rm -rf /usr/local/lib/jvm/*
+          sudo rm -rf /opt/hostedtoolcache/Java_*
+          sudo rm -rf /opt/hostedtoolcache/java_*
 
-      # ☕ Set up JDK 21 with explicit configuration
-      - name: ☕ Set up JDK 21
+      # Set up JDK 21
+      - name: ☕ Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -35,7 +34,12 @@ jobs:
           cache: 'maven'
           check-latest: true
           cache-dependency-path: '**/pom.xml'
+          overwrite-settings: true
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
+      # Verify Java installation
       - name: 🔍 Verify Java setup
         run: |
           echo "=== Java Version ==="
@@ -45,8 +49,16 @@ jobs:
           echo "=== JAVA_HOME ==="
           echo $JAVA_HOME
           echo "=== Maven Version ==="
-          mvn -version
+          ./backend/MediLine/mvnw -v
 
+      # Fix Maven wrapper permissions
+      - name: 🛠 Fix Maven wrapper permissions
+        working-directory: ./backend/MediLine
+        run: |
+          chmod +x mvnw
+          ./mvnw -v
+
+      # Set up Node.js
       - name: 📦 Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -54,30 +66,25 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      # ✅ Run backend tests with Java 21 verification
+      # Run backend tests
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
         run: |
-          echo "=== Verifying Java Version in Maven ==="
-          ./mvnw -v
-          echo "=== Building with Maven ==="
-          ./mvnw clean test -B
-          echo "=== Java Version Used in Build ==="
-          ./mvnw help:evaluate -Dexpression=java.version -q -DforceStdout
+          ./mvnw clean test -B -Djava.version=21 -Dmaven.compiler.release=21
 
       # Install frontend dependencies
       - name: 📦 Install frontend dependencies
         working-directory: ./mediline-health-portal
         run: npm ci
 
-      # Start backend server in background with test profile
+      # Start backend server
       - name: 🚀 Start Backend server
         working-directory: ./backend/MediLine
         run: |
           ./mvnw spring-boot:run -Dspring-boot.run.profiles=test &
 
-      # Wait for backend server to be ready
-      - name: ⏳ Wait for Backend to be ready
+      # Wait for backend
+      - name: ⏳ Wait for Backend
         run: |
           for i in {1..30}; do
             if curl --silent --fail http://localhost:8080/actuator/health; then
@@ -88,13 +95,13 @@ jobs:
             sleep 5
           done
 
-      # Start frontend server in background
+      # Start frontend server
       - name: 🚀 Start Frontend server
         working-directory: ./mediline-health-portal
         run: npm run dev &
 
-      # Wait for frontend server to be ready
-      - name: ⏳ Wait for Frontend to be ready
+      # Wait for frontend
+      - name: ⏳ Wait for Frontend
         run: |
           for i in {1..30}; do
             if curl --silent --fail http://localhost:5173; then
@@ -105,29 +112,27 @@ jobs:
             sleep 5
           done
 
-      # Run Cypress end-to-end tests
+      # Run Cypress tests
       - name: 🧪 Run Cypress E2E tests
         working-directory: ./mediline-health-portal
         run: npx cypress run
 
-      # Kill background servers
+      # Kill servers
       - name: 🛑 Kill servers
         run: |
           pkill -f 'spring-boot:run' || true
           pkill -f 'vite' || true
 
-      # 🐳 Set up Docker Buildx
+      # Docker setup
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 🔐 Log in to Docker Hub
       - name: 🔐 Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
-      # 📦 Build and push DB image
       - name: 📦 Build & Push DB image
         uses: docker/build-push-action@v5
         with:
@@ -135,7 +140,6 @@ jobs:
           push: true
           tags: hameem08/mediline-db:latest
 
-      # 📦 Build and push Backend image
       - name: 📦 Build & Push Backend image
         uses: docker/build-push-action@v5
         with:
@@ -145,7 +149,6 @@ jobs:
           build-args:
             JAVA_VERSION: 21
 
-      # 📦 Build and push Frontend image
       - name: 📦 Build & Push Frontend image
         uses: docker/build-push-action@v5
         with:
