@@ -218,7 +218,7 @@ const PrescriptionListView = () => {
                     <h4 className="font-medium text-gray-900">
                       Prescription #{prescription.prescriptionId}
                     </h4>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600" data-testid="prescription-meta">
                       <User className="w-4 h-4 inline mr-1" />
                       {prescription.doctorName} &nbsp;|&nbsp;
                       <Calendar className="w-4 h-4 inline mr-1" />

@@ -175,14 +175,19 @@ const TestResults = () => {
                   onClick={() => toggleExpanded(test.performedTestId)}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-start justify-between">
+                  <div
+                      data-testid={`test-card-${test.performedTestId}`}
+                      className="flex items-start justify-between"
+                  >
                     <div>
                       <CardTitle className="text-lg flex items-center">
                         <TestTube className="w-5 h-5 mr-2 text-medical-600" />
                         {test.name}
                       </CardTitle>
                       <CardDescription className="mt-1 space-y-1 text-sm text-gray-600">
-                        <div className="flex items-center">
+                        <div data-testid="test-date"
+                            className="flex items-center"
+                        >
                           <Calendar className="w-4 h-4 mr-1" />
                           {test.date}
                         </div>
