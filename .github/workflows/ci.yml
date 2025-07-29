@@ -59,8 +59,10 @@ jobs:
     services:
       postgres:
         image: postgres:15
-        env_file:
-          - .env
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -98,8 +100,11 @@ jobs:
 
       - name: ⚙️ Set up backend dependencies and test
         working-directory: ./backend/MediLine
-        env_file:
-          - .env
+        env:
+          SPRING_PROFILES_ACTIVE: test
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         run: ./mvnw test
 
       - name: 🐳 Set up Docker Buildx
