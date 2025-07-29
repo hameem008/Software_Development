@@ -76,7 +76,7 @@ jobs:
 
       - name: 🧪 Run frontend tests
         working-directory: ./mediline-health-portal
-        run: npm test -- --watchAll=false
+        run: npm test 
 
       - name: 🔨 Build frontend (optional, skip if Dockerfile handles it)
         working-directory: ./mediline-health-portal
