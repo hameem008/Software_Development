@@ -13,21 +13,29 @@ jobs:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
 
-      # ✅ Fix Maven wrapper permissions right after checkout with debugging
+      # ✅ Fix Maven wrapper permissions with multiple approaches
       - name: 🛠 Fix Maven wrapper permissions
         working-directory: ./backend/MediLine
         run: |
-          echo "📋 Checking current permissions..."
-          ls -la mvnw
-          echo "🔧 Setting execute permissions..."
-          chmod +x mvnw
-          echo "✅ Verifying permissions after chmod..."
-          ls -la mvnw
+          echo "📋 Current directory: $(pwd)"
+          echo "📋 Files in directory:"
+          ls -la
+          if [ -f "mvnw" ]; then
+            echo "📋 Found mvnw, checking permissions..."
+            ls -la mvnw
+            echo "🔧 Setting execute permissions..."
+            chmod +x mvnw
+            echo "✅ Verifying permissions after chmod..."
+            ls -la mvnw
+          else
+            echo "❌ mvnw file not found!"
+            exit 1
+          fi
 
-      - name: ☕ Set up JDK 17
+      - name: ☕ Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
       - name: 📦 Set up Node.js
@@ -35,20 +43,34 @@ jobs:
         with:
           node-version: 18
 
-      # ✅ Run backend tests
+      # ✅ Run backend tests with fallback to Maven
       - name: ⚙️ Run backend tests
         working-directory: ./backend/MediLine
-        run: ./mvnw test
+        run: |
+          if [ -x "./mvnw" ]; then
+            echo "✅ Using Maven wrapper..."
+            ./mvnw test
+          else
+            echo "⚠️ Maven wrapper not executable, using Maven directly..."
+            mvn test
+          fi
 
       # ✅ Install frontend dependencies (for Cypress and dev server)
       - name: 📦 Install frontend dependencies
         working-directory: ./mediline-health-portal
         run: npm install
 
-      # 🚀 Start backend server in background
+      # 🚀 Start backend server in background with fallback
       - name: 🚀 Start Backend server
         working-directory: ./backend/MediLine
-        run: ./mvnw spring-boot:run &
+        run: |
+          if [ -x "./mvnw" ]; then
+            echo "✅ Using Maven wrapper to start server..."
+            ./mvnw spring-boot:run &
+          else
+            echo "⚠️ Maven wrapper not executable, using Maven directly..."
+            mvn spring-boot:run &
+          fi
 
       # ⏳ Wait for backend server to be ready
       - name: ⏳ Wait for Backend to be ready
