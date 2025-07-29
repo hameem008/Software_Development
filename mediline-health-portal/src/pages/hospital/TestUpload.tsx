@@ -284,20 +284,8 @@ const TestUpload = () => {
                 </Select>
               </div>
             </div>
-            
-            <div className="mt-4">
-              <Label htmlFor="result">Test Results *</Label>
-              <Textarea
-                id="result"
-                value={result}
-                onChange={(e) => setResult(e.target.value)}
-                placeholder="Enter the test results, findings, or measurements..."
-                className="min-h-[120px]"
-                required
-              />
-            </div>
-            
-            <div className="mt-4">
+
+            {/*<div className="mt-4">
               <Label htmlFor="notes">Additional Notes</Label>
               <Textarea
                 id="notes"
@@ -306,7 +294,7 @@ const TestUpload = () => {
                 placeholder="Any additional observations, recommendations, or notes..."
                 className="min-h-[80px]"
               />
-            </div>
+            </div>*/}
           </CardContent>
         </Card>
 
@@ -320,16 +308,11 @@ const TestUpload = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
                 {parameters.map((param, index) => (
-                  <div key={index} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                  <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
                     <div>
                       <Label>Parameter Name</Label>
-                      <Input
-                        placeholder="e.g., Hemoglobin"
-                        value={param.name}
-                        onChange={(e) => updateParameter(index, 'name', e.target.value)}
-                      />
+                      <p className="text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-md px-3 py-2">{param.name || 'N/A'}</p>
                     </div>
                     <div>
                       <Label>Value</Label>
@@ -337,47 +320,43 @@ const TestUpload = () => {
                         placeholder="e.g., 14.2"
                         value={param.value}
                         onChange={(e) => updateParameter(index, 'value', e.target.value)}
+                        className="text-sm"
                       />
                     </div>
                     <div>
                       <Label>Unit</Label>
-                      <Input
-                        placeholder="e.g., g/dL"
-                        value={param.unit}
-                        onChange={(e) => updateParameter(index, 'unit', e.target.value)}
-                      />
+                      <p className="text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-md px-3 py-2">
+                        {param.unit || 'N/A'}
+                      </p>
                     </div>
                     <div>
-                      <Label>Normal Range</Label>
-                      <Input
-                        placeholder="e.g., 12-15.5"
-                        value={param.normalRange}
-                        onChange={(e) => updateParameter(index, 'normalRange', e.target.value)}
-                      />
+                      <Label>Ideal Female Range</Label>
+                      <p className="text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-md px-3 py-2">
+                        {param.normalRange || 'N/A'}
+                      </p>
                     </div>
                     <div>
-                      {parameters.length > 1 && (
-                        <Button 
-                          type="button" 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => removeParameter(index)}
-                        >
-                          Remove
-                        </Button>
-                      )}
+                      <Label>Ideal Male Range</Label>
+                      <p className="text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-md px-3 py-2">
+                        {param.normalRange || 'N/A'}
+                      </p>
+                    </div>
+                    <div>
+                      <Label>Ideal Child Range</Label>
+                      <p className="text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-md px-3 py-2">{param.normalRange || 'N/A'}</p>
                     </div>
                   </div>
                 ))}
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={addParameter}
-                  className="w-full"
-                >
-                  Add Parameter
-                </Button>
-              </div>
+              <div className="mt-4">
+              <Label htmlFor="notes">Additional Notes</Label>
+              <Textarea
+                id="notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Any additional observations, recommendations, or notes..."
+                className="min-h-[80px]"
+              />
+            </div>
             </CardContent>
           </Card>
         )}
@@ -394,32 +373,15 @@ const TestUpload = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="file">Report File</Label>
-                <Input
-                  id="file"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={handleFileSelect}
-                  className="cursor-pointer"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Supported formats: PDF, JPEG, PNG (Maximum size: 10MB)
-                </p>
-              </div>
-              
-              {selectedFile && (
-                <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center space-x-2">
-                    <FileText className="w-4 h-4 text-green-600" />
-                    <span className="text-sm font-medium text-green-800">{selectedFile.name}</span>
-                    <span className="text-xs text-green-600">
-                      ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
-                    </span>
-                  </div>
-                </div>
-              )}
+            <div className="mt-4">
+              <Label htmlFor="notes">Additional Notes</Label>
+              <Textarea
+                id="notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Any additional observations, recommendations, or notes..."
+                className="min-h-[80px]"
+              />
             </div>
           </CardContent>
         </Card>
@@ -431,12 +393,6 @@ const TestUpload = () => {
               <Button type="submit" className="bg-medical-600 hover:bg-medical-700">
                 <Upload className="w-4 h-4 mr-2" />
                 Upload Test Results
-              </Button>
-              <Button type="button" variant="outline">
-                Save as Draft
-              </Button>
-              <Button type="button" variant="outline">
-                Preview
               </Button>
             </div>
           </CardContent>

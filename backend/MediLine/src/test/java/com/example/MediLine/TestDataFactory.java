@@ -23,6 +23,15 @@ public class TestDataFactory {
         doctor.setDesignation("Professor");
         doctor.setAcademicInstitution("BSMMU");
         doctor.setAvailabilities(Set.of(createDoctorAvailability()));
+
+
+        DoctorDegree doctorDegree = new DoctorDegree();
+        doctorDegree.setId(new DoctorDegree.DoctorDegreeId(doctorId, "MBBS"));
+        doctorDegree.setInstitution("Dhaka Medical College");
+        doctorDegree.setPassingYear(2010);
+
+        doctor.setDegrees(Set.of(doctorDegree));
+
         return doctor;
     }
 
