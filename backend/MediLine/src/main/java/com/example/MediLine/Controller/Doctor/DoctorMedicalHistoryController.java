@@ -74,6 +74,24 @@ public class DoctorMedicalHistoryController {
         return ResponseEntity.ok(prescriptionDetails);
     }
 
+     @PostMapping("/prescription/all/email")
+    public ResponseEntity<List<PrescriptionSummaryDTO>> getAllPrescriptionsViaEmail(
+            @RequestBody
+            PatientHistoryRequest patientRequest,
+            @CurrentDoctor Doctor doctor) {
+
+        List<PrescriptionSummaryDTO> prescriptionDetails = doctorMedicalHistoryService
+                .getPatientsAllPrescriptionsViaEmail(
+                        patientRequest.getPatientEmail(),
+                        doctor.getDoctorId()
+                );
+
+        if (prescriptionDetails == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(prescriptionDetails);
+    }
+
     @PostMapping("/prescription/details")
     public ResponseEntity<PrescriptionDTO> getPrescriptionDetails(
             @RequestBody
@@ -127,8 +145,24 @@ public class DoctorMedicalHistoryController {
             return ResponseEntity.noContent().build();
 
         return ResponseEntity.ok(patientsAllTests);
+    }
 
+    @PostMapping("/test/all/email")
+    public ResponseEntity<List<TestSummaryDTO>> getAllTestsViaEmail(
+            @RequestBody
+            PatientHistoryRequest patientRequest,
+            @CurrentDoctor Doctor doctor) {
 
+        List<TestSummaryDTO> patientsAllTests =
+                doctorMedicalHistoryService.getPatientsAllTestsListViaEmail(
+                        patientRequest.getPatientEmail(),
+                        doctor.getDoctorId()
+                );
+
+        if (patientsAllTests.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(patientsAllTests);
     }
 
     @PostMapping("/test/result")
