@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -89,25 +91,23 @@ const PatientProfile = () => {
         {/* Profile Picture and Basic Info */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile Picture</CardTitle>
+            {/* <CardTitle>Profile Picture</CardTitle> */}
           </CardHeader>
           <CardContent className="text-center">
-            <div className="w-32 h-32 mx-auto mb-4 bg-medical-100 rounded-full flex items-center justify-center">
-              {patientProfile.profilePhotoUrl ? (
-                <img 
-                  src={patientProfile.profilePhotoUrl} 
-                  alt="Profile" 
-                  className="w-32 h-32 rounded-full object-cover"
-                />
-              ) : (
-                <User className="w-16 h-16 text-medical-600" />
-              )}
-            </div>
-            {isEditing && (
+            <Avatar className="w-32 h-32 mx-auto">
+              {/* <AvatarImage src={patientProfile.profilePhotoUrl} alt={patientProfile.firstName} /> */}
+              <AvatarFallback className="text-2xl">
+                {patientProfile.firstName?.[0] || 'D'}{patientProfile.lastName?.[0] || ''}
+              </AvatarFallback>
+            </Avatar>
+            {/* {isEditing && (
               <Button variant="outline" size="sm">
                 Change Photo
               </Button>
-            )}
+            )} */}
+              <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{patientProfile.firstName} {patientProfile.lastName}</h2>
+              </div>
           </CardContent>
         </Card>
 

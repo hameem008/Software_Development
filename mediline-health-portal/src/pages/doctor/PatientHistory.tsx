@@ -1,27 +1,80 @@
-
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { mockPatients, mockPrescriptions, mockTestResults } from '@/data/mockData';
 import { Search, User, FileText, TestTube, Calendar, Pill } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import api from '@/lib/api';
+
+interface Patient {
+  id: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  bloodGroup: string;
+}
+
+interface Test {
+  performedTestId: number;
+  name: string;
+  date: string;
+  orderedBy: {
+    doctorId: number;
+    name: string;
+    specialization: string;
+    designation: string;
+    academicInstitution: string;
+  };
+}
+
+interface Prescription {
+  prescriptionId: number;
+  doctorName: string;
+  doctorId: number;
+  issuedDate: string;
+  summary: string;
+}
 
 const PatientHistory = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPatient, setSelectedPatient] = useState<any>(null);
+  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [patientProfile, setPatientProfile] = useState<Patient | null>(null);
+  const [medications, setMedications] = useState<Prescription[]>([]);
+  const [testResults, setTestResults] = useState<Test[]>([]);
+  const navigate = useNavigate();
 
-  const filteredPatients = mockPatients.filter(patient =>
-    patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    patient.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSearchButton = async () => {
+    try {
+      const profileResponse = await api.post('/doctor/patient-history/patient', { patientEmail: searchTerm });
+      setPatientProfile(profileResponse.data);
+      setSelectedPatient(profileResponse.data);
 
-  const getPatientPrescriptions = (patientId: string) => {
-    return mockPrescriptions.filter(presc => presc.patientId === patientId);
+      const prescriptionsResponse = await api.post('/doctor/patient-history/prescription/all/email', { patientEmail: searchTerm });
+      setMedications(prescriptionsResponse.data);
+
+      const testResultsResponse = await api.post('/doctor/patient-history/test/all/email', { patientEmail: searchTerm });
+      setTestResults(testResultsResponse.data);
+      console.log(testResultsResponse.data)
+      console.log("loggon-------")
+      console.log(testResults)
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+      setPatientProfile(null);
+      setSelectedPatient(null);
+      setMedications([]);
+      setTestResults([]);
+    }
   };
 
-  const getPatientTestResults = (patientId: string) => {
-    return mockTestResults.filter(test => test.patientId === patientId);
+  const handleViewPrescription = (prescriptionId: number) => {
+    navigate('/doctor/prescriptions/details', { state: { prescriptionId } });
+  };
+
+  const handleViewTestResult = (performedTestId: number) => {
+    console.log(performedTestId);
+    navigate('/doctor/test/result', { state: { performedTestId } });
   };
 
   return (
@@ -32,7 +85,7 @@ const PatientHistory = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Patient Search & List */}
+        {/* Patient Search */}
         <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle className="flex items-center">
@@ -42,54 +95,16 @@ const PatientHistory = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <Input
-                placeholder="Search by name or email..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              
-              <div className="space-y-2 max-h-96 overflow-y-auto">
-                {filteredPatients.map((patient) => (
-                  <div
-                    key={patient.id}
-                    className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                      selectedPatient?.id === patient.id 
-                        ? 'bg-medical-50 border-medical-200' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                    onClick={() => setSelectedPatient(patient)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="flex-shrink-0">
-                        {patient.avatar ? (
-                          <img 
-                            src={patient.avatar} 
-                            alt={patient.name}
-                            className="w-10 h-10 rounded-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-10 h-10 bg-medical-100 rounded-full flex items-center justify-center">
-                            <User className="w-5 h-5 text-medical-600" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">{patient.name}</p>
-                        <p className="text-xs text-gray-500 truncate">{patient.email}</p>
-                        <p className="text-xs text-gray-500">
-                          Age: {new Date().getFullYear() - new Date(patient.dateOfBirth).getFullYear()}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                
-                {filteredPatients.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
-                    <Search className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                    <p>No patients found</p>
-                  </div>
-                )}
+              <div className="flex space-x-2">
+                <Input
+                  placeholder="Search by email..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button onClick={handleSearchButton}>
+                  <Search className="w-4 h-4 mr-2" />
+                  Search
+                </Button>
               </div>
             </div>
           </CardContent>
@@ -119,33 +134,21 @@ const PatientHistory = () => {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-600">Phone</p>
-                      <p className="text-base text-gray-900">{selectedPatient.phone}</p>
+                      <p className="text-base text-gray-900">{selectedPatient.phoneNumber}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-600">Date of Birth</p>
                       <p className="text-base text-gray-900">{selectedPatient.dateOfBirth}</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Gender</p>
-                      <p className="text-base text-gray-900 capitalize">{selectedPatient.gender}</p>
-                    </div>
-                    <div>
                       <p className="text-sm font-medium text-gray-600">Blood Group</p>
                       <p className="text-base text-gray-900">{selectedPatient.bloodGroup}</p>
-                    </div>
-                    <div className="md:col-span-2">
-                      <p className="text-sm font-medium text-gray-600">Address</p>
-                      <p className="text-base text-gray-900">{selectedPatient.address}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-600">Emergency Contact</p>
-                      <p className="text-base text-gray-900">{selectedPatient.emergencyContact}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Medical History */}
+              {/* Prescription History */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -154,41 +157,33 @@ const PatientHistory = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {getPatientPrescriptions(selectedPatient.id).length > 0 ? (
+                  {medications.length > 0 ? (
                     <div className="space-y-4">
-                      {getPatientPrescriptions(selectedPatient.id).map((prescription) => (
-                        <div key={prescription.id} className="border rounded-lg p-4">
+                      {medications.map((prescription) => (
+                        <div key={prescription.prescriptionId} className="border rounded-lg p-4">
                           <div className="flex items-start justify-between mb-3">
                             <div>
-                              <p className="font-medium text-gray-900">{prescription.diagnosis}</p>
+                              <p className="font-medium text-gray-900">Prescription #{prescription.prescriptionId}</p>
                               <p className="text-sm text-gray-600 flex items-center mt-1">
                                 <Calendar className="w-4 h-4 mr-1" />
-                                {prescription.date}
+                                {prescription.issuedDate}
+                              </p>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Doctor: {prescription.doctorName} (ID: {prescription.doctorId})
                               </p>
                             </div>
-                            <Button size="sm" variant="outline">
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleViewPrescription(prescription.prescriptionId)}
+                            >
                               View Full Prescription
                             </Button>
                           </div>
-                          
                           <div className="space-y-2">
-                            <p className="text-sm font-medium text-gray-700">Medications:</p>
-                            <div className="flex flex-wrap gap-2">
-                              {prescription.medications.map((med, index) => (
-                                <Badge key={index} variant="secondary" className="text-xs">
-                                  <Pill className="w-3 h-3 mr-1" />
-                                  {med.name} - {med.dosage}
-                                </Badge>
-                              ))}
-                            </div>
+                            <p className="text-sm font-medium text-gray-700">Summary:</p>
+                            <p className="text-sm text-gray-600">{prescription.summary}</p>
                           </div>
-                          
-                          {prescription.notes && (
-                            <div className="mt-3">
-                              <p className="text-sm font-medium text-gray-700">Notes:</p>
-                              <p className="text-sm text-gray-600">{prescription.notes}</p>
-                            </div>
-                          )}
                         </div>
                       ))}
                     </div>
@@ -210,27 +205,28 @@ const PatientHistory = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {getPatientTestResults(selectedPatient.id).length > 0 ? (
+                  {testResults.length > 0 ? (
                     <div className="space-y-3">
-                      {getPatientTestResults(selectedPatient.id).map((test) => (
-                        <div key={test.id} className="flex items-center justify-between p-3 border rounded-lg">
+                      {testResults.map((test) => (
+                        <div key={test.performedTestId} className="flex items-center justify-between p-3 border rounded-lg">
                           <div>
-                            <p className="font-medium text-gray-900">{test.testName}</p>
+                            <p className="font-medium text-gray-900">{test.name}</p>
                             <p className="text-sm text-gray-600">{test.date}</p>
-                            <p className="text-sm text-gray-700">{test.result}</p>
+                            <p className="text-sm text-gray-600">
+                              Ordered by: {test.orderedBy.name} ({test.orderedBy.specialization}, {test.orderedBy.designation})
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              Institution: {test.orderedBy.academicInstitution}
+                            </p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Badge 
-                              variant={test.status === 'completed' ? 'default' : 'secondary'}
-                              className={test.status === 'completed' ? 'bg-green-100 text-green-800' : ''}
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleViewTestResult(test.performedTestId)}
+                              variant="outline"
                             >
-                              {test.status}
-                            </Badge>
-                            {test.reportUrl && (
-                              <Button size="sm" variant="outline">
-                                Download Report
-                              </Button>
-                            )}
+                              View Report
+                            </Button>
                           </div>
                         </div>
                       ))}
@@ -243,33 +239,13 @@ const PatientHistory = () => {
                   )}
                 </CardContent>
               </Card>
-
-              {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-3">
-                    <Button className="bg-medical-600 hover:bg-medical-700">
-                      Write New Prescription
-                    </Button>
-                    <Button variant="outline">
-                      Schedule Appointment
-                    </Button>
-                    <Button variant="outline">
-                      Send Message
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           ) : (
             <Card>
               <CardContent className="text-center py-12">
                 <User className="w-16 h-16 mx-auto mb-4 text-gray-300" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Patient</h3>
-                <p className="text-gray-600">Choose a patient from the left to view their medical history</p>
+                <p className="text-gray-600">Search for a patient to view their medical history</p>
               </CardContent>
             </Card>
           )}

@@ -41,16 +41,33 @@ const PatientDashboard = () => {
     { path: '/patient/appointments', icon: Calendar, label: 'Appointments' },
     { path: '/patient/prescriptions', icon: Pill, label: 'Prescriptions' },
     { path: '/patient/tests', icon: TestTube, label: 'Tests & Results' },
-    { path: '/patient/tests/request', icon: TestTube, label: 'Request Test' },
-    { path: '/patient/tests/requests-list', icon: ClipboardList, label: 'My Test Requests' },
+    // { path: '/patient/tests/request', icon: TestTube, label: 'Request Test' },
+    // { path: '/patient/tests/requests-list', icon: ClipboardList, label: 'My Test Requests' },
     { path: '/patient/profile', icon: User, label: 'Profile' },
     { path: '/patient/chatbot', icon: MessageSquare, label: 'Chatbot' },
   ];
 
-  const isActive = (path: string, exact = false) => {
+ const isActive = (path: string, exact = false) => {
     if (exact) {
       return location.pathname === path;
     }
+    
+    // Special handling for test-related routes to prevent overlapping highlights
+    if (path === '/patient/tests') {
+      // Only highlight "Tests & Results" if we're exactly on /patient/tests
+      return location.pathname === '/patient/tests';
+    }
+    
+    if (path === '/patient/tests/request') {
+      // Only highlight "Request Test" if we're exactly on /patient/tests/request
+      return location.pathname === '/patient/tests/request';
+    }
+    
+    if (path === '/patient/tests/requests-list') {
+      // Only highlight "My Test Requests" if we're exactly on /patient/tests/requests-list
+      return location.pathname === '/patient/tests/requests-list';
+    }
+    
     return location.pathname.startsWith(path);
   };
 

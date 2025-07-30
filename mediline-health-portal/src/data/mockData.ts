@@ -331,3 +331,26 @@ export const mockDoctorAvailability = {
     { day: 'Saturday', time: '9:00 AM – 12:00 PM', location: 'Neurology Institute' },
   ],
 };
+
+  export const additionalHospitals: Hospital[] = [
+  {
+    id: '136',
+    name: 'Metro Diagnostic Center',
+    email: 'admin@metrodiag.com',
+    type: 'hospital',
+    address: '789 Medical Blvd, Springfield, IL',
+    phone: '+1 (555) 345-6789',
+    departments: ['Imaging', 'Pathology', 'Radiology'],
+    services: ['MRI', 'CT Scan', 'X-Ray', 'Ultrasound'],
+  },
+  {
+    id: '137',
+    name: 'Springfield Labs',
+    email: 'admin@springfieldlabs.com',
+    type: 'hospital',
+    address: '321 Lab Way, Springfield, IL',
+    phone: '+1 (555) 456-7890',
+    departments: ['Laboratory', 'Pathology'],
+    services: ['Blood Tests', 'Urine Analysis', 'Microbiology'],
+  },
+];

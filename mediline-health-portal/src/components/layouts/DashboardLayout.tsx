@@ -26,18 +26,18 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, sidebar }) => {
   const { user, logout } = useAuth();
 
-  const getNotificationComponent = () => {
-    switch (user?.type) {
-      case 'patient':
-        return <NotificationPanel />;
-      case 'doctor':
-        return <DoctorNotificationPanel />;
-      case 'hospital':
-        return <HospitalNotificationPanel />;
-      default:
-        return null;
-    }
-  };
+  // const getNotificationComponent = () => {
+  //   switch (user?.type) {
+  //     case 'patient':
+  //       return <NotificationPanel />;
+  //     case 'doctor':
+  //       return <DoctorNotificationPanel />;
+  //     case 'hospital':
+  //       return <HospitalNotificationPanel />;
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -85,7 +85,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, sidebar }) 
           
           <div className="flex items-center space-x-4">
             {/* Show notifications for all user types */}
-            {getNotificationComponent()}
+            {/* {getNotificationComponent()} */}
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -110,7 +110,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, sidebar }) 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <Link to={`/${user?.type}/profile`}>
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout}>

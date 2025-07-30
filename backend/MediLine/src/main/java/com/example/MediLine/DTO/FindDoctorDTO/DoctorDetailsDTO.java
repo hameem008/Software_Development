@@ -36,6 +36,7 @@ public class DoctorDetailsDTO {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
+    @Builder
     public static class AvailabilitySlot {
         private String weekDay;
 
@@ -44,6 +45,10 @@ public class DoctorDetailsDTO {
 
         @JsonFormat(pattern = "hh:mm a")
         private LocalTime endTime;
+
+        private int visitFee;
+
+        private int visitCapacity;
     }
 
 

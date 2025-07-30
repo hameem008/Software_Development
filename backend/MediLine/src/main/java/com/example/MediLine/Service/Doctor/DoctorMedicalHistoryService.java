@@ -2,6 +2,9 @@ package com.example.MediLine.Service.Doctor;
 
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
+import com.example.MediLine.DTO.PatientInfoDTO;
+import com.example.MediLine.Entity.Patient;
+import com.example.MediLine.Repository.PatientRepository;
 import com.example.MediLine.Service.MedicalHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import java.util.List;
 public class DoctorMedicalHistoryService {
     private final MedicalHistoryService medicalHistoryService;
     private final DoctorAuthorizationService doctorAuthorizationService;
+    private final PatientRepository patientRepository;
 
 
     public List<SymptomDTO> getPatientsSymptoms(Integer patientId, Integer doctorId) {
@@ -40,6 +44,28 @@ public class DoctorMedicalHistoryService {
                 testRequest, doctorTestListRequest.getPatientId());
     }
 
+    public List<TestSummaryDTO> getPatientsAllTestsListViaEmail(
+            String patientEmail, Integer doctorId) {
+
+        int patientId = patientRepository.findByEmail(patientEmail).orElseThrow(
+                () -> new IllegalArgumentException("Patient not found with email: "))
+                .getPatientId();
+
+         doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, patientId);
+
+
+        TestListRequest testRequest = TestListRequest.builder()
+                .dateFrom(null)
+                .dateTo(null)
+                .testId(null)
+                .build();
+
+        return medicalHistoryService.getAllPerformedTests(
+                testRequest, patientId);
+    }
+
     public TestResultDTO getPatientsTestResultDetails(Integer performedTestId, Integer doctorId) {
         doctorAuthorizationService
                 .checkDoctorsAccessToTestResult(doctorId, performedTestId);
@@ -64,6 +90,32 @@ public class DoctorMedicalHistoryService {
                 .build();
 
         return medicalHistoryService.getAllPrescriptionsList(prescriptionRequest, request.getPatientId());
+    }
+
+
+    public List<PrescriptionSummaryDTO> getPatientsAllPrescriptionsViaEmail(
+            String patientEmail, Integer doctorId) {
+
+        int patientId = patientRepository.findByEmail(patientEmail).orElseThrow(
+                () -> new IllegalArgumentException("Patient not found with email: "))
+                .getPatientId();
+
+        System.out.println("Patient ID: " + patientId);
+        System.out.println("patientEmail: " + patientEmail);
+
+        doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, patientId);
+
+        PrescriptionListRequest prescriptionRequest = PrescriptionListRequest.builder()
+                .dateFrom(null)
+                .dateTo(null)
+                .doctorId(doctorId)
+                .diseaseId(null)
+                .keyword(null)
+                .build();
+
+        return medicalHistoryService.getAllPrescriptionsList(prescriptionRequest, patientId);
     }
 
     public PrescriptionDTO getPatientsPrescription(Integer prescriptionId, Integer doctorId) {
@@ -95,4 +147,21 @@ public class DoctorMedicalHistoryService {
         return medicalHistoryService.getPerformedTestNames(patientId);
     }
 
+    public PatientInfoDTO getPatientsInfo(String patientEmail, Integer doctorId) {
+         Patient patient = patientRepository.findByEmail(patientEmail).orElseThrow(
+                () -> new IllegalArgumentException("Patient not found with email: "));
+
+         doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, patient.getPatientId());
+
+         return PatientInfoDTO.builder()
+                .id(patient.getPatientId())
+                .name(patient.getFirstName() + " " + patient.getLastName())
+                .email(patient.getEmail())
+                .phoneNumber(patient.getPhoneNumber())
+                .dateOfBirth(patient.getDateOfBirth())
+                .bloodGroup(patient.getBloodGroup())
+                .build();
+    }
 }

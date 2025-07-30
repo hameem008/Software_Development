@@ -21,6 +21,14 @@ const DoctorSearch = () => {
   const [locations, setLocations] = useState<string[]>([]);
   const [doctors, setDoctors] = useState<any[]>([]);
 
+  const filteredDoctors = doctors.filter((doctor) => {
+      const lowerSearch = searchTerm.toLowerCase();
+        return (
+          doctor.name.toLowerCase().includes(lowerSearch) ||
+          doctor.specialization.toLowerCase().includes(lowerSearch)
+        );
+    });
+
   useEffect(() => {
     const fetchSpecialtiesAndLocations = async () => {
       try {
@@ -58,7 +66,9 @@ const DoctorSearch = () => {
       }
     };
 
-    if (selectedSpecialty || selectedLocation) {
+    
+
+    if (selectedSpecialty || selectedLocation ) {
       fetchDoctors();
     }
 
@@ -133,9 +143,9 @@ const DoctorSearch = () => {
           </h2>
         </div>
 
-        {doctors.length > 0 ? (
+        {filteredDoctors.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {doctors.map((doctor) => (
+            {filteredDoctors.map((doctor) => (
               <DoctorCard key={doctor.doctorId} doctor={doctor} />
             ))}
           </div>

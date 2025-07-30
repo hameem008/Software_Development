@@ -55,7 +55,8 @@ public class FindDoctorServiceTest {
 
         when(doctorRepository.searchDoctors("Cardiology", "Dhaka"))
                 .thenReturn(List.of(doctor));
-        when(doctorReviewRepository.findAverageRatingByDoctorId(1)).thenReturn(4.5);
+        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
+                .thenReturn(4.5);
 
         List<DoctorCardDTO> result = findDoctorService.searchDoctors(request);
         assertEquals(1, result.size());

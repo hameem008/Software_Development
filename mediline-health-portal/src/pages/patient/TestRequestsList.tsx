@@ -98,12 +98,12 @@ const TestRequestsList = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">My Test Requests</h1>
           <p className="text-gray-600">Track the status of your test bookings and appointments</p>
         </div>
-        <Button asChild className="bg-medical-600 hover:bg-medical-700">
+        {/* <Button asChild className="bg-medical-600 hover:bg-medical-700">
           <Link to="/patient/tests/request">
             <TestTube className="w-4 h-4 mr-2" />
             Request New Test
           </Link>
-        </Button>
+        </Button> */}
       </div>
 
       <div className="space-y-4">

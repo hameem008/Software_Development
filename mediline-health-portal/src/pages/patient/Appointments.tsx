@@ -45,9 +45,9 @@ const PatientAppointments = () => {
     });
   };
 
-  const getStatusBadge = () => (
-    <Badge className="bg-green-100 text-green-800">✅ Confirmed</Badge>
-  );
+  // const getStatusBadge = () => (
+  //   <Badge className="bg-green-100 text-green-800">✅ Confirmed</Badge>
+  // );
 
   const AppointmentCard = ({ appointment, showActions = true }) => {
     return (
@@ -87,8 +87,8 @@ const PatientAppointments = () => {
               </div>
             </div>
 
-            <div className="flex flex-col items-end space-y-2">
-              {getStatusBadge()}
+            {/* <div className="flex flex-col items-end space-y-2">
+              {/* {getStatusBadge()} 
               {showActions && (
                 <div className="flex space-x-2">
                   <Button
@@ -112,7 +112,7 @@ const PatientAppointments = () => {
                   </Button>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </CardContent>
       </Card>
