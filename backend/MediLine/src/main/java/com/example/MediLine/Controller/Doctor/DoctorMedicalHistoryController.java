@@ -3,6 +3,7 @@ package com.example.MediLine.Controller.Doctor;
 import com.example.MediLine.Annotation.CurrentDoctor;
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
+import com.example.MediLine.DTO.PatientInfoDTO;
 import com.example.MediLine.Entity.Doctor;
 import com.example.MediLine.Service.Doctor.DoctorMedicalHistoryService;
 import jakarta.validation.Valid;
@@ -183,5 +184,24 @@ public class DoctorMedicalHistoryController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(testResultDetails);
+    }
+
+    @PostMapping("/patient")
+    public ResponseEntity<PatientInfoDTO> getTestResult(
+             @RequestBody
+             PatientHistoryRequest patientRequest,
+             @CurrentDoctor Doctor doctor) {
+
+         PatientInfoDTO patientInfo =
+                doctorMedicalHistoryService
+                        .getPatientsInfo(
+                                patientRequest.getPatientEmail(),
+                                doctor.getDoctorId()
+                );
+
+        if (patientInfo == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(patientInfo);
     }
 }

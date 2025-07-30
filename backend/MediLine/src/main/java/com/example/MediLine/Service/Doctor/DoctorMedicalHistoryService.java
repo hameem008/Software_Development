@@ -2,6 +2,8 @@ package com.example.MediLine.Service.Doctor;
 
 import com.example.MediLine.DTO.IdNameDTO;
 import com.example.MediLine.DTO.MedicalHistoryDTO.*;
+import com.example.MediLine.DTO.PatientInfoDTO;
+import com.example.MediLine.Entity.Patient;
 import com.example.MediLine.Repository.PatientRepository;
 import com.example.MediLine.Service.MedicalHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -145,4 +147,21 @@ public class DoctorMedicalHistoryService {
         return medicalHistoryService.getPerformedTestNames(patientId);
     }
 
+    public PatientInfoDTO getPatientsInfo(String patientEmail, Integer doctorId) {
+         Patient patient = patientRepository.findByEmail(patientEmail).orElseThrow(
+                () -> new IllegalArgumentException("Patient not found with email: "));
+
+         doctorAuthorizationService
+                .checkDoctorsAccessToPatient(
+                        doctorId, patient.getPatientId());
+
+         return PatientInfoDTO.builder()
+                .id(patient.getPatientId())
+                .name(patient.getFirstName() + " " + patient.getLastName())
+                .email(patient.getEmail())
+                .phoneNumber(patient.getPhoneNumber())
+                .dateOfBirth(patient.getDateOfBirth())
+                .bloodGroup(patient.getBloodGroup())
+                .build();
+    }
 }
