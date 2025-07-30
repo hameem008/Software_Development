@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PatientHistoryRequest {
-    @Positive
     private Integer patientId;
+    private String patientEmail;
 }
