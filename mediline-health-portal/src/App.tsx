@@ -15,6 +15,7 @@ import DoctorRegister from "./pages/auth/DoctorRegister";
 import HospitalRegister from "./pages/auth/HospitalRegister"; // Updated
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import PatientSearch from "./pages/hospital/PatientSearch";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +52,7 @@ const AppRoutes = () => {
       {/* Registration Routes */}
       <Route path="/register/patient" element={<PatientRegister />} />
       <Route path="/register/doctor" element={<DoctorRegister />} />
-      <Route path="/register/hospital" element={<HospitalRegister />} /> {/* Updated */}
+      <Route path="/register/hospital" element={<HospitalRegister />} />
       
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
@@ -81,7 +82,9 @@ const AppRoutes = () => {
             <HospitalDashboard />
           </ProtectedRoute>
         } 
-      />
+      >
+        <Route path="patient-search" element={<PatientSearch />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

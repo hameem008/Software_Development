@@ -1,15 +1,85 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { mockPatients, mockPrescriptions, mockTestResults } from '@/data/mockData';
+import { mockPatients } from '@/data/mockData';
 import { Search, User, FileText, TestTube, Calendar, Pill } from 'lucide-react';
+import api from '@/lib/api';
+
+// Mock prescription data
+const mockPrescriptions = [
+  {
+    id: 'presc1',
+    patientId: '1',
+    diagnosis: 'Hypertension',
+    date: '2025-01-15',
+    medications: [
+      { name: 'Lisinopril', dosage: '10mg daily' },
+      { name: 'Amlodipine', dosage: '5mg daily' },
+    ],
+    notes: 'Monitor blood pressure weekly.',
+  },
+  {
+    id: 'presc2',
+    patientId: '1',
+    diagnosis: 'Type 2 Diabetes',
+    date: '2025-03-22',
+    medications: [
+      { name: 'Metformin', dosage: '500mg twice daily' },
+    ],
+    notes: 'Follow up in 3 months.',
+  },
+  {
+    id: 'presc3',
+    patientId: '2',
+    diagnosis: 'Asthma',
+    date: '2025-02-10',
+    medications: [
+      { name: 'Albuterol', dosage: '2 puffs as needed' },
+      { name: 'Fluticasone', dosage: '110mcg twice daily' },
+    ],
+    notes: 'Use inhaler as prescribed.',
+  },
+];
+
+// Mock test results data
+const mockTestResults = [
+  {
+    id: 'test1',
+    patientId: '1',
+    testName: 'Blood Pressure',
+    date: '2025-01-10',
+    result: '120/80 mmHg',
+    status: 'completed',
+    reportUrl: '/reports/bp1.pdf',
+  },
+  {
+    id: 'test2',
+    patientId: '1',
+    testName: 'Blood Glucose',
+    date: '2025-03-20',
+    result: '100 mg/dL',
+    status: 'completed',
+    reportUrl: '/reports/glucose1.pdf',
+  },
+  {
+    id: 'test3',
+    patientId: '2',
+    testName: 'Lung Function',
+    date: '2025-02-05',
+    result: 'Normal',
+    status: 'completed',
+    reportUrl: '/reports/lung1.pdf',
+  },
+];
 
 const PatientHistory = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<any>(null);
+  const [patientProfile, setPatientProfile] = useState(null);
+  const [medications, setMedications] = useState(mockPrescriptions);
+  const [testResults, setTestResults] = useState(mockTestResults);
 
   const filteredPatients = mockPatients.filter(patient =>
     patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -17,11 +87,31 @@ const PatientHistory = () => {
   );
 
   const getPatientPrescriptions = (patientId: string) => {
-    return mockPrescriptions.filter(presc => presc.patientId === patientId);
+    return medications.filter(presc => presc.patientId === patientId);
   };
 
   const getPatientTestResults = (patientId: string) => {
-    return mockTestResults.filter(test => test.patientId === patientId);
+    return testResults.filter(test => test.patientId === patientId);
+  };
+
+  const handleSearchButton = async () => {
+    try {
+      const profileResponse = await api.post('/patient/profile', { email: searchTerm });
+      setPatientProfile(profileResponse.data);
+      setSelectedPatient(profileResponse.data);
+
+      const prescriptionsResponse = await api.post('/patient/prescriptions', { email: searchTerm });
+      setMedications(prescriptionsResponse.data);
+
+      const testResultsResponse = await api.post('/patient/test-results', { email: searchTerm });
+      setTestResults(testResultsResponse.data);
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+      setPatientProfile(null);
+      setSelectedPatient(null);
+      setMedications([]);
+      setTestResults([]);
+    }
   };
 
   return (
@@ -42,11 +132,17 @@ const PatientHistory = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <Input
-                placeholder="Search by name or email..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              <div className="flex space-x-2">
+                <Input
+                  placeholder="Search by name or email..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button onClick={handleSearchButton}>
+                  <Search className="w-4 h-4 mr-2" />
+                  Search
+                </Button>
+              </div>
               
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {filteredPatients.map((patient) => (
@@ -57,7 +153,11 @@ const PatientHistory = () => {
                         ? 'bg-medical-50 border-medical-200' 
                         : 'hover:bg-gray-50'
                     }`}
-                    onClick={() => setSelectedPatient(patient)}
+                    onClick={() => {
+                      setSelectedPatient(patient);
+                      setMedications(mockPrescriptions);
+                      setTestResults(mockTestResults);
+                    }}
                   >
                     <div className="flex items-center space-x-3">
                       <div className="flex-shrink-0">
@@ -154,9 +254,9 @@ const PatientHistory = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {getPatientPrescriptions(selectedPatient.id).length > 0 ? (
+                  {medications.length > 0 ? (
                     <div className="space-y-4">
-                      {getPatientPrescriptions(selectedPatient.id).map((prescription) => (
+                      {medications.map((prescription) => (
                         <div key={prescription.id} className="border rounded-lg p-4">
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -210,9 +310,9 @@ const PatientHistory = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {getPatientTestResults(selectedPatient.id).length > 0 ? (
+                  {testResults.length > 0 ? (
                     <div className="space-y-3">
-                      {getPatientTestResults(selectedPatient.id).map((test) => (
+                      {testResults.map((test) => (
                         <div key={test.id} className="flex items-center justify-between p-3 border rounded-lg">
                           <div>
                             <p className="font-medium text-gray-900">{test.testName}</p>
