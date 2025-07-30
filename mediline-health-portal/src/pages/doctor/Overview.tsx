@@ -37,7 +37,7 @@ const DoctorOverview = () => {
         <p className="text-medical-100">Here's your practice overview for today</p>
       </div>
 
-      {/* Quick Stats */}
+      {/* Quick Stats
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-6">
@@ -86,7 +86,7 @@ const DoctorOverview = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Today's Appointments */}
@@ -192,7 +192,7 @@ const DoctorOverview = () => {
       </div>
 
       {/* Recent Activity */}
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Recent Prescriptions</CardTitle>
           <CardDescription>
@@ -232,7 +232,7 @@ const DoctorOverview = () => {
             </div>
           )}
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 };

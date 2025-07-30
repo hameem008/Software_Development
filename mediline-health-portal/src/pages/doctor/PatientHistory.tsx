@@ -245,7 +245,7 @@ const PatientHistory = () => {
               </Card>
 
               {/* Quick Actions */}
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Quick Actions</CardTitle>
                 </CardHeader>
@@ -262,7 +262,7 @@ const PatientHistory = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
           ) : (
             <Card>

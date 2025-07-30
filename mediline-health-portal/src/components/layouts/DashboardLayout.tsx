@@ -110,7 +110,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, sidebar }) 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <Link to={`/${user?.type}/profile`}>
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout}>
