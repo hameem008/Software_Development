@@ -10,6 +10,7 @@ public class HospitalAuthorizationService {
     private final TestRequestRepository testRepository;
 
     public void checkAuthorizationToTestRequest(int hospitalId, int testRequestId) {
+        System.out.println("Checking authorization for hospital ID: " + hospitalId + " and test request ID: " + testRequestId);
         if (!testRepository.hospitalIsAuthorized(hospitalId, testRequestId)) {
             throw new IllegalArgumentException("Hospital is not authorized to access this test request");
         }

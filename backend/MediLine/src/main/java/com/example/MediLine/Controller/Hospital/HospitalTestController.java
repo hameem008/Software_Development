@@ -1,14 +1,21 @@
 package com.example.MediLine.Controller.Hospital;
 
 import com.example.MediLine.Annotation.CurrentHospital;
-import com.example.MediLine.DTO.CreateTestRequest;
-import com.example.MediLine.DTO.SaveTestResultRequest;
+import com.example.MediLine.DTO.IdNameDTO;
+import com.example.MediLine.DTO.MedicalHistoryDTO.PatientHistoryRequest;
+import com.example.MediLine.DTO.PatientInfoDTO;
+import com.example.MediLine.DTO.TestUploadDTO.CreateTestRequest;
+import com.example.MediLine.DTO.TestUploadDTO.SaveTestResultRequest;
+import com.example.MediLine.DTO.TestUploadDTO.TestParamsDTO;
+import com.example.MediLine.DTO.TestUploadDTO.TestRequestId;
 import com.example.MediLine.Entity.Hospital;
 import com.example.MediLine.Service.Hospital.HospitalTestService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/hospital/test")
@@ -37,5 +44,36 @@ public class HospitalTestController {
         hospitalTestService.saveTest(saveTestResultRequest, hospital.getHospitalId());
 
         return ResponseEntity.ok("successfully uploaded test result");
+    }
+
+    @PostMapping("/patient-info")
+    public ResponseEntity<PatientInfoDTO> getPatientInfo(
+            @RequestBody PatientHistoryRequest patientRequest) {
+
+        PatientInfoDTO patientInfo = hospitalTestService
+                .getPatientInfo(patientRequest.getPatientId());
+
+        return ResponseEntity.ok(patientInfo);
+    }
+
+    @GetMapping("/all-doctors")
+    public ResponseEntity<List<IdNameDTO>> getAllDoctorNames() {
+
+        List<IdNameDTO> allDoctorNames = hospitalTestService.getAllDoctors();
+
+        if (allDoctorNames.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(allDoctorNames);
+    }
+
+    @PostMapping("/test-params")
+    public ResponseEntity<TestParamsDTO> getTestParameters(@RequestBody TestRequestId testRequestId) {
+
+        TestParamsDTO testParams = hospitalTestService
+                .getTestParams(testRequestId.getTestRequestId());
+
+        return ResponseEntity.ok(testParams);
     }
 }
