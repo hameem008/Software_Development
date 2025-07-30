@@ -22,6 +22,7 @@ import DoctorProfile from '@/pages/doctor/Profile';
 import DoctorSchedule from '@/pages/doctor/Schedule';
 import PatientMedicalHistory from '@/pages/doctor/PatientMedicalHistory';
 import DoctorPrescriptions from './DoctorPrescriptionDetails';
+import TestResult from '@/pages/doctor/TestResult'
 
 const DoctorDashboard = () => {
   const location = useLocation();
@@ -30,7 +31,7 @@ const DoctorDashboard = () => {
     { path: '/doctor', icon: LayoutDashboard, label: 'Dashboard', exact: true },
     { path: '/doctor/appointments', icon: Calendar, label: 'Appointments' },
     { path: '/doctor/patients', icon: Users, label: 'Patient History' },
-    { path: '/doctor/tests', icon: TestTube, label: 'Test Review' },
+    // { path: '/doctor/tests', icon: TestTube, label: 'Test Review' },
     { path: '/doctor/prescriptions', icon: Pill, label: 'Prescriptions' },
     { path: '/doctor/schedule', icon: Clock, label: 'My Schedule' },
     { path: '/doctor/profile', icon: User, label: 'My Profile' },
@@ -78,7 +79,7 @@ const DoctorDashboard = () => {
         <Route path="patient/:patientId/history" element={<PatientMedicalHistory />} />
         <Route path="patient/:patientId/prescribe" element={<CreatePrescription />} />
         <Route path="/prescriptions/details" element={<DoctorPrescriptions />} />
-        
+        <Route path="/test/result" element={<TestResult />} />
       </Routes>
     </DashboardLayout>
   );

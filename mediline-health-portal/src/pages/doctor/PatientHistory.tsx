@@ -17,7 +17,7 @@ interface Patient {
 }
 
 interface Test {
-  performTestId: number;
+  performedTestId: number;
   name: string;
   date: string;
   orderedBy: {
@@ -56,6 +56,9 @@ const PatientHistory = () => {
 
       const testResultsResponse = await api.post('/doctor/patient-history/test/all/email', { patientEmail: searchTerm });
       setTestResults(testResultsResponse.data);
+      console.log(testResultsResponse.data)
+      console.log("loggon-------")
+      console.log(testResults)
     } catch (error) {
       console.error('Error fetching patient data:', error);
       setPatientProfile(null);
@@ -67,6 +70,11 @@ const PatientHistory = () => {
 
   const handleViewPrescription = (prescriptionId: number) => {
     navigate('/doctor/prescriptions/details', { state: { prescriptionId } });
+  };
+
+  const handleViewTestResult = (performedTestId: number) => {
+    console.log(performedTestId);
+    navigate('/doctor/test/result', { state: { performedTestId } });
   };
 
   return (
@@ -200,7 +208,7 @@ const PatientHistory = () => {
                   {testResults.length > 0 ? (
                     <div className="space-y-3">
                       {testResults.map((test) => (
-                        <div key={test.performTestId} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div key={test.performedTestId} className="flex items-center justify-between p-3 border rounded-lg">
                           <div>
                             <p className="font-medium text-gray-900">{test.name}</p>
                             <p className="text-sm text-gray-600">{test.date}</p>
@@ -212,7 +220,11 @@ const PatientHistory = () => {
                             </p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Button size="sm" variant="outline">
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleViewTestResult(test.performedTestId)}
+                              variant="outline"
+                            >
                               View Report
                             </Button>
                           </div>
