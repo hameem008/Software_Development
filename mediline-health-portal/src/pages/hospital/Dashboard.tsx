@@ -25,12 +25,14 @@ const HospitalDashboard = () => {
 
   const navigationItems = [
     { path: '/hospital', icon: LayoutDashboard, label: 'Dashboard', exact: true },
-    { path: '/hospital/test-requests', icon: FileText, label: 'Test Requests' },
-    { path: '/hospital/sample-management', icon: Package, label: 'Sample Management' },
+    // { path: '/hospital/test-requests', icon: FileText, label: 'Test Requests' },
+    // { path: '/hospital/sample-management', icon: Package, label: 'Sample Management' },
     { path: '/hospital/test-upload', icon: Upload, label: 'Upload Results' },
-    { path: '/hospital/pending-uploads', icon: Clock, label: 'Pending Uploads' },
-    { path: '/hospital/recent-uploads', icon: CheckCircle, label: 'Recent Uploads' },
+    // { path: '/hospital/pending-uploads', icon: Clock, label: 'Pending Uploads' },
+    // { path: '/hospital/recent-uploads', icon: CheckCircle, label: 'Recent Uploads' },
     { path: '/hospital/patient-search', icon: Search, label: 'Patient Search' },
+
+
   ];
 
   const isActive = (path: string, exact = false) => {

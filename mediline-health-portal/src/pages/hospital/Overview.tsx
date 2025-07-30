@@ -31,7 +31,7 @@ const HospitalOverview = () => {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -79,11 +79,11 @@ const HospitalOverview = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
         {/* Recent Uploads */}
-        <Card>
+        {/* <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-semibold">Recent Test Uploads</CardTitle>
             <Link to="/hospital/uploads">
@@ -128,10 +128,10 @@ const HospitalOverview = () => {
               </div>
             )}
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Quick Actions */}
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
             <CardDescription>Common tasks and shortcuts</CardDescription>
@@ -169,7 +169,7 @@ const HospitalOverview = () => {
               </Link>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Department Overview */}
