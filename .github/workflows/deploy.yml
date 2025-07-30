@@ -2,7 +2,7 @@ name: 🚀 Deploy to VM using PEM
 
 on:
   workflow_run:
-    workflows: ["CI - Build & Push Docker Images"]
+    workflows: ["CI - Test, Build & Push Docker Images"]
     types:
       - completed
   workflow_dispatch:  # Optional: Allows manual trigger
