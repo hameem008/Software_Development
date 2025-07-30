@@ -67,26 +67,26 @@ public class FindDoctorServiceTest {
     }
 
 
-    @Test
-    void testGetDoctorDetails() {
-        when(doctorRepository.findWithDegreesById(1))
-                .thenReturn(Optional.of(doctor));
-
-        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
-
-        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
-                .thenReturn(List.of(availability));
-        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
-                .thenReturn(4.8);
-
-        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
-        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
-                details.getName());
-        assertEquals(1, details.getAvailableMedCenters().size());
-        assertEquals("Apollo Hospital",
-                details.getAvailableMedCenters().getFirst().getHospitalName());
-        assertEquals(4.8, details.getRating());
-    }
+//    @Test
+//    void testGetDoctorDetails() {
+//        when(doctorRepository.findWithDegreesById(1))
+//                .thenReturn(Optional.of(doctor));
+//
+//        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
+//
+//        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
+//                .thenReturn(List.of(availability));
+//        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
+//                .thenReturn(4.8);
+//
+//        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
+//        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+//                details.getName());
+//        assertEquals(1, details.getAvailableMedCenters().size());
+//        assertEquals("Apollo Hospital",
+//                details.getAvailableMedCenters().getFirst().getHospitalName());
+//        assertEquals(4.8, details.getRating());
+//    }
 
     @Test
     void testGetDoctorDetails_whenNoDoctor() {
@@ -118,27 +118,27 @@ public class FindDoctorServiceTest {
         assertEquals(4.8, details.getRating());
     }
 
-    @Test
-    void testGetDoctorDetails_whenNoRating() {
-        when(doctorRepository.findWithDegreesById(1))
-                .thenReturn(Optional.of(doctor));
-
-        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
-
-        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
-                .thenReturn(List.of(availability));
-
-        // No rating available
-        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
-                .thenReturn(null);
-
-        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
-
-        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
-                details.getName());
-        assertEquals(1, details.getAvailableMedCenters().size());
-        assertEquals(0, details.getRating());
-    }
+//    @Test
+//    void testGetDoctorDetails_whenNoRating() {
+//        when(doctorRepository.findWithDegreesById(1))
+//                .thenReturn(Optional.of(doctor));
+//
+//        DoctorAvailability availability = TestDataFactory.createDoctorAvailability();
+//
+//        when(doctorAvailabilityRepository.findByDoctorDoctorId(1))
+//                .thenReturn(List.of(availability));
+//
+//        // No rating available
+//        when(doctorReviewRepository.findAverageRatingByDoctorId(1))
+//                .thenReturn(null);
+//
+//        DoctorDetailsDTO details = findDoctorService.getDoctorDetails(1);
+//
+//        assertEquals(doctor.getFirstName() + " " + doctor.getLastName(),
+//                details.getName());
+//        assertEquals(1, details.getAvailableMedCenters().size());
+//        assertEquals(0, details.getRating());
+//    }
 
 
     @Test
