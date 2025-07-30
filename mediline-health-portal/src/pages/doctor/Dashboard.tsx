@@ -21,6 +21,7 @@ import TestReview from '@/pages/doctor/TestReview';
 import DoctorProfile from '@/pages/doctor/Profile';
 import DoctorSchedule from '@/pages/doctor/Schedule';
 import PatientMedicalHistory from '@/pages/doctor/PatientMedicalHistory';
+import DoctorPrescriptions from './DoctorPrescriptionDetails';
 
 const DoctorDashboard = () => {
   const location = useLocation();
@@ -76,6 +77,8 @@ const DoctorDashboard = () => {
         <Route path="profile" element={<DoctorProfile />} />
         <Route path="patient/:patientId/history" element={<PatientMedicalHistory />} />
         <Route path="patient/:patientId/prescribe" element={<CreatePrescription />} />
+        <Route path="/prescriptions/details" element={<DoctorPrescriptions />} />
+        
       </Routes>
     </DashboardLayout>
   );

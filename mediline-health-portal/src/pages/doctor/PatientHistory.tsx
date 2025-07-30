@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Search, User, FileText, TestTube, Calendar, Pill } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import api from '@/lib/api';
 
 interface Patient {
@@ -42,6 +43,7 @@ const PatientHistory = () => {
   const [patientProfile, setPatientProfile] = useState<Patient | null>(null);
   const [medications, setMedications] = useState<Prescription[]>([]);
   const [testResults, setTestResults] = useState<Test[]>([]);
+  const navigate = useNavigate();
 
   const handleSearchButton = async () => {
     try {
@@ -61,6 +63,10 @@ const PatientHistory = () => {
       setMedications([]);
       setTestResults([]);
     }
+  };
+
+  const handleViewPrescription = (prescriptionId: number) => {
+    navigate('/doctor/prescriptions/details', { state: { prescriptionId } });
   };
 
   return (
@@ -155,10 +161,14 @@ const PatientHistory = () => {
                                 {prescription.issuedDate}
                               </p>
                               <p className="text-sm text-gray-600 mt-1">
-                                {prescription.doctorName}
+                                Doctor: {prescription.doctorName} (ID: {prescription.doctorId})
                               </p>
                             </div>
-                            <Button size="sm" variant="outline">
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleViewPrescription(prescription.prescriptionId)}
+                            >
                               View Full Prescription
                             </Button>
                           </div>
@@ -195,7 +205,10 @@ const PatientHistory = () => {
                             <p className="font-medium text-gray-900">{test.name}</p>
                             <p className="text-sm text-gray-600">{test.date}</p>
                             <p className="text-sm text-gray-600">
-                              {test.orderedBy.name}
+                              Ordered by: {test.orderedBy.name} ({test.orderedBy.specialization}, {test.orderedBy.designation})
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              Institution: {test.orderedBy.academicInstitution}
                             </p>
                           </div>
                           <div className="flex items-center space-x-2">
