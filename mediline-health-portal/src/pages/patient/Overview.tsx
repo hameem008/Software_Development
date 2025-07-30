@@ -124,7 +124,7 @@ const PatientOverview = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="p-4">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-100 rounded-lg">
@@ -163,7 +163,7 @@ const PatientOverview = () => {
           </div>
         </Card>
 
-        <Card className="p-4">
+        {/* <Card className="p-4">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-red-100 rounded-lg">
               <Heart className="w-6 h-6 text-red-600" />
@@ -173,26 +173,23 @@ const PatientOverview = () => {
               <p className="text-xl font-bold text-green-600">{healthScore}</p>
             </div>
           </div>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Side by Side Layout - Health Metrics and Medications */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Health Metrics Carousel */}
-        <div>
+        {/* <div>
           <HealthMetricsCarousel />
-        </div>
+        </div> */}
 
         {/* Daily Medications */}
         <div>
           <DailyMedications />
         </div>
-      </div>
 
-      {/* Bottom Section - Full Width Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Upcoming Appointments */}
-        <Card>
+        <div>
+                <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="flex items-center">
               <Calendar className="w-5 h-5 mr-2 text-medical-600" />
@@ -225,9 +222,48 @@ const PatientOverview = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
+      </div>
+
+      {/* Bottom Section - Full Width Cards */}
+      {/* <div className="grid grid-cols-2 lg:grid-cols-2 gap-6">
+        {/* Upcoming Appointments
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="flex items-center">
+              <Calendar className="w-5 h-5 mr-2 text-medical-600" />
+              Upcoming Appointments
+            </CardTitle>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/patient/appointments">
+                View All <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </Button>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {upcomingAppointments.map((appointment) => (
+                <div key={appointment.id} className="border rounded-lg p-4 bg-blue-50">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="font-medium text-gray-900">{appointment.doctorName}</h4>
+                      <p className="text-sm text-gray-600">{appointment.hospitalName}</p>
+                      <p className="text-xs text-gray-500 mt-1"> Chamber: {appointment.chamber}</p>
+                      <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                        <span>{appointment.date}</span>
+                        <span>{appointment.time}</span>
+                      </div>
+                    </div>
+                    <Badge className="bg-green-100 text-green-800">Confirmed</Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card> */}
 
         {/* Recent Test Results */}
-        <Card>
+        {/* <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="flex items-center">
               <TestTube className="w-5 h-5 mr-2 text-medical-600" />
@@ -268,8 +304,8 @@ const PatientOverview = () => {
               ))}
             </div>
           </CardContent>
-        </Card>
-      </div>
+        </Card> */}
+      {/* </div> */}
 
       {/* Quick Actions */}
       <Card>
@@ -280,25 +316,25 @@ const PatientOverview = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <Button asChild className="h-20 flex-col bg-medical-600 hover:bg-medical-700">
               <Link to="/patient/doctors">
                 <Calendar className="w-6 h-6 mb-2" />
                 <span>Book Appointment</span>
               </Link>
             </Button>
-            <Button asChild variant="outline" className="h-20 flex-col">
+            {/* <Button asChild variant="outline" className="h-20 flex-col">
               <Link to="/patient/tests/request">
                 <TestTube className="w-6 h-6 mb-2" />
                 <span>Request Test</span>
               </Link>
-            </Button>
-            <Button asChild variant="outline" className="h-20 flex-col">
+            </Button> */}
+            {/* <Button asChild variant="outline" className="h-20 flex-col">
               <Link to="/patient/tests/requests-list">
                 <FileText className="w-6 h-6 mb-2" />
                 <span>My Test Requests</span>
               </Link>
-            </Button>
+            </Button> */}
             <Button asChild variant="outline" className="h-20 flex-col">
               <Link to="/patient/symptoms">
                 <Heart className="w-6 h-6 mb-2" />

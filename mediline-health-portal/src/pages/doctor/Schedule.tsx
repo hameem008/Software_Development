@@ -109,13 +109,13 @@ const DoctorSchedule = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Weekly Schedule</h1>
           <p className="text-gray-600">Manage your consultation hours and availability</p>
         </div>
-        <Button 
+        {/* <Button 
           onClick={() => setShowAddForm(true)}
           className="bg-medical-600 hover:bg-medical-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add New Slot
-        </Button>
+        </Button> */}
       </div>
 
       {/* Schedule Overview */}

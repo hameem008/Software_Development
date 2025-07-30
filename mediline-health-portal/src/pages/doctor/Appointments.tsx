@@ -9,7 +9,11 @@ import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import api from '@/lib/api';
+import { useNavigate } from 'react-router-dom';
+
+
 const DoctorAppointments = () => {
+  const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const { toast } = useToast();
 
@@ -19,7 +23,7 @@ const DoctorAppointments = () => {
       const formatted = res.data.map((apt) => ({
         id: apt.appointmentId.toString(),
         patientName: apt.patientName,
-        patientId: '', // optional: if needed for history
+        patientId: apt.patientId, // optional: if needed for history
         date: apt.date,
         time: apt.time.slice(0, 5), // '13:00:00' → '13:00'
         status: 'scheduled',
@@ -35,6 +39,13 @@ const DoctorAppointments = () => {
       console.error('Failed to fetch appointments:', err);
     }
   };
+  
+  
+const handlePatientHistory = (patientId: number) => {
+  navigate('/doctor/patients/history', {
+    state: { patientId: 1 },
+  });
+};
 
   useEffect(() => {
     fetchAppointments();
@@ -100,12 +111,13 @@ const DoctorAppointments = () => {
             </div>
 
             <div className="flex-1">
-              <Link 
-                  to={`/doctor/patients`}
-                  className="text-lg font-semibold text-gray-900 hover:text-medical-600 transition-colors"
-                >
-                  {appointment.patientName}
-                </Link>
+              <Button
+                variant="link"
+                className="text-lg font-semibold text-gray-900 hover:text-medical-600 transition-colors p-0 h-auto"
+                onClick={() => handlePatientHistory(appointment.patientId)}
+              >
+                {appointment.patientName}
+              </Button>
               {/* <h3 className="text-lg font-semibold text-gray-900">{appointment.patientName}</h3> */}
               <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
                 <Calendar className="w-4 h-4 mr-1 text-medical-600" />
@@ -123,7 +135,7 @@ const DoctorAppointments = () => {
           </div>
 
           <div className="flex flex-col items-end space-y-2">
-            {getStatusBadge(appointment.status)}
+            {/* {getStatusBadge(appointment.status)} */}
 
             {showActions && appointment.status === 'scheduled' && (
               <div className="flex space-x-2">
@@ -133,7 +145,7 @@ const DoctorAppointments = () => {
                     Prescribe
                   </Button>
                 </Link>
-                <AlertDialog>
+                {/* <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button size="sm" variant="destructive">
                       <X className="w-3 h-3 mr-1" />
@@ -157,7 +169,7 @@ const DoctorAppointments = () => {
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
-                </AlertDialog>
+                </AlertDialog> */}
               </div>
             )}
           </div>

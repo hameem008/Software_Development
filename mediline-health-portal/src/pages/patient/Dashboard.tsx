@@ -42,7 +42,7 @@ const PatientDashboard = () => {
     { path: '/patient/prescriptions', icon: Pill, label: 'Prescriptions' },
     { path: '/patient/tests', icon: TestTube, label: 'Tests & Results' },
     // { path: '/patient/tests/request', icon: TestTube, label: 'Request Test' },
-    { path: '/patient/tests/requests-list', icon: ClipboardList, label: 'My Test Requests' },
+    // { path: '/patient/tests/requests-list', icon: ClipboardList, label: 'My Test Requests' },
     { path: '/patient/profile', icon: User, label: 'Profile' },
     { path: '/patient/chatbot', icon: MessageSquare, label: 'Chatbot' },
   ];
