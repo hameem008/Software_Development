@@ -120,6 +120,7 @@ public class BookAppointmentService {
         appointment.setDate(request.getDate());
         appointment.setTime(request.getTime());
         appointment.setSerialNumber(getSerialNumber(slot, request.getTime()));
+        appointment.setStatus(Appointment.AppointmentStatus.UPCOMING);
 
         appointmentRepository.save(appointment);
     }
