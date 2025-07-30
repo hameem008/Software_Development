@@ -2,6 +2,7 @@ package com.example.MediLine.Repository;
 
 import com.example.MediLine.Entity.TestRequest;
 import com.example.MediLine.Entity.TestRequest.TestRequestStatus;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,4 +28,13 @@ public interface TestRequestRepository extends JpaRepository<TestRequest, Intege
             @Param("hospitalId") Integer hospitalId,
             @Param("testRequestId") Integer testRequestId
     );
+
+    @EntityGraph(attributePaths = {"prescription", "prescription.doctor"})
+    @Query("""
+        SELECT tr
+        FROM TestRequest tr
+        WHERE tr.testRequestId = :testRequestId
+    """)
+    Optional<TestRequest> findByIdWithPrescription(Integer testRequestId);
+
 }
