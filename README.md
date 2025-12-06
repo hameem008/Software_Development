@@ -11,7 +11,7 @@ Tech Stack used
 8. Microsoft Azure VM for hosting & deployment 
 9. ChatGPT, Grok, Claude & Lovable for vibe coding
 
-Features
+Features ([Demo](https://www.youtube.com/watch?v=4Sko9gHJI9E))
 1. JWT authentication with refresh token & access token
 2. Cooperative chatbot for medical related conversation maintaining context
 3. Daily symptom tracker for patients
@@ -20,13 +20,11 @@ Features
 6. Appointment checking from doctor side
 7. Medical history observation from doctor side
 8. Prescription history observation from both sides
-[Demo](https://www.youtube.com/watch?v=4Sko9gHJI9E)
 
-Infrastructures
+Infrastructures ([Demo](https://www.youtube.com/watch?v=Q0kLinvnqXM))
 1. CI/CD pipeline with Docker using Github actions.
 2. Deployment using Azure VM
 3. API testing & End-to-end testing using JUnit & Mockito
-[Demo](https://www.youtube.com/watch?v=Q0kLinvnqXM)
 
 Contributions
 1. Myself -> authentication, chatbot, Devops (CI/CD pipeline & containerization), some of the backend API & features 
