@@ -29,6 +29,6 @@ Infrastructures
 [Demo](https://www.youtube.com/watch?v=Q0kLinvnqXM)
 
 Contributions
-Myself -> authentication, chatbot, Devops (CI/CD pipeline & containerization), some of the backend API & features
-[Tawhid](https://github.com/TawhidMM) -> most of the backend API & features, unit & end-to-end testing
-[Rafi](https://github.com/RuffledRaphael) -> most of the frontend, some of the backend API & features
+1. Myself -> authentication, chatbot, Devops (CI/CD pipeline & containerization), some of the backend API & features 
+2. [Tawhid](https://github.com/TawhidMM) -> most of the backend API & features, unit & end-to-end testing
+3. [Rafi](https://github.com/RuffledRaphael) -> most of the frontend, some of the backend API & features
