@@ -1,6 +1,6 @@
 # Software_Development
 
-Tech Stack used
+# Tech Stack used
 1. Spring Boot for backend
 2. ReactJS & vite for frontend
 3. PostgreSQL for DB
@@ -11,7 +11,7 @@ Tech Stack used
 8. Microsoft Azure VM for hosting & deployment 
 9. ChatGPT, Grok, Claude & Lovable for vibe coding
 
-Features ([Demo](https://www.youtube.com/watch?v=4Sko9gHJI9E))
+# Features ([Demo](https://www.youtube.com/watch?v=4Sko9gHJI9E))
 1. JWT authentication with refresh token & access token
 2. Cooperative chatbot for medical related conversation maintaining context
 3. Daily symptom tracker for patients
@@ -21,12 +21,12 @@ Features ([Demo](https://www.youtube.com/watch?v=4Sko9gHJI9E))
 7. Medical history observation from doctor side
 8. Prescription history observation from both sides
 
-Infrastructures ([Demo](https://www.youtube.com/watch?v=Q0kLinvnqXM))
+# Infrastructures ([Demo](https://www.youtube.com/watch?v=Q0kLinvnqXM))
 1. CI/CD pipeline with Docker using Github actions.
 2. Deployment using Azure VM
 3. API testing & End-to-end testing using JUnit & Mockito
 
-Contributions
+# Contributions
 1. Myself -> authentication, chatbot, Devops (CI/CD pipeline & containerization), some of the backend API & features 
 2. [Tawhid](https://github.com/TawhidMM) -> most of the backend API & features, unit & end-to-end testing
 3. [Rafi](https://github.com/RuffledRaphael) -> most of the frontend, some of the backend API & features
